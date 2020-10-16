@@ -18,6 +18,7 @@ extends:
   - prettier/@typescript-eslint
 
 rules:
+  react/react-in-jsx-scope: "off"
   simple-import-sort/sort: "error"
   sort-imports: "off"
 
