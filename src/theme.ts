@@ -3,12 +3,12 @@ import { Theme } from "theme-ui";
 export const theme: Theme = {
   useColorSchemeMediaQuery: true,
   colors: {
-    background: "white",
-    text: "black",
+    background: "#fff",
+    text: "#000",
     modes: {
       dark: {
-        background: "black",
-        text: "white",
+        background: "#0a0a0a",
+        text: "#fff",
       },
     },
   },
