@@ -1,5 +1,3 @@
-import "../styles/globals.css";
-
 import { NextComponentType } from "next";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
 import Head from "next/head";
