@@ -8,7 +8,7 @@ export const theme: Theme = {
     primary: "#5eb85c",
     modes: {
       dark: {
-        background: "#0a0a0a",
+        background: "#2f2f2f",
         text: "#fff",
       },
     },
