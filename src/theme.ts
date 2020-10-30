@@ -15,6 +15,12 @@ export const theme: Theme = {
   fonts: {
     body:
       "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+    heading:
+      "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+  },
+  fontWeights: {
+    body: 400,
+    heading: 700,
   },
   styles: {
     root: {
