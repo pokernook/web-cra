@@ -19,6 +19,7 @@ extends:
 
 rules:
   react/react-in-jsx-scope: "off"
+  react/prop-types: "off"
   simple-import-sort/sort: "error"
   sort-imports: "off"
 
