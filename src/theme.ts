@@ -5,6 +5,7 @@ export const theme: Theme = {
   colors: {
     background: "#fff",
     text: "#000",
+    primary: "#5eb85c",
     modes: {
       dark: {
         background: "#0a0a0a",
@@ -27,6 +28,12 @@ export const theme: Theme = {
       fontFamily: "body",
       padding: 0,
       margin: 0,
+    },
+  },
+  buttons: {
+    primary: {
+      color: "background",
+      bg: "primary",
     },
   },
 };
