@@ -2,7 +2,7 @@
 
 ## Development Setup
 
-Recommended tools:
+### Recommended Tools
 
 - Node.js 15.x
 - Docker Desktop
