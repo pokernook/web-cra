@@ -34,6 +34,11 @@ export const theme: Theme = {
     primary: {
       color: "background",
       bg: "primary",
+      px: 4,
+      py: 3,
+      ":hover": {
+        cursor: "pointer",
+      },
     },
   },
 };
