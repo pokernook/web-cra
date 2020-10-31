@@ -1,6 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-
-import { Button, ButtonProps } from "./Button";
+import { Button, ButtonProps } from "theme-ui";
 
 export default {
   title: "Button",
