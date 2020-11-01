@@ -7,4 +7,4 @@ addDecorator((storyFn) => (
   <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>
 ));
 
-addParameters({ docs: { theme: themes.dark } });
+addParameters({ docs: { theme: themes.light } });
