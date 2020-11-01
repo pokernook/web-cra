@@ -8,7 +8,7 @@ export const theme: Theme = {
     primary: "#5eb85c",
     modes: {
       dark: {
-        background: "#2f2f2f",
+        background: "#121212",
         text: "#fff",
       },
     },
@@ -39,6 +39,15 @@ export const theme: Theme = {
       ":hover": {
         cursor: "pointer",
       },
+    },
+  },
+  forms: {
+    label: {
+      fontSize: 1,
+      fontWeight: "bold",
+    },
+    input: {
+      mt: 1,
     },
   },
 };
