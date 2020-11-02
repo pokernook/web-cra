@@ -5,7 +5,7 @@ export const theme: Theme = {
   colors: {
     background: "#fff",
     text: "#000",
-    primary: "#5eb85c",
+    primary: "#54a058",
     modes: {
       dark: {
         background: "#121212",
@@ -16,8 +16,7 @@ export const theme: Theme = {
   fonts: {
     body:
       "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-    heading:
-      "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+    heading: "inherit",
   },
   fontWeights: {
     body: 400,
@@ -34,11 +33,8 @@ export const theme: Theme = {
     primary: {
       color: "background",
       bg: "primary",
-      px: 4,
-      py: 3,
-      ":hover": {
-        cursor: "pointer",
-      },
+      px: 3,
+      py: 2,
     },
   },
   forms: {
