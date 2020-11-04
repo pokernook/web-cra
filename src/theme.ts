@@ -6,13 +6,7 @@ export const theme: Theme = {
   colors: {
     background: "#fff",
     text: "#000",
-    primary: "#54a058",
-    modes: {
-      dark: {
-        background: "#121212",
-        text: "#fff",
-      },
-    },
+    primary: "#5eb85c",
   },
   fonts: {
     body:
@@ -23,7 +17,7 @@ export const theme: Theme = {
   fontWeights: {
     body: 400,
     heading: 700,
-    bold: 700,
+    bold: 600,
   },
   styles: {
     root: {
@@ -39,6 +33,16 @@ export const theme: Theme = {
       bg: "primary",
       px: 3,
       py: 2,
+      my: 2,
+    },
+  },
+  cards: {
+    primary: {
+      padding: 3,
+      borderRadius: 4,
+      border: "solid",
+      borderWidth: 1,
+      borderColor: "#e1e4e8",
     },
   },
   forms: {
@@ -47,7 +51,7 @@ export const theme: Theme = {
       fontWeight: "bold",
     },
     input: {
-      mt: "0.375rem",
+      my: 1,
       p: 1,
       bg: "#fafbfc",
       borderColor: "#e1e4e8",
