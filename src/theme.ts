@@ -33,7 +33,6 @@ export const theme: Theme = {
       bg: "primary",
       px: 3,
       py: 2,
-      my: 2,
     },
   },
   cards: {
@@ -51,7 +50,6 @@ export const theme: Theme = {
       fontWeight: "bold",
     },
     input: {
-      my: 1,
       p: 1,
       bg: "#fafbfc",
       borderColor: "#e1e4e8",
