@@ -13,7 +13,7 @@ export const theme: Theme = {
       "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
     heading: "inherit",
   },
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
     body: 400,
     heading: 700,
