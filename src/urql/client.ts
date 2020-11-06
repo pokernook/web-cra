@@ -1,6 +1,8 @@
 import { NextUrqlClientConfig } from "next-urql";
 
+import { config } from "../config";
+
 export const urqlClient: NextUrqlClientConfig = (ssrExchange) => ({
-  url: "http://localhost:3000",
+  url: config.graphqlUrl,
   exchanges: [ssrExchange],
 });
