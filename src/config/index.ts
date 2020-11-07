@@ -1,5 +1,3 @@
-import env from "env-var";
-
 export const config = {
-  graphqlUrl: env.get("GRAPHQL_URL").required().asUrlString(),
+  graphqlUrl: process.env.NEXT_PUBLIC_GRAPHQL_URL || "",
 };
