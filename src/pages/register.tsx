@@ -1,9 +1,20 @@
 import { withUrqlClient } from "next-urql";
 import { Button, Card, Container, Input, Label } from "theme-ui";
+import { useMutation } from "urql";
 
 import { createUrqlClient } from "../urql/client";
 
+const RegisterUser = /* GraphQL */ `
+  mutation($email: String!, $username: String!, $password: String!) {
+    register(email: $email, username: $username, password: $password) {
+      token
+    }
+  }
+`;
+
 const Register = (): JSX.Element => {
+  useMutation(RegisterUser);
+
   return (
     <>
       <Container sx={{ maxWidth: 375, pt: 20 }}>
