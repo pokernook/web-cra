@@ -1,6 +1,9 @@
+import { withUrqlClient } from "next-urql";
 import { Button, Card, Container, Input, Label } from "theme-ui";
 
-const Home = (): JSX.Element => {
+import { createUrqlClient } from "../urql/client";
+
+const Register = (): JSX.Element => {
   return (
     <>
       <Container sx={{ maxWidth: 375, pt: 20 }}>
@@ -27,4 +30,4 @@ const Home = (): JSX.Element => {
   );
 };
 
-export default Home;
+export default withUrqlClient(createUrqlClient)(Register);
