@@ -55,7 +55,7 @@ const SignIn = (): JSX.Element => {
             name="password"
             ref={register({ required: true })}
             type="password"
-            mb={2}
+            mb={3}
           />
 
           <Button type="submit" variant="primary">
