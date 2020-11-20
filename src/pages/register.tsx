@@ -26,7 +26,7 @@ type FormData = {
 const Register = (): JSX.Element => {
   const { register, handleSubmit } = useForm<FormData>();
 
-  const [_, registerUser] = useMutation(RegisterUser);
+  const [, registerUser] = useMutation(RegisterUser);
 
   const onSubmit = async (data: FormData) => {
     const result = await registerUser(data);
@@ -34,50 +34,48 @@ const Register = (): JSX.Element => {
   };
 
   return (
-    <>
-      <Container sx={{ maxWidth: 375, pt: 20 }}>
-        <Card sx={{ textAlign: "center" }}>
-          <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-            <Label htmlFor="username" mb={1}>
-              Username
-            </Label>
-            <Input
-              id="username"
-              name="username"
-              ref={register({ required: true })}
-              type="text"
-              mb={2}
-            />
+    <Container sx={{ maxWidth: 375, pt: 20 }}>
+      <Card sx={{ textAlign: "center" }}>
+        <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+          <Label htmlFor="username" mb={1}>
+            Username
+          </Label>
+          <Input
+            id="username"
+            name="username"
+            ref={register({ required: true })}
+            type="text"
+            mb={2}
+          />
 
-            <Label htmlFor="email" mb={1}>
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              ref={register({ required: true })}
-              type="email"
-              mb={2}
-            />
+          <Label htmlFor="email" mb={1}>
+            Email
+          </Label>
+          <Input
+            id="email"
+            name="email"
+            ref={register({ required: true })}
+            type="email"
+            mb={2}
+          />
 
-            <Label htmlFor="password" mb={1}>
-              Password
-            </Label>
-            <Input
-              id="password"
-              name="password"
-              ref={register({ required: true })}
-              type="password"
-              mb={3}
-            />
+          <Label htmlFor="password" mb={1}>
+            Password
+          </Label>
+          <Input
+            id="password"
+            name="password"
+            ref={register({ required: true })}
+            type="password"
+            mb={3}
+          />
 
-            <Button type="submit" variant="primary">
-              Register for PokerNook
-            </Button>
-          </Box>
-        </Card>
-      </Container>
-    </>
+          <Button type="submit" variant="primary">
+            Register for PokerNook
+          </Button>
+        </Box>
+      </Card>
+    </Container>
   );
 };
 
