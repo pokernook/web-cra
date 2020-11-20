@@ -13,8 +13,8 @@ export const theme: Theme = {
       dark: {
         background: "#0f0f0f",
         text: "#ededed",
-        muted: "#121212",
-        border: "#212121",
+        muted: "#0a0a0a",
+        border: "#454545",
       },
     },
   },
@@ -43,6 +43,9 @@ export const theme: Theme = {
       bg: "primary",
       px: 3,
       py: 2,
+      "&:hover": {
+        cursor: "pointer",
+      },
     },
   },
   cards: {
