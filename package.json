@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "scripts": {
     "generate": "graphql-codegen -r dotenv/config",
-    "dev": "next dev",
+    "dev": "concurrently --kill-others \"npm run generate -- --watch\" \"next dev\"",
     "build": "next build",
     "start": "next start",
     "sb": "start-storybook",
@@ -40,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "babel-loader": "^8.1.0",
+    "concurrently": "^5.3.0",
     "eslint": "^7.12.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
