@@ -4,7 +4,7 @@
   "repository": "github:pokernook/web",
   "version": "0.0.0",
   "scripts": {
-    "generate": "graphql-codegen",
+    "generate": "graphql-codegen -r dotenv/config",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
