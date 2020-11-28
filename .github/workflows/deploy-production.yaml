@@ -1,16 +1,15 @@
-name: Publish Container
+name: Deploy Production
 
 on:
   push:
     branches: [main]
 
-env:
-  cr_server: 445789524075.dkr.ecr.us-east-1.amazonaws.com
-
 jobs:
-  build-and-push:
-    name: Build and Push
+  publish-container:
+    name: Publish Container
     runs-on: ubuntu-latest
+    env:
+      cr_server: 445789524075.dkr.ecr.us-east-1.amazonaws.com
     steps:
       - uses: actions/checkout@v2
 
