@@ -5,9 +5,9 @@ import { useMutation } from "urql";
 
 import { createUrqlClient } from "../urql/client";
 
-const RegisterUser = /* GraphQL */ `
+const SignUpUser = /* GraphQL */ `
   mutation($username: String!, $email: String!, $password: String!) {
-    register(username: $username, email: $email, password: $password) {
+    signUp(username: $username, email: $email, password: $password) {
       token
       user {
         username
@@ -23,13 +23,13 @@ type FormData = {
   password: string;
 };
 
-const Register = (): JSX.Element => {
+const SignUp = (): JSX.Element => {
   const { register, handleSubmit } = useForm<FormData>();
 
-  const [, registerUser] = useMutation(RegisterUser);
+  const [, signUpUser] = useMutation(SignUpUser);
 
   const onSubmit = async (data: FormData) => {
-    const result = await registerUser(data);
+    const result = await signUpUser(data);
     console.log(result);
   };
 
@@ -71,7 +71,7 @@ const Register = (): JSX.Element => {
           />
 
           <Button type="submit" variant="primary">
-            Register for PokerNook
+            Sign up for PokerNook
           </Button>
         </Box>
       </Card>
@@ -79,4 +79,4 @@ const Register = (): JSX.Element => {
   );
 };
 
-export default withUrqlClient(createUrqlClient)(Register);
+export default withUrqlClient(createUrqlClient)(SignUp);
