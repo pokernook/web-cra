@@ -7,6 +7,16 @@ export const theme: Theme = {
     background: "#fff",
     text: "#000",
     primary: "#2ea44f",
+    muted: "#fafbfc",
+    border: "#e1e4e8",
+    modes: {
+      dark: {
+        background: "#0f0f0f",
+        text: "#ededed",
+        muted: "#0a0a0a",
+        border: "#454545",
+      },
+    },
   },
   fonts: {
     body:
@@ -33,6 +43,9 @@ export const theme: Theme = {
       bg: "primary",
       px: 3,
       py: 2,
+      "&:hover": {
+        cursor: "pointer",
+      },
     },
   },
   cards: {
@@ -41,7 +54,7 @@ export const theme: Theme = {
       borderRadius: 4,
       border: "solid",
       borderWidth: 1,
-      borderColor: "#e1e4e8",
+      borderColor: "border",
     },
   },
   forms: {
@@ -51,8 +64,8 @@ export const theme: Theme = {
     },
     input: {
       p: 1,
-      bg: "#fafbfc",
-      borderColor: "#e1e4e8",
+      bg: "muted",
+      borderColor: "border",
     },
   },
 };
