@@ -22,23 +22,21 @@ export type AuthPayload = {
   user?: Maybe<User>;
 };
 
-export type User = {
-  __typename?: "User";
-  id: Scalars["String"];
+export type Mutation = {
+  __typename?: "Mutation";
+  logIn?: Maybe<AuthPayload>;
+  signUp?: Maybe<AuthPayload>;
+};
+
+export type MutationLogInArgs = {
   email: Scalars["String"];
-  username: Scalars["String"];
-  discriminator: Scalars["Int"];
+  password: Scalars["String"];
 };
 
-export type UserWhereUniqueInput = {
-  id?: Maybe<Scalars["String"]>;
-  email?: Maybe<Scalars["String"]>;
-  UserTag?: Maybe<UserTagCompoundUniqueInput>;
-};
-
-export type UserTagCompoundUniqueInput = {
+export type MutationSignUpArgs = {
+  email: Scalars["String"];
+  password: Scalars["String"];
   username: Scalars["String"];
-  discriminator: Scalars["Int"];
 };
 
 export type Query = {
@@ -52,24 +50,26 @@ export type QueryUserArgs = {
 };
 
 export type QueryUsersArgs = {
-  take?: Maybe<Scalars["Int"]>;
-  skip?: Maybe<Scalars["Int"]>;
   cursor?: Maybe<UserWhereUniqueInput>;
+  skip?: Maybe<Scalars["Int"]>;
+  take?: Maybe<Scalars["Int"]>;
 };
 
-export type Mutation = {
-  __typename?: "Mutation";
-  signUp?: Maybe<AuthPayload>;
-  logIn?: Maybe<AuthPayload>;
-};
-
-export type MutationSignUpArgs = {
+export type User = {
+  __typename?: "User";
+  discriminator: Scalars["Int"];
   email: Scalars["String"];
+  id: Scalars["String"];
   username: Scalars["String"];
-  password: Scalars["String"];
 };
 
-export type MutationLogInArgs = {
-  email: Scalars["String"];
-  password: Scalars["String"];
+export type UserTagCompoundUniqueInput = {
+  discriminator: Scalars["Int"];
+  username: Scalars["String"];
+};
+
+export type UserWhereUniqueInput = {
+  email?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["String"]>;
+  UserTag?: Maybe<UserTagCompoundUniqueInput>;
 };
