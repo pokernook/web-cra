@@ -1,7 +1,8 @@
 name: Check Container Build
 
 on:
-  pull_request:
+  # TODO: Switch to PR only pull_request:
+  push:
 
 jobs:
   build:
