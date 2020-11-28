@@ -4,6 +4,7 @@
   "repository": "github:pokernook/web",
   "version": "0.0.0",
   "scripts": {
+    "generate": "graphql-codegen",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -23,7 +24,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@graphql-codegen/cli": "^1.19.3",
+    "@graphql-codegen/cli": "1.19.3",
+    "@graphql-codegen/typescript": "1.18.1",
+    "@graphql-codegen/typescript-operations": "1.17.12",
     "@storybook/addon-actions": "^6.1.0-alpha.33",
     "@storybook/addon-essentials": "^6.1.0-alpha.33",
     "@storybook/addon-links": "^6.1.0-alpha.33",
