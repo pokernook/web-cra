@@ -1,21 +1,9 @@
 import { withUrqlClient } from "next-urql";
 import { useForm } from "react-hook-form";
 import { Box, Button, Card, Container, Input, Label } from "theme-ui";
-import { useMutation } from "urql";
 
-import { createUrqlClient } from "../urql/client";
-
-const SignUpUser = /* GraphQL */ `
-  mutation($username: String!, $email: String!, $password: String!) {
-    signUp(username: $username, email: $email, password: $password) {
-      token
-      user {
-        username
-        discriminator
-      }
-    }
-  }
-`;
+import { useSignUpMutation } from "../../graphql/types";
+import { createUrqlClient } from "../../urql/client";
 
 type FormData = {
   username: string;
@@ -26,7 +14,7 @@ type FormData = {
 const SignUp = (): JSX.Element => {
   const { register, handleSubmit } = useForm<FormData>();
 
-  const [, signUpUser] = useMutation(SignUpUser);
+  const [, signUpUser] = useSignUpMutation();
 
   const onSubmit = async (data: FormData) => {
     const result = await signUpUser(data);

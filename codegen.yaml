@@ -1,6 +1,6 @@
 schema: ${GRAPHQL_SCHEMA_PATH}
 overwrite: true
-# documents: src/**/*.graphql
+documents: src/**/*.graphql
 generates:
   src/graphql/types.ts:
     plugins:
