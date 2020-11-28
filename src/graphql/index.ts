@@ -77,6 +77,15 @@ export type UserWhereUniqueInput = {
   UserTag?: Maybe<UserTagCompoundUniqueInput>;
 };
 
+export type LogInMutationVariables = Exact<{
+  email: Scalars["String"];
+  password: Scalars["String"];
+}>;
+
+export type LogInMutation = { __typename?: "Mutation" } & {
+  logIn?: Maybe<{ __typename?: "AuthPayload" } & Pick<AuthPayload, "token">>;
+};
+
 export type SignUpMutationVariables = Exact<{
   username: Scalars["String"];
   email: Scalars["String"];
@@ -87,6 +96,17 @@ export type SignUpMutation = { __typename?: "Mutation" } & {
   signUp?: Maybe<{ __typename?: "AuthPayload" } & Pick<AuthPayload, "token">>;
 };
 
+export const LogInDocument = gql`
+  mutation logIn($email: String!, $password: String!) {
+    logIn(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
+export function useLogInMutation() {
+  return Urql.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument);
+}
 export const SignUpDocument = gql`
   mutation signUp($username: String!, $email: String!, $password: String!) {
     signUp(username: $username, email: $email, password: $password) {
