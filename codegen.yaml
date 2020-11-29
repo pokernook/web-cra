@@ -1,4 +1,4 @@
-schema: ${GRAPHQL_SCHEMA_PATH}
+schema: ${GRAPHQL_SCHEMA_PATH} # TODO: This should allow a github url
 overwrite: true
 documents: src/**/*.graphql
 generates:
