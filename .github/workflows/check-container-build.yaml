@@ -17,4 +17,4 @@ jobs:
         with:
           push: false
           build-args: |
-            GRAPHQL_SCHEMA_PATH=github:pokernook/graph#main:schema.graphql
+            GRAPHQL_SCHEMA_PATH=https://raw.githubusercontent.com/pokernook/graph/main/schema.graphql
