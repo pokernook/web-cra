@@ -34,7 +34,7 @@ jobs:
           push: true
           tags: ${{ steps.prepare.outputs.tag }}
           build-args: |
-            GRAPHQL_SCHEMA_PATH=${{ secrets.GRAPHQL_SCHEMA_PATH }}
+            GRAPHQL_SCHEMA_PATH=https://raw.githubusercontent.com/pokernook/graph/main/schema.graphql
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.clone_url }}
             org.opencontainers.image.created=${{ steps.prepare.outputs.created }}
