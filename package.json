@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@graphql-codegen/add": "^2.0.2",
     "@graphql-codegen/cli": "1.19.4",
     "@graphql-codegen/typescript": "1.19.0",
     "@graphql-codegen/typescript-operations": "1.17.12",
