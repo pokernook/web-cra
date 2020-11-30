@@ -33,6 +33,8 @@ jobs:
         with:
           push: true
           tags: ${{ steps.prepare.outputs.tag }}
+          build-args: |
+            GRAPHQL_SCHEMA_PATH=${{ secrets.GRAPHQL_SCHEMA_PATH }}
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.clone_url }}
             org.opencontainers.image.created=${{ steps.prepare.outputs.created }}

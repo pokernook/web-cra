@@ -1,8 +1,8 @@
 name: Check Container Build
 
 on:
-  # TODO: Switch to PR only pull_request:
-  push:
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -17,4 +17,4 @@ jobs:
         with:
           push: false
           build-args: |
-            GRAPHQL_SCHEMA_PATH=https://raw.githubusercontent.com/pokernook/graph/main/schema.graphql
+            GRAPHQL_SCHEMA_PATH=${{ secrets.GRAPHQL_SCHEMA_PATH }}
