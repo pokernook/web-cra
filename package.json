@@ -22,7 +22,7 @@
     "react-hook-form": "^6.11.3",
     "react-is": "^17.0.1",
     "theme-ui": "^0.3.1",
-    "urql": "^1.10.3"
+    "urql": "^1.11.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
