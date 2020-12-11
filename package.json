@@ -7,6 +7,7 @@
     "generate": "graphql-codegen -r dotenv/config",
     "dev": "concurrently --kill-others \"npm run generate -- --watch\" \"next dev\"",
     "lint": "eslint . --ext .js,.ts",
+    "postinstall": "npm run generate",
     "prebuild": "npm run generate",
     "build": "next build",
     "start": "next start",
