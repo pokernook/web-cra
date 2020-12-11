@@ -5,10 +5,11 @@
   "version": "0.0.0",
   "scripts": {
     "generate": "graphql-codegen -r dotenv/config",
-    "dev": "concurrently --kill-others \"npm run generate -- --watch\" \"next dev\"",
+    "dev:next": "next dev",
+    "dev:codegen": "npm run generate -- --watch",
+    "dev": "concurrently --kill-others npm:dev:*",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "postinstall": "npm run generate",
-    "prebuild": "npm run generate",
     "build": "next build",
     "start": "next start",
     "sb": "start-storybook",
