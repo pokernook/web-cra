@@ -24,6 +24,8 @@ npm run dev # Create a hot-reloading Next.js server
 
 npm run build # Build application for deployment
 
+npm run generate # Generate GraphQL types
+
 npm run sb # Storybook
 ```
 
