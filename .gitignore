@@ -33,3 +33,6 @@ lerna-debug.log*
 
 # Vercel
 .vercel
+
+# DevSpace cache and log folder
+.devspace/
