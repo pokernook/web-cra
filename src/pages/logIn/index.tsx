@@ -11,6 +11,7 @@ type FormData = {
 };
 
 const LogIn = (): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { register, handleSubmit } = useForm<FormData>();
 
   const [, logInUser] = useLogInMutation();
