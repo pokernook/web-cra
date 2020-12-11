@@ -14,7 +14,3 @@ generates:
       - typescript
       - typescript-operations
       - typescript-urql
-
-hooks:
-  afterAllFileWrite:
-    - eslint --fix
