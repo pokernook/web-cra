@@ -1,0 +1,54 @@
+version: v1beta9
+
+images:
+  web:
+    image: registry.digitalocean.com/pokernook/web
+    tags:
+      - sha-${DEVSPACE_GIT_COMMIT}-${DEVSPACE_RANDOM}
+    cmd: ["npm", "run", "dev"]
+    preferSyncOverRebuild: true
+    build:
+      docker:
+        useBuildKit: true
+
+deployments:
+  - name: pokernook-web
+    helm:
+      componentChart: true
+      values:
+        containers:
+          - image: registry.digitalocean.com/pokernook/web
+        service:
+          ports:
+            - port: 3000
+
+profiles:
+  - name: production
+    patches:
+      - op: remove
+        path: images.web.cmd
+
+dev:
+  ports:
+    - imageName: web
+      forward:
+        - port: 3000
+  open:
+    - url: http://localhost:3000
+  sync:
+    - imageName: web
+      excludePaths:
+        - .git/
+      uploadExcludePaths:
+        - /.next/
+        - node_modules
+        - generated
+        - "**/*.graphql"
+        - logs
+        - "**/*.log"
+        - npm-debug.log*
+        - yarn-debug.log*
+        - yarn-error.log*
+        - lerna-debug.log*
+        - /coverage
+        - devspace.yaml
