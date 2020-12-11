@@ -18,6 +18,10 @@ extends:
   - plugin:jsx-a11y/recommended
   - prettier/@typescript-eslint
 
+settings:
+  react:
+    version: detect
+
 rules:
   react/react-in-jsx-scope: "off"
   react/prop-types: "off"
