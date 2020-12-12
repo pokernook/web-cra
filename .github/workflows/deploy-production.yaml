@@ -4,9 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  NEXT_PUBLIC_GRAPHQL_URL: https://graph.pokernook.com
-
 jobs:
   publish-container:
     name: Publish Container
