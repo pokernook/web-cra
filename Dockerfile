@@ -1,6 +1,4 @@
-FROM node:15.3.0-alpine
-ARG GRAPHQL_SCHEMA_PATH
-ENV GRAPHQL_SCHEMA_PATH=${GRAPHQL_SCHEMA_PATH}
+FROM node:15.4.0-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci

@@ -1,17 +1,20 @@
-# PokerNook Next.js App
+# PokerNook Web App
 
 ## Development Setup
 
 ### Recommended Tools
 
 - Node.js 15.x
-- Docker Desktop
+- Docker Desktop (or an alternative container runtime and local Kubernetes cluster)
 - VS Code
+- DevSpace CLI
 
 Clone the repo, then run:
 
 ```bash
 npm install # Install project dependencies
+
+devspace dev # Run the app in a Kubernetes cluster
 ```
 
 ### NPM Scripts Overview
@@ -20,6 +23,8 @@ npm install # Install project dependencies
 npm run dev # Create a hot-reloading Next.js server
 
 npm run build # Build application for deployment
+
+npm run generate # Generate GraphQL types
 
 npm run sb # Storybook
 ```

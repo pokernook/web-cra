@@ -6,9 +6,6 @@
 # Dependencies
 node_modules
 
-# Generated Code
-generated
-
 # Logs
 logs
 *.log
@@ -33,3 +30,6 @@ lerna-debug.log*
 
 # Vercel
 .vercel
+
+# DevSpace cache and log folder
+.devspace/

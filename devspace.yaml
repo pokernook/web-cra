@@ -1,0 +1,68 @@
+version: v1beta9
+
+images:
+  web:
+    image: registry.digitalocean.com/pokernook/web
+    tags:
+      - sha-${DEVSPACE_GIT_COMMIT}-${DEVSPACE_RANDOM}
+    cmd: ["npm", "run", "dev"]
+    preferSyncOverRebuild: true
+    build:
+      docker:
+        useBuildKit: true
+
+deployments:
+  - name: pokernook-web
+    helm:
+      componentChart: true
+      values:
+        containers:
+          - image: registry.digitalocean.com/pokernook/web
+            env:
+              - name: NEXT_PUBLIC_GRAPHQL_URL
+                value: http://pokernook-graph:4000
+              - name: GRAPHQL_SCHEMA_PATH
+                value: http://pokernook-graph:4000
+        service:
+          ports:
+            - port: 3000
+
+dependencies:
+  - source:
+      git: https://github.com/pokernook/graph
+      branch: main
+
+profiles:
+  - name: production
+    patches:
+      - op: remove
+        path: images.web.cmd
+      - op: remove
+        path: dependencies
+      - op: remove
+        path: deployments.name=pokernook-web.helm.values.containers[0].env.name=GRAPHQL_SCHEMA_PATH
+
+dev:
+  ports:
+    - imageName: web
+      forward:
+        - port: 3000
+  open:
+    - url: http://localhost:3000
+  sync:
+    - imageName: web
+      excludePaths:
+        - .git/
+      uploadExcludePaths:
+        - /.next/
+        - node_modules
+        - generated
+        - "**/*.graphql"
+        - logs
+        - "**/*.log"
+        - npm-debug.log*
+        - yarn-debug.log*
+        - yarn-error.log*
+        - lerna-debug.log*
+        - /coverage
+        - devspace.yaml
