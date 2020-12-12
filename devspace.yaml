@@ -20,18 +20,25 @@ deployments:
           - image: registry.digitalocean.com/pokernook/web
             env:
               - name: NEXT_PUBLIC_GRAPHQL_URL
-                value: http://localhost:4000
+                value: http://pokernook-graph:4000
               - name: GRAPHQL_SCHEMA_PATH
-                value: http://localhost:4000
+                value: http://pokernook-graph:4000
         service:
           ports:
             - port: 3000
+
+dependencies:
+  - source:
+      git: https://github.com/pokernook/graph
+      branch: main
 
 profiles:
   - name: production
     patches:
       - op: remove
         path: images.web.cmd
+      - op: remove
+        path: dependencies
       - op: replace
         path: deployments.name=pokernook-web.helm.values.containers[0].env.name=NEXT_PUBLIC_GRAPHQL_URL.value
         value: ${NEXT_PUBLIC_GRAPHQL_URL}
@@ -43,8 +50,6 @@ dev:
     - imageName: web
       forward:
         - port: 3000
-      reverseForward:
-        - port: 4000
   open:
     - url: http://localhost:3000
   sync:
