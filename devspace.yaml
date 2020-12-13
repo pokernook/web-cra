@@ -27,28 +27,17 @@ deployments:
           ports:
             - port: 3000
 
-dependencies:
-  - source:
-      git: https://github.com/pokernook/graph
-      branch: main
-
 profiles:
   - name: production
     patches:
       - op: remove
         path: images.web.cmd
-      - op: remove
-        path: dependencies
-      - op: remove
-        path: deployments.name=pokernook-web.helm.values.containers[0].env.name=GRAPHQL_SCHEMA_PATH
 
 dev:
   ports:
     - imageName: web
       forward:
         - port: 3000
-  open:
-    - url: http://localhost:3000
   sync:
     - imageName: web
       excludePaths:
