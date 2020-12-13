@@ -11,10 +11,11 @@ export const theme: Theme = {
     border: "#e1e4e8",
     modes: {
       dark: {
-        background: "#0f0f0f",
-        text: "#ededed",
-        muted: "#0a0a0a",
-        border: "#454545",
+        background: "#0d1117",
+        text: "#fdfefd",
+        primary: "#238636",
+        muted: "#090d13",
+        border: "#21262d",
       },
     },
   },
@@ -27,20 +28,20 @@ export const theme: Theme = {
   fontWeights: {
     body: 400,
     heading: 700,
-    bold: 600,
+    bold: 500,
   },
   styles: {
     root: {
       fontFamily: "body",
       fontSize: 1,
-      padding: 0,
-      margin: 0,
+      p: 0,
+      m: 0,
     },
   },
   buttons: {
     primary: {
-      color: "background",
       bg: "primary",
+      color: "#fff",
       px: 3,
       py: 2,
       "&:hover": {
@@ -50,11 +51,11 @@ export const theme: Theme = {
   },
   cards: {
     primary: {
-      padding: 3,
-      borderRadius: 4,
+      p: 3,
       border: "solid",
-      borderWidth: 1,
       borderColor: "border",
+      borderRadius: 4,
+      borderWidth: 1,
     },
   },
   forms: {
@@ -63,7 +64,8 @@ export const theme: Theme = {
       fontWeight: "bold",
     },
     input: {
-      p: 1,
+      px: 2,
+      py: 1,
       bg: "muted",
       borderColor: "border",
     },
