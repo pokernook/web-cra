@@ -25,7 +25,7 @@ const LogIn = (): JSX.Element => {
     <Container sx={{ maxWidth: 375, pt: 20 }}>
       <Card sx={{ textAlign: "center" }}>
         <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="email" mb={1}>
+          <Label htmlFor="email" mb={2}>
             Email
           </Label>
           <Input
@@ -36,7 +36,7 @@ const LogIn = (): JSX.Element => {
             mb={2}
           />
 
-          <Label htmlFor="password" mb={1}>
+          <Label htmlFor="password" mb={2}>
             Password
           </Label>
           <Input

@@ -26,18 +26,19 @@ const SignUp = (): JSX.Element => {
     <Container sx={{ maxWidth: 375, pt: 20 }}>
       <Card sx={{ textAlign: "center" }}>
         <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="username" mb={1}>
+          <Label htmlFor="username" mb={2}>
             Username
           </Label>
           <Input
             id="username"
             name="username"
             ref={register({ required: true })}
+            spellCheck={false}
             type="text"
             mb={2}
           />
 
-          <Label htmlFor="email" mb={1}>
+          <Label htmlFor="email" mb={2}>
             Email
           </Label>
           <Input
@@ -48,7 +49,7 @@ const SignUp = (): JSX.Element => {
             mb={2}
           />
 
-          <Label htmlFor="password" mb={1}>
+          <Label htmlFor="password" mb={2}>
             Password
           </Label>
           <Input
