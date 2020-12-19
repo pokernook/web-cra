@@ -21,7 +21,6 @@ export type Scalars = {
 
 export type AuthPayload = {
   __typename?: 'AuthPayload';
-  token?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
 };
 
@@ -91,7 +90,10 @@ export type LogInMutation = (
   { __typename?: 'Mutation' }
   & { logIn?: Maybe<(
     { __typename?: 'AuthPayload' }
-    & Pick<AuthPayload, 'token'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'username' | 'discriminator'>
+    )> }
   )> }
 );
 
@@ -106,7 +108,10 @@ export type SignUpMutation = (
   { __typename?: 'Mutation' }
   & { signUp?: Maybe<(
     { __typename?: 'AuthPayload' }
-    & Pick<AuthPayload, 'token'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'username' | 'discriminator'>
+    )> }
   )> }
 );
 
@@ -114,7 +119,10 @@ export type SignUpMutation = (
 export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
   logIn(email: $email, password: $password) {
-    token
+    user {
+      username
+      discriminator
+    }
   }
 }
     `;
@@ -125,7 +133,10 @@ export function useLogInMutation() {
 export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
   signUp(username: $username, email: $email, password: $password) {
-    token
+    user {
+      username
+      discriminator
+    }
   }
 }
     `;

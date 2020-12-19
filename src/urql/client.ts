@@ -4,6 +4,10 @@ import { cacheExchange, dedupExchange, fetchExchange } from "urql";
 import { config } from "../config";
 
 export const createUrqlClient: NextUrqlClientConfig = (ssrExchange) => ({
-  url: config.graphqlUrl,
   exchanges: [cacheExchange, dedupExchange, fetchExchange, ssrExchange],
+  fetchOptions: {
+    credentials: "include",
+    mode: "cors",
+  },
+  url: config.graphqlUrl,
 });
