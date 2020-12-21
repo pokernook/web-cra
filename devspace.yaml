@@ -11,6 +11,7 @@ images:
       docker:
         useBuildKit: true
 
+# TODO: Enable nginx ingress here to route traffic to the backend service
 deployments:
   - name: pokernook-web
     helm:
