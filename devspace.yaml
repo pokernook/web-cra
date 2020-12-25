@@ -10,6 +10,8 @@ images:
     build:
       docker:
         useBuildKit: true
+        options:
+          target: build
 
 # TODO: Enable nginx ingress here to route traffic to the backend service
 deployments:
@@ -43,8 +45,8 @@ dev:
     - imageName: web
       excludePaths:
         - .git/
-      uploadExcludePaths:
         - /.next/
+      uploadExcludePaths:
         - node_modules
         - generated
         - "**/*.graphql"
