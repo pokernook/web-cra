@@ -51,6 +51,8 @@ profiles:
     patches:
       - op: remove
         path: images.web.cmd
+      - op: remove
+        path: images.web.build.docker.options.target
 
 dev:
   ports:
