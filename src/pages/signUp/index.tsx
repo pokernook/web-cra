@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Box, Button, Card, Container, Input, Label } from "theme-ui";
 
 import { useSignUpMutation } from "../../generated/graphql";
-import { createUrqlClient } from "../../urql/client";
+import { createUrqlClient } from "../../urql";
 
 type FormData = {
   username: string;
