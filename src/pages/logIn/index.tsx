@@ -2,8 +2,7 @@ import { withUrqlClient } from "next-urql";
 import { useForm } from "react-hook-form";
 import { Box, Button, Card, Container, Input, Label } from "theme-ui";
 
-import { useLogInMutation } from "../../generated/graphql";
-import { createUrqlClient } from "../../urql";
+import { createUrqlClient, useLogInMutation } from "../../urql";
 
 type FormData = {
   email: string;

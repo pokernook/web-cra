@@ -3,7 +3,7 @@ overwrite: true
 documents: src/**/*.graphql
 
 generates:
-  src/generated/graphql.ts:
+  src/urql/graphql-types.ts:
     plugins:
       - add:
           content: |

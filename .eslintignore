@@ -4,4 +4,4 @@
 /build
 
 # Generated Code
-generated
+/src/urql/graphql-types.ts
