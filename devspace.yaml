@@ -30,17 +30,18 @@ deployments:
               - name: NEXT_PUBLIC_GRAPHQL_URL
                 value: http://local.graph.pokernook.com
               - name: GRAPHQL_SCHEMA_PATH
-                value: http://pokernook-graph:4000
+                value: http://pokernook-graph
         service:
           ports:
-            - port: 3000
+            - port: 80
+              containerPort: 3000
         ingress:
           ingressClass: nginx
           rules:
             - host: local.pokernook.com
             - host: local.graph.pokernook.com
               serviceName: pokernook-graph
-              servicePort: 4000
+              servicePort: 80
           annotations:
             nginx.ingress.kubernetes.io/enable-cors: "true"
             nginx.ingress.kubernetes.io/cors-allow-origin: "http://local.pokernook.com"
