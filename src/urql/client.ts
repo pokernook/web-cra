@@ -7,7 +7,6 @@ export const createUrqlClient: NextUrqlClientConfig = (ssrExchange) => ({
   exchanges: [cacheExchange, dedupExchange, fetchExchange, ssrExchange],
   fetchOptions: {
     credentials: "include",
-    mode: "cors",
   },
   url: config.graphqlUrl,
 });
