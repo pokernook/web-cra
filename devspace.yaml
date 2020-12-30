@@ -28,7 +28,7 @@ deployments:
           - image: registry.digitalocean.com/pokernook/web
             env:
               - name: NEXT_PUBLIC_GRAPHQL_URL
-                value: http://kubernetes.docker.internal
+                value: http://local.graph.pokernook.com
               - name: GRAPHQL_SCHEMA_PATH
                 value: http://pokernook-graph:4000
         service:
@@ -37,12 +37,13 @@ deployments:
         ingress:
           ingressClass: nginx
           rules:
-            - host: kubernetes.docker.internal
+            - host: local.pokernook.com
+            - host: local.graph.pokernook.com
               serviceName: pokernook-graph
               servicePort: 4000
           annotations:
             nginx.ingress.kubernetes.io/enable-cors: "true"
-            nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:3000"
+            nginx.ingress.kubernetes.io/cors-allow-origin: "http://local.pokernook.com"
 
 profiles:
   - name: production
