@@ -6,6 +6,7 @@ export const theme: Theme = {
   colors: {
     background: "#fff",
     text: "#000",
+    link: "#4c7dee",
     primary: "#2ea44f",
     muted: "#fafbfc",
     border: "#e1e4e8",
@@ -31,6 +32,11 @@ export const theme: Theme = {
     bold: 500,
   },
   styles: {
+    a: {
+      color: "link",
+      fontWeight: "bold",
+      textDecoration: "none",
+    },
     root: {
       fontFamily: "body",
       fontSize: 1,
