@@ -1,6 +1,16 @@
+import Link from "next/link";
 import { withUrqlClient } from "next-urql";
 import { useForm } from "react-hook-form";
-import { Box, Button, Card, Container, Input, Label } from "theme-ui";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Input,
+  Label,
+  Link as ThemeLink,
+  Text,
+} from "theme-ui";
 
 import { createUrqlClient, useSignUpMutation } from "../../urql";
 
@@ -13,7 +23,6 @@ type FormData = {
 const SignUp = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { register, handleSubmit } = useForm<FormData>();
-
   const [, signUpUser] = useSignUpMutation();
 
   const onSubmit = async (data: FormData) => {
@@ -22,8 +31,8 @@ const SignUp = (): JSX.Element => {
   };
 
   return (
-    <Container sx={{ maxWidth: 375, pt: 20 }}>
-      <Card sx={{ textAlign: "center" }}>
+    <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
+      <Card>
         <Box as="form" onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="username" mb={2}>
             Username
@@ -63,6 +72,16 @@ const SignUp = (): JSX.Element => {
             Sign up for PokerNook
           </Button>
         </Box>
+      </Card>
+
+      <Card sx={{ mt: 3, bg: "muted" }}>
+        <Text>
+          Been here before?{" "}
+          <Link href="/logIn" passHref>
+            <ThemeLink>Log in</ThemeLink>
+          </Link>
+          .
+        </Text>
       </Card>
     </Container>
   );
