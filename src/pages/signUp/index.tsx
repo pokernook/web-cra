@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { withUrqlClient } from "next-urql";
 import { useForm } from "react-hook-form";
 import {
@@ -24,10 +25,13 @@ const SignUp = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { register, handleSubmit } = useForm<FormData>();
   const [, signUpUser] = useSignUpMutation();
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     const result = await signUpUser(data);
-    console.log(result);
+    if (!result.error) {
+      await router.push("/");
+    }
   };
 
   return (
