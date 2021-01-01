@@ -24,6 +24,11 @@ export type AuthPayload = {
   user?: Maybe<User>;
 };
 
+export type LogOutPayload = {
+  __typename?: 'LogOutPayload';
+  sessionId?: Maybe<Scalars['String']>;
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['String'];
@@ -65,6 +70,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   signUp?: Maybe<AuthPayload>;
   logIn?: Maybe<AuthPayload>;
+  logOut?: Maybe<LogOutPayload>;
 };
 
 
