@@ -80,7 +80,7 @@ dev:
         - /.next/
       uploadExcludePaths:
         - node_modules
-        - generated
+        - "**/graphql-types.ts"
         - "**/*.graphql"
         - logs
         - "**/*.log"
