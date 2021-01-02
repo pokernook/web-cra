@@ -30,6 +30,10 @@ deployments:
       wait: true
       values:
         installCRDs: true
+  - name: issuer
+    kubectl:
+      manifests:
+        - manifests/issuer/
   - name: pokernook-web
     helm:
       componentChart: true
