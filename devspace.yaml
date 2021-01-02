@@ -75,13 +75,14 @@ dev:
         - port: 3000
   sync:
     - imageName: web
+      initialSync: preferRemote # Initial GraphQL types download
       excludePaths:
+        - Dockerfile
+        - node_modules
         - .git/
         - /.next/
       uploadExcludePaths:
-        - node_modules
         - "**/graphql-types.ts"
-        - "**/*.graphql"
         - logs
         - "**/*.log"
         - npm-debug.log*
