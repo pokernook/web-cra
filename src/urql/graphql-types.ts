@@ -52,6 +52,7 @@ export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
   users: Array<User>;
+  me?: Maybe<User>;
 };
 
 
