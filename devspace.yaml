@@ -2,7 +2,7 @@ version: v1beta9
 
 images:
   web:
-    image: registry.digitalocean.com/pokernook/web
+    image: devspace/pokernook/web
     tags:
       - sha-${DEVSPACE_GIT_COMMIT}-${DEVSPACE_RANDOM}
     cmd: ["npm", "run", "dev"]
@@ -10,8 +10,6 @@ images:
     build:
       docker:
         useBuildKit: true
-        options:
-          target: build
 
 deployments:
   - name: ingress-nginx
@@ -30,16 +28,12 @@ deployments:
       wait: true
       values:
         installCRDs: true
-  - name: issuer
-    kubectl:
-      manifests:
-        - manifests/issuer/
-  - name: pokernook-web
+  - name: web
     helm:
       componentChart: true
       values:
         containers:
-          - image: registry.digitalocean.com/pokernook/web
+          - image: devspace/pokernook/web
             env:
               - name: NEXT_PUBLIC_GRAPHQL_URL
                 value: http://local.graph.pokernook.com
@@ -59,14 +53,6 @@ deployments:
           annotations:
             nginx.ingress.kubernetes.io/enable-cors: "true"
             nginx.ingress.kubernetes.io/cors-allow-origin: "http://local.pokernook.com"
-
-profiles:
-  - name: production
-    patches:
-      - op: remove
-        path: images.web.cmd
-      - op: remove
-        path: images.web.build.docker.options.target
 
 dev:
   ports:
