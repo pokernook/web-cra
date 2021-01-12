@@ -2,7 +2,7 @@ version: v1beta9
 
 images:
   web:
-    image: registry.digitalocean.com/pokernook/web
+    image: devspace/pokernook/web
     tags:
       - sha-${DEVSPACE_GIT_COMMIT}-${DEVSPACE_RANDOM}
     cmd: ["npm", "run", "dev"]
@@ -12,52 +12,63 @@ images:
         useBuildKit: true
 
 deployments:
-  - name: pokernook-web
+  - name: ingress-nginx
+    helm:
+      chart:
+        name: ingress-nginx
+        repo: https://kubernetes.github.io/ingress-nginx
+        version: "3.18.0"
+      wait: true
+  - name: cert-manager
+    helm:
+      chart:
+        name: cert-manager
+        repo: https://charts.jetstack.io
+        version: "1.1.0"
+      wait: true
+      values:
+        installCRDs: true
+  - name: web
     helm:
       componentChart: true
       values:
         containers:
-          - image: registry.digitalocean.com/pokernook/web
+          - image: devspace/pokernook/web
             env:
               - name: NEXT_PUBLIC_GRAPHQL_URL
-                value: http://pokernook-graph:4000
+                value: http://local.graph.pokernook.com
               - name: GRAPHQL_SCHEMA_PATH
-                value: http://pokernook-graph:4000
+                value: http://pokernook-graph
         service:
           ports:
-            - port: 3000
-
-dependencies:
-  - source:
-      git: https://github.com/pokernook/graph
-      branch: main
-
-profiles:
-  - name: production
-    patches:
-      - op: remove
-        path: images.web.cmd
-      - op: remove
-        path: dependencies
-      - op: remove
-        path: deployments.name=pokernook-web.helm.values.containers[0].env.name=GRAPHQL_SCHEMA_PATH
+            - port: 80
+              containerPort: 3000
+        ingress:
+          ingressClass: nginx
+          rules:
+            - host: local.pokernook.com
+            - host: local.graph.pokernook.com
+              serviceName: pokernook-graph
+              servicePort: 80
+          annotations:
+            nginx.ingress.kubernetes.io/enable-cors: "true"
+            nginx.ingress.kubernetes.io/cors-allow-origin: "http://local.pokernook.com"
 
 dev:
   ports:
     - imageName: web
       forward:
         - port: 3000
-  open:
-    - url: http://localhost:3000
   sync:
     - imageName: web
+      initialSync: preferRemote # Initial GraphQL types download
       excludePaths:
-        - .git/
-      uploadExcludePaths:
-        - /.next/
+        - Dockerfile
         - node_modules
-        - generated
-        - "**/*.graphql"
+        - .git/
+        - /.next/
+      uploadExcludePaths:
+        - "**/graphql-types.ts"
         - logs
         - "**/*.log"
         - npm-debug.log*

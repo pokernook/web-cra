@@ -1,9 +1,19 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { withUrqlClient } from "next-urql";
 import { useForm } from "react-hook-form";
-import { Box, Button, Card, Container, Input, Label } from "theme-ui";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Input,
+  Label,
+  Link as ThemeLink,
+  Text,
+} from "theme-ui";
 
-import { useSignUpMutation } from "../../generated/graphql";
-import { createUrqlClient } from "../../urql/client";
+import { createUrqlClient, useSignUpMutation } from "../../urql";
 
 type FormData = {
   username: string;
@@ -14,30 +24,33 @@ type FormData = {
 const SignUp = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { register, handleSubmit } = useForm<FormData>();
-
   const [, signUpUser] = useSignUpMutation();
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     const result = await signUpUser(data);
-    console.log(result);
+    if (!result.error) {
+      await router.push("/");
+    }
   };
 
   return (
-    <Container sx={{ maxWidth: 375, pt: 20 }}>
-      <Card sx={{ textAlign: "center" }}>
+    <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
+      <Card>
         <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="username" mb={1}>
+          <Label htmlFor="username" mb={2}>
             Username
           </Label>
           <Input
             id="username"
             name="username"
             ref={register({ required: true })}
+            spellCheck={false}
             type="text"
             mb={2}
           />
 
-          <Label htmlFor="email" mb={1}>
+          <Label htmlFor="email" mb={2}>
             Email
           </Label>
           <Input
@@ -48,7 +61,7 @@ const SignUp = (): JSX.Element => {
             mb={2}
           />
 
-          <Label htmlFor="password" mb={1}>
+          <Label htmlFor="password" mb={2}>
             Password
           </Label>
           <Input
@@ -63,6 +76,16 @@ const SignUp = (): JSX.Element => {
             Sign up for PokerNook
           </Button>
         </Box>
+      </Card>
+
+      <Card sx={{ mt: 3, bg: "muted" }}>
+        <Text>
+          Been here before?{" "}
+          <Link href="/logIn" passHref>
+            <ThemeLink>Log in</ThemeLink>
+          </Link>
+          .
+        </Text>
       </Card>
     </Container>
   );

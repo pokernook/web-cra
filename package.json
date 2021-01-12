@@ -2,7 +2,6 @@
   "name": "web",
   "description": "Web App built with Next.js",
   "repository": "github:pokernook/web",
-  "version": "0.0.0",
   "scripts": {
     "generate": "graphql-codegen -r dotenv/config",
     "dev:next": "next dev",
@@ -15,6 +14,7 @@
     "sb:build": "build-storybook"
   },
   "dependencies": {
+    "@urql/exchange-graphcache": "^3.3.3",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "next": "^10.0.1",
@@ -23,15 +23,16 @@
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.11.3",
     "react-is": "^17.0.1",
+    "sharp": "^0.27.0",
     "theme-ui": "^0.3.1",
     "urql": "^1.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@graphql-codegen/add": "^2.0.2",
-    "@graphql-codegen/cli": "1.19.4",
-    "@graphql-codegen/typescript": "1.19.0",
-    "@graphql-codegen/typescript-operations": "1.17.12",
+    "@graphql-codegen/cli": "^1.19.4",
+    "@graphql-codegen/typescript": "^1.19.0",
+    "@graphql-codegen/typescript-operations": "^1.17.12",
     "@graphql-codegen/typescript-urql": "^2.0.3",
     "@storybook/addon-actions": "^6.1.0",
     "@storybook/addon-essentials": "^6.1.0",
