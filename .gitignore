@@ -1,6 +1,4 @@
 # Build output
-/.next/
-/out/
 /build/
 
 # Dependencies
@@ -28,8 +26,8 @@ lerna-debug.log*
 # Testing
 /coverage
 
-# Vercel
-.vercel
-
 # DevSpace cache and log folder
 .devspace/
+
+# ESLint cache
+.eslintcache

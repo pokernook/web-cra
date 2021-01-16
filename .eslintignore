@@ -1,7 +1,0 @@
-# Build output
-/.next
-/out
-/build
-
-# Generated Code
-/src/urql/graphql-types.ts
