@@ -20,13 +20,11 @@ devspace dev # Run the app in a Kubernetes cluster
 ### NPM Scripts Overview
 
 ```bash
-npm run dev # Create a hot-reloading Next.js server
+npm run dev # Create a hot-reloading React app
 
 npm run build # Build application for deployment
 
 npm run generate # Generate GraphQL types
-
-npm run sb # Storybook
 ```
 
 ## Contributing

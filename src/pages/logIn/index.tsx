@@ -1,42 +1,32 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { withUrqlClient } from "next-urql";
+/** @jsxImportSource theme-ui */
+import { FC } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Input,
-  Label,
-  Link as ThemeLink,
-  Text,
-} from "theme-ui";
+import { Link, useHistory } from "react-router-dom";
+import { Box, Button, Card, Container, Input, Label, Text } from "theme-ui";
 
-import { createUrqlClient, useLogInMutation } from "../../urql";
+import { useLogInMutation } from "../../graphql";
 
-type FormData = {
+interface FormData {
   email: string;
   password: string;
-};
+}
 
-const LogIn = (): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
+export const LogIn: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const [, logInUser] = useLogInMutation();
-  const router = useRouter();
+  const history = useHistory();
 
-  const onSubmit = async (data: FormData) => {
+  const logIn = async (data: FormData) => {
     const result = await logInUser(data);
     if (!result.error) {
-      await router.push("/");
+      history.push("/");
     }
   };
 
   return (
     <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
       <Card>
-        <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" onSubmit={handleSubmit(logIn)}>
           <Label htmlFor="email" mb={2}>
             Email
           </Label>
@@ -68,8 +58,8 @@ const LogIn = (): JSX.Element => {
       <Card sx={{ mt: 3, bg: "muted" }}>
         <Text>
           New &apos;round these parts?{" "}
-          <Link href="/signUp" passHref={true}>
-            <ThemeLink>Sign up</ThemeLink>
+          <Link to="/signUp" sx={{ variant: "styles.a" }}>
+            Sign up
           </Link>
           .
         </Text>
@@ -77,5 +67,3 @@ const LogIn = (): JSX.Element => {
     </Container>
   );
 };
-
-export default withUrqlClient(createUrqlClient)(LogIn);

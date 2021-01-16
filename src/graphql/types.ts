@@ -40,7 +40,7 @@ export type User = {
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
-  UserTag?: Maybe<UserTagCompoundUniqueInput>;
+  Tag?: Maybe<UserTagCompoundUniqueInput>;
 };
 
 export type UserTagCompoundUniqueInput = {

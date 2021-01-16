@@ -21,6 +21,7 @@ export const theme: Theme = {
     },
   },
   fonts: {
+    code: "source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace",
     body:
       "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
     heading: "inherit",
@@ -39,6 +40,7 @@ export const theme: Theme = {
     },
     root: {
       fontFamily: "body",
+      fontWeight: "body",
       fontSize: 1,
       p: 0,
       m: 0,

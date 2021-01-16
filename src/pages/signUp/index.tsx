@@ -1,43 +1,33 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { withUrqlClient } from "next-urql";
+/** @jsxImportSource theme-ui */
+import { FC } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Input,
-  Label,
-  Link as ThemeLink,
-  Text,
-} from "theme-ui";
+import { Link, useHistory } from "react-router-dom";
+import { Box, Button, Card, Container, Input, Label, Text } from "theme-ui";
 
-import { createUrqlClient, useSignUpMutation } from "../../urql";
+import { useSignUpMutation } from "../../graphql";
 
-type FormData = {
+interface FormData {
   username: string;
   email: string;
   password: string;
-};
+}
 
-const SignUp = (): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
+export const SignUp: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const [, signUpUser] = useSignUpMutation();
-  const router = useRouter();
+  const history = useHistory();
 
-  const onSubmit = async (data: FormData) => {
+  const signUp = async (data: FormData) => {
     const result = await signUpUser(data);
     if (!result.error) {
-      await router.push("/");
+      history.push("/");
     }
   };
 
   return (
     <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
       <Card>
-        <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" onSubmit={handleSubmit(signUp)}>
           <Label htmlFor="username" mb={2}>
             Username
           </Label>
@@ -81,8 +71,8 @@ const SignUp = (): JSX.Element => {
       <Card sx={{ mt: 3, bg: "muted" }}>
         <Text>
           Been here before?{" "}
-          <Link href="/logIn" passHref>
-            <ThemeLink>Log in</ThemeLink>
+          <Link to="/logIn" sx={{ variant: "styles.a" }}>
+            Log in
           </Link>
           .
         </Text>
@@ -90,5 +80,3 @@ const SignUp = (): JSX.Element => {
     </Container>
   );
 };
-
-export default withUrqlClient(createUrqlClient)(SignUp);

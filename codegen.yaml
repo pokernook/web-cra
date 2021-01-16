@@ -1,9 +1,7 @@
 schema: ${GRAPHQL_SCHEMA_PATH}
-overwrite: true
 documents: src/**/*.graphql
-
 generates:
-  src/urql/graphql-types.ts:
+  src/graphql/types.ts:
     plugins:
       - add:
           content: |
