@@ -1,0 +1,5 @@
+# Build output
+/build
+
+# Generated code
+/src/graphql/types.ts

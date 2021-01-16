@@ -1,0 +1,10 @@
+plugins:
+  - simple-import-sort
+
+extends:
+  - react-app
+
+rules:
+  simple-import-sort/imports: "error"
+  simple-import-sort/exports: "error"
+  sort-imports: "off"

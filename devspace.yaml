@@ -1,0 +1,78 @@
+version: v1beta9
+
+images:
+  web:
+    image: devspace/pokernook/web
+    tags:
+      - sha-${DEVSPACE_GIT_COMMIT}-${DEVSPACE_RANDOM}
+    cmd: ["npm", "run", "dev"]
+    preferSyncOverRebuild: true
+    build:
+      docker:
+        useBuildKit: true
+
+deployments:
+  - name: ingress-nginx
+    helm:
+      chart:
+        name: ingress-nginx
+        repo: https://kubernetes.github.io/ingress-nginx
+        version: 3.x
+      wait: true
+  - name: cert-manager
+    helm:
+      chart:
+        name: cert-manager
+        repo: https://charts.jetstack.io
+        version: 1.x
+      wait: true
+      values:
+        installCRDs: true
+  - name: web
+    helm:
+      componentChart: true
+      values:
+        containers:
+          - image: devspace/pokernook/web
+            env:
+              - name: REACT_APP_GRAPHQL_URL
+                value: http://local.graph.pokernook.com
+              - name: GRAPHQL_SCHEMA_PATH
+                value: http://graph
+        service:
+          ports:
+            - port: 80
+              containerPort: 3000
+        ingress:
+          ingressClass: nginx
+          rules:
+            - host: local.pokernook.com
+            - host: local.graph.pokernook.com
+              serviceName: graph
+              servicePort: 80
+          annotations:
+            nginx.ingress.kubernetes.io/enable-cors: "true"
+            nginx.ingress.kubernetes.io/cors-allow-origin: "http://local.pokernook.com"
+
+dev:
+  ports:
+    - imageName: web
+      forward:
+        - port: 3000
+  sync:
+    - imageName: web
+      initialSync: preferRemote # Initial GraphQL types download
+      excludePaths:
+        - Dockerfile
+        - node_modules
+        - .git/
+      uploadExcludePaths:
+        - "**/graphql-types.ts"
+        - logs
+        - "**/*.log"
+        - npm-debug.log*
+        - yarn-debug.log*
+        - yarn-error.log*
+        - lerna-debug.log*
+        - /coverage
+        - devspace.yaml
