@@ -36,9 +36,9 @@ deployments:
           - image: devspace/pokernook/web
             env:
               - name: REACT_APP_GRAPHQL_URL
-                value: http://local.graph.pokernook.com
+                value: http://local.graphql.pokernook.com
               - name: GRAPHQL_SCHEMA_PATH
-                value: http://graph
+                value: http://graphql
         service:
           ports:
             - port: 80
@@ -47,8 +47,8 @@ deployments:
           ingressClass: nginx
           rules:
             - host: local.pokernook.com
-            - host: local.graph.pokernook.com
-              serviceName: graph
+            - host: local.graphql.pokernook.com
+              serviceName: graphql
               servicePort: 80
           annotations:
             nginx.ingress.kubernetes.io/enable-cors: "true"
