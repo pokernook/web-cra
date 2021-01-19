@@ -19,15 +19,6 @@ deployments:
         repo: https://kubernetes.github.io/ingress-nginx
         version: 3.x
       wait: true
-  - name: cert-manager
-    helm:
-      chart:
-        name: cert-manager
-        repo: https://charts.jetstack.io
-        version: 1.x
-      wait: true
-      values:
-        installCRDs: true
   - name: web
     helm:
       componentChart: true
@@ -66,6 +57,7 @@ dev:
         - Dockerfile
         - node_modules
         - .git/
+        - .eslintcache
       uploadExcludePaths:
         - "**/graphql-types.ts"
         - logs
