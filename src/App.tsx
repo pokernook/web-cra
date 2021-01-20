@@ -22,7 +22,7 @@ const AuthenticatedApp: FC = () => {
   const user = useUserStore((state) => state.user);
   const history = useHistory();
 
-  useEffect(() => history.push("/"));
+  useEffect(() => history.push("/"), [history]);
 
   return (
     <>
