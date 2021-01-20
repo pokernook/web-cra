@@ -77,6 +77,7 @@ export const theme: Theme = {
       color: "text",
       fontWeight: "body",
       p: 3,
+      overflow: "hidden",
     },
   },
   forms: {
