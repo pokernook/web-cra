@@ -12,7 +12,7 @@ import {
   SignUpMutation,
   SignUpMutationVariables,
   User,
-} from "../../graphql";
+} from "../graphql";
 
 type State = {
   user: Partial<User> | undefined | null;
