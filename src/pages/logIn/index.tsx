@@ -1,8 +1,17 @@
 /** @jsxImportSource theme-ui */
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Box, Button, Card, Container, Input, Label, Text } from "theme-ui";
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  Container,
+  Input,
+  Label,
+  Text,
+} from "theme-ui";
 
 import { LogInMutationVariables } from "../../graphql";
 import { useUserStore } from "../../stores/user";
@@ -11,10 +20,22 @@ type FormData = LogInMutationVariables;
 
 export const LogIn: FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
-  const logIn = useUserStore((state) => state.logIn);
+  const [logIn, authError, clearAuthError] = useUserStore((state) => [
+    state.logIn,
+    state.authError,
+    state.clearAuthError,
+  ]);
+
+  useEffect(() => clearAuthError(), [clearAuthError]);
 
   return (
     <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
+      {authError && (
+        <Alert variant="error" mb={3}>
+          {authError.networkError?.message ||
+            authError.graphQLErrors[0]?.message}
+        </Alert>
+      )}
       <Card>
         <Box as="form" onSubmit={handleSubmit(logIn)}>
           <Label htmlFor="email" mb={2}>
