@@ -13,8 +13,8 @@ import {
   Text,
 } from "theme-ui";
 
-import { LogInMutationVariables } from "../../graphql";
-import { useUserStore } from "../../stores/user";
+import { LogInMutationVariables } from "../graphql";
+import { useUserStore } from "../stores/user";
 
 type FormData = LogInMutationVariables;
 

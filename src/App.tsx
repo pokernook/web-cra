@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 
-import { LogIn } from "./pages/logIn";
-import { SignUp } from "./pages/signUp";
+import { LogIn } from "./pages/LogIn";
+import { SignUp } from "./pages/SignUp";
 import { useUserStore } from "./stores/user";
 
 const UnauthenticatedApp: FC = () => (
@@ -24,6 +24,7 @@ const AuthenticatedApp: FC = () => {
 
   useEffect(() => history.push("/"), [history]);
 
+  // TODO: Using the back button while authenticated reveals unauthenticated routes
   return (
     <>
       <Switch>
@@ -39,7 +40,12 @@ const AuthenticatedApp: FC = () => {
 };
 
 export const App: FC = () => {
-  const user = useUserStore((state) => state.user);
+  const [user, checkSession] = useUserStore((state) => [
+    state.user,
+    state.checkSession,
+  ]);
+
+  useEffect(() => checkSession(), [checkSession]); // TODO: Avoid "unauthenticated flash" when checking session
 
   return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 };
