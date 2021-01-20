@@ -99,7 +99,7 @@ export type LogInMutation = (
     { __typename?: 'AuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'discriminator'>
+      & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
     )> }
   )> }
 );
@@ -117,7 +117,7 @@ export type SignUpMutation = (
     { __typename?: 'AuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'discriminator'>
+      & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
     )> }
   )> }
 );
@@ -127,6 +127,8 @@ export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
   logIn(email: $email, password: $password) {
     user {
+      id
+      email
       username
       discriminator
     }
@@ -141,6 +143,8 @@ export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
   signUp(username: $username, email: $email, password: $password) {
     user {
+      id
+      email
       username
       discriminator
     }
