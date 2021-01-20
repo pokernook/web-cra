@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { LogIn } from "./pages/logIn";
 import { SignUp } from "./pages/signUp";
 
-const App: FC = () => {
+export const App: FC = () => {
   return (
     <>
       <Switch>
@@ -18,5 +18,3 @@ const App: FC = () => {
     </>
   );
 };
-
-export default App;
