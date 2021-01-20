@@ -14,7 +14,8 @@ import {
 
 type State = {
   user: Partial<User> | undefined | null;
-  authError: CombinedError | undefined;
+  authError: CombinedError | undefined | null;
+  clearAuthError: () => void;
   signUp: (data: SignUpMutationVariables) => void;
   logIn: (data: LogInMutationVariables) => void;
 };
@@ -22,6 +23,7 @@ type State = {
 export const useUserStore = create<State>((set) => ({
   user: undefined,
   authError: undefined,
+  clearAuthError: () => set({ authError: null }),
   signUp: async (data) => {
     const result = await client
       .mutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, {
