@@ -23,6 +23,8 @@ const AuthenticatedApp: FC = () => {
 
   return (
     <>
+      <pre>{user?.id}</pre>
+      <pre>{user?.email}</pre>
       <pre>{user?.username}</pre>
       <pre>{user?.discriminator}</pre>
     </>
