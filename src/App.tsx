@@ -3,18 +3,34 @@ import { Route, Switch } from "react-router-dom";
 
 import { LogIn } from "./pages/logIn";
 import { SignUp } from "./pages/signUp";
+import { useUserStore } from "./stores/user";
 
-export const App: FC = () => {
+const UnauthenticatedApp: FC = () => (
+  <>
+    <Switch>
+      <Route path="/logIn">
+        <LogIn />
+      </Route>
+      <Route path="/">
+        <SignUp />
+      </Route>
+    </Switch>
+  </>
+);
+
+const AuthenticatedApp: FC = () => {
+  const user = useUserStore((state) => state.user);
+
   return (
     <>
-      <Switch>
-        <Route path="/logIn">
-          <LogIn />
-        </Route>
-        <Route path="/signUp">
-          <SignUp />
-        </Route>
-      </Switch>
+      <pre>{user?.username}</pre>
+      <pre>{user?.discriminator}</pre>
     </>
   );
+};
+
+export const App: FC = () => {
+  const user = useUserStore((state) => state.user);
+
+  return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
 };
