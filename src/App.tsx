@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Route, Switch } from "react-router-dom";
+import { FC, useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import { LogIn } from "./pages/logIn";
 import { SignUp } from "./pages/signUp";
@@ -20,13 +20,20 @@ const UnauthenticatedApp: FC = () => (
 
 const AuthenticatedApp: FC = () => {
   const user = useUserStore((state) => state.user);
+  const history = useHistory();
+
+  useEffect(() => history.push("/"));
 
   return (
     <>
-      <pre>{user?.id}</pre>
-      <pre>{user?.email}</pre>
-      <pre>{user?.username}</pre>
-      <pre>{user?.discriminator}</pre>
+      <Switch>
+        <Route path="/">
+          <pre>{user?.id}</pre>
+          <pre>{user?.email}</pre>
+          <pre>{user?.username}</pre>
+          <pre>{user?.discriminator}</pre>
+        </Route>
+      </Switch>
     </>
   );
 };
