@@ -87,17 +87,6 @@ export type MutationLogInArgs = {
   password: Scalars['String'];
 };
 
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MeQuery = (
-  { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
-  )> }
-);
-
 export type LogInMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -112,6 +101,17 @@ export type LogInMutation = (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
     )> }
+  )> }
+);
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
   )> }
 );
 
@@ -134,20 +134,6 @@ export type SignUpMutation = (
 );
 
 
-export const MeDocument = gql`
-    query me {
-  me {
-    id
-    email
-    username
-    discriminator
-  }
-}
-    `;
-
-export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
-};
 export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
   logIn(email: $email, password: $password) {
@@ -163,6 +149,20 @@ export const LogInDocument = gql`
 
 export function useLogInMutation() {
   return Urql.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument);
+};
+export const MeDocument = gql`
+    query me {
+  me {
+    id
+    email
+    username
+    discriminator
+  }
+}
+    `;
+
+export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
 export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
