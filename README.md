@@ -5,7 +5,7 @@
 ### Recommended Tools
 
 - Node.js 15.x
-- Docker Desktop (or an alternative container runtime and local Kubernetes cluster)
+- Docker Desktop (or an alternative container runtime)
 - VS Code
 
 Clone the repo, then run:
