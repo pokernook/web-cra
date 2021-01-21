@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { LogIn } from "./pages/LogIn";
 import { SignUp } from "./pages/SignUp";
@@ -8,11 +8,14 @@ import { useUserStore } from "./stores/user";
 const UnauthenticatedApp: FC = () => (
   <>
     <Switch>
-      <Route path="/logIn">
+      <Route exact path="/logIn">
         <LogIn />
       </Route>
-      <Route path="/">
+      <Route exact path="/">
         <SignUp />
+      </Route>
+      <Route>
+        <Redirect to="/" />
       </Route>
     </Switch>
   </>
@@ -20,19 +23,18 @@ const UnauthenticatedApp: FC = () => (
 
 const AuthenticatedApp: FC = () => {
   const user = useUserStore((state) => state.user);
-  const history = useHistory();
 
-  useEffect(() => history.push("/"), [history]);
-
-  // TODO: Using the back button while authenticated reveals unauthenticated routes
   return (
     <>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <pre>{user?.id}</pre>
           <pre>{user?.email}</pre>
           <pre>{user?.username}</pre>
           <pre>{user?.discriminator}</pre>
+        </Route>
+        <Route>
+          <Redirect to="/" />
         </Route>
       </Switch>
     </>
