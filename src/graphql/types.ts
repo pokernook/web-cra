@@ -104,6 +104,17 @@ export type LogInMutation = (
   )> }
 );
 
+export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogOutMutation = (
+  { __typename?: 'Mutation' }
+  & { logOut?: Maybe<(
+    { __typename?: 'LogOutPayload' }
+    & Pick<LogOutPayload, 'sessionId'>
+  )> }
+);
+
 export type SignUpMutationVariables = Exact<{
   username: Scalars['String'];
   email: Scalars['String'];
@@ -149,6 +160,17 @@ export const LogInDocument = gql`
 
 export function useLogInMutation() {
   return Urql.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument);
+};
+export const LogOutDocument = gql`
+    mutation logOut {
+  logOut {
+    sessionId
+  }
+}
+    `;
+
+export function useLogOutMutation() {
+  return Urql.useMutation<LogOutMutation, LogOutMutationVariables>(LogOutDocument);
 };
 export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
