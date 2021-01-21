@@ -6,6 +6,8 @@ import {
   LogInDocument,
   LogInMutation,
   LogInMutationVariables,
+  LogOutDocument,
+  LogOutMutation,
   MeDocument,
   MeQuery,
   SignUpDocument,
@@ -20,6 +22,7 @@ type State = {
   clearAuthError: () => void;
   signUp: (data: SignUpMutationVariables) => void;
   logIn: (data: LogInMutationVariables) => void;
+  logOut: () => void;
   checkSession: () => void;
 };
 
@@ -42,6 +45,10 @@ export const useUserStore = create<State>((set) => ({
       })
       .toPromise();
     set({ authError: result.error, user: result.data?.logIn?.user });
+  },
+  logOut: async () => {
+    await client.mutation<LogOutMutation>(LogOutDocument).toPromise();
+    set({ user: null });
   },
   checkSession: async () => {
     const result = await client.query<MeQuery>(MeDocument).toPromise();
