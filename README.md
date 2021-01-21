@@ -7,14 +7,13 @@
 - Node.js 15.x
 - Docker Desktop (or an alternative container runtime and local Kubernetes cluster)
 - VS Code
-- DevSpace CLI
 
 Clone the repo, then run:
 
 ```bash
 npm install # Install project dependencies
 
-devspace dev # Run the app in a Kubernetes cluster
+npm run dev # Run the app
 ```
 
 ### NPM Scripts Overview
