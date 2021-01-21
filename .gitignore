@@ -26,8 +26,5 @@ lerna-debug.log*
 # Testing
 /coverage
 
-# DevSpace cache and log folder
-.devspace/
-
 # ESLint cache
 .eslintcache

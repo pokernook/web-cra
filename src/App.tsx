@@ -1,22 +1,16 @@
-import { FC } from "react";
-import { Route, Switch } from "react-router-dom";
+import { useEffect } from "react";
 
-import { LogIn } from "./pages/logIn";
-import { SignUp } from "./pages/signUp";
+import { PrivateApp } from "./routes/PrivateApp";
+import { PublicApp } from "./routes/PublicApp";
+import { useUserStore } from "./stores/user";
 
-const App: FC = () => {
-  return (
-    <>
-      <Switch>
-        <Route path="/logIn">
-          <LogIn />
-        </Route>
-        <Route path="/signUp">
-          <SignUp />
-        </Route>
-      </Switch>
-    </>
-  );
+export const App = () => {
+  const [user, checkSession] = useUserStore((state) => [
+    state.user,
+    state.checkSession,
+  ]);
+
+  useEffect(() => checkSession(), [checkSession]); // TODO: Avoid "unauthenticated flash" when checking session
+
+  return user ? <PrivateApp /> : <PublicApp />;
 };
-
-export default App;

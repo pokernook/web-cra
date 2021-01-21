@@ -1,3 +1,4 @@
+import { alpha } from "@theme-ui/color";
 import { Theme } from "theme-ui";
 
 export const theme: Theme = {
@@ -8,6 +9,7 @@ export const theme: Theme = {
     text: "#000",
     link: "#4c7dee",
     primary: "#2ea44f",
+    error: "#b83232",
     muted: "#fafbfc",
     border: "#e1e4e8",
     modes: {
@@ -64,6 +66,18 @@ export const theme: Theme = {
       borderColor: "border",
       borderRadius: 4,
       borderWidth: 1,
+    },
+  },
+  alerts: {
+    error: {
+      bg: alpha("error", 0.2),
+      border: "solid",
+      borderColor: "error",
+      borderWidth: 1,
+      color: "text",
+      fontWeight: "body",
+      p: 3,
+      overflow: "hidden",
     },
   },
   forms: {

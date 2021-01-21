@@ -1,6 +1,8 @@
 mutation logIn($email: String!, $password: String!) {
   logIn(email: $email, password: $password) {
     user {
+      id
+      email
       username
       discriminator
     }

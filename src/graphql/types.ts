@@ -99,8 +99,19 @@ export type LogInMutation = (
     { __typename?: 'AuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'discriminator'>
+      & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
     )> }
+  )> }
+);
+
+export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogOutMutation = (
+  { __typename?: 'Mutation' }
+  & { logOut?: Maybe<(
+    { __typename?: 'LogOutPayload' }
+    & Pick<LogOutPayload, 'sessionId'>
   )> }
 );
 
@@ -117,8 +128,19 @@ export type SignUpMutation = (
     { __typename?: 'AuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'username' | 'discriminator'>
+      & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
     )> }
+  )> }
+);
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
   )> }
 );
 
@@ -127,6 +149,8 @@ export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
   logIn(email: $email, password: $password) {
     user {
+      id
+      email
       username
       discriminator
     }
@@ -137,10 +161,23 @@ export const LogInDocument = gql`
 export function useLogInMutation() {
   return Urql.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument);
 };
+export const LogOutDocument = gql`
+    mutation logOut {
+  logOut {
+    sessionId
+  }
+}
+    `;
+
+export function useLogOutMutation() {
+  return Urql.useMutation<LogOutMutation, LogOutMutationVariables>(LogOutDocument);
+};
 export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
   signUp(username: $username, email: $email, password: $password) {
     user {
+      id
+      email
       username
       discriminator
     }
@@ -150,4 +187,18 @@ export const SignUpDocument = gql`
 
 export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
+};
+export const MeDocument = gql`
+    query me {
+  me {
+    id
+    email
+    username
+    discriminator
+  }
+}
+    `;
+
+export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
