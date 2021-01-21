@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import {
@@ -18,7 +18,7 @@ import { useUserStore } from "../stores/user";
 
 type FormData = SignUpMutationVariables;
 
-export const SignUp: FC = () => {
+export const SignUp = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const [signUp, authError, clearAuthError] = useUserStore((state) => [
     state.signUp,
