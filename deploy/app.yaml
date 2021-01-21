@@ -35,7 +35,7 @@ spec:
       - name: regcred
       containers:
       - name: web
-        image: ghcr.io/pokernook/web:0.0.2 # {"$imagepolicy": "flux-system:web"}
+        image: ghcr.io/pokernook/web:0.0.3 # {"$imagepolicy": "flux-system:web"}
         resources:
           requests:
             memory: 128Mi
