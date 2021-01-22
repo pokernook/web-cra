@@ -34,7 +34,8 @@ export const SignUp = () => {
     <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
       {authError && (
         <Alert variant="error" mb={3}>
-          {authError.graphQLErrors[0]?.message}
+          {authError.networkError?.message ||
+            authError.graphQLErrors[0]?.message}
         </Alert>
       )}
       <Card>
