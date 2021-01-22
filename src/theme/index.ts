@@ -3,7 +3,7 @@ import { Theme } from "theme-ui";
 
 export const theme: Theme = {
   useColorSchemeMediaQuery: true,
-  useLocalStorage: true,
+  useLocalStorage: false,
   colors: {
     background: "#fff",
     text: "#000",
