@@ -26,7 +26,9 @@ export const SignUp = () => {
     state.clearAuthError,
   ]);
 
-  useEffect(() => clearAuthError(), [clearAuthError]);
+  useEffect(() => {
+    return () => clearAuthError();
+  }, [clearAuthError]);
 
   return (
     <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
