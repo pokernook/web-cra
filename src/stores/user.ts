@@ -1,8 +1,8 @@
 import { CombinedError } from "urql";
 import create from "zustand";
 
+import { client } from "../graphql/client";
 import {
-  client,
   LogInDocument,
   LogInMutation,
   LogInMutationVariables,
@@ -14,7 +14,7 @@ import {
   SignUpMutation,
   SignUpMutationVariables,
   User,
-} from "../graphql";
+} from "../graphql/types";
 
 type State = {
   user: Partial<User> | undefined | null;

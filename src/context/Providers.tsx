@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "theme-ui";
 import { Provider as UrqlProvider } from "urql";
 
-import { client } from "../graphql";
+import { client } from "../graphql/client";
 import { theme } from "../theme";
 
 export const Providers: FC = ({ children }) => (
