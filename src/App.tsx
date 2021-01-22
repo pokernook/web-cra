@@ -10,7 +10,7 @@ export const App = () => {
     state.checkSession,
   ]);
 
-  useEffect(() => checkSession(), [checkSession]); // TODO: Avoid "unauthenticated flash" when checking session
+  useEffect(checkSession, [checkSession]); // TODO: Avoid "unauthenticated flash" when checking session
 
   return user ? <PrivateApp /> : <PublicApp />;
 };
