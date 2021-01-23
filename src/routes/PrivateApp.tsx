@@ -1,12 +1,13 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import { Helm } from "../layouts/Helm";
 import { useUserStore } from "../stores/user";
 
 export const PrivateApp = () => {
   const user = useUserStore((state) => state.user);
 
   return (
-    <>
+    <Helm>
       <Switch>
         <Route exact path="/">
           <pre>ID: {user?.id}</pre>
@@ -20,6 +21,6 @@ export const PrivateApp = () => {
           <Redirect to="/" />
         </Route>
       </Switch>
-    </>
+    </Helm>
   );
 };
