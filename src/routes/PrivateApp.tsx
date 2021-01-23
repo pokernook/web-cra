@@ -9,10 +9,12 @@ export const PrivateApp = () => {
     <>
       <Switch>
         <Route exact path="/">
-          <pre>{user?.id}</pre>
-          <pre>{user?.email}</pre>
-          <pre>{user?.username}</pre>
-          <pre>{user?.discriminator}</pre>
+          <pre>ID: {user?.id}</pre>
+          <pre>Created: {user?.createdAt}</pre>
+          <pre>Email: {user?.email}</pre>
+          <pre>
+            Tag: {user?.username}#{user?.discriminator}
+          </pre>
         </Route>
         <Route>
           <Redirect to="/" />
