@@ -85,7 +85,7 @@ const getAvatarSvgFromData = (avatarData: string, size: number) => {
   return `data:image/svg+xml;base64,${btoa(svg)}`;
 };
 
-export const generateAvatarSvg = (seed: string, complexity = 6, size = 256) => {
+export const generateAvatarSvg = (seed: string, complexity = 8, size = 256) => {
   const avatarData = generateRandomAvatarData(seed, complexity);
   return getAvatarSvgFromData(avatarData, size);
 };
