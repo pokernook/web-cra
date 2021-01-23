@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-import { Loading } from "./pages/Loading";
-import { PrivateApp } from "./routes/PrivateApp";
-import { PublicApp } from "./routes/PublicApp";
+import { Loading } from "./components/pages/Loading";
+import { PrivateApp } from "./components/routes/PrivateApp";
+import { PublicApp } from "./components/routes/PublicApp";
 import { useUserStore } from "./stores/user";
 
 useUserStore.setState({ fetchingSession: true });
