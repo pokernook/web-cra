@@ -8,6 +8,7 @@ import {
   Button,
   Card,
   Container,
+  Heading,
   Input,
   Label,
   Text,
@@ -31,7 +32,8 @@ export const SignUp = () => {
   }, [clearAuthError]);
 
   return (
-    <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
+    <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+      <Heading mb={3}>Create your account</Heading>
       {authError && (
         <Alert variant="error" mb={3}>
           {authError.networkError?.message ||
