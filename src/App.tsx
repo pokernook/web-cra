@@ -1,16 +1,24 @@
 import { useEffect } from "react";
 
+import { Loading } from "./pages/Loading";
 import { PrivateApp } from "./routes/PrivateApp";
 import { PublicApp } from "./routes/PublicApp";
 import { useUserStore } from "./stores/user";
 
+useUserStore.setState({ fetchingSession: true });
+
 export const App = () => {
-  const [user, checkSession] = useUserStore((state) => [
+  const [user, checkSession, fetchingSession] = useUserStore((state) => [
     state.user,
     state.checkSession,
+    state.fetchingSession,
   ]);
 
-  useEffect(checkSession, [checkSession]); // TODO: Avoid "unauthenticated flash" when checking session
+  useEffect(() => {
+    setTimeout(() => {
+      checkSession();
+    }, 1000);
+  }, [checkSession]);
 
-  return user ? <PrivateApp /> : <PublicApp />;
+  return fetchingSession ? <Loading /> : user ? <PrivateApp /> : <PublicApp />;
 };
