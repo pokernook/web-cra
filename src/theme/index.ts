@@ -7,7 +7,7 @@ export const theme: Theme = {
     background: "#0d1117",
     text: "#fdfefd",
     link: "#4c7dee",
-    primary: "#238636",
+    primary: "#258e3a",
     error: "#b83232",
     muted: "#090d13",
     border: "#21262d",
