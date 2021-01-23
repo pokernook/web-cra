@@ -2,25 +2,15 @@ import { alpha } from "@theme-ui/color";
 import { Theme } from "theme-ui";
 
 export const theme: Theme = {
-  useColorSchemeMediaQuery: true,
-  useLocalStorage: true,
+  useLocalStorage: false,
   colors: {
-    background: "#fff",
-    text: "#000",
+    background: "#0d1117",
+    text: "#fdfefd",
     link: "#4c7dee",
-    primary: "#2ea44f",
+    primary: "#258e3a",
     error: "#b83232",
-    muted: "#fafbfc",
-    border: "#e1e4e8",
-    modes: {
-      dark: {
-        background: "#0d1117",
-        text: "#fdfefd",
-        primary: "#238636",
-        muted: "#090d13",
-        border: "#21262d",
-      },
-    },
+    muted: "#090d13",
+    border: "#21262d",
   },
   fonts: {
     code: "source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace",

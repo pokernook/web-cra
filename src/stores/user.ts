@@ -1,8 +1,8 @@
 import { CombinedError } from "urql";
 import create from "zustand";
 
+import { client } from "../graphql/client";
 import {
-  client,
   LogInDocument,
   LogInMutation,
   LogInMutationVariables,
@@ -14,11 +14,12 @@ import {
   SignUpMutation,
   SignUpMutationVariables,
   User,
-} from "../graphql";
+} from "../graphql/types";
 
 type State = {
   user: Partial<User> | undefined | null;
   authError: CombinedError | undefined | null;
+  fetchingSession: boolean;
   clearAuthError: () => void;
   signUp: (data: SignUpMutationVariables) => void;
   logIn: (data: LogInMutationVariables) => void;
@@ -29,6 +30,7 @@ type State = {
 export const useUserStore = create<State>((set) => ({
   user: undefined,
   authError: undefined,
+  fetchingSession: false,
   clearAuthError: () => set({ authError: null }),
   signUp: async (data) => {
     const result = await client
@@ -51,7 +53,8 @@ export const useUserStore = create<State>((set) => ({
     set({ user: null });
   },
   checkSession: async () => {
+    set({ fetchingSession: true });
     const result = await client.query<MeQuery>(MeDocument).toPromise();
-    set({ user: result.data?.me });
+    set({ fetchingSession: false, user: result.data?.me });
   },
 }));

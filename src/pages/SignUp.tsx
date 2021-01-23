@@ -8,12 +8,13 @@ import {
   Button,
   Card,
   Container,
+  Heading,
   Input,
   Label,
   Text,
 } from "theme-ui";
 
-import { SignUpMutationVariables } from "../graphql";
+import { SignUpMutationVariables } from "../graphql/types";
 import { useUserStore } from "../stores/user";
 
 type FormData = SignUpMutationVariables;
@@ -26,13 +27,17 @@ export const SignUp = () => {
     state.clearAuthError,
   ]);
 
-  useEffect(() => clearAuthError(), [clearAuthError]);
+  useEffect(() => {
+    return () => clearAuthError();
+  }, [clearAuthError]);
 
   return (
-    <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
+    <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+      <Heading mb={3}>Create your account</Heading>
       {authError && (
         <Alert variant="error" mb={3}>
-          {authError.graphQLErrors[0]?.message}
+          {authError.networkError?.message ||
+            authError.graphQLErrors[0]?.message}
         </Alert>
       )}
       <Card>

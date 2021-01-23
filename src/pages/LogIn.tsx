@@ -8,12 +8,13 @@ import {
   Button,
   Card,
   Container,
+  Heading,
   Input,
   Label,
   Text,
 } from "theme-ui";
 
-import { LogInMutationVariables } from "../graphql";
+import { LogInMutationVariables } from "../graphql/types";
 import { useUserStore } from "../stores/user";
 
 type FormData = LogInMutationVariables;
@@ -26,10 +27,13 @@ export const LogIn = () => {
     state.clearAuthError,
   ]);
 
-  useEffect(() => clearAuthError(), [clearAuthError]);
+  useEffect(() => {
+    return () => clearAuthError();
+  }, [clearAuthError]);
 
   return (
-    <Container sx={{ maxWidth: 375, pt: 20, textAlign: "center" }}>
+    <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+      <Heading mb={3}>Enter the &apos;Nook</Heading>
       {authError && (
         <Alert variant="error" mb={3}>
           {authError.networkError?.message ||
