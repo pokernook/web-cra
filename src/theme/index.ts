@@ -38,6 +38,9 @@ export const theme: Theme = {
       m: 0,
     },
   },
+  sizes: {
+    sidebar: 320,
+  },
   buttons: {
     primary: {
       bg: "primary",

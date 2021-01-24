@@ -17,6 +17,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
 };
 
 export type AuthPayload = {
@@ -32,10 +33,12 @@ export type LogOutPayload = {
 export type User = {
   __typename?: 'User';
   id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   username: Scalars['String'];
   discriminator: Scalars['Int'];
 };
+
 
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
@@ -99,7 +102,7 @@ export type LogInMutation = (
     { __typename?: 'AuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
+      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
     )> }
   )> }
 );
@@ -128,7 +131,7 @@ export type SignUpMutation = (
     { __typename?: 'AuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
+      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
     )> }
   )> }
 );
@@ -140,7 +143,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'username' | 'discriminator'>
+    & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
   )> }
 );
 
@@ -150,6 +153,7 @@ export const LogInDocument = gql`
   logIn(email: $email, password: $password) {
     user {
       id
+      createdAt
       email
       username
       discriminator
@@ -177,6 +181,7 @@ export const SignUpDocument = gql`
   signUp(username: $username, email: $email, password: $password) {
     user {
       id
+      createdAt
       email
       username
       discriminator
@@ -192,6 +197,7 @@ export const MeDocument = gql`
     query me {
   me {
     id
+    createdAt
     email
     username
     discriminator
