@@ -1,5 +1,8 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
+import { Avatar } from "theme-ui";
+
+import { useUserStore } from "../../stores/user";
 
 const Sidebar = () => (
   <aside
@@ -16,7 +19,24 @@ const Sidebar = () => (
   ></aside>
 );
 
-const Header = () => <header sx={{ width: "100%" }}></header>;
+const Header = () => {
+  const getAvatar = useUserStore((state) => state.getAvatar);
+
+  return (
+    <header sx={{ width: "100%" }}>
+      <Avatar
+        alt="Avatar"
+        src={getAvatar()}
+        sx={{
+          bg: "black",
+          float: "right",
+          mt: 4,
+          mr: 7,
+        }}
+      />
+    </header>
+  );
+};
 
 const Footer = () => <footer sx={{ width: "100%" }}></footer>;
 
