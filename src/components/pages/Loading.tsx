@@ -15,7 +15,7 @@ export const Loading = () => (
     <motion.img
       alt="Logo"
       src={logo}
-      animate={{ scale: [0.5, 0.6, 0.5] }}
+      animate={{ scale: [0.5, 0.52, 0.5] }}
       transition={{ duration: 1.1, repeat: Infinity }}
     />
   </Container>
