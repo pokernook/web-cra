@@ -15,11 +15,13 @@ import {
   SignUpMutationVariables,
   User,
 } from "../graphql/types";
+import { generateAvatarSvg } from "../util/generate-avatar";
 
 type State = {
   user: Partial<User> | undefined | null;
   authError: CombinedError | undefined | null;
   fetchingSession: boolean;
+  getAvatar: () => string;
   clearAuthError: () => void;
   signUp: (data: SignUpMutationVariables) => void;
   logIn: (data: LogInMutationVariables) => void;
@@ -27,10 +29,11 @@ type State = {
   checkSession: () => void;
 };
 
-export const useUserStore = create<State>((set) => ({
+export const useUserStore = create<State>((set, get) => ({
   user: undefined,
   authError: undefined,
   fetchingSession: false,
+  getAvatar: () => generateAvatarSvg(`${get().user?.id}`),
   clearAuthError: () => set({ authError: null }),
   signUp: async (data) => {
     const result = await client
