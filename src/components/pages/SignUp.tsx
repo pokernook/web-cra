@@ -8,9 +8,8 @@ import {
   Button,
   Card,
   Container,
+  Field,
   Heading,
-  Input,
-  Label,
   Text,
 } from "theme-ui";
 
@@ -42,37 +41,28 @@ export const SignUp = () => {
       )}
       <Card>
         <Box as="form" onSubmit={handleSubmit(signUp)}>
-          <Label htmlFor="username" mb={2}>
-            Username
-          </Label>
-          <Input
-            id="username"
+          <Field
+            label="Username"
             name="username"
+            type="text"
             ref={register({ required: true })}
             spellCheck={false}
-            type="text"
             mb={2}
           />
 
-          <Label htmlFor="email" mb={2}>
-            Email
-          </Label>
-          <Input
-            id="email"
+          <Field
+            label="Email"
             name="email"
-            ref={register({ required: true })}
             type="email"
+            ref={register({ required: true })}
             mb={2}
           />
 
-          <Label htmlFor="password" mb={2}>
-            Password
-          </Label>
-          <Input
-            id="password"
+          <Field
+            label="Password"
             name="password"
-            ref={register({ required: true })}
             type="password"
+            ref={register({ required: true })}
             mb={3}
           />
 
