@@ -8,9 +8,8 @@ import {
   Button,
   Card,
   Container,
+  Field,
   Heading,
-  Input,
-  Label,
   Text,
 } from "theme-ui";
 
@@ -42,25 +41,19 @@ export const LogIn = () => {
       )}
       <Card>
         <Box as="form" onSubmit={handleSubmit(logIn)}>
-          <Label htmlFor="email" mb={2}>
-            Email
-          </Label>
-          <Input
-            id="email"
+          <Field
+            label="Email"
             name="email"
-            ref={register({ required: true })}
             type="email"
+            ref={register({ required: true })}
             mb={2}
           />
 
-          <Label htmlFor="password" mb={2}>
-            Password
-          </Label>
-          <Input
-            id="password"
+          <Field
+            label="Password"
             name="password"
-            ref={register({ required: true })}
             type="password"
+            ref={register({ required: true })}
             mb={3}
           />
 
