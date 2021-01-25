@@ -1,40 +1,39 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
-import { Avatar } from "theme-ui";
+import { Avatar, Flex } from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
 
-const Sidebar = () => (
-  <aside
-    sx={{
-      bg: "muted",
-      borderRadius: 0,
-      borderRight: "solid",
-      borderRightColor: "border",
-      borderRightWidth: 1,
-      flexGrow: 1,
-      flexBasis: "sidebar",
-      minHeight: "100vh",
-    }}
-  ></aside>
-);
-
-const Header = () => {
-  const getAvatar = useUserStore((state) => state.getAvatar);
+const Sidebar = () => {
+  const [user, getAvatar] = useUserStore((state) => [
+    state.user,
+    state.getAvatar,
+  ]);
 
   return (
-    <header sx={{ width: "100%" }}>
-      <Avatar
-        alt="Avatar"
-        src={getAvatar()}
-        sx={{
-          bg: "black",
-          float: "right",
-          mt: 4,
-          mr: 7,
-        }}
-      />
-    </header>
+    <aside
+      sx={{
+        bg: "muted",
+        flexGrow: 1,
+        flexBasis: "sidebar",
+        minHeight: "100vh",
+      }}
+    >
+      <Flex>
+        <Avatar
+          alt="Avatar"
+          src={getAvatar()}
+          sx={{
+            bg: "black",
+            width: 40,
+            height: 40,
+          }}
+        />
+        <pre>
+          {user?.username}#{user?.discriminator}
+        </pre>
+      </Flex>
+    </aside>
   );
 };
 
@@ -53,7 +52,6 @@ export const Helm: FC = ({ children }) => (
         minWidth: 320,
       }}
     >
-      <Header />
       <main sx={{ flex: "1 1 auto", width: "100%" }}>{children}</main>
       <Footer />
     </div>
