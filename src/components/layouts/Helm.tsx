@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
-import { Avatar, Flex, Link } from "theme-ui";
+import { Avatar, Container, Flex, Link } from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
 
@@ -14,10 +14,9 @@ const Sidebar = () => {
   return (
     <aside
       sx={{
-        bg: "muted",
         flexGrow: 1,
         flexBasis: "sidebar",
-        minHeight: "100vh",
+        minHeight: "inherit",
       }}
     >
       <Flex>
@@ -39,23 +38,32 @@ const Sidebar = () => {
   );
 };
 
-const Footer = () => <footer sx={{ width: "100%" }}></footer>;
+const Main: FC = ({ children }) => (
+  <main
+    sx={{
+      display: "inherit",
+      flex: "1 1 auto",
+      flexGrow: 99999,
+      flexBasis: 0,
+      minHeight: "inherit",
+      minWidth: 320,
+      width: "100%",
+    }}
+  >
+    {children}
+  </main>
+);
 
 export const Helm: FC = ({ children }) => (
-  <div sx={{ display: "flex", flexWrap: "wrap" }}>
+  <Container
+    sx={{
+      display: "flex",
+      flexWrap: "nowrap",
+      maxWidth: 1450,
+      minHeight: "100vh",
+    }}
+  >
     <Sidebar />
-    <div
-      sx={{
-        display: "inherit",
-        flexDirection: "column",
-        flexGrow: 99999,
-        flexBasis: 0,
-        minHeight: "100vh",
-        minWidth: 320,
-      }}
-    >
-      <main sx={{ flex: "1 1 auto", width: "100%" }}>{children}</main>
-      <Footer />
-    </div>
-  </div>
+    <Main>{children}</Main>
+  </Container>
 );
