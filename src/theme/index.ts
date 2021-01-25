@@ -77,6 +77,7 @@ export const theme: Theme = {
     label: {
       fontSize: 1,
       fontWeight: "bold",
+      mb: 2,
     },
     input: {
       px: 2,
