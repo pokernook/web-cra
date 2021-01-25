@@ -1,13 +1,14 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
-import { Avatar, Flex } from "theme-ui";
+import { Avatar, Flex, Link } from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
 
 const Sidebar = () => {
-  const [user, getAvatar] = useUserStore((state) => [
+  const [user, getAvatar, logOut] = useUserStore((state) => [
     state.user,
     state.getAvatar,
+    state.logOut,
   ]);
 
   return (
@@ -33,6 +34,7 @@ const Sidebar = () => {
           {user?.username}#{user?.discriminator}
         </pre>
       </Flex>
+      <Link onClick={logOut}>Log out</Link>
     </aside>
   );
 };
