@@ -31,7 +31,7 @@ const Sidebar = () => {
           }}
         />
         <pre>
-          {user?.username}#{user?.discriminator}
+          {user?.username}#{user?.discriminator?.toString().padStart(4, "0")}
         </pre>
       </Flex>
       <Link onClick={logOut}>Log out</Link>
