@@ -2,16 +2,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  Container,
-  Field,
-  Heading,
-  Text,
-} from "theme-ui";
+import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
 import { LogInMutationVariables } from "../../graphql/types";
 import { useUserStore } from "../../stores/user";
@@ -31,7 +22,7 @@ export const LogIn = () => {
   }, [clearAuthError]);
 
   return (
-    <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+    <>
       <Heading mb={3}>Enter the &apos;Nook</Heading>
       {authError && (
         <Alert variant="error" mb={3}>
@@ -72,6 +63,6 @@ export const LogIn = () => {
           .
         </Text>
       </Card>
-    </Container>
+    </>
   );
 };
