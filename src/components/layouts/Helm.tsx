@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
-import { Avatar, Container, Flex, Link } from "theme-ui";
+import { NavLink } from "react-router-dom";
+import { Avatar, Container, Text } from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
 
@@ -17,23 +18,34 @@ const Sidebar = () => {
         flexGrow: 1,
         flexBasis: "sidebar",
         minHeight: "inherit",
+        display: "inline-block",
       }}
     >
-      <Flex>
-        <Avatar
-          alt="Avatar"
-          src={getAvatar()}
-          sx={{
-            bg: "black",
-            width: 40,
-            height: 40,
-          }}
-        />
-        <pre>
-          {user?.username}#{user?.discriminator?.toString().padStart(4, "0")}
-        </pre>
-      </Flex>
-      <Link onClick={logOut}>Log out</Link>
+      <ul sx={{ listStyle: "none" }}>
+        <li>
+          <NavLink to="/" sx={{ variant: "links.nav" }}>
+            <Avatar
+              src={getAvatar()}
+              sx={{
+                bg: "black",
+                width: 36,
+                height: 36,
+                mr: 3,
+              }}
+            />
+            <Text sx={{ fontSize: 2 }}>{user?.username}</Text>
+            <Text sx={{ fontSize: 2, color: "mutedText" }}>
+              #{user?.discriminator?.toString().padStart(4, "0")}
+            </Text>
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/" sx={{ variant: "links.nav" }} onClick={logOut}>
+            <Text sx={{ fontSize: 2 }}>Log out</Text>
+          </NavLink>
+        </li>
+      </ul>
     </aside>
   );
 };
