@@ -4,13 +4,12 @@ import { Theme } from "theme-ui";
 export const theme: Theme = {
   useLocalStorage: false,
   colors: {
-    background: "#0d1117",
+    background: "#090d13",
     text: "#fdfefd",
-    mutedText: "#8c8c8c",
     link: "#4c7dee",
     primary: "#258e3a",
     error: "#b83232",
-    muted: "#090d13",
+    muted: "#0d1117",
     border: "#21262d",
   },
   fonts: {
@@ -40,7 +39,7 @@ export const theme: Theme = {
     },
   },
   sizes: {
-    sidebar: 320,
+    sidebar: 360,
   },
   buttons: {
     primary: {
