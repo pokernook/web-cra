@@ -60,6 +60,7 @@ export const theme: Theme = {
       color: "text",
       display: "flex",
       minHeight: 50,
+      my: 2,
       p: 2,
       textDecoration: "none",
       ":hover": {
