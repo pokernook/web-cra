@@ -40,35 +40,15 @@ export const theme: Theme = {
     },
   },
   sizes: {
-    sidebar: 280,
+    sidebar: 320,
   },
   buttons: {
     primary: {
       bg: "primary",
-      color: "#fff",
+      color: "text",
       px: 3,
       py: 2,
       "&:hover": {
-        cursor: "pointer",
-      },
-    },
-  },
-  links: {
-    nav: {
-      alignItems: "center",
-      border: "solid",
-      borderColor: "background",
-      borderRadius: 4,
-      borderWidth: 1,
-      color: "text",
-      display: "flex",
-      minHeight: 50,
-      my: 2,
-      p: 2,
-      textDecoration: "none",
-      ":hover": {
-        bg: alpha("link", 0.2),
-        borderColor: "link",
         cursor: "pointer",
       },
     },
