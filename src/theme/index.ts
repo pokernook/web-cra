@@ -56,18 +56,14 @@ export const theme: Theme = {
   links: {
     nav: {
       alignItems: "center",
-      border: "solid",
-      borderColor: "background",
       borderRadius: 4,
-      borderWidth: 1,
       color: "text",
       display: "flex",
       minHeight: 50,
       p: 2,
       textDecoration: "none",
       ":hover": {
-        bg: alpha("link", 0.2),
-        borderColor: "link",
+        bg: "border",
         cursor: "pointer",
       },
     },
