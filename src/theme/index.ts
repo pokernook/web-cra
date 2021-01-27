@@ -30,6 +30,7 @@ export const theme: Theme = {
       fontWeight: "bold",
       textDecoration: "none",
     },
+    hr: { borderColor: "border", borderWidth: 1, p: 1, mx: 3 },
     root: {
       fontFamily: "body",
       fontWeight: "body",
