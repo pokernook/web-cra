@@ -43,7 +43,7 @@ export const theme: Theme = {
     },
   },
   sizes: {
-    sidebar: 320,
+    sidebar: 340,
   },
   buttons: {
     primary: {
