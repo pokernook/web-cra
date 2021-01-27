@@ -39,17 +39,14 @@ const Sidebar = () => {
 
       <ul sx={{ listStyle: "none" }}>
         <li>
-          <NavLink
-            to="/logOut"
-            onClick={logOut}
-            sx={{
-              variant: "styles.a",
-              verticalAlign: "middle",
-            }}
-          >
-            <FiLogOut sx={{ color: "text", mr: 2, verticalAlign: "middle" }} />
-            Log out
-          </NavLink>
+          <Flex>
+            <NavLink to="/logOut" onClick={logOut} sx={{ variant: "styles.a" }}>
+              <FiLogOut
+                sx={{ color: "text", mr: 2, verticalAlign: "middle" }}
+              />
+              Log out
+            </NavLink>
+          </Flex>
         </li>
       </ul>
     </aside>
