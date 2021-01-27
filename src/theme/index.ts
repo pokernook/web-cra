@@ -29,6 +29,9 @@ export const theme: Theme = {
       color: "link",
       fontWeight: "bold",
       textDecoration: "none",
+      ":hover": {
+        textDecoration: "underline",
+      },
     },
     hr: { borderColor: "border", borderWidth: 1, p: 1, mx: 3 },
     root: {
