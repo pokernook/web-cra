@@ -38,7 +38,7 @@ const Sidebar = () => {
       <Divider />
 
       <ul sx={{ listStyle: "none" }}>
-        <li>
+        <li sx={{ py: 2 }}>
           <Flex>
             <NavLink to="/logOut" onClick={logOut} sx={{ variant: "styles.a" }}>
               <FiLogOut
