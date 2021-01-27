@@ -25,7 +25,7 @@ const Sidebar = () => {
         minHeight: "inherit",
       }}
     >
-      <Flex sx={{ mx: 4, mt: 4, p: 0 }}>
+      <Flex sx={{ mx: 4, mt: 4 }}>
         <Avatar
           src={getAvatar()}
           sx={{ bg: "black", width: 36, height: 36, mr: 2 }}
