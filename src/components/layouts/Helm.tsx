@@ -1,48 +1,38 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
+import { FiLogOut } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import { Avatar, Container, Text } from "theme-ui";
+import { Container } from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
 
 const Sidebar = () => {
-  const [user, getAvatar, logOut] = useUserStore((state) => [
-    state.user,
-    state.getAvatar,
-    state.logOut,
-  ]);
+  const logOut = useUserStore((state) => state.logOut);
 
   return (
     <aside
       sx={{
+        bg: "muted",
+        borderRight: "solid",
+        borderRightColor: "border",
+        borderRightWidth: 1,
         flexGrow: 1,
         flexBasis: "sidebar",
         minHeight: "inherit",
-        display: "inline-block",
       }}
     >
-      <ul sx={{ listStyle: "none" }}>
+      <ul sx={{ listStyle: "none", m: 0 }}>
         <li>
-          <NavLink to="/" sx={{ variant: "links.nav" }}>
-            <Avatar
-              src={getAvatar()}
-              sx={{
-                bg: "black",
-                width: 36,
-                height: 36,
-                mr: 3,
-              }}
-            />
-            <Text sx={{ fontSize: 2 }}>{user?.username}</Text>
-            <Text sx={{ fontSize: 2, color: "mutedText" }}>
-              #{user?.discriminator?.toString().padStart(4, "0")}
-            </Text>
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink to="/" sx={{ variant: "links.nav" }} onClick={logOut}>
-            <Text sx={{ fontSize: 2 }}>Log out</Text>
+          <NavLink
+            to="/logOut"
+            onClick={logOut}
+            sx={{
+              variant: "styles.a",
+              verticalAlign: "middle",
+            }}
+          >
+            <FiLogOut sx={{ color: "text", mr: 2, verticalAlign: "middle" }} />
+            Log out
           </NavLink>
         </li>
       </ul>
@@ -71,7 +61,7 @@ export const Helm: FC = ({ children }) => (
     sx={{
       display: "flex",
       flexWrap: "nowrap",
-      maxWidth: 1450,
+      maxWidth: "100%",
       minHeight: "100vh",
     }}
   >
