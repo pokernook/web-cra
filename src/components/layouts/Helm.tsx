@@ -2,12 +2,16 @@
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import { Container } from "theme-ui";
+import { Avatar, Container, Divider, Flex } from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
 
 const Sidebar = () => {
-  const logOut = useUserStore((state) => state.logOut);
+  const [user, getAvatar, logOut] = useUserStore((state) => [
+    state.user,
+    state.getAvatar,
+    state.logOut,
+  ]);
 
   return (
     <aside
@@ -21,7 +25,19 @@ const Sidebar = () => {
         minHeight: "inherit",
       }}
     >
-      <ul sx={{ listStyle: "none", m: 0 }}>
+      <Flex sx={{ mx: 4, mt: 4, p: 0 }}>
+        <Avatar
+          src={getAvatar()}
+          sx={{ bg: "black", width: 36, height: 36, mr: 2 }}
+        />
+        <NavLink to="/profile" sx={{ variant: "styles.a" }}>
+          {user?.username}#{user?.discriminator?.toString().padStart(4, "0")}
+        </NavLink>
+      </Flex>
+
+      <Divider />
+
+      <ul sx={{ listStyle: "none" }}>
         <li>
           <NavLink
             to="/logOut"
