@@ -6,6 +6,7 @@ export const theme: Theme = {
   colors: {
     background: "#090d13",
     text: "#fdfefd",
+    mutedText: "#6f7182",
     link: "#459cff",
     primary: "#258e3a",
     error: "#b83232",
