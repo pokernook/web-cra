@@ -5,7 +5,6 @@ import { Helm } from "../layouts/Helm";
 export const PrivateApp = () => (
   <Helm>
     <Switch>
-      <Route exact path="/settings"></Route>
       <Route exact path="/"></Route>
       <Route>
         <Redirect to="/" />
