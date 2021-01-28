@@ -99,6 +99,14 @@ export const theme: Theme = {
       overflow: "hidden",
     },
   },
+  images: {
+    avatar: {
+      bg: "black",
+      border: "solid",
+      borderColor: "border",
+      borderWidth: 1,
+    },
+  },
   forms: {
     label: {
       fontSize: 1,
