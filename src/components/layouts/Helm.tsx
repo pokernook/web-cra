@@ -2,9 +2,20 @@
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import { Avatar, Container, Divider, Flex } from "theme-ui";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Flex,
+  Label,
+  Text,
+} from "theme-ui";
 
 import { useUserStore } from "../../stores/user";
+
+const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
 
 const Sidebar = () => {
   const [user, getAvatar, logOut] = useUserStore((state) => [
@@ -25,30 +36,39 @@ const Sidebar = () => {
         minHeight: "inherit",
       }}
     >
-      <Flex sx={{ mx: 4, mt: 4 }}>
-        <Avatar
-          src={getAvatar()}
-          sx={{ bg: "black", width: 36, height: 36, mr: 2 }}
-        />
-        <NavLink to="/profile" sx={{ variant: "styles.a" }}>
-          {user?.username}#{user?.discriminator?.toString().padStart(4, "0")}
-        </NavLink>
-      </Flex>
+      <Box sx={{ mx: 4, mt: 4 }}>
+        <Flex>
+          <Avatar src={getAvatar()} sx={{ width: 36, height: 36, mr: 2 }} />
+          <Text sx={{ fontWeight: "bold" }}>{user?.username}</Text>
+          <Text sx={{ color: "mutedText" }}>
+            #{user?.discriminator?.toString().padStart(4, "0")}
+          </Text>
+        </Flex>
 
-      <Divider />
+        <Divider />
 
-      <ul sx={{ listStyle: "none" }}>
-        <li sx={{ py: 2 }}>
-          <Flex>
-            <NavLink to="/logOut" onClick={logOut} sx={{ variant: "styles.a" }}>
-              <FiLogOut
-                sx={{ color: "text", mr: 2, verticalAlign: "middle" }}
-              />
-              Log out
-            </NavLink>
-          </Flex>
-        </li>
-      </ul>
+        <Box>
+          <ul sx={{ listStyle: "none", p: 0 }}>
+            {sidebarRoutes.map((route, index) => (
+              <li key={index} sx={{ py: 1 }}>
+                <NavLink to={route.to} sx={{ variant: "styles.a" }}>
+                  {route.display}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </Box>
+
+        <Divider />
+
+        <Box>
+          <Label>Need to run?</Label>
+          <Button variant="secondary" onClick={logOut}>
+            <FiLogOut sx={{ verticalAlign: "middle", mr: 2 }} />
+            Log out
+          </Button>
+        </Box>
+      </Box>
     </aside>
   );
 };
