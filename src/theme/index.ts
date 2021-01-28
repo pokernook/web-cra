@@ -34,7 +34,7 @@ export const theme: Theme = {
         textDecoration: "underline",
       },
     },
-    hr: { borderColor: "border", borderWidth: 1, p: 1, mx: 3 },
+    hr: { borderColor: "border", borderWidth: 1 },
     root: {
       fontFamily: "body",
       fontWeight: "body",
