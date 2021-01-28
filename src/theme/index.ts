@@ -1,4 +1,4 @@
-import { alpha } from "@theme-ui/color";
+import { alpha, lighten } from "@theme-ui/color";
 import { Theme } from "theme-ui";
 
 export const theme: Theme = {
