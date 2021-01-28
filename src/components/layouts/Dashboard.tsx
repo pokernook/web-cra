@@ -89,7 +89,7 @@ const Main: FC = ({ children }) => (
   </main>
 );
 
-export const Helm: FC = ({ children }) => (
+export const Dashboard: FC = ({ children }) => (
   <Container
     sx={{
       display: "flex",

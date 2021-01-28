@@ -1,14 +1,14 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 
-import { Helm } from "../layouts/Helm";
+import { Dashboard } from "../layouts/Dashboard";
 
 export const PrivateApp = () => (
-  <Helm>
+  <Dashboard>
     <Switch>
       <Route exact path="/"></Route>
       <Route>
         <Redirect to="/" />
       </Route>
     </Switch>
-  </Helm>
+  </Dashboard>
 );
