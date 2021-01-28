@@ -44,7 +44,7 @@ export const theme: Theme = {
     },
   },
   sizes: {
-    sidebar: 340,
+    sidebar: 350,
   },
   buttons: {
     primary: {
