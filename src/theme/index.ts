@@ -49,6 +49,9 @@ export const theme: Theme = {
   buttons: {
     primary: {
       bg: "primary",
+      border: "solid",
+      borderColor: lighten("primary", 0.1),
+      borderWidth: 1,
       color: "text",
       px: 3,
       py: 2,
