@@ -10,7 +10,7 @@ export const theme: Theme = {
     gray: "#212730",
     link: "#459cff",
     muted: "#0d1117",
-    mutedText: "#6f7182",
+    mutedText: "#384252",
     primary: "#238636",
     text: "#fdfefd",
   },
