@@ -41,7 +41,8 @@ const Sidebar = () => {
           <Avatar src={getAvatar()} sx={{ width: 36, height: 36, mr: 2 }} />
           <Text sx={{ fontWeight: "bold" }}>{user?.username}</Text>
           <Text sx={{ color: "mutedText" }}>
-            #{user?.discriminator?.toString().padStart(4, "0")}
+            {/* TODO: Centralize discriminator formatting */}#
+            {user?.discriminator?.toString().padStart(4, "0")}{" "}
           </Text>
         </Flex>
 
