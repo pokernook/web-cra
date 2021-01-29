@@ -34,6 +34,9 @@ export const theme: Theme = {
       ":hover": {
         textDecoration: "underline",
       },
+      "&.active": {
+        textDecoration: "underline",
+      },
     },
     hr: { borderColor: "border", borderWidth: 1, my: 3 },
     root: {
