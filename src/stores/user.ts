@@ -41,7 +41,7 @@ export const useUserStore = create<State>((set, get) => ({
         ...data,
       })
       .toPromise();
-    set({ authError: result.error, user: result.data?.signUp?.user });
+    set({ authError: result.error, user: result.data?.userSignUp?.user });
   },
   logIn: async (data) => {
     const result = await client
@@ -49,7 +49,7 @@ export const useUserStore = create<State>((set, get) => ({
         ...data,
       })
       .toPromise();
-    set({ authError: result.error, user: result.data?.logIn?.user });
+    set({ authError: result.error, user: result.data?.userLogIn?.user });
   },
   logOut: async () => {
     await client.mutation<LogOutMutation>(LogOutDocument).toPromise();
