@@ -11,7 +11,7 @@ export const theme: Theme = {
     link: "#459cff",
     muted: "#0d1117",
     mutedText: "#6f7182",
-    primary: "#258e3a",
+    primary: "#238636",
     text: "#fdfefd",
   },
   fonts: {
@@ -58,7 +58,7 @@ export const theme: Theme = {
       px: 3,
       py: 2,
       "&:hover": {
-        bg: lighten("primary", 0.1),
+        bg: lighten("primary", 0.05),
         cursor: "pointer",
       },
     },
@@ -72,7 +72,7 @@ export const theme: Theme = {
       px: 3,
       py: 2,
       ":hover": {
-        bg: lighten("gray", 0.1),
+        bg: lighten("gray", 0.05),
         borderColor: "link",
         cursor: "pointer",
       },
