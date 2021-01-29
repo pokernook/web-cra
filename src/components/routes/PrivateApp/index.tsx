@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import {
   Avatar,
@@ -13,7 +14,8 @@ import {
   Text,
 } from "theme-ui";
 
-import { useUserStore } from "../../stores/user";
+import { useUserStore } from "../../../stores/user";
+import { Settings } from "./Settings";
 
 const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
 
@@ -90,7 +92,7 @@ const Main: FC = ({ children }) => (
   </main>
 );
 
-export const Dashboard: FC = ({ children }) => (
+const PrivateAppLayout: FC = ({ children }) => (
   <Container
     sx={{
       display: "flex",
@@ -102,4 +104,18 @@ export const Dashboard: FC = ({ children }) => (
     <Sidebar />
     <Main>{children}</Main>
   </Container>
+);
+
+export const PrivateApp = () => (
+  <PrivateAppLayout>
+    <Switch>
+      <Route exact path="/"></Route>
+      <Route path="/settings">
+        <Settings />
+      </Route>
+      <Route>
+        <Redirect to="/" />
+      </Route>
+    </Switch>
+  </PrivateAppLayout>
 );

@@ -1,11 +1,18 @@
+import { FC } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { Container } from "theme-ui";
 
-import { Authentication } from "../layouts/Authentication";
 import { LogIn } from "../pages/LogIn";
 import { SignUp } from "../pages/SignUp";
 
+const PublicAppLayout: FC = ({ children }) => (
+  <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+    {children}
+  </Container>
+);
+
 export const PublicApp = () => (
-  <Authentication>
+  <PublicAppLayout>
     <Switch>
       <Route exact path="/logIn">
         <LogIn />
@@ -17,5 +24,5 @@ export const PublicApp = () => (
         <Redirect to="/" />
       </Route>
     </Switch>
-  </Authentication>
+  </PublicAppLayout>
 );
