@@ -85,7 +85,7 @@ export const Settings = () => {
     <SettingsLayout>
       <Switch>
         <Route exact path={`${path}/profile`}></Route>
-        <Route exact path={`${path}/*`}>
+        <Route path={`${path}`}>
           <Redirect to={`${path}/profile`} />
         </Route>
       </Switch>
