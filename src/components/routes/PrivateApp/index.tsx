@@ -50,19 +50,17 @@ const Sidebar = () => {
 
         <Divider sx={{ my: 3 }} />
 
-        <Box>
-          <nav sx={{ listStyle: "none", p: 0 }}>
-            {sidebarRoutes.map((route, index) => (
-              <NavLink
-                key={index}
-                to={route.to}
-                sx={{ variant: "styles.a", py: 1 }}
-              >
-                {route.display}
-              </NavLink>
-            ))}
-          </nav>
-        </Box>
+        <nav>
+          {sidebarRoutes.map((route, index) => (
+            <NavLink
+              key={index}
+              to={route.to}
+              sx={{ variant: "styles.a", py: 2, display: "inherit" }}
+            >
+              {route.display}
+            </NavLink>
+          ))}
+        </nav>
 
         <Divider sx={{ my: 3 }} />
 
