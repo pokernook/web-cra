@@ -48,7 +48,7 @@ const Sidebar = () => {
           </Text>
         </Flex>
 
-        <Divider />
+        <Divider sx={{ my: 3 }} />
 
         <Box>
           <ul sx={{ listStyle: "none", p: 0 }}>
@@ -62,7 +62,7 @@ const Sidebar = () => {
           </ul>
         </Box>
 
-        <Divider />
+        <Divider sx={{ my: 3 }} />
 
         <Box>
           <Label>Need to run?</Label>
