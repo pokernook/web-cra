@@ -55,7 +55,7 @@ const Sidebar = () => {
             <NavLink
               key={index}
               to={route.to}
-              sx={{ variant: "styles.a", py: 2, display: "inherit" }}
+              sx={{ variant: "links.nav", py: 2, display: "inherit" }}
             >
               {route.display}
             </NavLink>
