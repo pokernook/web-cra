@@ -9,6 +9,8 @@ export const theme: Theme = {
     error: "#b83232",
     gray: "#212730",
     link: "#459cff",
+    menuItemActiveBackground: "#171b21",
+    menuItemActiveBorder: "#e8886d",
     muted: "#0d1117",
     mutedText: "#384252",
     primary: "#238636",
@@ -34,9 +36,6 @@ export const theme: Theme = {
       ":hover": {
         textDecoration: "underline",
       },
-      "&.active": {
-        textDecoration: "underline",
-      },
     },
     hr: { borderColor: "border", borderWidth: 1, m: 0 },
     root: {
@@ -49,6 +48,33 @@ export const theme: Theme = {
   },
   sizes: {
     sidebar: 350,
+  },
+  links: {
+    menu: {
+      color: "text",
+      fontWeight: "body",
+      textDecoration: "none",
+      ":hover": {
+        bg: "menuItemActiveBackground",
+      },
+      "&.active": {
+        bg: "menuItemActiveBackground",
+        borderLeft: "solid",
+        borderLeftColor: "menuItemActiveBorder",
+        borderLeftWidth: 2,
+      },
+    },
+    nav: {
+      color: "link",
+      fontWeight: "bold",
+      textDecoration: "none",
+      ":hover": {
+        textDecoration: "underline",
+      },
+      "&.active": {
+        textDecoration: "underline",
+      },
+    },
   },
   buttons: {
     primary: {
