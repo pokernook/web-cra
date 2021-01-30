@@ -51,6 +51,9 @@ export const theme: Theme = {
   },
   links: {
     menu: {
+      borderLeft: "solid",
+      borderLeftColor: "transparent",
+      borderLeftWidth: 2,
       color: "text",
       fontWeight: "body",
       textDecoration: "none",
@@ -59,9 +62,7 @@ export const theme: Theme = {
       },
       "&.active": {
         bg: "menuItemActiveBackground",
-        borderLeft: "solid",
         borderLeftColor: "menuItemActiveBorder",
-        borderLeftWidth: 2,
       },
     },
     nav: {
