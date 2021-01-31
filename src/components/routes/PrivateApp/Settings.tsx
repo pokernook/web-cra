@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import {
   NavLink,
   Redirect,
@@ -54,10 +54,9 @@ const SettingsLayout: FC = ({ children }) => {
 
           <nav>
             {settingsRoutes.map((route, index) => (
-              <>
+              <Fragment key={index}>
                 <Divider />
                 <NavLink
-                  key={index}
                   to={`${url}${route.to}`}
                   sx={{
                     variant: "links.menu",
@@ -68,7 +67,7 @@ const SettingsLayout: FC = ({ children }) => {
                 >
                   {route.display}
                 </NavLink>
-              </>
+              </Fragment>
             ))}
           </nav>
         </Card>
