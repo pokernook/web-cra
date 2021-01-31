@@ -3,16 +3,7 @@ import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Divider,
-  Flex,
-  Label,
-  Text,
-} from "theme-ui";
+import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
 import { useUserStore } from "../../../stores/user";
 import { Settings } from "./Settings";
@@ -65,7 +56,9 @@ const Sidebar = () => {
         <Divider sx={{ my: 3 }} />
 
         <Box>
-          <Label>Need to run?</Label>
+          <Text sx={{ display: "inherit", fontWeight: "bold", mb: 2 }}>
+            Need to run?
+          </Text>
           <Button variant="secondary" onClick={logOut}>
             <FiLogOut sx={{ verticalAlign: "middle", mr: 2 }} />
             Log out
