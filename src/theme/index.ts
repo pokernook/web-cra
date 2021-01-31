@@ -66,14 +66,16 @@ export const theme: Theme = {
       },
     },
     nav: {
-      color: "link",
+      borderRadius: 4,
+      color: "text",
       fontWeight: "bold",
       textDecoration: "none",
       ":hover": {
-        textDecoration: "underline",
+        bg: "gray",
       },
       "&.active": {
-        textDecoration: "underline",
+        bg: "gray",
+        color: "link",
       },
     },
   },
