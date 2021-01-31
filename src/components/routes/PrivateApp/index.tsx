@@ -29,7 +29,7 @@ const Sidebar = () => {
         minHeight: "inherit",
       }}
     >
-      <Box sx={{ mx: 4, mt: 4 }}>
+      <Box sx={{ mx: 4, position: "sticky", top: 4 }}>
         <Flex>
           <Avatar src={getAvatar()} sx={{ width: 36, height: 36, mr: 2 }} />
           <Text sx={{ fontWeight: "bold" }}>{user?.username}</Text>
