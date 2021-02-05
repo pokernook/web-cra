@@ -1,0 +1,11 @@
+mutation updateUsername($newUsername: String!) {
+  userUpdateUsername(newUsername: $newUsername) {
+    user {
+      id
+      createdAt
+      email
+      username
+      discriminator
+    }
+  }
+}

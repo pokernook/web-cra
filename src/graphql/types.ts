@@ -148,6 +148,22 @@ export type SignUpMutation = (
   )> }
 );
 
+export type UpdateUsernameMutationVariables = Exact<{
+  newUsername: Scalars['String'];
+}>;
+
+
+export type UpdateUsernameMutation = (
+  { __typename?: 'Mutation' }
+  & { userUpdateUsername?: Maybe<(
+    { __typename?: 'UserPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+    )> }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -204,6 +220,23 @@ export const SignUpDocument = gql`
 
 export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
+};
+export const UpdateUsernameDocument = gql`
+    mutation updateUsername($newUsername: String!) {
+  userUpdateUsername(newUsername: $newUsername) {
+    user {
+      id
+      createdAt
+      email
+      username
+      discriminator
+    }
+  }
+}
+    `;
+
+export function useUpdateUsernameMutation() {
+  return Urql.useMutation<UpdateUsernameMutation, UpdateUsernameMutationVariables>(UpdateUsernameDocument);
 };
 export const MeDocument = gql`
     query me {
