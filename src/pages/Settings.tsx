@@ -70,7 +70,7 @@ const SettingsLayout: FC = ({ children }) => {
         </Heading>
       </Flex>
 
-      <Grid gap={3} columns={["1fr 3fr"]}>
+      <Grid gap={3} columns={["1fr 3fr"]} sx={{ alignItems: "start" }}>
         <SettingsSidebar />
         <Container>{children}</Container>
       </Grid>
