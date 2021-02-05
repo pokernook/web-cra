@@ -19,6 +19,7 @@ import {
 } from "theme-ui";
 
 import { useUserStore } from "../stores/user";
+import { ProfileSettings } from "./ProfileSettings";
 
 const settingsRoutes = [{ to: "/profile", display: "Profile" }];
 
@@ -83,7 +84,9 @@ export const Settings = () => {
   return (
     <SettingsLayout>
       <Switch>
-        <Route exact path={`${path}/profile`}></Route>
+        <Route exact path={`${path}/profile`}>
+          <ProfileSettings />
+        </Route>
         <Route path={`${path}`}>
           <Redirect to={`${path}/profile`} />
         </Route>
