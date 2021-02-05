@@ -13,7 +13,7 @@ export const ProfileSettings = () => {
         label="Username"
         name="username"
         type="text"
-        value={user?.username}
+        defaultValue={user?.username}
         spellCheck={false}
         mb={3}
       />
