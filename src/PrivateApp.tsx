@@ -5,8 +5,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
-import { useUserStore } from "../../../stores/user";
-import { Settings } from "./Settings";
+import { Settings } from "./pages/Settings";
+import { useUserStore } from "./stores/user";
 
 const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
 

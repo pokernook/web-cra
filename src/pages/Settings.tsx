@@ -18,7 +18,7 @@ import {
   Text,
 } from "theme-ui";
 
-import { useUserStore } from "../../../stores/user";
+import { useUserStore } from "../stores/user";
 
 const settingsRoutes = [{ to: "/profile", display: "Profile" }];
 
