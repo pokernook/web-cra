@@ -1,66 +1,23 @@
-import { CombinedError } from "urql";
 import create from "zustand";
 
-import { client } from "../graphql/client";
-import {
-  LogInDocument,
-  LogInMutation,
-  LogInMutationVariables,
-  LogOutDocument,
-  LogOutMutation,
-  MeDocument,
-  MeQuery,
-  SignUpDocument,
-  SignUpMutation,
-  SignUpMutationVariables,
-  User,
-} from "../graphql/types";
+import { User as GraphQLUser } from "../graphql/types";
 import { generateAvatarSvg } from "../util/generate-avatar";
 
+type User = Partial<GraphQLUser> | undefined | null;
+
 type State = {
-  user: Partial<User> | undefined | null;
-  authError: CombinedError | undefined | null;
-  fetchingSession: boolean;
+  user: User;
+  setUser: (user: User) => void;
+  removeUser: () => void;
   getAvatar: () => string;
   getDiscriminator: () => string;
-  clearAuthError: () => void;
-  signUp: (data: SignUpMutationVariables) => void;
-  logIn: (data: LogInMutationVariables) => void;
-  logOut: () => void;
-  checkSession: () => void;
 };
 
 export const useUserStore = create<State>((set, get) => ({
   user: undefined,
-  authError: undefined,
-  fetchingSession: false,
+  setUser: (user) => set({ user }),
+  removeUser: () => set({ user: null }),
   getAvatar: () => generateAvatarSvg(`${get().user?.id}`),
   getDiscriminator: () =>
     `${get().user?.discriminator?.toString().padStart(4, "0")}`,
-  clearAuthError: () => set({ authError: null }),
-  signUp: async (data) => {
-    const result = await client
-      .mutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, {
-        ...data,
-      })
-      .toPromise();
-    set({ authError: result.error, user: result.data?.userSignUp?.user });
-  },
-  logIn: async (data) => {
-    const result = await client
-      .mutation<LogInMutation, LogInMutationVariables>(LogInDocument, {
-        ...data,
-      })
-      .toPromise();
-    set({ authError: result.error, user: result.data?.userLogIn?.user });
-  },
-  logOut: async () => {
-    await client.mutation<LogOutMutation>(LogOutDocument).toPromise();
-    set({ user: null });
-  },
-  checkSession: async () => {
-    set({ fetchingSession: true });
-    const result = await client.query<MeQuery>(MeDocument).toPromise();
-    set({ fetchingSession: false, user: result.data?.me });
-  },
 }));
