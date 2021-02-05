@@ -5,18 +5,30 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
+import { useLogOutMutation } from "./graphql/types";
 import { Settings } from "./pages/Settings";
 import { useUserStore } from "./stores/user";
 
 const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
 
 const Sidebar = () => {
-  const [user, getAvatar, getDiscriminator, logOut] = useUserStore((state) => [
+  const [, logOut] = useLogOutMutation();
+  const [
+    user,
+    getAvatar,
+    getDiscriminator,
+    removeUser,
+  ] = useUserStore((state) => [
     state.user,
     state.getAvatar,
     state.getDiscriminator,
-    state.logOut,
+    state.removeUser,
   ]);
+
+  const handleLogOut = async () => {
+    await logOut();
+    removeUser();
+  };
 
   return (
     <aside
@@ -57,7 +69,7 @@ const Sidebar = () => {
           <Text sx={{ display: "inherit", fontWeight: "bold", mb: 2 }}>
             Need to run?
           </Text>
-          <Button variant="secondary" onClick={logOut}>
+          <Button variant="secondary" onClick={handleLogOut}>
             <FiLogOut sx={{ verticalAlign: "middle", mr: 2 }} />
             Log out
           </Button>
