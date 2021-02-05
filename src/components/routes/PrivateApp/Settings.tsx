@@ -24,9 +24,10 @@ const settingsRoutes = [{ to: "/profile", display: "Profile" }];
 
 const SettingsLayout: FC = ({ children }) => {
   const { url } = useRouteMatch();
-  const [user, getAvatar] = useUserStore((state) => [
+  const [user, getAvatar, getDiscriminator] = useUserStore((state) => [
     state.user,
     state.getAvatar,
+    state.getDiscriminator,
   ]);
 
   return (
@@ -35,7 +36,7 @@ const SettingsLayout: FC = ({ children }) => {
         <Avatar src={getAvatar()} sx={{ width: 64, height: 64, mr: 3 }} />
         <Heading>{user?.username}</Heading>
         <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
-          #{user?.discriminator?.toString().padStart(4, "0")}
+          #{getDiscriminator()}
         </Heading>
       </Flex>
 

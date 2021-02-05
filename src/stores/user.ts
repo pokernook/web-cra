@@ -22,6 +22,7 @@ type State = {
   authError: CombinedError | undefined | null;
   fetchingSession: boolean;
   getAvatar: () => string;
+  getDiscriminator: () => string;
   clearAuthError: () => void;
   signUp: (data: SignUpMutationVariables) => void;
   logIn: (data: LogInMutationVariables) => void;
@@ -34,6 +35,8 @@ export const useUserStore = create<State>((set, get) => ({
   authError: undefined,
   fetchingSession: false,
   getAvatar: () => generateAvatarSvg(`${get().user?.id}`),
+  getDiscriminator: () =>
+    `${get().user?.discriminator?.toString().padStart(4, "0")}`,
   clearAuthError: () => set({ authError: null }),
   signUp: async (data) => {
     const result = await client
