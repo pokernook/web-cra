@@ -20,16 +20,6 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type AuthPayload = {
-  __typename?: 'AuthPayload';
-  user?: Maybe<User>;
-};
-
-export type LogOutPayload = {
-  __typename?: 'LogOutPayload';
-  sessionId?: Maybe<Scalars['String']>;
-};
-
 export type User = {
   __typename?: 'User';
   id: Scalars['String'];
@@ -37,6 +27,16 @@ export type User = {
   email: Scalars['String'];
   username: Scalars['String'];
   discriminator: Scalars['Int'];
+};
+
+export type UserPayload = {
+  __typename?: 'UserPayload';
+  user?: Maybe<User>;
+};
+
+export type UserLogOutPayload = {
+  __typename?: 'UserLogOutPayload';
+  sessionId?: Maybe<Scalars['String']>;
 };
 
 
@@ -72,22 +72,34 @@ export type QueryUsersArgs = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  signUp?: Maybe<AuthPayload>;
-  logIn?: Maybe<AuthPayload>;
-  logOut?: Maybe<LogOutPayload>;
+  userSignUp?: Maybe<UserPayload>;
+  userLogIn?: Maybe<UserPayload>;
+  userLogOut?: Maybe<UserLogOutPayload>;
+  userUpdateUsername?: Maybe<UserPayload>;
+  userUpdatePassword?: Maybe<UserPayload>;
 };
 
 
-export type MutationSignUpArgs = {
+export type MutationUserSignUpArgs = {
   email: Scalars['String'];
   username: Scalars['String'];
   password: Scalars['String'];
 };
 
 
-export type MutationLogInArgs = {
+export type MutationUserLogInArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationUserUpdateUsernameArgs = {
+  newUsername: Scalars['String'];
+};
+
+
+export type MutationUserUpdatePasswordArgs = {
+  newPassword: Scalars['String'];
 };
 
 export type LogInMutationVariables = Exact<{
@@ -98,8 +110,8 @@ export type LogInMutationVariables = Exact<{
 
 export type LogInMutation = (
   { __typename?: 'Mutation' }
-  & { logIn?: Maybe<(
-    { __typename?: 'AuthPayload' }
+  & { userLogIn?: Maybe<(
+    { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
@@ -112,9 +124,9 @@ export type LogOutMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LogOutMutation = (
   { __typename?: 'Mutation' }
-  & { logOut?: Maybe<(
-    { __typename?: 'LogOutPayload' }
-    & Pick<LogOutPayload, 'sessionId'>
+  & { userLogOut?: Maybe<(
+    { __typename?: 'UserLogOutPayload' }
+    & Pick<UserLogOutPayload, 'sessionId'>
   )> }
 );
 
@@ -127,8 +139,8 @@ export type SignUpMutationVariables = Exact<{
 
 export type SignUpMutation = (
   { __typename?: 'Mutation' }
-  & { signUp?: Maybe<(
-    { __typename?: 'AuthPayload' }
+  & { userSignUp?: Maybe<(
+    { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
@@ -150,7 +162,7 @@ export type MeQuery = (
 
 export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
-  logIn(email: $email, password: $password) {
+  userLogIn(email: $email, password: $password) {
     user {
       id
       createdAt
@@ -167,7 +179,7 @@ export function useLogInMutation() {
 };
 export const LogOutDocument = gql`
     mutation logOut {
-  logOut {
+  userLogOut {
     sessionId
   }
 }
@@ -178,7 +190,7 @@ export function useLogOutMutation() {
 };
 export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
-  signUp(username: $username, email: $email, password: $password) {
+  userSignUp(username: $username, email: $email, password: $password) {
     user {
       id
       createdAt

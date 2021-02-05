@@ -2,20 +2,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  Container,
-  Heading,
-  Input,
-  Label,
-  Text,
-} from "theme-ui";
+import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import { LogInMutationVariables } from "../../graphql/types";
-import { useUserStore } from "../../stores/user";
+import { LogInMutationVariables } from "../graphql/types";
+import { useUserStore } from "../stores/user";
 
 type FormData = LogInMutationVariables;
 
@@ -32,7 +22,7 @@ export const LogIn = () => {
   }, [clearAuthError]);
 
   return (
-    <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+    <>
       <Heading mb={3}>Enter the &apos;Nook</Heading>
       {authError && (
         <Alert variant="error" mb={3}>
@@ -42,25 +32,19 @@ export const LogIn = () => {
       )}
       <Card>
         <Box as="form" onSubmit={handleSubmit(logIn)}>
-          <Label htmlFor="email" mb={2}>
-            Email
-          </Label>
-          <Input
-            id="email"
+          <Field
+            label="Email"
             name="email"
-            ref={register({ required: true })}
             type="email"
+            ref={register({ required: true })}
             mb={2}
           />
 
-          <Label htmlFor="password" mb={2}>
-            Password
-          </Label>
-          <Input
-            id="password"
+          <Field
+            label="Password"
             name="password"
-            ref={register({ required: true })}
             type="password"
+            ref={register({ required: true })}
             mb={3}
           />
 
@@ -70,7 +54,7 @@ export const LogIn = () => {
         </Box>
       </Card>
 
-      <Card sx={{ mt: 3, bg: "muted" }}>
+      <Card sx={{ mt: 3 }}>
         <Text>
           New &apos;round these parts?{" "}
           <Link to="/signUp" sx={{ variant: "styles.a" }}>
@@ -79,6 +63,6 @@ export const LogIn = () => {
           .
         </Text>
       </Card>
-    </Container>
+    </>
   );
 };

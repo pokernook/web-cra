@@ -2,20 +2,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  Container,
-  Heading,
-  Input,
-  Label,
-  Text,
-} from "theme-ui";
+import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import { SignUpMutationVariables } from "../../graphql/types";
-import { useUserStore } from "../../stores/user";
+import { SignUpMutationVariables } from "../graphql/types";
+import { useUserStore } from "../stores/user";
 
 type FormData = SignUpMutationVariables;
 
@@ -32,7 +22,7 @@ export const SignUp = () => {
   }, [clearAuthError]);
 
   return (
-    <Container sx={{ maxWidth: 325, pt: 20, textAlign: "center" }}>
+    <>
       <Heading mb={3}>Create your account</Heading>
       {authError && (
         <Alert variant="error" mb={3}>
@@ -42,37 +32,28 @@ export const SignUp = () => {
       )}
       <Card>
         <Box as="form" onSubmit={handleSubmit(signUp)}>
-          <Label htmlFor="username" mb={2}>
-            Username
-          </Label>
-          <Input
-            id="username"
+          <Field
+            label="Username"
             name="username"
+            type="text"
             ref={register({ required: true })}
             spellCheck={false}
-            type="text"
             mb={2}
           />
 
-          <Label htmlFor="email" mb={2}>
-            Email
-          </Label>
-          <Input
-            id="email"
+          <Field
+            label="Email"
             name="email"
-            ref={register({ required: true })}
             type="email"
+            ref={register({ required: true })}
             mb={2}
           />
 
-          <Label htmlFor="password" mb={2}>
-            Password
-          </Label>
-          <Input
-            id="password"
+          <Field
+            label="Password"
             name="password"
-            ref={register({ required: true })}
             type="password"
+            ref={register({ required: true })}
             mb={3}
           />
 
@@ -82,7 +63,7 @@ export const SignUp = () => {
         </Box>
       </Card>
 
-      <Card sx={{ mt: 3, bg: "muted" }}>
+      <Card sx={{ mt: 3 }}>
         <Text>
           Been here before?{" "}
           <Link to="/logIn" sx={{ variant: "styles.a" }}>
@@ -91,6 +72,6 @@ export const SignUp = () => {
           .
         </Text>
       </Card>
-    </Container>
+    </>
   );
 };

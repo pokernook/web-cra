@@ -1,5 +1,5 @@
 mutation logIn($email: String!, $password: String!) {
-  logIn(email: $email, password: $password) {
+  userLogIn(email: $email, password: $password) {
     user {
       id
       createdAt
