@@ -22,8 +22,37 @@ import { useUserStore } from "../stores/user";
 
 const settingsRoutes = [{ to: "/profile", display: "Profile" }];
 
-const SettingsLayout: FC = ({ children }) => {
+const SettingsSidebar = () => {
   const { url } = useRouteMatch();
+
+  return (
+    <Card as="nav" sx={{ display: "block", m: 0, p: 0 }}>
+      <Text sx={{ px: 3, py: 2, fontWeight: "bold", display: "inherit" }}>
+        Account settings
+      </Text>
+      <nav>
+        {settingsRoutes.map((route, index) => (
+          <Fragment key={index}>
+            <Divider />
+            <NavLink
+              to={`${url}${route.to}`}
+              sx={{
+                variant: "links.menu",
+                px: 3,
+                py: 2,
+                display: "inherit",
+              }}
+            >
+              {route.display}
+            </NavLink>
+          </Fragment>
+        ))}
+      </nav>
+    </Card>
+  );
+};
+
+const SettingsLayout: FC = ({ children }) => {
   const [user, getAvatar, getDiscriminator] = useUserStore((state) => [
     state.user,
     state.getAvatar,
@@ -41,37 +70,7 @@ const SettingsLayout: FC = ({ children }) => {
       </Flex>
 
       <Grid gap={3} columns={["1fr 3fr"]}>
-        <Card as="nav" sx={{ display: "block", m: 0, p: 0 }}>
-          <Text
-            sx={{
-              px: 3,
-              py: 2,
-              fontWeight: "bold",
-              display: "inherit",
-            }}
-          >
-            Account settings
-          </Text>
-
-          <nav>
-            {settingsRoutes.map((route, index) => (
-              <Fragment key={index}>
-                <Divider />
-                <NavLink
-                  to={`${url}${route.to}`}
-                  sx={{
-                    variant: "links.menu",
-                    px: 3,
-                    py: 2,
-                    display: "inherit",
-                  }}
-                >
-                  {route.display}
-                </NavLink>
-              </Fragment>
-            ))}
-          </nav>
-        </Card>
+        <SettingsSidebar />
         <Container>{children}</Container>
       </Grid>
     </Container>
