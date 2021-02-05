@@ -6,11 +6,9 @@ import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 import { LogInMutationVariables, useLogInMutation } from "../graphql/types";
 import { useUserStore } from "../stores/user";
 
-type FormData = LogInMutationVariables;
-
 export const LogIn = () => {
   const [logInResult, logIn] = useLogInMutation();
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<LogInMutationVariables>();
   const setUser = useUserStore((state) => state.setUser);
 
   const onSubmit = handleSubmit(async (data) => {
