@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import { LogInMutationVariables } from "../../graphql/types";
-import { useUserStore } from "../../stores/user";
+import { LogInMutationVariables } from "../graphql/types";
+import { useUserStore } from "../stores/user";
 
 type FormData = LogInMutationVariables;
 

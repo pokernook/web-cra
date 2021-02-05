@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Loading } from "./components/pages/Loading";
+import { Loading } from ".//pages/Loading";
 import { PrivateApp } from "./components/routes/PrivateApp";
 import { PublicApp } from "./components/routes/PublicApp";
 import { useUserStore } from "./stores/user";
