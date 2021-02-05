@@ -1,37 +1,34 @@
 /** @jsxImportSource theme-ui */
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import { SignUpMutationVariables } from "../graphql/types";
+import { SignUpMutationVariables, useSignUpMutation } from "../graphql/types";
 import { useUserStore } from "../stores/user";
 
 type FormData = SignUpMutationVariables;
 
 export const SignUp = () => {
+  const [signUpResult, signUp] = useSignUpMutation();
   const { register, handleSubmit } = useForm<FormData>();
-  const [signUp, authError, clearAuthError] = useUserStore((state) => [
-    state.signUp,
-    state.authError,
-    state.clearAuthError,
-  ]);
+  const setUser = useUserStore((state) => state.setUser);
 
-  useEffect(() => {
-    return () => clearAuthError();
-  }, [clearAuthError]);
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await signUp(data);
+    setUser(result.data?.userSignUp?.user);
+  });
 
   return (
     <>
       <Heading mb={3}>Create your account</Heading>
-      {authError && (
+      {signUpResult.error && (
         <Alert variant="error" mb={3}>
-          {authError.networkError?.message ||
-            authError.graphQLErrors[0]?.message}
+          {signUpResult.error.networkError?.message ||
+            signUpResult.error.graphQLErrors[0]?.message}
         </Alert>
       )}
       <Card>
-        <Box as="form" onSubmit={handleSubmit(signUp)}>
+        <Box as="form" onSubmit={onSubmit}>
           <Field
             label="Username"
             name="username"
