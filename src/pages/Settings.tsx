@@ -68,7 +68,7 @@ const SettingsLayout: FC = ({ children }) => {
         />
         <Heading>{data?.me?.username}</Heading>
         <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
-          #{data?.me?.discriminator.toString().padStart(4, "0")}
+          #{data?.me?.discriminator}
         </Heading>
       </Flex>
 

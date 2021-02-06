@@ -41,9 +41,7 @@ const Sidebar = () => {
             sx={{ width: 36, height: 36, mr: 2 }}
           />
           <Text sx={{ fontWeight: "bold" }}>{data?.me?.username}</Text>
-          <Text sx={{ color: "mutedText" }}>
-            #{data?.me?.discriminator.toString().padStart(4, "0")}
-          </Text>
+          <Text sx={{ color: "mutedText" }}>#{data?.me?.discriminator}</Text>
         </Flex>
 
         <Divider sx={{ my: 3 }} />
