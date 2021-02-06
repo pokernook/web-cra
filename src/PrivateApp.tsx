@@ -5,29 +5,21 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
-import { useLogOutMutation } from "./graphql/types";
+import { useLogOutMutation, useMeQuery } from "./graphql/types";
 import { Settings } from "./pages/Settings";
-import { useUserStore } from "./stores/user";
+import { generateAvatarSvg } from "./util/generate-avatar";
 
 const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
 
 const Sidebar = () => {
+  const [meQuery, reexecuteMeQuery] = useMeQuery();
   const [, logOut] = useLogOutMutation();
-  const [
-    user,
-    getAvatar,
-    formatDiscriminator,
-    removeUser,
-  ] = useUserStore((state) => [
-    state.user,
-    state.getAvatar,
-    state.formatDiscriminator,
-    state.removeUser,
-  ]);
+
+  const { data } = meQuery;
 
   const handleLogOut = async () => {
     await logOut();
-    removeUser();
+    reexecuteMeQuery({ requestPolicy: "network-only" });
   };
 
   return (
@@ -44,9 +36,14 @@ const Sidebar = () => {
     >
       <Box sx={{ mx: 4, position: "sticky", top: 4 }}>
         <Flex>
-          <Avatar src={getAvatar()} sx={{ width: 36, height: 36, mr: 2 }} />
-          <Text sx={{ fontWeight: "bold" }}>{user?.username}</Text>
-          <Text sx={{ color: "mutedText" }}>#{formatDiscriminator()}</Text>
+          <Avatar
+            src={generateAvatarSvg(`${data?.me?.id}`)}
+            sx={{ width: 36, height: 36, mr: 2 }}
+          />
+          <Text sx={{ fontWeight: "bold" }}>{data?.me?.username}</Text>
+          <Text sx={{ color: "mutedText" }}>
+            #{data?.me?.discriminator.toString().padStart(4, "0")}
+          </Text>
         </Flex>
 
         <Divider sx={{ my: 3 }} />
