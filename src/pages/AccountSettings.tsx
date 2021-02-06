@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
-  UpdatePasswordMutationVariables,
+  MutationUserUpdatePasswordArgs,
   useDeleteAccountMutation,
   useMeQuery,
   useUpdatePasswordMutation,
@@ -10,9 +10,11 @@ import {
 
 const UpdatePasswordForm = () => {
   const [, updatePassword] = useUpdatePasswordMutation();
-  const { errors, getValues, handleSubmit, register, reset } = useForm<
-    UpdatePasswordMutationVariables & { confirmPassword: string }
-  >();
+  const {
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<MutationUserUpdatePasswordArgs>();
 
   const onSubmit = handleSubmit(async (data) => {
     const result = await updatePassword(data);
@@ -27,8 +29,8 @@ const UpdatePasswordForm = () => {
       <Divider my={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
-          label="Old password"
-          name="oldPassword"
+          label="Current password"
+          name="currentPassword"
           type="password"
           ref={register({ required: true })}
           mb={3}
@@ -41,23 +43,6 @@ const UpdatePasswordForm = () => {
           ref={register({ required: true })}
           mb={3}
         />
-
-        <Field
-          label="Confirm new password"
-          name="confirmPassword"
-          type="password"
-          ref={register({
-            required: true,
-            validate: {
-              passwordMatch: (value) =>
-                value === getValues().newPassword ||
-                "Password confirmation doesn't match the password",
-            },
-          })}
-        />
-        <Box mb={3} mt={1}>
-          <Text variant="error">{errors.confirmPassword?.message}</Text>
-        </Box>
 
         <Button variant="secondary" type="submit" mb={4}>
           Update password
