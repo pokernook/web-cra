@@ -7,10 +7,10 @@ import { PublicApp } from "./PublicApp";
 import { useUserStore } from "./stores/user";
 
 export const App = () => {
-  const [session] = useMeQuery();
+  const [meQuery] = useMeQuery();
   const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
 
-  const { data } = session;
+  const { data } = meQuery;
   const initialLoad = user === undefined;
 
   useEffect(() => {
