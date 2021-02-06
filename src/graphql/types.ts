@@ -100,6 +100,7 @@ export type MutationUserUpdateUsernameArgs = {
 
 export type MutationUserUpdatePasswordArgs = {
   newPassword: Scalars['String'];
+  oldPassword: Scalars['String'];
 };
 
 export type LogInMutationVariables = Exact<{
@@ -140,6 +141,23 @@ export type SignUpMutationVariables = Exact<{
 export type SignUpMutation = (
   { __typename?: 'Mutation' }
   & { userSignUp?: Maybe<(
+    { __typename?: 'UserPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+    )> }
+  )> }
+);
+
+export type UpdatePasswordMutationVariables = Exact<{
+  newPassword: Scalars['String'];
+  oldPassword: Scalars['String'];
+}>;
+
+
+export type UpdatePasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { userUpdatePassword?: Maybe<(
     { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
@@ -220,6 +238,23 @@ export const SignUpDocument = gql`
 
 export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
+};
+export const UpdatePasswordDocument = gql`
+    mutation updatePassword($newPassword: String!, $oldPassword: String!) {
+  userUpdatePassword(newPassword: $newPassword, oldPassword: $oldPassword) {
+    user {
+      id
+      createdAt
+      email
+      username
+      discriminator
+    }
+  }
+}
+    `;
+
+export function useUpdatePasswordMutation() {
+  return Urql.useMutation<UpdatePasswordMutation, UpdatePasswordMutationVariables>(UpdatePasswordDocument);
 };
 export const UpdateUsernameDocument = gql`
     mutation updateUsername($newUsername: String!) {
