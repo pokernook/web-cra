@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
