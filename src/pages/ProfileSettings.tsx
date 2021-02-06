@@ -57,7 +57,7 @@ const UpdateProfilePictureForm = () => {
           variant="primary"
           sx={{ position: "absolute", bottom: 0, left: 0 }}
         >
-          Edit picture
+          Change picture
         </Button>
       </Box>
     </>
