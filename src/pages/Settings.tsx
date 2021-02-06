@@ -54,10 +54,10 @@ const SettingsSidebar = () => {
 };
 
 const SettingsLayout: FC = ({ children }) => {
-  const [user, getAvatar, getDiscriminator] = useUserStore((state) => [
+  const [user, getAvatar, formatDiscriminator] = useUserStore((state) => [
     state.user,
     state.getAvatar,
-    state.getDiscriminator,
+    state.formatDiscriminator,
   ]);
 
   return (
@@ -66,7 +66,7 @@ const SettingsLayout: FC = ({ children }) => {
         <Avatar src={getAvatar()} sx={{ width: 64, height: 64, mr: 3 }} />
         <Heading>{user?.username}</Heading>
         <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
-          #{getDiscriminator()}
+          #{formatDiscriminator()}
         </Heading>
       </Flex>
 

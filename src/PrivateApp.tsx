@@ -16,12 +16,12 @@ const Sidebar = () => {
   const [
     user,
     getAvatar,
-    getDiscriminator,
+    formatDiscriminator,
     removeUser,
   ] = useUserStore((state) => [
     state.user,
     state.getAvatar,
-    state.getDiscriminator,
+    state.formatDiscriminator,
     state.removeUser,
   ]);
 
@@ -46,7 +46,7 @@ const Sidebar = () => {
         <Flex>
           <Avatar src={getAvatar()} sx={{ width: 36, height: 36, mr: 2 }} />
           <Text sx={{ fontWeight: "bold" }}>{user?.username}</Text>
-          <Text sx={{ color: "mutedText" }}>#{getDiscriminator()}</Text>
+          <Text sx={{ color: "mutedText" }}>#{formatDiscriminator()}</Text>
         </Flex>
 
         <Divider sx={{ my: 3 }} />

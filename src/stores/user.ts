@@ -10,7 +10,7 @@ type State = {
   setUser: (user: User) => void;
   removeUser: () => void;
   getAvatar: () => string;
-  getDiscriminator: () => string;
+  formatDiscriminator: () => string;
 };
 
 export const useUserStore = create<State>((set, get) => ({
@@ -18,6 +18,6 @@ export const useUserStore = create<State>((set, get) => ({
   setUser: (user) => set({ user }),
   removeUser: () => set({ user: null }),
   getAvatar: () => generateAvatarSvg(`${get().user?.id}`),
-  getDiscriminator: () =>
+  formatDiscriminator: () =>
     `${get().user?.discriminator?.toString().padStart(4, "0")}`,
 }));
