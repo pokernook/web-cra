@@ -7,7 +7,7 @@ import {
   LogInMutationVariables,
   useLogInMutation,
   useMeQuery,
-} from "../graphql/types";
+} from "../graphql";
 
 export const LogIn = () => {
   const [, reexecuteMeQuery] = useMeQuery({

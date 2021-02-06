@@ -19,7 +19,7 @@ import {
   Text,
 } from "theme-ui";
 
-import { useMeQuery } from "../graphql/types";
+import { useMeQuery } from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
 import { ProfileSettings } from "./ProfileSettings";
 

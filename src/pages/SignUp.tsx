@@ -7,7 +7,7 @@ import {
   SignUpMutationVariables,
   useMeQuery,
   useSignUpMutation,
-} from "../graphql/types";
+} from "../graphql";
 
 export const SignUp = () => {
   const [, reexecuteMeQuery] = useMeQuery({

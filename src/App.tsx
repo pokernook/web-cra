@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useMeQuery } from "./graphql/types";
+import { useMeQuery } from "./graphql";
 import { Loading } from "./pages/Loading";
 import { PrivateApp } from "./PrivateApp";
 import { PublicApp } from "./PublicApp";

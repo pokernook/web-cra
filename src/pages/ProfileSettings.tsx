@@ -6,7 +6,7 @@ import {
   UpdateUsernameMutationVariables,
   useMeQuery,
   useUpdateUsernameMutation,
-} from "../graphql/types";
+} from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
 
 const UpdateUsernameForm = () => {

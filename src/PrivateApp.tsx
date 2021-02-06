@@ -5,7 +5,7 @@ import { NavLinkProps, Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
-import { useLogOutMutation, useMeQuery } from "./graphql/types";
+import { useLogOutMutation, useMeQuery } from "./graphql";
 import { Settings } from "./pages/Settings";
 import { generateAvatarSvg } from "./util/generate-avatar";
 
