@@ -70,6 +70,7 @@ const DeleteAccountForm = () => {
       <Box mb={3}>
         <Text>Be careful, there's no coming back.</Text>
       </Box>
+
       <Button variant="danger" onClick={handleDeleteAccount}>
         Delete account
       </Button>
