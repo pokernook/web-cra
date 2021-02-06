@@ -31,7 +31,7 @@ const UpdateUsernameForm = () => {
           spellCheck={false}
           sx={{ mb: 3 }}
         />
-        <Button variant="primary" type="submit" sx={{ mb: 4 }}>
+        <Button variant="secondary" type="submit" sx={{ mb: 4 }}>
           Save username
         </Button>
       </Box>
@@ -48,16 +48,48 @@ const UpdateProfilePictureForm = () => {
     <>
       <Heading as="h1">Profile picture</Heading>
       <Divider sx={{ my: 3 }} />
-      <Box sx={{ position: "relative" }}>
+      <Box sx={{ position: "relative", mb: 4 }}>
         <Avatar
           src={generateAvatarSvg(`${data?.me?.id}`)}
           sx={{ width: 200, height: 200 }}
         />
         <Button
-          variant="primary"
+          variant="secondary"
           sx={{ position: "absolute", bottom: 0, left: 0 }}
         >
           Change picture
+        </Button>
+      </Box>
+    </>
+  );
+};
+
+const UpdatePasswordForm = () => {
+  return (
+    <>
+      <Heading as="h1">Password</Heading>
+      <Divider sx={{ my: 3 }} />
+      <Box as="form">
+        <Field
+          label="Old password"
+          name="oldPassword"
+          type="password"
+          sx={{ mb: 3 }}
+        />
+        <Field
+          label="New password"
+          name="newPassword"
+          type="password"
+          sx={{ mb: 3 }}
+        />
+        <Field
+          label="Confirm new password"
+          name="confirmPassword"
+          type="password"
+          sx={{ mb: 3 }}
+        />
+        <Button variant="secondary" type="submit" sx={{ mb: 4 }}>
+          Update password
         </Button>
       </Box>
     </>
@@ -68,5 +100,6 @@ export const ProfileSettings = () => (
   <>
     <UpdateUsernameForm />
     <UpdateProfilePictureForm />
+    <UpdatePasswordForm />
   </>
 );
