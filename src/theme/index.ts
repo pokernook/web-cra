@@ -129,6 +129,21 @@ export const theme: Theme = {
         cursor: "pointer",
       },
     },
+    danger: {
+      bg: "gray",
+      border: "solid",
+      borderColor: lighten("gray", 0.1),
+      borderWidth: 1,
+      color: "error",
+      fontWeight: "bold",
+      px: 3,
+      py: 2,
+      ":hover": {
+        bg: lighten("gray", 0.05),
+        borderColor: "error",
+        cursor: "pointer",
+      },
+    },
   },
   cards: {
     primary: {
