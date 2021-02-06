@@ -4,12 +4,10 @@ import { useMeQuery } from "./graphql/types";
 import { Loading } from "./pages/Loading";
 import { PrivateApp } from "./PrivateApp";
 import { PublicApp } from "./PublicApp";
-import { useUserStore } from "./stores/user";
 
 export const App = () => {
-  const [launching, setLaunching] = useState(true);
   const [meQuery] = useMeQuery();
-  const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
+  const [launching, setLaunching] = useState(true);
 
   const { data, fetching: fetchingUser } = meQuery;
 
@@ -20,14 +18,9 @@ export const App = () => {
     }, 1000);
   });
 
-  // Refresh user data
-  useEffect(() => {
-    setUser(data?.me);
-  }, [data, setUser]);
-
   return fetchingUser || launching ? (
     <Loading />
-  ) : user ? (
+  ) : data?.me ? (
     <PrivateApp />
   ) : (
     <PublicApp />
