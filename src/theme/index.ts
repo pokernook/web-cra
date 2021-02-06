@@ -98,6 +98,9 @@ export const theme: Theme = {
         bg: lighten("primary", 0.05),
         cursor: "pointer",
       },
+      ":active": {
+        bg: "primary",
+      },
     },
     secondary: {
       bg: "gray",
@@ -113,6 +116,9 @@ export const theme: Theme = {
         borderColor: "link",
         cursor: "pointer",
       },
+      ":active": {
+        bg: "gray",
+      },
     },
     tertiary: {
       bg: "gray",
@@ -127,6 +133,9 @@ export const theme: Theme = {
         bg: lighten("gray", 0.05),
         borderColor: "text",
         cursor: "pointer",
+      },
+      ":active": {
+        bg: "gray",
       },
     },
     danger: {
