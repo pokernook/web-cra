@@ -66,7 +66,7 @@ const SettingsLayout: FC = ({ children }) => {
 
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
-      <Flex sx={{ mb: 4 }}>
+      <Flex mb={4}>
         <Avatar
           src={generateAvatarSvg(`${data?.me?.id}`)}
           sx={{ width: 64, height: 64, mr: 3 }}
