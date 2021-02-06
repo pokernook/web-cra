@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
 import {
-  LogInMutationVariables,
+  MutationUserLogInArgs,
   useLogInMutation,
   useMeQuery,
 } from "../graphql";
@@ -15,7 +15,7 @@ export const LogIn = () => {
     requestPolicy: "network-only",
   });
   const [logInResult, logIn] = useLogInMutation();
-  const { register, handleSubmit } = useForm<LogInMutationVariables>();
+  const { register, handleSubmit } = useForm<MutationUserLogInArgs>();
 
   const onSubmit = handleSubmit(async (data) => {
     await logIn(data);

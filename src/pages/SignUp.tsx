@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
 import {
-  SignUpMutationVariables,
+  MutationUserSignUpArgs,
   useMeQuery,
   useSignUpMutation,
 } from "../graphql";
@@ -15,7 +15,7 @@ export const SignUp = () => {
     requestPolicy: "network-only",
   });
   const [signUpResult, signUp] = useSignUpMutation();
-  const { register, handleSubmit } = useForm<SignUpMutationVariables>();
+  const { register, handleSubmit } = useForm<MutationUserSignUpArgs>();
 
   const onSubmit = handleSubmit(async (data) => {
     await signUp(data);
