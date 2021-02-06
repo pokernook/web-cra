@@ -21,6 +21,7 @@ import {
 
 import { useMeQuery } from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
+import { AccountSettings } from "./AccountSettings";
 import { ProfileSettings } from "./ProfileSettings";
 
 const settingsRoutes: NavLinkProps[] = [
@@ -93,7 +94,9 @@ export const Settings = () => {
         <Route exact path={`${path}/profile`}>
           <ProfileSettings />
         </Route>
-        <Route exact path={`${path}/account`}></Route>
+        <Route exact path={`${path}/account`}>
+          <AccountSettings />
+        </Route>
         <Route path={`${path}`}>
           <Redirect to={`${path}/profile`} />
         </Route>
