@@ -77,6 +77,7 @@ export type Mutation = {
   userLogOut?: Maybe<UserLogOutPayload>;
   userUpdateUsername?: Maybe<UserPayload>;
   userUpdatePassword?: Maybe<UserPayload>;
+  userDeleteAccount?: Maybe<UserPayload>;
 };
 
 
@@ -106,6 +107,20 @@ export type MutationUserUpdatePasswordArgs = {
 export type UserFieldsFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+);
+
+export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DeleteAccountMutation = (
+  { __typename?: 'Mutation' }
+  & { userDeleteAccount?: Maybe<(
+    { __typename?: 'UserPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    )> }
+  )> }
 );
 
 export type LogInMutationVariables = Exact<{
@@ -207,6 +222,19 @@ export const UserFieldsFragmentDoc = gql`
   discriminator
 }
     `;
+export const DeleteAccountDocument = gql`
+    mutation deleteAccount {
+  userDeleteAccount {
+    user {
+      ...userFields
+    }
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+export function useDeleteAccountMutation() {
+  return Urql.useMutation<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument);
+};
 export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
   userLogIn(email: $email, password: $password) {
