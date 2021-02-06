@@ -3,17 +3,23 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import { LogInMutationVariables, useLogInMutation } from "../graphql/types";
-import { useUserStore } from "../stores/user";
+import {
+  LogInMutationVariables,
+  useLogInMutation,
+  useMeQuery,
+} from "../graphql/types";
 
 export const LogIn = () => {
+  const [, reexecuteMeQuery] = useMeQuery({
+    pause: true,
+    requestPolicy: "network-only",
+  });
   const [logInResult, logIn] = useLogInMutation();
   const { register, handleSubmit } = useForm<LogInMutationVariables>();
-  const setUser = useUserStore((state) => state.setUser);
 
   const onSubmit = handleSubmit(async (data) => {
-    const result = await logIn(data);
-    setUser(result.data?.userLogIn?.user);
+    await logIn(data);
+    reexecuteMeQuery();
   });
 
   return (
