@@ -1,37 +1,38 @@
 /** @jsxImportSource theme-ui */
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import { LogInMutationVariables } from "../graphql/types";
-import { useUserStore } from "../stores/user";
-
-type FormData = LogInMutationVariables;
+import {
+  LogInMutationVariables,
+  useLogInMutation,
+  useMeQuery,
+} from "../graphql";
 
 export const LogIn = () => {
-  const { register, handleSubmit } = useForm<FormData>();
-  const [logIn, authError, clearAuthError] = useUserStore((state) => [
-    state.logIn,
-    state.authError,
-    state.clearAuthError,
-  ]);
+  const [, reexecuteMeQuery] = useMeQuery({
+    pause: true,
+    requestPolicy: "network-only",
+  });
+  const [logInResult, logIn] = useLogInMutation();
+  const { register, handleSubmit } = useForm<LogInMutationVariables>();
 
-  useEffect(() => {
-    return () => clearAuthError();
-  }, [clearAuthError]);
+  const onSubmit = handleSubmit(async (data) => {
+    await logIn(data);
+    reexecuteMeQuery();
+  });
 
   return (
     <>
       <Heading mb={3}>Enter the &apos;Nook</Heading>
-      {authError && (
+      {logInResult.error && (
         <Alert variant="error" mb={3}>
-          {authError.networkError?.message ||
-            authError.graphQLErrors[0]?.message}
+          {logInResult.error.networkError?.message ||
+            logInResult.error.graphQLErrors[0]?.message}
         </Alert>
       )}
       <Card>
-        <Box as="form" onSubmit={handleSubmit(logIn)}>
+        <Box as="form" onSubmit={onSubmit}>
           <Field
             label="Email"
             name="email"

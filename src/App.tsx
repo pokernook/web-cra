@@ -1,24 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { Loading } from ".//pages/Loading";
+import { useMeQuery } from "./graphql";
+import { Loading } from "./pages/Loading";
 import { PrivateApp } from "./PrivateApp";
 import { PublicApp } from "./PublicApp";
-import { useUserStore } from "./stores/user";
-
-useUserStore.setState({ fetchingSession: true });
 
 export const App = () => {
-  const [user, checkSession, fetchingSession] = useUserStore((state) => [
-    state.user,
-    state.checkSession,
-    state.fetchingSession,
-  ]);
+  const [meQuery] = useMeQuery();
+  const [launching, setLaunching] = useState(true);
 
+  const { data, fetching: fetchingUser } = meQuery;
+
+  // Set minimum launch time
   useEffect(() => {
     setTimeout(() => {
-      checkSession();
+      setLaunching(false);
     }, 1000);
-  }, [checkSession]);
+  });
 
-  return fetchingSession ? <Loading /> : user ? <PrivateApp /> : <PublicApp />;
+  return fetchingUser || launching ? (
+    <Loading />
+  ) : data?.me ? (
+    <PrivateApp />
+  ) : (
+    <PublicApp />
+  );
 };

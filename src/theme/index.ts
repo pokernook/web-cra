@@ -6,15 +6,16 @@ export const theme: Theme = {
   colors: {
     background: "#090d13",
     border: "#21262d",
-    error: "#b83232",
-    gray: "#212730",
+    primary: "#238636",
+    error: "#f85249",
     link: "#459cff",
+    gray: "#212730",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
     muted: "#0d1117",
+    text: "#c9d1d9",
     mutedText: "#384252",
-    primary: "#238636",
-    text: "#fdfefd",
+    primaryButtonText: "#fdfefd",
   },
   fonts: {
     code: "source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace",
@@ -48,6 +49,10 @@ export const theme: Theme = {
   },
   sizes: {
     sidebar: 350,
+  },
+  text: {
+    default: { color: "text", fontSize: 1, fontWeight: "body" },
+    error: { color: "error", fontSize: 0, fontWeight: "bold" },
   },
   links: {
     menu: {
@@ -85,7 +90,7 @@ export const theme: Theme = {
       border: "solid",
       borderColor: lighten("primary", 0.1),
       borderWidth: 1,
-      color: "text",
+      color: "primaryButtonText",
       fontWeight: "bold",
       px: 3,
       py: 2,
@@ -106,6 +111,36 @@ export const theme: Theme = {
       ":hover": {
         bg: lighten("gray", 0.05),
         borderColor: "link",
+        cursor: "pointer",
+      },
+    },
+    tertiary: {
+      bg: "gray",
+      border: "solid",
+      borderColor: lighten("gray", 0.1),
+      borderWidth: 1,
+      color: "text",
+      fontWeight: "bold",
+      px: 3,
+      py: 2,
+      ":hover": {
+        bg: lighten("gray", 0.05),
+        borderColor: "text",
+        cursor: "pointer",
+      },
+    },
+    danger: {
+      bg: "gray",
+      border: "solid",
+      borderColor: lighten("gray", 0.1),
+      borderWidth: 1,
+      color: "error",
+      fontWeight: "bold",
+      px: 3,
+      py: 2,
+      ":hover": {
+        bg: lighten("gray", 0.05),
+        borderColor: "error",
         cursor: "pointer",
       },
     },

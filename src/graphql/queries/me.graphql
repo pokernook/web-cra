@@ -1,9 +1,5 @@
 query me {
   me {
-    id
-    createdAt
-    email
-    username
-    discriminator
+    ...userFields
   }
 }

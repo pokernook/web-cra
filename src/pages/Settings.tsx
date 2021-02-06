@@ -2,6 +2,7 @@
 import { FC, Fragment } from "react";
 import {
   NavLink,
+  NavLinkProps,
   Redirect,
   Route,
   Switch,
@@ -18,9 +19,15 @@ import {
   Text,
 } from "theme-ui";
 
-import { useUserStore } from "../stores/user";
+import { useMeQuery } from "../graphql";
+import { generateAvatarSvg } from "../util/generate-avatar";
+import { AccountSettings } from "./AccountSettings";
+import { ProfileSettings } from "./ProfileSettings";
 
-const settingsRoutes = [{ to: "/profile", display: "Profile" }];
+const settingsRoutes: NavLinkProps[] = [
+  { to: "/profile", children: "Profile" },
+  { to: "/account", children: "Account" },
+];
 
 const SettingsSidebar = () => {
   const { url } = useRouteMatch();
@@ -43,7 +50,7 @@ const SettingsSidebar = () => {
                 display: "inherit",
               }}
             >
-              {route.display}
+              {route.children}
             </NavLink>
           </Fragment>
         ))}
@@ -53,23 +60,24 @@ const SettingsSidebar = () => {
 };
 
 const SettingsLayout: FC = ({ children }) => {
-  const [user, getAvatar, getDiscriminator] = useUserStore((state) => [
-    state.user,
-    state.getAvatar,
-    state.getDiscriminator,
-  ]);
+  const [meQuery] = useMeQuery();
+
+  const { data } = meQuery;
 
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
-      <Flex sx={{ mb: 4 }}>
-        <Avatar src={getAvatar()} sx={{ width: 64, height: 64, mr: 3 }} />
-        <Heading>{user?.username}</Heading>
+      <Flex mb={4}>
+        <Avatar
+          src={generateAvatarSvg(`${data?.me?.id}`)}
+          sx={{ width: 64, height: 64, mr: 3 }}
+        />
+        <Heading>{data?.me?.username}</Heading>
         <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
-          #{getDiscriminator()}
+          #{data?.me?.discriminator}
         </Heading>
       </Flex>
 
-      <Grid gap={3} columns={["1fr 3fr"]}>
+      <Grid gap={3} columns={["1fr 3fr"]} sx={{ alignItems: "start" }}>
         <SettingsSidebar />
         <Container>{children}</Container>
       </Grid>
@@ -83,7 +91,12 @@ export const Settings = () => {
   return (
     <SettingsLayout>
       <Switch>
-        <Route exact path={`${path}/profile`}></Route>
+        <Route exact path={`${path}/profile`}>
+          <ProfileSettings />
+        </Route>
+        <Route exact path={`${path}/account`}>
+          <AccountSettings />
+        </Route>
         <Route path={`${path}`}>
           <Redirect to={`${path}/profile`} />
         </Route>

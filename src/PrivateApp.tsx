@@ -1,22 +1,29 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { NavLinkProps, Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
+import { useLogOutMutation, useMeQuery } from "./graphql";
 import { Settings } from "./pages/Settings";
-import { useUserStore } from "./stores/user";
+import { generateAvatarSvg } from "./util/generate-avatar";
 
-const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
+const sidebarRoutes: NavLinkProps[] = [
+  { to: "/", exact: true, children: "Home" },
+  { to: "/settings", exact: false, children: "Settings" },
+];
 
 const Sidebar = () => {
-  const [user, getAvatar, getDiscriminator, logOut] = useUserStore((state) => [
-    state.user,
-    state.getAvatar,
-    state.getDiscriminator,
-    state.logOut,
-  ]);
+  const [meQuery, reexecuteMeQuery] = useMeQuery();
+  const [, logOut] = useLogOutMutation();
+
+  const { data } = meQuery;
+
+  const handleLogOut = async () => {
+    await logOut();
+    reexecuteMeQuery({ requestPolicy: "network-only" });
+  };
 
   return (
     <aside
@@ -32,32 +39,36 @@ const Sidebar = () => {
     >
       <Box sx={{ mx: 4, position: "sticky", top: 4 }}>
         <Flex>
-          <Avatar src={getAvatar()} sx={{ width: 36, height: 36, mr: 2 }} />
-          <Text sx={{ fontWeight: "bold" }}>{user?.username}</Text>
-          <Text sx={{ color: "mutedText" }}>#{getDiscriminator()}</Text>
+          <Avatar
+            src={generateAvatarSvg(`${data?.me?.id}`)}
+            sx={{ width: 36, height: 36, mr: 2 }}
+          />
+          <Text sx={{ fontWeight: "bold" }}>{data?.me?.username}</Text>
+          <Text sx={{ color: "mutedText" }}>#{data?.me?.discriminator}</Text>
         </Flex>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider my={3} />
 
         <nav>
           {sidebarRoutes.map((route, index) => (
             <NavLink
               key={index}
               to={route.to}
+              exact={route.exact}
               sx={{ variant: "links.nav", p: 2, my: 1, display: "inherit" }}
             >
-              {route.display}
+              {route.children}
             </NavLink>
           ))}
         </nav>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider my={3} />
 
         <Box>
           <Text sx={{ display: "inherit", fontWeight: "bold", mb: 2 }}>
             Need to run?
           </Text>
-          <Button variant="secondary" onClick={logOut}>
+          <Button variant="tertiary" onClick={handleLogOut}>
             <FiLogOut sx={{ verticalAlign: "middle", mr: 2 }} />
             Log out
           </Button>
