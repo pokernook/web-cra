@@ -7,7 +7,7 @@ export const theme: Theme = {
     background: "#090d13",
     border: "#21262d",
     primary: "#238636",
-    error: "#b83232",
+    error: "#f85249",
     link: "#459cff",
     gray: "#212730",
     menuItemActiveBackground: "#171b21",
@@ -49,6 +49,10 @@ export const theme: Theme = {
   },
   sizes: {
     sidebar: 350,
+  },
+  text: {
+    default: { color: "text", fontSize: 1, fontWeight: "body" },
+    error: { color: "error", fontSize: 0, fontWeight: "bold" },
   },
   links: {
     menu: {
