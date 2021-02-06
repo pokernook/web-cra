@@ -1,10 +1,12 @@
 /** @jsxImportSource theme-ui */
 import { useForm } from "react-hook-form";
-import { Avatar, Box, Button, Divider, Field, Heading } from "theme-ui";
+import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
+  UpdatePasswordMutationVariables,
   UpdateUsernameMutationVariables,
   useMeQuery,
+  useUpdatePasswordMutation,
   useUpdateUsernameMutation,
 } from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
@@ -65,29 +67,56 @@ const UpdateProfilePictureForm = () => {
 };
 
 const UpdatePasswordForm = () => {
+  const [, updatePassword] = useUpdatePasswordMutation();
+  const { errors, getValues, handleSubmit, register, reset } = useForm<
+    UpdatePasswordMutationVariables & { confirmPassword: string }
+  >();
+
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await updatePassword(data);
+    if (!result.error) {
+      reset();
+    }
+  });
+
   return (
     <>
       <Heading as="h1">Password</Heading>
       <Divider sx={{ my: 3 }} />
-      <Box as="form">
+      <Box as="form" onSubmit={onSubmit}>
         <Field
           label="Old password"
           name="oldPassword"
           type="password"
+          ref={register({ required: true })}
           sx={{ mb: 3 }}
         />
+
         <Field
           label="New password"
           name="newPassword"
           type="password"
+          ref={register({ required: true })}
           sx={{ mb: 3 }}
         />
+
         <Field
           label="Confirm new password"
           name="confirmPassword"
           type="password"
-          sx={{ mb: 3 }}
+          ref={register({
+            required: true,
+            validate: {
+              passwordMatch: (value) =>
+                value === getValues().newPassword ||
+                "Password confirmation doesn't match the password",
+            },
+          })}
         />
+        <Box sx={{ mb: 3, mt: 1 }}>
+          <Text variant="error">{errors.confirmPassword?.message}</Text>
+        </Box>
+
         <Button variant="secondary" type="submit" sx={{ mb: 4 }}>
           Update password
         </Button>
