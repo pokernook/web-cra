@@ -68,7 +68,7 @@ const Sidebar = () => {
           <Text sx={{ display: "inherit", fontWeight: "bold", mb: 2 }}>
             Need to run?
           </Text>
-          <Button variant="secondary" onClick={handleLogOut}>
+          <Button variant="tertiary" onClick={handleLogOut}>
             <FiLogOut sx={{ verticalAlign: "middle", mr: 2 }} />
             Log out
           </Button>
