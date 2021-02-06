@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Divider, Field, Heading } from "theme-ui";
 
 import {
-  UpdateUsernameMutationVariables,
+  MutationUserUpdateUsernameArgs,
   useMeQuery,
   useUpdateUsernameMutation,
 } from "../graphql";
@@ -10,7 +10,7 @@ import { generateAvatarSvg } from "../util/generate-avatar";
 
 const UpdateUsernameForm = () => {
   const [meQuery] = useMeQuery();
-  const { register, handleSubmit } = useForm<UpdateUsernameMutationVariables>();
+  const { register, handleSubmit } = useForm<MutationUserUpdateUsernameArgs>();
   const [, updateUsername] = useUpdateUsernameMutation();
 
   const { data } = meQuery;
@@ -30,6 +30,7 @@ const UpdateUsernameForm = () => {
           spellCheck={false}
           mb={3}
         />
+
         <Button variant="secondary" type="submit" mb={4}>
           Save username
         </Button>
@@ -52,6 +53,7 @@ const UpdateProfilePictureForm = () => {
           src={generateAvatarSvg(`${data?.me?.id}`)}
           sx={{ width: 200, height: 200 }}
         />
+
         <Button
           variant="secondary"
           sx={{ position: "absolute", bottom: 0, left: 0 }}
