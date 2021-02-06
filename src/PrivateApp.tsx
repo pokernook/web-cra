@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { NavLinkProps, Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
 
@@ -9,7 +9,10 @@ import { useLogOutMutation, useMeQuery } from "./graphql/types";
 import { Settings } from "./pages/Settings";
 import { generateAvatarSvg } from "./util/generate-avatar";
 
-const sidebarRoutes = [{ to: "/settings", display: "Settings" }];
+const sidebarRoutes: NavLinkProps[] = [
+  { to: "/", exact: true, children: "Home" },
+  { to: "/settings", exact: false, children: "Settings" },
+];
 
 const Sidebar = () => {
   const [meQuery, reexecuteMeQuery] = useMeQuery();
@@ -51,9 +54,10 @@ const Sidebar = () => {
             <NavLink
               key={index}
               to={route.to}
+              exact={route.exact}
               sx={{ variant: "links.nav", p: 2, my: 1, display: "inherit" }}
             >
-              {route.display}
+              {route.children}
             </NavLink>
           ))}
         </nav>
