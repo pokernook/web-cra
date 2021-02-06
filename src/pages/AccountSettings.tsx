@@ -82,7 +82,7 @@ const DeleteAccountForm = () => {
         Delete account
       </Heading>
       <Divider my={3} />
-      <Box mb={2}>
+      <Box mb={3}>
         <Text>Be careful, there's no coming back.</Text>
       </Box>
       <Button variant="danger" onClick={handleDeleteAccount}>
