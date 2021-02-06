@@ -103,6 +103,11 @@ export type MutationUserUpdatePasswordArgs = {
   oldPassword: Scalars['String'];
 };
 
+export type UserFieldsFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+);
+
 export type LogInMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -115,7 +120,7 @@ export type LogInMutation = (
     { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+      & UserFieldsFragment
     )> }
   )> }
 );
@@ -144,7 +149,7 @@ export type SignUpMutation = (
     { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+      & UserFieldsFragment
     )> }
   )> }
 );
@@ -161,7 +166,7 @@ export type UpdatePasswordMutation = (
     { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+      & UserFieldsFragment
     )> }
   )> }
 );
@@ -177,7 +182,7 @@ export type UpdateUsernameMutation = (
     { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+      & UserFieldsFragment
     )> }
   )> }
 );
@@ -189,24 +194,28 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+    & UserFieldsFragment
   )> }
 );
 
-
+export const UserFieldsFragmentDoc = gql`
+    fragment userFields on User {
+  id
+  createdAt
+  email
+  username
+  discriminator
+}
+    `;
 export const LogInDocument = gql`
     mutation logIn($email: String!, $password: String!) {
   userLogIn(email: $email, password: $password) {
     user {
-      id
-      createdAt
-      email
-      username
-      discriminator
+      ...userFields
     }
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}`;
 
 export function useLogInMutation() {
   return Urql.useMutation<LogInMutation, LogInMutationVariables>(LogInDocument);
@@ -226,15 +235,11 @@ export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
   userSignUp(username: $username, email: $email, password: $password) {
     user {
-      id
-      createdAt
-      email
-      username
-      discriminator
+      ...userFields
     }
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}`;
 
 export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
@@ -243,15 +248,11 @@ export const UpdatePasswordDocument = gql`
     mutation updatePassword($newPassword: String!, $oldPassword: String!) {
   userUpdatePassword(newPassword: $newPassword, oldPassword: $oldPassword) {
     user {
-      id
-      createdAt
-      email
-      username
-      discriminator
+      ...userFields
     }
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}`;
 
 export function useUpdatePasswordMutation() {
   return Urql.useMutation<UpdatePasswordMutation, UpdatePasswordMutationVariables>(UpdatePasswordDocument);
@@ -260,15 +261,11 @@ export const UpdateUsernameDocument = gql`
     mutation updateUsername($newUsername: String!) {
   userUpdateUsername(newUsername: $newUsername) {
     user {
-      id
-      createdAt
-      email
-      username
-      discriminator
+      ...userFields
     }
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}`;
 
 export function useUpdateUsernameMutation() {
   return Urql.useMutation<UpdateUsernameMutation, UpdateUsernameMutationVariables>(UpdateUsernameDocument);
@@ -276,14 +273,10 @@ export function useUpdateUsernameMutation() {
 export const MeDocument = gql`
     query me {
   me {
-    id
-    createdAt
-    email
-    username
-    discriminator
+    ...userFields
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}`;
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
