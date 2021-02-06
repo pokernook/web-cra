@@ -22,7 +22,7 @@ const UpdateUsernameForm = () => {
   return (
     <>
       <Heading as="h1">Username</Heading>
-      <Divider sx={{ my: 3 }} />
+      <Divider my={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
           defaultValue={data?.me?.username}
@@ -31,9 +31,9 @@ const UpdateUsernameForm = () => {
           type="text"
           ref={register({ required: true })}
           spellCheck={false}
-          sx={{ mb: 3 }}
+          mb={3}
         />
-        <Button variant="secondary" type="submit" sx={{ mb: 4 }}>
+        <Button variant="secondary" type="submit" mb={4}>
           Save username
         </Button>
       </Box>
@@ -49,7 +49,7 @@ const UpdateProfilePictureForm = () => {
   return (
     <>
       <Heading as="h1">Profile picture</Heading>
-      <Divider sx={{ my: 3 }} />
+      <Divider my={3} />
       <Box sx={{ position: "relative", mb: 4 }}>
         <Avatar
           src={generateAvatarSvg(`${data?.me?.id}`)}
@@ -82,14 +82,14 @@ const UpdatePasswordForm = () => {
   return (
     <>
       <Heading as="h1">Password</Heading>
-      <Divider sx={{ my: 3 }} />
+      <Divider my={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
           label="Old password"
           name="oldPassword"
           type="password"
           ref={register({ required: true })}
-          sx={{ mb: 3 }}
+          mb={3}
         />
 
         <Field
@@ -97,7 +97,7 @@ const UpdatePasswordForm = () => {
           name="newPassword"
           type="password"
           ref={register({ required: true })}
-          sx={{ mb: 3 }}
+          mb={3}
         />
 
         <Field
@@ -113,11 +113,11 @@ const UpdatePasswordForm = () => {
             },
           })}
         />
-        <Box sx={{ mb: 3, mt: 1 }}>
+        <Box mb={3} mt={1}>
           <Text variant="error">{errors.confirmPassword?.message}</Text>
         </Box>
 
-        <Button variant="secondary" type="submit" sx={{ mb: 4 }}>
+        <Button variant="secondary" type="submit" mb={4}>
           Update password
         </Button>
       </Box>
