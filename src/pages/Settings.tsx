@@ -2,6 +2,7 @@
 import { FC, Fragment } from "react";
 import {
   NavLink,
+  NavLinkProps,
   Redirect,
   Route,
   Switch,
@@ -22,7 +23,10 @@ import { useMeQuery } from "../graphql/types";
 import { generateAvatarSvg } from "../util/generate-avatar";
 import { ProfileSettings } from "./ProfileSettings";
 
-const settingsRoutes = [{ to: "/profile", display: "Profile" }];
+const settingsRoutes: NavLinkProps[] = [
+  { to: "/profile", children: "Profile" },
+  { to: "/account", children: "Account" },
+];
 
 const SettingsSidebar = () => {
   const { url } = useRouteMatch();
@@ -45,7 +49,7 @@ const SettingsSidebar = () => {
                 display: "inherit",
               }}
             >
-              {route.display}
+              {route.children}
             </NavLink>
           </Fragment>
         ))}
@@ -89,6 +93,7 @@ export const Settings = () => {
         <Route exact path={`${path}/profile`}>
           <ProfileSettings />
         </Route>
+        <Route exact path={`${path}/account`}></Route>
         <Route path={`${path}`}>
           <Redirect to={`${path}/profile`} />
         </Route>
