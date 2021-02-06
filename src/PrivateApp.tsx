@@ -47,7 +47,7 @@ const Sidebar = () => {
           <Text sx={{ color: "mutedText" }}>#{data?.me?.discriminator}</Text>
         </Flex>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider my={3} />
 
         <nav>
           {sidebarRoutes.map((route, index) => (
@@ -62,7 +62,7 @@ const Sidebar = () => {
           ))}
         </nav>
 
-        <Divider sx={{ my: 3 }} />
+        <Divider my={3} />
 
         <Box>
           <Text sx={{ display: "inherit", fontWeight: "bold", mb: 2 }}>
