@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Divider, Field, Heading } from "theme-ui";
 
@@ -10,14 +9,12 @@ import {
 } from "../graphql/types";
 import { generateAvatarSvg } from "../util/generate-avatar";
 
-type UpdateUsernameFormProps = {
-  username?: string;
-};
-
-const UpdateUsernameForm: FC<UpdateUsernameFormProps> = ({ username }) => {
+const UpdateUsernameForm = () => {
+  const [meQuery] = useMeQuery();
   const { register, handleSubmit } = useForm<UpdateUsernameMutationVariables>();
   const [, updateUsername] = useUpdateUsernameMutation();
 
+  const { data } = meQuery;
   const onSubmit = handleSubmit((data) => updateUsername(data));
 
   return (
@@ -26,7 +23,7 @@ const UpdateUsernameForm: FC<UpdateUsernameFormProps> = ({ username }) => {
       <Divider sx={{ my: 3 }} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
-          defaultValue={username}
+          defaultValue={data?.me?.username}
           label="Username"
           name="newUsername"
           type="text"
@@ -42,20 +39,18 @@ const UpdateUsernameForm: FC<UpdateUsernameFormProps> = ({ username }) => {
   );
 };
 
-type UpdateProfilePictureFormProps = {
-  id?: string;
-};
+const UpdateProfilePictureForm = () => {
+  const [meQuery] = useMeQuery();
 
-const UpdateProfilePictureForm: FC<UpdateProfilePictureFormProps> = ({
-  id,
-}) => {
+  const { data } = meQuery;
+
   return (
     <>
       <Heading as="h1">Profile picture</Heading>
       <Divider sx={{ my: 3 }} />
       <Box sx={{ position: "relative" }}>
         <Avatar
-          src={generateAvatarSvg(`${id}`)}
+          src={generateAvatarSvg(`${data?.me?.id}`)}
           sx={{ width: 200, height: 200 }}
         />
         <Button
@@ -69,15 +64,9 @@ const UpdateProfilePictureForm: FC<UpdateProfilePictureFormProps> = ({
   );
 };
 
-export const ProfileSettings = () => {
-  const [meQuery] = useMeQuery();
-
-  const { data } = meQuery;
-
-  return (
-    <>
-      <UpdateUsernameForm username={data?.me?.username} />
-      <UpdateProfilePictureForm id={data?.me?.id} />
-    </>
-  );
-};
+export const ProfileSettings = () => (
+  <>
+    <UpdateUsernameForm />
+    <UpdateProfilePictureForm />
+  </>
+);

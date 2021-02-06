@@ -18,7 +18,8 @@ import {
   Text,
 } from "theme-ui";
 
-import { useUserStore } from "../stores/user";
+import { useMeQuery } from "../graphql/types";
+import { generateAvatarSvg } from "../util/generate-avatar";
 import { ProfileSettings } from "./ProfileSettings";
 
 const settingsRoutes = [{ to: "/profile", display: "Profile" }];
@@ -54,19 +55,20 @@ const SettingsSidebar = () => {
 };
 
 const SettingsLayout: FC = ({ children }) => {
-  const [user, getAvatar, formatDiscriminator] = useUserStore((state) => [
-    state.user,
-    state.getAvatar,
-    state.formatDiscriminator,
-  ]);
+  const [meQuery] = useMeQuery();
+
+  const { data } = meQuery;
 
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
       <Flex sx={{ mb: 4 }}>
-        <Avatar src={getAvatar()} sx={{ width: 64, height: 64, mr: 3 }} />
-        <Heading>{user?.username}</Heading>
+        <Avatar
+          src={generateAvatarSvg(`${data?.me?.id}`)}
+          sx={{ width: 64, height: 64, mr: 3 }}
+        />
+        <Heading>{data?.me?.username}</Heading>
         <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
-          #{formatDiscriminator()}
+          #{data?.me?.discriminator.toString().padStart(4, "0")}
         </Heading>
       </Flex>
 
