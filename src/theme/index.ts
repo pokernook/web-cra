@@ -152,6 +152,9 @@ export const theme: Theme = {
         borderColor: "error",
         cursor: "pointer",
       },
+      ":active": {
+        bg: "gray",
+      },
     },
   },
   cards: {
