@@ -11,6 +11,7 @@ export const theme: Theme = {
     link: "#459cff",
     gray: "#212730",
     textSuccess: "#56d364",
+    textDanger: "#f85149",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
     muted: "#0d1117",
@@ -54,6 +55,7 @@ export const theme: Theme = {
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
     success: { color: "textSuccess", fontSize: 1, fontWeight: "bold" },
+    danger: { color: "textDanger", fontSize: 1, fontWeight: "bold" },
   },
   links: {
     menu: {
