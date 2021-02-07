@@ -1,4 +1,5 @@
 /** @jsxImportSource theme-ui */
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
@@ -25,12 +26,16 @@ export const LogIn = () => {
   return (
     <>
       <Heading mb={3}>Enter the &apos;Nook</Heading>
+
       {logInResult.error && (
-        <Alert variant="error" mb={3}>
-          {logInResult.error.networkError?.message ||
-            logInResult.error.graphQLErrors[0]?.message}
-        </Alert>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Alert variant="error" mb={3}>
+            {logInResult.error.networkError?.message ||
+              logInResult.error.graphQLErrors[0]?.message}
+          </Alert>
+        </motion.div>
       )}
+
       <Card>
         <Box as="form" onSubmit={onSubmit}>
           <Field
