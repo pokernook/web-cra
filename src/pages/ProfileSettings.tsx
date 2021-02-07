@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
@@ -8,8 +9,6 @@ import {
   useUpdateUsernameMutation,
 } from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
-
-const MotionText = motion.custom(Text);
 
 const UpdateUsernameForm = () => {
   const [meQuery] = useMeQuery();
@@ -31,22 +30,35 @@ const UpdateUsernameForm = () => {
           type="text"
           ref={register({ required: true })}
           spellCheck={false}
-          mb={3}
         />
+
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
+        </Box>
 
         <Button variant="secondary" type="submit" mb={4} mr={2}>
           Save username
         </Button>
 
-        {result.data && (
-          <MotionText
-            variant="success"
+        {result.data && !result.error && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            sx={{ display: "inline-block" }}
           >
-            Saved
-          </MotionText>
+            <Text variant="success">Saved</Text>
+          </motion.div>
         )}
       </Box>
     </>

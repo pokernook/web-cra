@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
@@ -8,8 +9,6 @@ import {
   useMeQuery,
   useUpdatePasswordMutation,
 } from "../graphql";
-
-const MotionText = motion.custom(Text);
 
 const UpdatePasswordForm = () => {
   const {
@@ -44,22 +43,35 @@ const UpdatePasswordForm = () => {
           name="newPassword"
           type="password"
           ref={register({ required: true })}
-          mb={3}
         />
+
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
+        </Box>
 
         <Button variant="secondary" type="submit" mb={4} mr={2}>
           Update password
         </Button>
 
-        {result.data && (
-          <MotionText
-            variant="success"
+        {result.data && !result.error && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            sx={{ display: "inline-block" }}
           >
-            Updated
-          </MotionText>
+            <Text variant="success">Updated</Text>
+          </motion.div>
         )}
       </Box>
     </>
