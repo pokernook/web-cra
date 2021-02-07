@@ -10,6 +10,7 @@ export const theme: Theme = {
     error: "#f85249",
     link: "#459cff",
     gray: "#212730",
+    textSuccess: "#56d364",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
     muted: "#0d1117",
@@ -52,7 +53,7 @@ export const theme: Theme = {
   },
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
-    error: { color: "error", fontSize: 0, fontWeight: "bold" },
+    success: { color: "textSuccess", fontSize: 1, fontWeight: "bold" },
   },
   links: {
     menu: {
