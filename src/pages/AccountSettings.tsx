@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
@@ -8,13 +9,15 @@ import {
   useUpdatePasswordMutation,
 } from "../graphql";
 
+const MotionText = motion.custom(Text);
+
 const UpdatePasswordForm = () => {
-  const [, updatePassword] = useUpdatePasswordMutation();
   const {
     handleSubmit,
     register,
     reset,
   } = useForm<MutationUserUpdatePasswordArgs>();
+  const [result, updatePassword] = useUpdatePasswordMutation();
 
   const onSubmit = handleSubmit(async (data) => {
     const result = await updatePassword(data);
@@ -44,9 +47,20 @@ const UpdatePasswordForm = () => {
           mb={3}
         />
 
-        <Button variant="secondary" type="submit" mb={4}>
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
           Update password
         </Button>
+
+        {result.data && (
+          <MotionText
+            variant="success"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            Updated
+          </MotionText>
+        )}
       </Box>
     </>
   );

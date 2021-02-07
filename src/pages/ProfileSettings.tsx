@@ -1,5 +1,6 @@
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Avatar, Box, Button, Divider, Field, Heading } from "theme-ui";
+import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
   MutationUserUpdateUsernameArgs,
@@ -8,10 +9,12 @@ import {
 } from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
 
+const MotionText = motion.custom(Text);
+
 const UpdateUsernameForm = () => {
   const [meQuery] = useMeQuery();
   const { register, handleSubmit } = useForm<MutationUserUpdateUsernameArgs>();
-  const [, updateUsername] = useUpdateUsernameMutation();
+  const [result, updateUsername] = useUpdateUsernameMutation();
 
   const { data } = meQuery;
   const onSubmit = handleSubmit((data) => updateUsername(data));
@@ -31,9 +34,20 @@ const UpdateUsernameForm = () => {
           mb={3}
         />
 
-        <Button variant="secondary" type="submit" mb={4}>
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
           Save username
         </Button>
+
+        {result.data && (
+          <MotionText
+            variant="success"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            Saved
+          </MotionText>
+        )}
       </Box>
     </>
   );
