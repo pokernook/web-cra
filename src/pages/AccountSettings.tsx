@@ -1,18 +1,22 @@
+/** @jsxImportSource theme-ui */
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
-  UpdatePasswordMutationVariables,
+  MutationUserUpdatePasswordArgs,
   useDeleteAccountMutation,
   useMeQuery,
   useUpdatePasswordMutation,
 } from "../graphql";
 
 const UpdatePasswordForm = () => {
-  const [, updatePassword] = useUpdatePasswordMutation();
-  const { errors, getValues, handleSubmit, register, reset } = useForm<
-    UpdatePasswordMutationVariables & { confirmPassword: string }
-  >();
+  const {
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<MutationUserUpdatePasswordArgs>();
+  const [result, updatePassword] = useUpdatePasswordMutation();
 
   const onSubmit = handleSubmit(async (data) => {
     const result = await updatePassword(data);
@@ -27,8 +31,8 @@ const UpdatePasswordForm = () => {
       <Divider my={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
-          label="Old password"
-          name="oldPassword"
+          label="Current password"
+          name="currentPassword"
           type="password"
           ref={register({ required: true })}
           mb={3}
@@ -39,29 +43,36 @@ const UpdatePasswordForm = () => {
           name="newPassword"
           type="password"
           ref={register({ required: true })}
-          mb={3}
         />
 
-        <Field
-          label="Confirm new password"
-          name="confirmPassword"
-          type="password"
-          ref={register({
-            required: true,
-            validate: {
-              passwordMatch: (value) =>
-                value === getValues().newPassword ||
-                "Password confirmation doesn't match the password",
-            },
-          })}
-        />
-        <Box mb={3} mt={1}>
-          <Text variant="error">{errors.confirmPassword?.message}</Text>
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
         </Box>
 
-        <Button variant="secondary" type="submit" mb={4}>
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
           Update password
         </Button>
+
+        {result.data && !result.error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            sx={{ display: "inline-block" }}
+          >
+            <Text variant="success">Updated</Text>
+          </motion.div>
+        )}
       </Box>
     </>
   );
@@ -82,9 +93,10 @@ const DeleteAccountForm = () => {
         Delete account
       </Heading>
       <Divider my={3} />
-      <Box mb={2}>
+      <Box mb={3}>
         <Text>Be careful, there's no coming back.</Text>
       </Box>
+
       <Button variant="danger" onClick={handleDeleteAccount}>
         Delete account
       </Button>

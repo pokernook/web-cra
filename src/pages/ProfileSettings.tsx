@@ -1,8 +1,10 @@
+/** @jsxImportSource theme-ui */
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Avatar, Box, Button, Divider, Field, Heading } from "theme-ui";
+import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
-  UpdateUsernameMutationVariables,
+  MutationUserUpdateUsernameArgs,
   useMeQuery,
   useUpdateUsernameMutation,
 } from "../graphql";
@@ -10,8 +12,8 @@ import { generateAvatarSvg } from "../util/generate-avatar";
 
 const UpdateUsernameForm = () => {
   const [meQuery] = useMeQuery();
-  const { register, handleSubmit } = useForm<UpdateUsernameMutationVariables>();
-  const [, updateUsername] = useUpdateUsernameMutation();
+  const { register, handleSubmit } = useForm<MutationUserUpdateUsernameArgs>();
+  const [result, updateUsername] = useUpdateUsernameMutation();
 
   const { data } = meQuery;
   const onSubmit = handleSubmit((data) => updateUsername(data));
@@ -28,11 +30,36 @@ const UpdateUsernameForm = () => {
           type="text"
           ref={register({ required: true })}
           spellCheck={false}
-          mb={3}
         />
-        <Button variant="secondary" type="submit" mb={4}>
+
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
+        </Box>
+
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
           Save username
         </Button>
+
+        {result.data && !result.error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            sx={{ display: "inline-block" }}
+          >
+            <Text variant="success">Saved</Text>
+          </motion.div>
+        )}
       </Box>
     </>
   );
@@ -52,6 +79,7 @@ const UpdateProfilePictureForm = () => {
           src={generateAvatarSvg(`${data?.me?.id}`)}
           sx={{ width: 200, height: 200 }}
         />
+
         <Button
           variant="secondary"
           sx={{ position: "absolute", bottom: 0, left: 0 }}

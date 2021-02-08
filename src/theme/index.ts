@@ -10,6 +10,8 @@ export const theme: Theme = {
     error: "#f85249",
     link: "#459cff",
     gray: "#212730",
+    textSuccess: "#56d364",
+    textDanger: "#f85149",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
     muted: "#0d1117",
@@ -52,7 +54,8 @@ export const theme: Theme = {
   },
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
-    error: { color: "error", fontSize: 0, fontWeight: "bold" },
+    success: { color: "textSuccess", fontSize: 1, fontWeight: "bold" },
+    danger: { color: "textDanger", fontSize: 1, fontWeight: "bold" },
   },
   links: {
     menu: {
@@ -98,6 +101,9 @@ export const theme: Theme = {
         bg: lighten("primary", 0.05),
         cursor: "pointer",
       },
+      ":active": {
+        bg: "primary",
+      },
     },
     secondary: {
       bg: "gray",
@@ -112,6 +118,9 @@ export const theme: Theme = {
         bg: lighten("gray", 0.05),
         borderColor: "link",
         cursor: "pointer",
+      },
+      ":active": {
+        bg: "gray",
       },
     },
     tertiary: {
@@ -128,6 +137,9 @@ export const theme: Theme = {
         borderColor: "text",
         cursor: "pointer",
       },
+      ":active": {
+        bg: "gray",
+      },
     },
     danger: {
       bg: "gray",
@@ -142,6 +154,9 @@ export const theme: Theme = {
         bg: lighten("gray", 0.05),
         borderColor: "error",
         cursor: "pointer",
+      },
+      ":active": {
+        bg: "gray",
       },
     },
   },
