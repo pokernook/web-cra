@@ -37,6 +37,7 @@ export const theme: Theme = {
       fontWeight: "bold",
       textDecoration: "none",
       ":hover": {
+        cursor: "pointer",
         textDecoration: "underline",
       },
     },

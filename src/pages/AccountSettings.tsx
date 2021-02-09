@@ -1,14 +1,89 @@
 /** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
+import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
 import {
+  MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
   useDeleteAccountMutation,
   useMeQuery,
+  useUpdateEmailMutation,
   useUpdatePasswordMutation,
 } from "../graphql";
+
+const EmailVerificationForm = () => {
+  const [meQuery] = useMeQuery();
+  const [result, updateEmail] = useUpdateEmailMutation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+  } = useForm<MutationUserUpdateEmailArgs>();
+
+  const { data } = meQuery;
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await updateEmail(data);
+    if (!result.error) {
+      reset();
+    }
+  });
+
+  return (
+    <>
+      <Heading as="h1">Email</Heading>
+      <Divider my={3} />
+
+      <Heading as="h3">{data?.me?.email}</Heading>
+      <Box mt={2} mb={3}>
+        {!data?.me?.emailVerified && (
+          <Text>
+            Looks like your email isn't verified; check your inbox, or{" "}
+            <Link>resend the verification email</Link>.
+          </Text>
+        )}
+      </Box>
+
+      <Box as="form" onSubmit={onSubmit}>
+        <Field
+          label="Email"
+          name="newEmail"
+          type="email"
+          ref={register({ required: true })}
+        />
+
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
+        </Box>
+
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
+          Update email
+        </Button>
+
+        {result.data && !result.error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            sx={{ display: "inline-block" }}
+          >
+            <Text variant="success">Updated</Text>
+          </motion.div>
+        )}
+      </Box>
+    </>
+  );
+};
 
 const UpdatePasswordForm = () => {
   const {
@@ -106,6 +181,7 @@ const DeleteAccountForm = () => {
 
 export const AccountSettings = () => (
   <>
+    <EmailVerificationForm />
     <UpdatePasswordForm />
     <DeleteAccountForm />
   </>

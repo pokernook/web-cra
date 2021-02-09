@@ -2,6 +2,7 @@ fragment userFields on User {
   id
   createdAt
   email
+  emailVerified
   username
   discriminator
 }
