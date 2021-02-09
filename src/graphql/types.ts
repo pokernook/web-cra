@@ -78,6 +78,7 @@ export type Mutation = {
   userLogOut?: Maybe<UserLogOutPayload>;
   userUpdateUsername?: Maybe<UserPayload>;
   userUpdatePassword?: Maybe<UserPayload>;
+  userUpdateEmail?: Maybe<UserPayload>;
   userDeleteAccount?: Maybe<UserPayload>;
 };
 
@@ -103,6 +104,11 @@ export type MutationUserUpdateUsernameArgs = {
 export type MutationUserUpdatePasswordArgs = {
   currentPassword: Scalars['String'];
   newPassword: Scalars['String'];
+};
+
+
+export type MutationUserUpdateEmailArgs = {
+  newEmail: Scalars['String'];
 };
 
 export type UserFieldsFragment = (
@@ -162,6 +168,22 @@ export type SignUpMutationVariables = Exact<{
 export type SignUpMutation = (
   { __typename?: 'Mutation' }
   & { userSignUp?: Maybe<(
+    { __typename?: 'UserPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    )> }
+  )> }
+);
+
+export type UpdateEmailMutationVariables = Exact<{
+  newEmail: Scalars['String'];
+}>;
+
+
+export type UpdateEmailMutation = (
+  { __typename?: 'Mutation' }
+  & { userUpdateEmail?: Maybe<(
     { __typename?: 'UserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
@@ -273,6 +295,19 @@ export const SignUpDocument = gql`
 
 export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
+};
+export const UpdateEmailDocument = gql`
+    mutation updateEmail($newEmail: String!) {
+  userUpdateEmail(newEmail: $newEmail) {
+    user {
+      ...userFields
+    }
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+export function useUpdateEmailMutation() {
+  return Urql.useMutation<UpdateEmailMutation, UpdateEmailMutationVariables>(UpdateEmailDocument);
 };
 export const UpdatePasswordDocument = gql`
     mutation updatePassword($currentPassword: String!, $newPassword: String!) {
