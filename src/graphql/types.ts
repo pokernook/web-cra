@@ -25,6 +25,7 @@ export type User = {
   id: Scalars['String'];
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
+  emailVerified: Scalars['Boolean'];
   username: Scalars['String'];
   discriminator: Scalars['Int'];
 };
