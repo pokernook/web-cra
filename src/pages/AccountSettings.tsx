@@ -4,18 +4,30 @@ import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
+  MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
   useDeleteAccountMutation,
   useMeQuery,
+  useUpdateEmailMutation,
   useUpdatePasswordMutation,
 } from "../graphql";
 
 const EmailVerificationForm = () => {
   const [meQuery] = useMeQuery();
-  const { register, handleSubmit } = useForm();
+  const [result, updateEmail] = useUpdateEmailMutation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+  } = useForm<MutationUserUpdateEmailArgs>();
 
   const { data } = meQuery;
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await updateEmail(data);
+    if (!result.error) {
+      reset();
+    }
+  });
 
   return (
     <>
@@ -28,13 +40,39 @@ const EmailVerificationForm = () => {
       <Box as="form" onSubmit={onSubmit}>
         <Field
           label="Email"
-          name="email"
+          name="newEmail"
           type="email"
           ref={register({ required: true })}
         />
+
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
+        </Box>
+
         <Button variant="secondary" type="submit" mb={4} mr={2}>
           Update email
         </Button>
+
+        {result.data && !result.error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            sx={{ display: "inline-block" }}
+          >
+            <Text variant="success">Updated</Text>
+          </motion.div>
+        )}
       </Box>
     </>
   );
