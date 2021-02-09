@@ -107,7 +107,7 @@ export type MutationUserUpdatePasswordArgs = {
 
 export type UserFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'createdAt' | 'email' | 'username' | 'discriminator'>
+  & Pick<User, 'id' | 'createdAt' | 'email' | 'emailVerified' | 'username' | 'discriminator'>
 );
 
 export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
@@ -219,6 +219,7 @@ export const UserFieldsFragmentDoc = gql`
   id
   createdAt
   email
+  emailVerified
   username
   discriminator
 }
