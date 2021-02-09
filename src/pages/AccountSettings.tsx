@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
+import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
 import {
   MutationUserUpdateEmailArgs,
@@ -33,9 +33,16 @@ const EmailVerificationForm = () => {
     <>
       <Heading as="h1">Email</Heading>
       <Divider my={3} />
-      <Heading as="h3" mb={3}>
-        {data?.me?.email}
-      </Heading>
+
+      <Heading as="h3">{data?.me?.email}</Heading>
+      <Box mt={2} mb={3}>
+        {!data?.me?.emailVerified && (
+          <Text>
+            Looks like your email isn't verified; check your inbox, or{" "}
+            <Link>resend the verification email</Link>.
+          </Text>
+        )}
+      </Box>
 
       <Box as="form" onSubmit={onSubmit}>
         <Field
