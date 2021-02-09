@@ -10,6 +10,36 @@ import {
   useUpdatePasswordMutation,
 } from "../graphql";
 
+const EmailVerificationForm = () => {
+  const [meQuery] = useMeQuery();
+  const { register, handleSubmit } = useForm();
+
+  const { data } = meQuery;
+  const onSubmit = handleSubmit((data) => console.log(data));
+
+  return (
+    <>
+      <Heading as="h1">Email</Heading>
+      <Divider my={3} />
+      <Heading as="h3" mb={3}>
+        {data?.me?.email}
+      </Heading>
+
+      <Box as="form" onSubmit={onSubmit}>
+        <Field
+          label="Email"
+          name="email"
+          type="email"
+          ref={register({ required: true })}
+        />
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
+          Update email
+        </Button>
+      </Box>
+    </>
+  );
+};
+
 const UpdatePasswordForm = () => {
   const {
     handleSubmit,
@@ -106,6 +136,7 @@ const DeleteAccountForm = () => {
 
 export const AccountSettings = () => (
   <>
+    <EmailVerificationForm />
     <UpdatePasswordForm />
     <DeleteAccountForm />
   </>
