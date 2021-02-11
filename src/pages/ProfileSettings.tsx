@@ -82,7 +82,7 @@ const UpdateStatusForm = () => {
       <Box as="form" onSubmit={onSubmit}>
         <Field
           defaultValue={data?.me?.status?.message || ""}
-          label="Status"
+          label="What's happening?"
           name="message"
           type="text"
           spellCheck={false}
