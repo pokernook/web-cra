@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import {
   Avatar,
+  Box,
   Card,
   Container,
   Divider,
@@ -71,10 +72,18 @@ const SettingsLayout: FC = ({ children }) => {
           src={generateAvatarSvg(`${data?.me?.id}`)}
           sx={{ width: 64, height: 64, mr: 3 }}
         />
-        <Heading>{data?.me?.username}</Heading>
-        <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
-          #{data?.me?.discriminator}
-        </Heading>
+        <Box>
+          <Flex mb={2}>
+            <Heading>{data?.me?.username}</Heading>
+            <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
+              #{data?.me?.discriminator}
+            </Heading>
+          </Flex>
+
+          <Flex>
+            <Text>{data?.me?.status?.message}</Text>
+          </Flex>
+        </Box>
       </Flex>
 
       <Grid gap={3} columns={["1fr 3fr"]} sx={{ alignItems: "start" }}>
