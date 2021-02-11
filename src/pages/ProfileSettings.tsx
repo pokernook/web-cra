@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import {
+  MutationUserSetStatusArgs,
   MutationUserUpdateUsernameArgs,
   useMeQuery,
+  useSetStatusMutation,
   useUpdateUsernameMutation,
 } from "../graphql";
 import { generateAvatarSvg } from "../util/generate-avatar";
@@ -65,6 +67,48 @@ const UpdateUsernameForm = () => {
   );
 };
 
+const UpdateStatusForm = () => {
+  const [result, setStatus] = useSetStatusMutation();
+  const { register, handleSubmit } = useForm<MutationUserSetStatusArgs>();
+
+  const onSubmit = handleSubmit((data) => setStatus(data));
+
+  return (
+    <>
+      <Heading as="h1">Status</Heading>
+      <Divider my={3} />
+      <Box as="form" onSubmit={onSubmit}>
+        <Field
+          label="Status"
+          name="message"
+          type="text"
+          spellCheck={false}
+          ref={register()}
+        />
+
+        <Box mt={1} mb={3}>
+          {result.error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Text variant="danger">
+                {result.error.graphQLErrors[0]?.message ||
+                  result.error.networkError?.message}
+              </Text>
+            </motion.div>
+          )}
+        </Box>
+
+        <Button variant="secondary" type="submit" mb={4} mr={2}>
+          Set status
+        </Button>
+      </Box>
+    </>
+  );
+};
+
 const UpdateProfilePictureForm = () => {
   const [meQuery] = useMeQuery();
 
@@ -94,6 +138,7 @@ const UpdateProfilePictureForm = () => {
 export const ProfileSettings = () => (
   <>
     <UpdateUsernameForm />
+    <UpdateStatusForm />
     <UpdateProfilePictureForm />
   </>
 );
