@@ -68,9 +68,11 @@ const UpdateUsernameForm = () => {
 };
 
 const UpdateStatusForm = () => {
+  const [meQuery] = useMeQuery();
   const [result, setStatus] = useSetStatusMutation();
   const { register, handleSubmit } = useForm<MutationUserSetStatusArgs>();
 
+  const { data } = meQuery;
   const onSubmit = handleSubmit((data) => setStatus(data));
 
   return (
@@ -79,6 +81,7 @@ const UpdateStatusForm = () => {
       <Divider my={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
+          defaultValue={data?.me?.status?.message || ""}
           label="Status"
           name="message"
           type="text"
