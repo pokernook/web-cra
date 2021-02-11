@@ -5,4 +5,8 @@ fragment userFields on User {
   emailVerified
   username
   discriminator
+  status {
+    emoji
+    message
+  }
 }

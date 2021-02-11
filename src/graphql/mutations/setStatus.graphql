@@ -5,5 +5,8 @@ mutation setStatus($emoji: String, $message: String) {
     id
     message
     updatedAt
+    user {
+      ...userFields
+    }
   }
 }
