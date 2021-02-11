@@ -173,6 +173,20 @@ export type LogOutMutation = (
   )> }
 );
 
+export type SetStatusMutationVariables = Exact<{
+  emoji?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+}>;
+
+
+export type SetStatusMutation = (
+  { __typename?: 'Mutation' }
+  & { userSetStatus?: Maybe<(
+    { __typename?: 'UserStatus' }
+    & Pick<UserStatus, 'createdAt' | 'emoji' | 'id' | 'message' | 'updatedAt'>
+  )> }
+);
+
 export type SignUpMutationVariables = Exact<{
   username: Scalars['String'];
   email: Scalars['String'];
@@ -286,6 +300,21 @@ export const LogOutDocument = gql`
 
 export function useLogOutMutation() {
   return Urql.useMutation<LogOutMutation, LogOutMutationVariables>(LogOutDocument);
+};
+export const SetStatusDocument = gql`
+    mutation setStatus($emoji: String, $message: String) {
+  userSetStatus(emoji: $emoji, message: $message) {
+    createdAt
+    emoji
+    id
+    message
+    updatedAt
+  }
+}
+    `;
+
+export function useSetStatusMutation() {
+  return Urql.useMutation<SetStatusMutation, SetStatusMutationVariables>(SetStatusDocument);
 };
 export const SignUpDocument = gql`
     mutation signUp($username: String!, $email: String!, $password: String!) {
