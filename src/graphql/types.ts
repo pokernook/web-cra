@@ -22,16 +22,17 @@ export type Scalars = {
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  discriminator: Scalars['Int'];
   email: Scalars['String'];
   emailVerified: Scalars['Boolean'];
+  id: Scalars['String'];
+  status?: Maybe<UserStatus>;
   username: Scalars['String'];
-  discriminator: Scalars['Int'];
 };
 
-export type UserPayload = {
-  __typename?: 'UserPayload';
+export type UserAuthPayload = {
+  __typename?: 'UserAuthPayload';
   user?: Maybe<User>;
 };
 
@@ -40,10 +41,20 @@ export type UserLogOutPayload = {
   sessionId?: Maybe<Scalars['String']>;
 };
 
+export type UserStatus = {
+  __typename?: 'UserStatus';
+  createdAt: Scalars['DateTime'];
+  emoji?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  message?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+  user: User;
+};
+
 
 export type UserWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   Tag?: Maybe<UserTagCompoundUniqueInput>;
 };
 
@@ -73,13 +84,14 @@ export type QueryUsersArgs = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  userSignUp?: Maybe<UserPayload>;
-  userLogIn?: Maybe<UserPayload>;
+  userSignUp?: Maybe<UserAuthPayload>;
+  userLogIn?: Maybe<UserAuthPayload>;
   userLogOut?: Maybe<UserLogOutPayload>;
-  userUpdateUsername?: Maybe<UserPayload>;
-  userUpdatePassword?: Maybe<UserPayload>;
-  userUpdateEmail?: Maybe<UserPayload>;
-  userDeleteAccount?: Maybe<UserPayload>;
+  userUpdateUsername?: Maybe<User>;
+  userUpdatePassword?: Maybe<User>;
+  userUpdateEmail?: Maybe<User>;
+  userDeleteAccount?: Maybe<User>;
+  userSetStatus?: Maybe<UserStatus>;
 };
 
 
@@ -111,6 +123,12 @@ export type MutationUserUpdateEmailArgs = {
   newEmail: Scalars['String'];
 };
 
+
+export type MutationUserSetStatusArgs = {
+  emoji?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+};
+
 export type UserFieldsFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'createdAt' | 'email' | 'emailVerified' | 'username' | 'discriminator'>
@@ -122,11 +140,8 @@ export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
 export type DeleteAccountMutation = (
   { __typename?: 'Mutation' }
   & { userDeleteAccount?: Maybe<(
-    { __typename?: 'UserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & UserFieldsFragment
-    )> }
+    { __typename?: 'User' }
+    & UserFieldsFragment
   )> }
 );
 
@@ -139,7 +154,7 @@ export type LogInMutationVariables = Exact<{
 export type LogInMutation = (
   { __typename?: 'Mutation' }
   & { userLogIn?: Maybe<(
-    { __typename?: 'UserPayload' }
+    { __typename?: 'UserAuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
       & UserFieldsFragment
@@ -168,7 +183,7 @@ export type SignUpMutationVariables = Exact<{
 export type SignUpMutation = (
   { __typename?: 'Mutation' }
   & { userSignUp?: Maybe<(
-    { __typename?: 'UserPayload' }
+    { __typename?: 'UserAuthPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
       & UserFieldsFragment
@@ -184,11 +199,8 @@ export type UpdateEmailMutationVariables = Exact<{
 export type UpdateEmailMutation = (
   { __typename?: 'Mutation' }
   & { userUpdateEmail?: Maybe<(
-    { __typename?: 'UserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & UserFieldsFragment
-    )> }
+    { __typename?: 'User' }
+    & UserFieldsFragment
   )> }
 );
 
@@ -201,11 +213,8 @@ export type UpdatePasswordMutationVariables = Exact<{
 export type UpdatePasswordMutation = (
   { __typename?: 'Mutation' }
   & { userUpdatePassword?: Maybe<(
-    { __typename?: 'UserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & UserFieldsFragment
-    )> }
+    { __typename?: 'User' }
+    & UserFieldsFragment
   )> }
 );
 
@@ -217,11 +226,8 @@ export type UpdateUsernameMutationVariables = Exact<{
 export type UpdateUsernameMutation = (
   { __typename?: 'Mutation' }
   & { userUpdateUsername?: Maybe<(
-    { __typename?: 'UserPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & UserFieldsFragment
-    )> }
+    { __typename?: 'User' }
+    & UserFieldsFragment
   )> }
 );
 
@@ -249,9 +255,7 @@ export const UserFieldsFragmentDoc = gql`
 export const DeleteAccountDocument = gql`
     mutation deleteAccount {
   userDeleteAccount {
-    user {
-      ...userFields
-    }
+    ...userFields
   }
 }
     ${UserFieldsFragmentDoc}`;
@@ -299,9 +303,7 @@ export function useSignUpMutation() {
 export const UpdateEmailDocument = gql`
     mutation updateEmail($newEmail: String!) {
   userUpdateEmail(newEmail: $newEmail) {
-    user {
-      ...userFields
-    }
+    ...userFields
   }
 }
     ${UserFieldsFragmentDoc}`;
@@ -312,9 +314,7 @@ export function useUpdateEmailMutation() {
 export const UpdatePasswordDocument = gql`
     mutation updatePassword($currentPassword: String!, $newPassword: String!) {
   userUpdatePassword(currentPassword: $currentPassword, newPassword: $newPassword) {
-    user {
-      ...userFields
-    }
+    ...userFields
   }
 }
     ${UserFieldsFragmentDoc}`;
@@ -325,9 +325,7 @@ export function useUpdatePasswordMutation() {
 export const UpdateUsernameDocument = gql`
     mutation updateUsername($newUsername: String!) {
   userUpdateUsername(newUsername: $newUsername) {
-    user {
-      ...userFields
-    }
+    ...userFields
   }
 }
     ${UserFieldsFragmentDoc}`;

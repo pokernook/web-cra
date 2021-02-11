@@ -1,7 +1,5 @@
 mutation updateUsername($newUsername: String!) {
   userUpdateUsername(newUsername: $newUsername) {
-    user {
-      ...userFields
-    }
+    ...userFields
   }
 }
