@@ -132,6 +132,10 @@ export type MutationUserSetStatusArgs = {
 export type UserFieldsFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'createdAt' | 'email' | 'emailVerified' | 'username' | 'discriminator'>
+  & { status?: Maybe<(
+    { __typename?: 'UserStatus' }
+    & Pick<UserStatus, 'emoji' | 'message'>
+  )> }
 );
 
 export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
@@ -184,6 +188,10 @@ export type SetStatusMutation = (
   & { userSetStatus?: Maybe<(
     { __typename?: 'UserStatus' }
     & Pick<UserStatus, 'createdAt' | 'emoji' | 'id' | 'message' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    ) }
   )> }
 );
 
@@ -264,6 +272,10 @@ export const UserFieldsFragmentDoc = gql`
   emailVerified
   username
   discriminator
+  status {
+    emoji
+    message
+  }
 }
     `;
 export const DeleteAccountDocument = gql`
@@ -309,9 +321,12 @@ export const SetStatusDocument = gql`
     id
     message
     updatedAt
+    user {
+      ...userFields
+    }
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}`;
 
 export function useSetStatusMutation() {
   return Urql.useMutation<SetStatusMutation, SetStatusMutationVariables>(SetStatusDocument);
