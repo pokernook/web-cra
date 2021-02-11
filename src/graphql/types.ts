@@ -134,7 +134,7 @@ export type UserFieldsFragment = (
   & Pick<User, 'id' | 'createdAt' | 'email' | 'emailVerified' | 'username' | 'discriminator'>
   & { status?: Maybe<(
     { __typename?: 'UserStatus' }
-    & Pick<UserStatus, 'emoji' | 'message'>
+    & Pick<UserStatus, 'id' | 'emoji' | 'message'>
   )> }
 );
 
@@ -273,6 +273,7 @@ export const UserFieldsFragmentDoc = gql`
   username
   discriminator
   status {
+    id
     emoji
     message
   }
