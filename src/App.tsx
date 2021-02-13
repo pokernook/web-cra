@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useMeQuery } from "./graphql";
 import { Loading } from "./pages/Loading";
@@ -6,7 +6,8 @@ import { PrivateApp } from "./PrivateApp";
 import { PublicApp } from "./PublicApp";
 
 export const App = () => {
-  const [meQuery] = useMeQuery();
+  const context = useMemo(() => ({ additionalTypenames: ["User"] }), []);
+  const [meQuery] = useMeQuery({ context });
   const [launching, setLaunching] = useState(true);
 
   const { data, fetching: fetchingUser } = meQuery;
