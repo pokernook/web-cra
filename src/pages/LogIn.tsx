@@ -4,23 +4,14 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
-import {
-  MutationUserLogInArgs,
-  useLogInMutation,
-  useMeQuery,
-} from "../graphql";
+import { MutationUserLogInArgs, useLogInMutation } from "../graphql";
 
 export const LogIn = () => {
-  const [, reexecuteMeQuery] = useMeQuery({
-    pause: true,
-    requestPolicy: "network-only",
-  });
   const [logInResult, logIn] = useLogInMutation();
   const { register, handleSubmit } = useForm<MutationUserLogInArgs>();
 
   const onSubmit = handleSubmit(async (data) => {
     await logIn(data);
-    reexecuteMeQuery();
   });
 
   return (
