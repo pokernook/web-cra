@@ -1,11 +1,21 @@
 /** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Avatar, Box, Button, Divider, Field, Heading, Text } from "theme-ui";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Field,
+  Flex,
+  Heading,
+  Text,
+} from "theme-ui";
 
 import {
   MutationUserSetStatusArgs,
   MutationUserUpdateUsernameArgs,
+  useClearStatusMutation,
   useMeQuery,
   useSetStatusMutation,
   useUpdateUsernameMutation,
@@ -70,10 +80,21 @@ const UpdateUsernameForm = () => {
 const UpdateStatusForm = () => {
   const [meQuery] = useMeQuery();
   const [result, setStatus] = useSetStatusMutation();
-  const { register, handleSubmit } = useForm<MutationUserSetStatusArgs>();
+  const [, clearStatus] = useClearStatusMutation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+  } = useForm<MutationUserSetStatusArgs>();
 
   const { data } = meQuery;
   const onSubmit = handleSubmit((data) => setStatus(data));
+  const onClearStatus = async () => {
+    const result = await clearStatus();
+    if (!result.error) {
+      reset();
+    }
+  };
 
   return (
     <>
@@ -104,9 +125,14 @@ const UpdateStatusForm = () => {
           )}
         </Box>
 
-        <Button variant="secondary" type="submit" mb={4} mr={2}>
-          Set status
-        </Button>
+        <Flex mb={4}>
+          <Button variant="secondary" type="submit" mr={2}>
+            Set status
+          </Button>
+          <Button variant="tertiary" type="button" onClick={onClearStatus}>
+            Clear status
+          </Button>
+        </Flex>
       </Box>
     </>
   );
