@@ -114,6 +114,17 @@ export type UserFieldsFragment = (
   )> }
 );
 
+export type ClearStatusMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ClearStatusMutation = (
+  { __typename?: 'Mutation' }
+  & { userClearStatus?: Maybe<(
+    { __typename?: 'UserStatus' }
+    & Pick<UserStatus, 'id'>
+  )> }
+);
+
 export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -255,6 +266,17 @@ export const UserFieldsFragmentDoc = gql`
   }
 }
     `;
+export const ClearStatusDocument = gql`
+    mutation clearStatus {
+  userClearStatus {
+    id
+  }
+}
+    `;
+
+export function useClearStatusMutation() {
+  return Urql.useMutation<ClearStatusMutation, ClearStatusMutationVariables>(ClearStatusDocument);
+};
 export const DeleteAccountDocument = gql`
     mutation deleteAccount {
   userDeleteAccount {

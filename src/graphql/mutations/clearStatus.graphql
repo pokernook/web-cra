@@ -1,0 +1,5 @@
+mutation clearStatus {
+  userClearStatus {
+    id
+  }
+}
