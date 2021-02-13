@@ -52,34 +52,9 @@ export type UserStatus = {
 };
 
 
-export type UserWhereUniqueInput = {
-  email?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  Tag?: Maybe<UserTagCompoundUniqueInput>;
-};
-
-export type UserTagCompoundUniqueInput = {
-  username: Scalars['String'];
-  discriminator: Scalars['Int'];
-};
-
 export type Query = {
   __typename?: 'Query';
-  user?: Maybe<User>;
-  users: Array<User>;
   me?: Maybe<User>;
-};
-
-
-export type QueryUserArgs = {
-  where: UserWhereUniqueInput;
-};
-
-
-export type QueryUsersArgs = {
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
-  cursor?: Maybe<UserWhereUniqueInput>;
 };
 
 export type Mutation = {
@@ -92,6 +67,7 @@ export type Mutation = {
   userUpdateEmail?: Maybe<User>;
   userDeleteAccount?: Maybe<User>;
   userSetStatus?: Maybe<UserStatus>;
+  userClearStatus?: Maybe<UserStatus>;
 };
 
 
