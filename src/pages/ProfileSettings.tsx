@@ -22,12 +22,12 @@ const UpdateUsernameForm = () => {
 
   return (
     <>
-      <Heading as="h1">Username</Heading>
-      <Divider my={3} />
+      <Heading as="h2">Username</Heading>
+      <Divider mt={2} mb={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
           defaultValue={data?.me?.username}
-          label="Username"
+          label="New username"
           name="newUsername"
           type="text"
           ref={register({ required: true })}
@@ -77,8 +77,8 @@ const UpdateStatusForm = () => {
 
   return (
     <>
-      <Heading as="h1">Status</Heading>
-      <Divider my={3} />
+      <Heading as="h2">Status</Heading>
+      <Divider mt={2} mb={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
           defaultValue={data?.me?.status?.message || ""}
@@ -119,8 +119,8 @@ const UpdateProfilePictureForm = () => {
 
   return (
     <>
-      <Heading as="h1">Profile picture</Heading>
-      <Divider my={3} />
+      <Heading as="h2">Profile picture</Heading>
+      <Divider mt={2} mb={3} />
       <Box sx={{ position: "relative", mb: 4 }}>
         <Avatar
           src={generateAvatarSvg(`${data?.me?.id}`)}

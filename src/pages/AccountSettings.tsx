@@ -31,8 +31,8 @@ const EmailVerificationForm = () => {
 
   return (
     <>
-      <Heading as="h1">Email</Heading>
-      <Divider my={3} />
+      <Heading as="h2">Email</Heading>
+      <Divider mt={2} mb={3} />
 
       <Heading as="h3">{data?.me?.email}</Heading>
       <Box mt={2} mb={3}>
@@ -46,7 +46,7 @@ const EmailVerificationForm = () => {
 
       <Box as="form" onSubmit={onSubmit}>
         <Field
-          label="Email"
+          label="New email"
           name="newEmail"
           type="email"
           ref={register({ required: true })}
@@ -102,8 +102,8 @@ const UpdatePasswordForm = () => {
 
   return (
     <>
-      <Heading as="h1">Password</Heading>
-      <Divider my={3} />
+      <Heading as="h2">Password</Heading>
+      <Divider mt={2} mb={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
           label="Current password"
@@ -164,10 +164,10 @@ const DeleteAccountForm = () => {
 
   return (
     <>
-      <Heading as="h1" color="error">
+      <Heading as="h2" color="error">
         Delete account
       </Heading>
-      <Divider my={3} />
+      <Divider mt={2} mb={3} />
       <Box mb={3}>
         <Text>Be careful, there's no coming back.</Text>
       </Box>
