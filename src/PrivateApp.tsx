@@ -15,15 +15,11 @@ const sidebarRoutes: NavLinkProps[] = [
 ];
 
 const Sidebar = () => {
-  const [meQuery, reexecuteMeQuery] = useMeQuery();
+  const [meQuery] = useMeQuery();
   const [, logOut] = useLogOutMutation();
 
   const { data } = meQuery;
-
-  const handleLogOut = async () => {
-    await logOut();
-    reexecuteMeQuery({ requestPolicy: "network-only" });
-  };
+  const handleLogOut = () => logOut();
 
   return (
     <aside
