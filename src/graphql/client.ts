@@ -40,6 +40,16 @@ const updates: Partial<UpdatesConfig> = {
     userLogOut: (_result, _args, cache) => {
       cache.invalidate("Query", "me");
     },
+
+    userClearStatus: (_result, _args, cache) => {
+      cache.updateQuery({ query: graphql.MeDocument }, (data) => {
+        const castData = data as graphql.MeQuery;
+        if (castData.me) {
+          castData.me.status = null;
+        }
+        return castData as Data;
+      });
+    },
   },
 };
 
