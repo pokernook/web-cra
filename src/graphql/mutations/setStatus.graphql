@@ -5,7 +5,6 @@ mutation setStatus($emoji: String, $message: String) {
     id
     message
     updatedAt
-    # TODO: Should the status mutation really be returning user info?
     user {
       ...userFields
     }
