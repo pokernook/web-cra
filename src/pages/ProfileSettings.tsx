@@ -12,6 +12,7 @@ import {
   Text,
 } from "theme-ui";
 
+import { BriefDiv } from "../components/BriefDiv";
 import {
   MutationUserSetStatusArgs,
   MutationUserUpdateUsernameArgs,
@@ -46,11 +47,7 @@ const UpdateUsernameForm = () => {
 
         <Box mt={1} mb={3}>
           {result.error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Text variant="danger">
                 {result.error.graphQLErrors[0]?.message ||
                   result.error.networkError?.message}
@@ -64,13 +61,9 @@ const UpdateUsernameForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            sx={{ display: "inline-block" }}
-          >
+          <BriefDiv sx={{ display: "inline-block" }}>
             <Text variant="success">Saved</Text>
-          </motion.div>
+          </BriefDiv>
         )}
       </Box>
     </>
@@ -112,11 +105,7 @@ const UpdateStatusForm = () => {
 
         <Box mt={1} mb={3}>
           {setStatusResult.error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Text variant="danger">
                 {setStatusResult.error.graphQLErrors[0]?.message ||
                   setStatusResult.error.networkError?.message}
@@ -139,13 +128,9 @@ const UpdateStatusForm = () => {
           </Button>
 
           {setStatusResult.data && !setStatusResult.error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              sx={{ display: "inline-block" }}
-            >
+            <BriefDiv sx={{ display: "inline-block" }}>
               <Text variant="success">Saved</Text>
-            </motion.div>
+            </BriefDiv>
           )}
         </Flex>
       </Box>

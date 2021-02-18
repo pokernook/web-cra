@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
+import { BriefDiv } from "../components/BriefDiv";
 import {
   MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
@@ -12,7 +13,7 @@ import {
   useUpdatePasswordMutation,
 } from "../graphql";
 
-const EmailVerificationForm = () => {
+const EmailForm = () => {
   const [meQuery] = useMeQuery();
   const [result, updateEmail] = useUpdateEmailMutation();
   const {
@@ -54,11 +55,7 @@ const EmailVerificationForm = () => {
 
         <Box mt={1} mb={3}>
           {result.error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Text variant="danger">
                 {result.error.graphQLErrors[0]?.message ||
                   result.error.networkError?.message}
@@ -72,13 +69,9 @@ const EmailVerificationForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            sx={{ display: "inline-block" }}
-          >
+          <BriefDiv sx={{ display: "inline-block" }}>
             <Text variant="success">Updated</Text>
-          </motion.div>
+          </BriefDiv>
         )}
       </Box>
     </>
@@ -122,11 +115,7 @@ const UpdatePasswordForm = () => {
 
         <Box mt={1} mb={3}>
           {result.error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Text variant="danger">
                 {result.error.graphQLErrors[0]?.message ||
                   result.error.networkError?.message}
@@ -140,13 +129,9 @@ const UpdatePasswordForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            sx={{ display: "inline-block" }}
-          >
+          <BriefDiv sx={{ display: "inline-block" }}>
             <Text variant="success">Updated</Text>
-          </motion.div>
+          </BriefDiv>
         )}
       </Box>
     </>
@@ -177,7 +162,7 @@ const DeleteAccountForm = () => {
 
 export const AccountSettings = () => (
   <>
-    <EmailVerificationForm />
+    <EmailForm />
     <UpdatePasswordForm />
     <DeleteAccountForm />
   </>
