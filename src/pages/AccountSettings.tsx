@@ -154,13 +154,9 @@ const UpdatePasswordForm = () => {
 };
 
 const DeleteAccountForm = () => {
-  const [, reexecuteMeQuery] = useMeQuery();
   const [, deleteAccount] = useDeleteAccountMutation();
 
-  const handleDeleteAccount = async () => {
-    await deleteAccount();
-    reexecuteMeQuery({ requestPolicy: "network-only" });
-  };
+  const handleDeleteAccount = async () => await deleteAccount();
 
   return (
     <>
