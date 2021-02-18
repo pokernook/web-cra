@@ -39,6 +39,7 @@ export type UserAuthPayload = {
 export type UserLogOutPayload = {
   __typename?: 'UserLogOutPayload';
   sessionId?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 export type UserStatus = {
@@ -48,7 +49,7 @@ export type UserStatus = {
   id: Scalars['String'];
   message?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-  user: User;
+  user?: Maybe<User>;
 };
 
 
@@ -175,10 +176,10 @@ export type SetStatusMutation = (
   & { userSetStatus?: Maybe<(
     { __typename?: 'UserStatus' }
     & Pick<UserStatus, 'createdAt' | 'emoji' | 'id' | 'message' | 'updatedAt'>
-    & { user: (
+    & { user?: Maybe<(
       { __typename?: 'User' }
       & UserFieldsFragment
-    ) }
+    )> }
   )> }
 );
 
