@@ -73,7 +73,7 @@ const UpdateUsernameForm = () => {
 const UpdateStatusForm = () => {
   const [meQuery] = useMeQuery();
   const [setStatusResult, setStatus] = useSetStatusMutation();
-  const [, clearStatus] = useClearStatusMutation();
+  const [clearStatusResult, clearStatus] = useClearStatusMutation();
   const {
     register,
     handleSubmit,
@@ -101,6 +101,7 @@ const UpdateStatusForm = () => {
           type="text"
           spellCheck={false}
           ref={register()}
+          required
         />
 
         <Box mt={1} mb={3}>
@@ -118,6 +119,7 @@ const UpdateStatusForm = () => {
           <Button variant="secondary" type="submit" mr={2}>
             Set status
           </Button>
+
           <Button
             variant="tertiary"
             type="button"
@@ -128,8 +130,13 @@ const UpdateStatusForm = () => {
           </Button>
 
           {setStatusResult.data && !setStatusResult.error && (
-            <BriefDiv sx={{ display: "inline-block" }}>
+            <BriefDiv sx={{ display: "inline-block", mr: 2 }}>
               <Text variant="success">Saved</Text>
+            </BriefDiv>
+          )}
+          {clearStatusResult.data && !clearStatusResult.error && (
+            <BriefDiv sx={{ display: "inline-block" }}>
+              <Text>Cleared</Text>
             </BriefDiv>
           )}
         </Flex>
