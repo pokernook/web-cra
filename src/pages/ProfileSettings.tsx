@@ -95,7 +95,7 @@ const UpdateStatusForm = () => {
       <Divider mt={2} mb={3} />
       <Box as="form" onSubmit={onSubmit}>
         <Field
-          defaultValue={`${data?.me?.status?.message}`}
+          defaultValue={data?.me?.status?.message || ""}
           label="What's happening?"
           name="message"
           type="text"
