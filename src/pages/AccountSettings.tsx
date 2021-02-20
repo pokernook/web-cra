@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
-import { BriefDiv } from "../components/BriefDiv";
+import { FadeOutDiv } from "../components/FadeOutDiv";
 import {
   MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
@@ -69,9 +69,9 @@ const EmailForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <BriefDiv sx={{ display: "inline-block" }}>
+          <FadeOutDiv sx={{ display: "inline-block" }}>
             <Text variant="success">Updated</Text>
-          </BriefDiv>
+          </FadeOutDiv>
         )}
       </Box>
     </>
@@ -129,9 +129,9 @@ const UpdatePasswordForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <BriefDiv sx={{ display: "inline-block" }}>
+          <FadeOutDiv sx={{ display: "inline-block" }}>
             <Text variant="success">Updated</Text>
-          </BriefDiv>
+          </FadeOutDiv>
         )}
       </Box>
     </>

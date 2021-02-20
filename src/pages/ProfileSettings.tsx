@@ -12,7 +12,7 @@ import {
   Text,
 } from "theme-ui";
 
-import { BriefDiv } from "../components/BriefDiv";
+import { FadeOutDiv } from "../components/FadeOutDiv";
 import {
   MutationUserSetStatusArgs,
   MutationUserUpdateUsernameArgs,
@@ -61,9 +61,9 @@ const UpdateUsernameForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <BriefDiv sx={{ display: "inline-block" }}>
+          <FadeOutDiv sx={{ display: "inline-block" }}>
             <Text variant="success">Saved</Text>
-          </BriefDiv>
+          </FadeOutDiv>
         )}
       </Box>
     </>
@@ -130,14 +130,14 @@ const UpdateStatusForm = () => {
           </Button>
 
           {setStatusResult.data && !setStatusResult.error && (
-            <BriefDiv sx={{ display: "inline-block", mr: 2 }}>
+            <FadeOutDiv sx={{ display: "inline-block", mr: 2 }}>
               <Text variant="success">Saved</Text>
-            </BriefDiv>
+            </FadeOutDiv>
           )}
           {clearStatusResult.data && !clearStatusResult.error && (
-            <BriefDiv sx={{ display: "inline-block" }}>
+            <FadeOutDiv sx={{ display: "inline-block" }}>
               <Text>Cleared</Text>
-            </BriefDiv>
+            </FadeOutDiv>
           )}
         </Flex>
       </Box>

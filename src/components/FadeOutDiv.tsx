@@ -7,7 +7,7 @@ type Props = {
   sx?: ThemeUIStyleObject;
 };
 
-export const BriefDiv: FC<Props> = ({
+export const FadeOutDiv: FC<Props> = ({
   children,
   showTime = 1500,
   ...props
