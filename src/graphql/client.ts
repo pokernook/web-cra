@@ -15,6 +15,9 @@ const resolvers: ResolverConfig = {
     discriminator: (parent) =>
       parent.discriminator?.toString().padStart(4, "0"),
   },
+  UserStatus: {
+    emoji: (parent) => parent.emoji ?? "💭",
+  },
 };
 
 const updates: Partial<UpdatesConfig> = {

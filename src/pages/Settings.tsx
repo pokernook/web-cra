@@ -73,14 +73,15 @@ const SettingsLayout: FC = ({ children }) => {
           sx={{ width: 64, height: 64, mr: 3 }}
         />
         <Box>
-          <Flex mb={1}>
+          <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>
             <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
               #{data?.me?.discriminator}
             </Heading>
           </Flex>
 
-          <Flex>
+          <Flex sx={{ alignItems: "center" }}>
+            <Text mr={1}>{data?.me?.status?.emoji}</Text>
             <Text>{data?.me?.status?.message}</Text>
           </Flex>
         </Box>
