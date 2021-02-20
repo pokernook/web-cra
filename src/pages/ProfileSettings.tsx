@@ -146,7 +146,7 @@ const UpdateProfilePictureForm = () => {
       <Heading as="h2">Profile picture</Heading>
       <Divider mt={2} mb={3} />
       <Box sx={{ position: "relative", mb: 4 }}>
-        <UserAvatar size={200} userId={data?.me?.id} />
+        <UserAvatar size={200} user={data?.me} />
 
         <Button
           variant="secondary"

@@ -67,7 +67,7 @@ const SettingsLayout: FC = ({ children }) => {
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
       <Flex mb={4}>
-        <UserAvatar size={64} userId={data?.me?.id} sx={{ mr: 3 }} />
+        <UserAvatar size={64} user={data?.me} sx={{ mr: 3 }} />
         <Box>
           <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>
