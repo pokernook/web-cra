@@ -117,7 +117,7 @@ const UpdateStatusForm = () => {
 
         <Flex mb={4} sx={{ alignItems: "center" }}>
           <Button variant="secondary" type="submit" mr={2}>
-            Set status
+            Save status
           </Button>
 
           <Button
