@@ -1,18 +1,10 @@
 /** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import {
-  Avatar,
-  Box,
-  Button,
-  Divider,
-  Field,
-  Flex,
-  Heading,
-  Text,
-} from "theme-ui";
+import { Box, Button, Divider, Field, Flex, Heading, Text } from "theme-ui";
 
 import { FadeOutDiv } from "../components/FadeOutDiv";
+import { UserAvatar } from "../components/UserAvatar";
 import {
   MutationUserSetStatusArgs,
   MutationUserUpdateUsernameArgs,
@@ -21,7 +13,6 @@ import {
   useSetStatusMutation,
   useUpdateUsernameMutation,
 } from "../graphql";
-import { generateAvatarSvg } from "../util/generate-avatar";
 
 const UpdateUsernameForm = () => {
   const [meQuery] = useMeQuery();
@@ -155,10 +146,7 @@ const UpdateProfilePictureForm = () => {
       <Heading as="h2">Profile picture</Heading>
       <Divider mt={2} mb={3} />
       <Box sx={{ position: "relative", mb: 4 }}>
-        <Avatar
-          src={generateAvatarSvg(`${data?.me?.id}`)}
-          sx={{ width: 200, height: 200 }}
-        />
+        <UserAvatar size={200} userId={data?.me?.id} />
 
         <Button
           variant="secondary"
