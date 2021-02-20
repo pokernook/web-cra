@@ -14,6 +14,7 @@ export const theme: Theme = {
     textDanger: "#f85149",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
+    inputFocusBorder: "#268bff",
     muted: "#0d1117",
     text: "#c9d1d9",
     mutedText: "#384252",
@@ -201,6 +202,10 @@ export const theme: Theme = {
       py: 1,
       bg: "muted",
       borderColor: "border",
+      outline: "none",
+      ":focus": {
+        borderColor: "inputFocusBorder",
+      },
     },
   },
 };
