@@ -71,7 +71,7 @@ const SettingsLayout: FC = ({ children }) => {
         <Box>
           <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>
-            <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
+            <Heading sx={{ color: "textMuted", fontWeight: "body" }}>
               #{data?.me?.discriminator}
             </Heading>
           </Flex>
