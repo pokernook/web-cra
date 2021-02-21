@@ -80,6 +80,7 @@ export const theme: Theme = {
       color: "text",
       fontWeight: "bold",
       textDecoration: "none",
+      p: 2,
       ":hover": {
         bg: "gray",
       },
