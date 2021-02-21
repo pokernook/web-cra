@@ -15,7 +15,6 @@ export const TopNav = () => {
     <header
       sx={{
         alignItems: "center",
-        justifyContent: "center",
         bg: "muted",
         display: "flex",
         position: "sticky",
