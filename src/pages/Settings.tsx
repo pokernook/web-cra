@@ -76,10 +76,9 @@ const SettingsLayout: FC = ({ children }) => {
             </Heading>
           </Flex>
 
-          <Flex sx={{ alignItems: "center" }}>
-            <Text mr={1}>{data?.me?.status?.emoji}</Text>
-            <Text>{data?.me?.status?.message}</Text>
-          </Flex>
+          <Text>
+            {data?.me?.status?.emoji} {data?.me?.status?.message}
+          </Text>
         </Box>
       </Flex>
 
