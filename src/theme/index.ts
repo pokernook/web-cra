@@ -14,6 +14,8 @@ export const theme: Theme = {
     textDanger: "#f85149",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
+    navLinkHoverBackground: "#141921",
+    navLinkActiveBackground: "#1f2836",
     inputFocusBorder: "#268bff",
     muted: "#0d1117",
     text: "#c9d1d9",
@@ -82,11 +84,10 @@ export const theme: Theme = {
       textDecoration: "none",
       p: 2,
       ":hover": {
-        bg: "gray",
+        bg: "navLinkHoverBackground",
       },
       "&.active": {
-        bg: "gray",
-        color: "link",
+        bg: "navLinkActiveBackground",
       },
     },
   },
