@@ -1,4 +1,8 @@
 /** @jsxImportSource theme-ui */
+import { NavLink } from "react-router-dom";
+import { Image } from "theme-ui";
+
+import logo from "../assets/logo.svg";
 
 export const TopNav = () => (
   <header
@@ -14,5 +18,9 @@ export const TopNav = () => (
       borderBottomWidth: 1,
       zIndex: 1,
     }}
-  ></header>
+  >
+    <NavLink to="/">
+      <Image src={logo} height={56} width={56} />
+    </NavLink>
+  </header>
 );
