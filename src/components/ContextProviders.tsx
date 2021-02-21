@@ -6,7 +6,7 @@ import { Provider as UrqlProvider } from "urql";
 import { client } from "../graphql";
 import { theme } from "../theme";
 
-export const Providers: FC = ({ children }) => (
+export const ContextProviders: FC = ({ children }) => (
   <React.StrictMode>
     <UrqlProvider value={client}>
       <ThemeProvider theme={theme}>
