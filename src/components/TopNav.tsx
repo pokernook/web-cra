@@ -10,6 +10,7 @@ export const TopNav = () => {
       sx={{
         alignItems: "center",
         display: "flex",
+        bg: "background",
         position: "sticky",
         top: 0,
         borderBottom: "solid",
