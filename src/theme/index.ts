@@ -5,21 +5,19 @@ export const theme: Theme = {
   useLocalStorage: false,
   colors: {
     background: "#090d13",
-    border: "#21262d",
+    text: "#c9d1d9",
     primary: "#238636",
+    success: "#56d364",
     error: "#f85249",
     link: "#459cff",
-    gray: "#212730",
-    text: "#c9d1d9",
+    border: "#21262d",
+    muted: "#0d1117",
     textMuted: "#384252",
-    textSuccess: "#56d364",
-    textDanger: "#f85149",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
     navLinkHoverBackground: "#141921",
     navLinkActiveBackground: "#1f2836",
     inputFocusBorder: "#268bff",
-    muted: "#0d1117",
   },
   fonts: {
     code: "source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace",
@@ -57,8 +55,8 @@ export const theme: Theme = {
   },
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
-    success: { color: "textSuccess", fontSize: 1, fontWeight: "bold" },
-    danger: { color: "textDanger", fontSize: 1, fontWeight: "bold" },
+    success: { color: "success", fontSize: 1, fontWeight: "bold" },
+    danger: { color: "error", fontSize: 1, fontWeight: "bold" },
   },
   links: {
     menu: {
