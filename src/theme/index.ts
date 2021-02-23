@@ -11,7 +11,6 @@ export const theme: Theme = {
     error: "#f85249",
     link: "#459cff",
     border: "#21262d",
-    muted: "#0d1117",
     textMuted: "#384252",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
@@ -193,11 +192,10 @@ export const theme: Theme = {
     input: {
       px: 2,
       py: 1,
-      bg: "muted",
       borderColor: "border",
       outline: "none",
       ":focus": {
-        borderColor: "inputFocusBorder",
+        borderColor: "link",
       },
     },
   },
