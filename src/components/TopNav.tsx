@@ -34,7 +34,7 @@ export const TopNav = () => {
       </Flex>
 
       <Flex sx={{ flex: 1, justifyContent: "flex-end", mx: 4 }}>
-        <Menu trigger={<UserAvatar user={data?.me} size={36} />} />
+        <Menu trigger={<UserAvatar user={data?.me} size={32} />} />
       </Flex>
     </header>
   );
