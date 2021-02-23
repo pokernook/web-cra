@@ -4,10 +4,10 @@ import { FC, ReactNode, useRef, useState } from "react";
 import { useClickOutside } from "../hooks";
 
 type Props = {
-  prompt: ReactNode;
+  trigger: ReactNode;
 };
 
-export const Menu: FC<Props> = ({ children, prompt }) => {
+export const Menu: FC<Props> = ({ children, trigger }) => {
   const menuRef = useRef(null);
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen(!open);
@@ -17,7 +17,7 @@ export const Menu: FC<Props> = ({ children, prompt }) => {
   return (
     <div ref={menuRef}>
       <p onClick={toggle} sx={{ ":hover": { cursor: "pointer" } }}>
-        {prompt}
+        {trigger}
       </p>
 
       {open && children}
