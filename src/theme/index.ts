@@ -164,7 +164,6 @@ export const theme: Theme = {
       borderWidth: 1,
     },
     menu: {
-      p: 3,
       border: "solid",
       borderColor: "border",
       borderRadius: 4,
