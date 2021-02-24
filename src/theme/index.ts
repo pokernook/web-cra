@@ -4,13 +4,14 @@ import { Theme } from "theme-ui";
 export const theme: Theme = {
   useLocalStorage: false,
   colors: {
-    background: "#090d13",
+    background: "#06090e",
     text: "#c9d1d9",
     primary: "#238636",
     success: "#56d364",
     error: "#f85249",
     link: "#459cff",
     border: "#21262d",
+    muted: "#0e1116",
     textMuted: "#384252",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
