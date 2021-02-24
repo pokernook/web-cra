@@ -3,13 +3,16 @@ import { NavLink } from "react-router-dom";
 import { Flex, Image } from "theme-ui";
 
 import logo from "../assets/logo.svg";
-import { Menu } from "../components/Menu";
-import { useMeQuery } from "../graphql";
+import { Menu, MenuButton, MenuItem, MenuSeparator } from "../components/Menu";
+import { useLogOutMutation, useMeQuery } from "../graphql";
 import { UserAvatar } from "./UserAvatar";
 
 export const TopNav = () => {
   const [meQuery] = useMeQuery();
+  const [, logOut] = useLogOutMutation();
+
   const { data } = meQuery;
+  const handleLogOut = () => logOut();
 
   return (
     <header
@@ -34,7 +37,15 @@ export const TopNav = () => {
       </Flex>
 
       <Flex sx={{ flex: 1, justifyContent: "flex-end", mx: 4 }}>
-        <Menu trigger={<UserAvatar user={data?.me} size={32} />} />
+        <Menu trigger={<UserAvatar user={data?.me} size={32} />}>
+          <MenuItem>
+            <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
+          </MenuItem>
+
+          <MenuSeparator />
+
+          <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
+        </Menu>
       </Flex>
     </header>
   );
