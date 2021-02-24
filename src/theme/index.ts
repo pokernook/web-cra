@@ -74,7 +74,6 @@ export const theme: Theme = {
     nav: {
       borderRadius: 4,
       color: "text",
-      fontWeight: "bold",
       textDecoration: "none",
       p: 2,
       ":hover": {
