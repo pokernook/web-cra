@@ -16,9 +16,6 @@ export const theme: Theme = {
     textMuted: "#384252",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
-    navLinkHoverBackground: "#141921",
-    navLinkActiveBackground: "#1f2836",
-    inputFocusBorder: "#268bff",
   },
   fonts: {
     code: "source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace",
@@ -78,10 +75,10 @@ export const theme: Theme = {
       textDecoration: "none",
       p: 2,
       ":hover": {
-        bg: "navLinkHoverBackground",
+        bg: "muted",
       },
       "&.active": {
-        bg: "navLinkActiveBackground",
+        bg: "accent",
       },
     },
   },
