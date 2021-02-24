@@ -50,9 +50,6 @@ export const theme: Theme = {
       m: 0,
     },
   },
-  sizes: {
-    sidebar: 350,
-  },
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
     success: { color: "success", fontSize: 1, fontWeight: "bold" },
@@ -164,12 +161,15 @@ export const theme: Theme = {
       borderWidth: 1,
     },
     menu: {
+      py: 2,
       border: "solid",
       borderColor: "border",
       borderRadius: 4,
       borderWidth: 1,
       bg: "muted",
       boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.12)",
+      position: "absolute",
+      right: 0,
       minWidth: 300,
     },
   },
