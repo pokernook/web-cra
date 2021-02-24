@@ -21,17 +21,7 @@ export const Menu: FC<Props> = ({ children, trigger }) => {
         {trigger}
       </div>
 
-      {open && (
-        <Card
-          variant="menu"
-          sx={{
-            position: "absolute",
-            right: 0,
-          }}
-        >
-          {children}
-        </Card>
-      )}
+      {open && <Card variant="menu">{children}</Card>}
     </div>
   );
 };
