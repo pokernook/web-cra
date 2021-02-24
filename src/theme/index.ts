@@ -163,6 +163,16 @@ export const theme: Theme = {
       borderRadius: 4,
       borderWidth: 1,
     },
+    menu: {
+      p: 3,
+      border: "solid",
+      borderColor: "border",
+      borderRadius: 4,
+      borderWidth: 1,
+      bg: "muted",
+      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.12)",
+      minWidth: 300,
+    },
   },
   alerts: {
     error: {
