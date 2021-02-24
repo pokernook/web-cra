@@ -151,6 +151,14 @@ export const theme: Theme = {
         bg: "background",
       },
     },
+    unstyled: {
+      bg: "transparent",
+      p: 0,
+      m: 0,
+      ":hover": {
+        cursor: "pointer",
+      },
+    },
   },
   cards: {
     primary: {
