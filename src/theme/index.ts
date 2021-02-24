@@ -6,6 +6,7 @@ export const theme: Theme = {
   colors: {
     background: "#06090e",
     text: "#c9d1d9",
+    accent: "#2c639e",
     primary: "#238636",
     success: "#56d364",
     error: "#f85249",
@@ -148,14 +149,6 @@ export const theme: Theme = {
       },
       ":active": {
         bg: "background",
-      },
-    },
-    unstyled: {
-      bg: "transparent",
-      p: 0,
-      m: 0,
-      ":hover": {
-        cursor: "pointer",
       },
     },
   },
