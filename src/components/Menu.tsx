@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { FC, ReactNode, useRef, useState } from "react";
+import { Card } from "theme-ui";
 
 import { useClickOutside } from "../hooks";
 
@@ -15,12 +16,22 @@ export const Menu: FC<Props> = ({ children, trigger }) => {
   useClickOutside(menuRef, () => setOpen(false));
 
   return (
-    <div ref={menuRef}>
-      <p onClick={toggle} sx={{ ":hover": { cursor: "pointer" } }}>
+    <div ref={menuRef} sx={{ position: "relative" }}>
+      <div onClick={toggle} sx={{ ":hover": { cursor: "pointer" } }}>
         {trigger}
-      </p>
+      </div>
 
-      {open && children}
+      {open && (
+        <Card
+          variant="menu"
+          sx={{
+            position: "absolute",
+            right: 0,
+          }}
+        >
+          {children}
+        </Card>
+      )}
     </div>
   );
 };
