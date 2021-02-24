@@ -1,14 +1,14 @@
 /** @jsxImportSource theme-ui */
 import { FC, ReactNode, useRef, useState } from "react";
-import { Button, Card, Flex } from "theme-ui";
+import { Card, Divider, Flex } from "theme-ui";
 
 import { useClickOutside } from "../hooks";
 
-type Props = {
+type MenuProps = {
   trigger: ReactNode;
 };
 
-export const Menu: FC<Props> = ({ children, trigger }) => {
+export const Menu: FC<MenuProps> = ({ children, trigger }) => {
   const menuRef = useRef(null);
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen(!open);
@@ -17,9 +17,9 @@ export const Menu: FC<Props> = ({ children, trigger }) => {
 
   return (
     <div ref={menuRef} sx={{ position: "relative" }}>
-      <Button onClick={toggle} variant="unstyled">
+      <div onClick={toggle} sx={{ ":hover": { cursor: "pointer" } }}>
         {trigger}
-      </Button>
+      </div>
 
       {open && <Card variant="menu">{children}</Card>}
     </div>
@@ -29,3 +29,23 @@ export const Menu: FC<Props> = ({ children, trigger }) => {
 export const MenuItem: FC = ({ children }) => (
   <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>{children}</Flex>
 );
+
+type MenuButtonProps = {
+  onClick?: () => void;
+};
+
+export const MenuButton: FC<MenuButtonProps> = ({ children, onClick }) => (
+  <Flex
+    onClick={onClick}
+    sx={{
+      alignItems: "center",
+      px: 3,
+      py: 1,
+      ":hover": { cursor: "pointer", bg: "accent" },
+    }}
+  >
+    {children}
+  </Flex>
+);
+
+export const MenuSeparator = () => <Divider my={2} />;
