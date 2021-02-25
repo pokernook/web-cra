@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { NavLink } from "react-router-dom";
-import { Flex, Image } from "theme-ui";
+import { Flex, Heading, Image } from "theme-ui";
 
 import logo from "../assets/logo.svg";
 import { Menu, MenuButton, MenuItem, MenuSeparator } from "../components/Menu";
@@ -40,6 +40,10 @@ export const TopNav = () => {
         <Menu trigger={<UserAvatar user={data?.me} size={32} />}>
           <MenuItem>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
+            <Heading as="h3">{data?.me?.username}</Heading>
+            <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
+              #{data?.me?.discriminator}
+            </Heading>
           </MenuItem>
 
           <MenuSeparator />
