@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { NavLink } from "react-router-dom";
-import { Flex, Heading, Image } from "theme-ui";
+import { Button, Flex, Heading, Image } from "theme-ui";
 
 import logo from "../assets/logo.svg";
 import { Menu, MenuButton, MenuItem, MenuSeparator } from "../components/Menu";
@@ -45,6 +45,23 @@ export const TopNav = () => {
               #{data?.me?.discriminator}
             </Heading>
           </MenuItem>
+
+          <MenuItem>
+            <Button
+              variant="tertiary"
+              sx={{ width: "100%", textAlign: "left" }}
+            >
+              {data?.me?.status?.emoji} {data?.me?.status?.message}
+            </Button>
+          </MenuItem>
+
+          <MenuButton>Clear status</MenuButton>
+
+          <MenuSeparator />
+
+          <MenuButton>Edit profile</MenuButton>
+          <MenuButton>View profile</MenuButton>
+          <MenuButton>Settings</MenuButton>
 
           <MenuSeparator />
 
