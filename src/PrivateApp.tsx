@@ -1,13 +1,13 @@
 /** @jsxImportSource theme-ui */
 import { FC } from "react";
-import { FiLogOut } from "react-icons/fi";
 import { NavLinkProps, Redirect, Route, Switch } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { Avatar, Box, Button, Container, Divider, Flex, Text } from "theme-ui";
+import { Box, Divider, Flex, Grid, Heading } from "theme-ui";
 
-import { useLogOutMutation, useMeQuery } from "./graphql";
+import { TopNav } from "./components/TopNav";
+import { UserAvatar } from "./components/UserAvatar";
+import { useMeQuery } from "./graphql";
 import { Settings } from "./pages/Settings";
-import { generateAvatarSvg } from "./util/generate-avatar";
 
 const sidebarRoutes: NavLinkProps[] = [
   { to: "/", exact: true, children: "Home" },
@@ -16,58 +16,41 @@ const sidebarRoutes: NavLinkProps[] = [
 
 const Sidebar = () => {
   const [meQuery] = useMeQuery();
-  const [, logOut] = useLogOutMutation();
 
   const { data } = meQuery;
-  const handleLogOut = () => logOut();
 
   return (
     <aside
       sx={{
-        bg: "muted",
         borderRight: "solid",
         borderRightColor: "border",
         borderRightWidth: 1,
-        flexGrow: 1,
-        flexBasis: "sidebar",
-        minHeight: "inherit",
       }}
     >
-      <Box sx={{ mx: 4, position: "sticky", top: 4 }}>
-        <Flex>
-          <Avatar
-            src={generateAvatarSvg(`${data?.me?.id}`)}
-            sx={{ width: 36, height: 36, mr: 2 }}
-          />
-          <Text sx={{ fontWeight: "bold" }}>{data?.me?.username}</Text>
-          <Text sx={{ color: "mutedText" }}>#{data?.me?.discriminator}</Text>
+      <Box sx={{ position: "sticky", top: 5 }}>
+        <Flex mx={3} sx={{ alignItems: "center" }}>
+          <UserAvatar size={48} user={data?.me} sx={{ mr: 2 }} />
+          <Heading as="h3">{data?.me?.username}</Heading>
+          <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
+            #{data?.me?.discriminator}
+          </Heading>
         </Flex>
 
         <Divider my={3} />
 
-        <nav>
-          {sidebarRoutes.map((route, index) => (
-            <NavLink
-              key={index}
-              to={route.to}
-              exact={route.exact}
-              sx={{ variant: "links.nav", p: 2, my: 1, display: "inherit" }}
-            >
-              {route.children}
-            </NavLink>
-          ))}
-        </nav>
-
-        <Divider my={3} />
-
-        <Box>
-          <Text sx={{ display: "inherit", fontWeight: "bold", mb: 2 }}>
-            Need to run?
-          </Text>
-          <Button variant="tertiary" onClick={handleLogOut}>
-            <FiLogOut sx={{ verticalAlign: "middle", mr: 2 }} />
-            Log out
-          </Button>
+        <Box mx={3}>
+          <nav>
+            {sidebarRoutes.map((route, index) => (
+              <NavLink
+                key={index}
+                to={route.to}
+                exact={route.exact}
+                sx={{ variant: "links.nav", my: 1, display: "inherit" }}
+              >
+                {route.children}
+              </NavLink>
+            ))}
+          </nav>
         </Box>
       </Box>
     </aside>
@@ -78,9 +61,6 @@ const Main: FC = ({ children }) => (
   <main
     sx={{
       display: "inherit",
-      flex: "1 1 auto",
-      flexGrow: 99999,
-      flexBasis: 0,
       minHeight: "inherit",
       minWidth: 320,
       width: "100%",
@@ -91,17 +71,22 @@ const Main: FC = ({ children }) => (
 );
 
 const PrivateAppLayout: FC = ({ children }) => (
-  <Container
+  // TODO: Fix gap at bottom of page on Safari
+  <Grid
+    columns={["auto"]}
+    gap="0px"
     sx={{
-      display: "flex",
-      flexWrap: "nowrap",
-      maxWidth: "100%",
       minHeight: "100vh",
+      width: "100vw",
+      gridTemplateRows: "50px auto",
     }}
   >
-    <Sidebar />
-    <Main>{children}</Main>
-  </Container>
+    <TopNav />
+    <Grid columns={["280px 1fr"]} gap="0px">
+      <Sidebar />
+      <Main>{children}</Main>
+    </Grid>
+  </Grid>
 );
 
 export const PrivateApp = () => (
