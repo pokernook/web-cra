@@ -109,11 +109,11 @@ export const theme: Theme = {
       px: 3,
       py: 2,
       ":hover": {
-        bg: lighten("background", 0.05),
+        borderColor: lighten("border", 0.2),
         cursor: "pointer",
       },
       ":active": {
-        bg: "background",
+        borderColor: "border",
       },
     },
     tertiary: {
@@ -125,11 +125,11 @@ export const theme: Theme = {
       px: 3,
       py: 2,
       ":hover": {
-        bg: lighten("background", 0.05),
+        borderColor: lighten("border", 0.2),
         cursor: "pointer",
       },
       ":active": {
-        bg: "background",
+        borderColor: "border",
       },
     },
     danger: {
@@ -141,11 +141,11 @@ export const theme: Theme = {
       px: 3,
       py: 2,
       ":hover": {
-        bg: lighten("background", 0.05),
+        borderColor: lighten("border", 0.2),
         cursor: "pointer",
       },
       ":active": {
-        bg: "background",
+        borderColor: "border",
       },
     },
   },
