@@ -60,7 +60,7 @@ export const TopNav = () => {
                   {data.me.status.emoji} {data.me.status.message}
                 </Text>
               ) : (
-                <Text color="textMuted">Update your status</Text>
+                <Text color="textMuted">Update status</Text>
               )}
             </Button>
           </MenuItem>
