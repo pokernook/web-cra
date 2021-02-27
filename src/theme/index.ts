@@ -101,7 +101,7 @@ export const theme: Theme = {
       },
     },
     secondary: {
-      bg: "background",
+      bg: "transparent",
       border: "solid",
       borderColor: "border",
       borderWidth: 1,
@@ -117,7 +117,7 @@ export const theme: Theme = {
       },
     },
     tertiary: {
-      bg: "background",
+      bg: "transparent",
       border: "solid",
       borderColor: "border",
       borderWidth: 1,
@@ -133,7 +133,7 @@ export const theme: Theme = {
       },
     },
     danger: {
-      bg: "background",
+      bg: "transparent",
       border: "solid",
       borderColor: "border",
       borderWidth: 1,
