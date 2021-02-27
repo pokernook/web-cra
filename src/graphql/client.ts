@@ -16,7 +16,7 @@ const resolvers: ResolverConfig = {
       parent.discriminator?.toString().padStart(4, "0"),
   },
   UserStatus: {
-    emoji: (parent) => parent.emoji ?? "💭",
+    emoji: (parent) => parent.emoji ?? "💬",
   },
 };
 
