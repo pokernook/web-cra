@@ -175,7 +175,7 @@ export const theme: Theme = {
       borderColor: "border",
       borderRadius: 4,
       borderWidth: 1,
-      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.12)",
+      boxShadow: "0 18px 48px 0 rgba(0, 0, 0, .35)",
       p: 3,
     },
   },
