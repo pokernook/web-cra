@@ -34,6 +34,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
     }
   });
 
+  // TODO: Display graphql errors
   return (
     <Modal title="Set a status" open={open} closeModal={closeModal}>
       <form onSubmit={handleSaveStatus}>
