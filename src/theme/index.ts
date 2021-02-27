@@ -149,6 +149,7 @@ export const theme: Theme = {
       },
     },
     close: {
+      color: "text",
       ":hover": {
         cursor: "pointer",
       },
