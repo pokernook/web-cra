@@ -1,16 +1,13 @@
 /** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Box, Button, Divider, Field, Flex, Heading, Text } from "theme-ui";
+import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
 import { FadeOutDiv } from "../components/FadeOutDiv";
 import { UserAvatar } from "../components/UserAvatar";
 import {
-  MutationUserSetStatusArgs,
   MutationUserUpdateUsernameArgs,
-  useClearStatusMutation,
   useMeQuery,
-  useSetStatusMutation,
   useUpdateUsernameMutation,
 } from "../graphql";
 
@@ -61,81 +58,6 @@ const UpdateUsernameForm = () => {
   );
 };
 
-const UpdateStatusForm = () => {
-  const [meQuery] = useMeQuery();
-  const [setStatusResult, setStatus] = useSetStatusMutation();
-  const [clearStatusResult, clearStatus] = useClearStatusMutation();
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm<MutationUserSetStatusArgs>();
-
-  const { data } = meQuery;
-  const onSubmit = handleSubmit((data) => setStatus(data));
-  const onClearStatus = async () => {
-    const result = await clearStatus();
-    if (!result.error) {
-      reset();
-    }
-  };
-
-  return (
-    <>
-      <Heading as="h2">Status</Heading>
-      <Divider mt={2} mb={3} />
-      <Box as="form" onSubmit={onSubmit}>
-        <Field
-          defaultValue={data?.me?.status?.message || ""}
-          label="What's happening?"
-          name="message"
-          type="text"
-          spellCheck={false}
-          ref={register()}
-          required
-        />
-
-        <Box mt={1} mb={3}>
-          {setStatusResult.error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <Text variant="danger">
-                {setStatusResult.error.graphQLErrors[0]?.message ||
-                  setStatusResult.error.networkError?.message}
-              </Text>
-            </motion.div>
-          )}
-        </Box>
-
-        <Flex mb={4} sx={{ alignItems: "center" }}>
-          <Button variant="secondary" type="submit" mr={2}>
-            Save status
-          </Button>
-
-          <Button
-            variant="tertiary"
-            type="button"
-            onClick={onClearStatus}
-            mr={2}
-          >
-            Clear status
-          </Button>
-
-          {setStatusResult.data && !setStatusResult.error && (
-            <FadeOutDiv sx={{ display: "inline-block", mr: 2 }}>
-              <Text variant="success">Saved</Text>
-            </FadeOutDiv>
-          )}
-          {clearStatusResult.data && !clearStatusResult.error && (
-            <FadeOutDiv sx={{ display: "inline-block" }}>
-              <Text>Cleared</Text>
-            </FadeOutDiv>
-          )}
-        </Flex>
-      </Box>
-    </>
-  );
-};
-
 const UpdateProfilePictureForm = () => {
   const [meQuery] = useMeQuery();
 
@@ -162,7 +84,6 @@ const UpdateProfilePictureForm = () => {
 export const ProfileSettings = () => (
   <>
     <UpdateUsernameForm />
-    <UpdateStatusForm />
     <UpdateProfilePictureForm />
   </>
 );
