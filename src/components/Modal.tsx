@@ -2,17 +2,18 @@ import { FC, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Card, Flex } from "theme-ui";
 
-import { useClickOutside } from "../hooks";
+import { useClickOutside, useKeyPress } from "../hooks";
 
 type ModalProps = {
   open: boolean;
-  toggle: () => void;
+  closeModal: () => void;
 };
 
-export const Modal: FC<ModalProps> = ({ open, toggle, children }) => {
+export const Modal: FC<ModalProps> = ({ open, closeModal, children }) => {
   const modalRef = useRef(null);
 
-  useClickOutside(modalRef, toggle);
+  useClickOutside(modalRef, closeModal);
+  useKeyPress("Escape", closeModal);
 
   return createPortal(
     open && (
