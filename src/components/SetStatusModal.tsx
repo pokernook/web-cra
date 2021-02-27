@@ -23,9 +23,9 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   const [, clearStatus] = useClearStatusMutation();
   const [, setStatus] = useSetStatusMutation();
   const {
-    register,
-    handleSubmit,
     control,
+    handleSubmit,
+    register,
     watch,
   } = useForm<SetStatusMutationVariables>();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
