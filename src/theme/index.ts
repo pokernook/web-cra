@@ -169,6 +169,15 @@ export const theme: Theme = {
       right: 0,
       minWidth: 300,
     },
+    modal: {
+      bg: "muted",
+      border: "solid",
+      borderColor: "border",
+      borderRadius: 4,
+      borderWidth: 1,
+      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.12)",
+      p: 3,
+    },
   },
   alerts: {
     error: {
