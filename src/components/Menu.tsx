@@ -8,6 +8,7 @@ type MenuProps = {
   trigger: ReactNode;
 };
 
+// TODO: Menu should close when any action is performed within the menu
 export const Menu: FC<MenuProps> = ({ children, trigger }) => {
   const menuRef = useRef(null);
   const [open, setOpen] = useState(false);
