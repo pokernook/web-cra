@@ -60,7 +60,6 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           spellCheck
           name="message"
           ref={register({ required: true })}
-          mb={3}
           pl={4}
         />
 
@@ -74,7 +73,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           />
         )}
 
-        <Flex sx={{ float: "right" }}>
+        <Flex sx={{ float: "right", mt: 3 }}>
           <Button
             variant="tertiary"
             type="button"
