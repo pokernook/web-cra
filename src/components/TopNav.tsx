@@ -1,18 +1,22 @@
 /** @jsxImportSource theme-ui */
 import { NavLink } from "react-router-dom";
-import { Button, Flex, Heading, Image } from "theme-ui";
+import { Button, Flex, Heading, Image, Text } from "theme-ui";
 
 import logo from "../assets/logo.svg";
 import { Menu, MenuButton, MenuItem, MenuSeparator } from "../components/Menu";
-import { useLogOutMutation, useMeQuery } from "../graphql";
+import {
+  useClearStatusMutation,
+  useLogOutMutation,
+  useMeQuery,
+} from "../graphql";
 import { UserAvatar } from "./UserAvatar";
 
 export const TopNav = () => {
   const [meQuery] = useMeQuery();
+  const [, clearStatus] = useClearStatusMutation();
   const [, logOut] = useLogOutMutation();
 
   const { data } = meQuery;
-  const handleLogOut = () => logOut();
 
   return (
     <header
@@ -51,11 +55,19 @@ export const TopNav = () => {
               variant="tertiary"
               sx={{ width: "100%", textAlign: "left" }}
             >
-              {data?.me?.status?.emoji} {data?.me?.status?.message}
+              {data?.me?.status ? (
+                <Text>
+                  {data.me.status.emoji} {data.me.status.message}
+                </Text>
+              ) : (
+                <Text color="textMuted">Update your status</Text>
+              )}
             </Button>
           </MenuItem>
 
-          <MenuButton>Clear status</MenuButton>
+          {data?.me?.status && (
+            <MenuButton onClick={() => clearStatus()}>Clear status</MenuButton>
+          )}
 
           <MenuSeparator />
 
@@ -65,7 +77,7 @@ export const TopNav = () => {
 
           <MenuSeparator />
 
-          <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
+          <MenuButton onClick={() => logOut()}>Log out of PokerNook</MenuButton>
         </Menu>
       </Flex>
     </header>
