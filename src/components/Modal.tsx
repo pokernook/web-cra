@@ -1,15 +1,21 @@
 import { FC, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Card, Close, Flex } from "theme-ui";
+import { Box, Card, Close, Flex, Heading } from "theme-ui";
 
 import { useClickOutside, useKeyPress } from "../hooks";
 
 type ModalProps = {
   open: boolean;
   closeModal: () => void;
+  title: string;
 };
 
-export const Modal: FC<ModalProps> = ({ open, closeModal, children }) => {
+export const Modal: FC<ModalProps> = ({
+  open,
+  closeModal,
+  title,
+  children,
+}) => {
   const modalRef = useRef(null);
 
   useClickOutside(modalRef, closeModal);
@@ -23,7 +29,8 @@ export const Modal: FC<ModalProps> = ({ open, closeModal, children }) => {
             onClick={closeModal}
             sx={{ position: "absolute", top: 10, right: 10 }}
           />
-          {children}
+          <Heading>{title}</Heading>
+          <Box sx={{ mt: 3 }}>{children}</Box>
         </Card>
       </ModalBackground>
     ),
