@@ -13,7 +13,7 @@ export const theme: Theme = {
     link: "#459cff",
     border: "#21262d",
     muted: "#0e1116",
-    textMuted: "#384252",
+    textMuted: "#4b5669",
     menuItemActiveBackground: "#171b21",
     menuItemActiveBorder: "#e8886d",
   },
