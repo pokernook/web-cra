@@ -39,6 +39,7 @@ export const Loading: FC<Props> = ({
             alignItems: "center",
             display: "flex",
             height: "100vh",
+            width: "100vw",
             justifyContent: "center",
           }}
         >
