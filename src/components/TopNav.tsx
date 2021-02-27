@@ -1,4 +1,5 @@
 /** @jsxImportSource theme-ui */
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Flex, Heading, Image, Text } from "theme-ui";
 
@@ -9,9 +10,11 @@ import {
   useLogOutMutation,
   useMeQuery,
 } from "../graphql";
+import { SetStatusModal } from "./SetStatusModal";
 import { UserAvatar } from "./UserAvatar";
 
 export const TopNav = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [meQuery] = useMeQuery();
   const [, clearStatus] = useClearStatusMutation();
   const [, logOut] = useLogOutMutation();
@@ -53,7 +56,8 @@ export const TopNav = () => {
           <MenuItem>
             <Button
               variant="tertiary"
-              sx={{ width: "100%", textAlign: "left" }}
+              sx={{ width: "100%", textAlign: "left", bg: "background" }}
+              onClick={() => setModalOpen(true)}
             >
               {data?.me?.status ? (
                 <Text>
@@ -80,6 +84,8 @@ export const TopNav = () => {
           <MenuButton onClick={() => logOut()}>Log out of PokerNook</MenuButton>
         </Menu>
       </Flex>
+
+      <SetStatusModal open={modalOpen} closeModal={() => setModalOpen(false)} />
     </header>
   );
 };
