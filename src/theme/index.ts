@@ -148,6 +148,11 @@ export const theme: Theme = {
         borderColor: "border",
       },
     },
+    close: {
+      ":hover": {
+        cursor: "pointer",
+      },
+    },
   },
   cards: {
     primary: {
