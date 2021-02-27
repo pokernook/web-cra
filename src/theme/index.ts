@@ -11,7 +11,7 @@ export const theme: Theme = {
     success: "#56d364",
     error: "#f85249",
     link: "#459cff",
-    border: "#21262d",
+    border: "#2f353d",
     muted: "#0e1116",
     textMuted: "#4b5669",
     menuItemActiveBackground: "#171b21",
