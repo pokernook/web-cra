@@ -1,6 +1,9 @@
-import { FC } from "react";
+import "emoji-mart/css/emoji-mart.css";
+
+import { Picker } from "emoji-mart";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Field, Flex } from "theme-ui";
+import { Button, Flex, Input, Label } from "theme-ui";
 
 import {
   useClearStatusMutation,
@@ -19,8 +22,11 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   const [, clearStatus] = useClearStatusMutation();
   const [, setStatus] = useSetStatusMutation();
   const { register, handleSubmit } = useForm();
+  const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
 
   const { data } = meQuery;
+
+  const toggleEmojiPicker = () => setEmojiPickerOpen(!emojiPickerOpen);
 
   const handleClearStatus = async () => {
     await clearStatus();
@@ -38,15 +44,35 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   return (
     <Modal title="Set a status" open={open} closeModal={closeModal}>
       <form onSubmit={handleSaveStatus}>
-        <Field
+        <Label>What's happening {data?.me?.username}?</Label>
+
+        <Button
+          variant="unstyled"
+          type="button"
+          sx={{ position: "absolute", p: 1 }}
+          onClick={toggleEmojiPicker}
+        >
+          {data?.me?.status?.emoji}
+        </Button>
+        <Input
           type="text"
-          label={`What's happening ${data?.me?.username}?`}
           defaultValue={data?.me?.status?.message || ""}
           spellCheck
           name="message"
           ref={register({ required: true })}
           mb={3}
+          pl={4}
         />
+
+        {emojiPickerOpen && (
+          <Picker
+            emoji="point_up"
+            native
+            theme="dark"
+            title="Pick an emoji"
+            style={{ position: "absolute" }}
+          />
+        )}
 
         <Flex sx={{ float: "right" }}>
           <Button
