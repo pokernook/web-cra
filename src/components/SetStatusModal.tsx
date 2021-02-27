@@ -23,6 +23,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   const [, setStatus] = useSetStatusMutation();
   const { register, handleSubmit } = useForm();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
+  const [emoji, setEmoji] = useState("");
 
   const { data } = meQuery;
 
@@ -41,7 +42,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   });
 
   const handleEmojiSelect = (emoji: BaseEmoji) => {
-    console.log(emoji.native);
+    setEmoji(emoji.native);
     toggleEmojiPicker();
   };
 
@@ -55,7 +56,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           sx={{ position: "absolute", px: 1, pt: 30 }}
           onClick={toggleEmojiPicker}
         >
-          {data?.me?.status?.emoji}
+          {emoji || data?.me?.status?.emoji}
         </Button>
         <Field
           label={`What's happening ${data?.me?.username}?`}
