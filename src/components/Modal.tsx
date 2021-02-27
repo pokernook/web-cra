@@ -1,18 +1,27 @@
-/** @jsxImportSource theme-ui */
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Flex } from "theme-ui";
+import { Card, Flex } from "theme-ui";
 
 import { useClickOutside } from "../hooks";
 
-export const Modal: FC = ({ children }) => {
-  const modalRef = useRef(null);
-  const [open, setOpen] = useState(false);
+type ModalProps = {
+  open: boolean;
+  toggle: () => void;
+};
 
-  useClickOutside(modalRef, () => setOpen(false));
+export const Modal: FC<ModalProps> = ({ open, toggle, children }) => {
+  const modalRef = useRef(null);
+
+  useClickOutside(modalRef, toggle);
 
   return createPortal(
-    open && <ModalBackground>{children}</ModalBackground>,
+    open && (
+      <ModalBackground>
+        <Card ref={modalRef} variant="modal">
+          {children}
+        </Card>
+      </ModalBackground>
+    ),
     document.body
   );
 };
