@@ -148,6 +148,15 @@ export const theme: Theme = {
         borderColor: "border",
       },
     },
+    unstyled: {
+      bg: "transparent",
+      border: "none",
+      p: 0,
+      m: 0,
+      ":hover": {
+        cursor: "pointer",
+      },
+    },
     close: {
       color: "text",
       ":hover": {
