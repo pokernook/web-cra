@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Card, Flex } from "theme-ui";
+import { Card, Close, Flex } from "theme-ui";
 
 import { useClickOutside, useKeyPress } from "../hooks";
 
@@ -19,6 +19,10 @@ export const Modal: FC<ModalProps> = ({ open, closeModal, children }) => {
     open && (
       <ModalBackground>
         <Card ref={modalRef} variant="modal">
+          <Close
+            onClick={closeModal}
+            sx={{ position: "absolute", top: 10, right: 10 }}
+          />
           {children}
         </Card>
       </ModalBackground>
