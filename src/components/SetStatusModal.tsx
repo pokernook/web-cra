@@ -32,7 +32,8 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
 
   const { data } = meQuery;
 
-  const watchEmoji = watch("emoji");
+  const defaultEmoji = data?.me?.status?.emoji || "💬";
+  const watchEmoji = watch("emoji", defaultEmoji);
 
   const toggleEmojiPicker = () => setEmojiPickerOpen(!emojiPickerOpen);
 
@@ -74,7 +75,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
         <Controller
           name="emoji"
           control={control}
-          defaultValue={false}
+          defaultValue={defaultEmoji}
           render={(props) =>
             emojiPickerOpen ? (
               <Picker
