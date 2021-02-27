@@ -1,9 +1,9 @@
 import "emoji-mart/css/emoji-mart.css";
 
-import { Picker } from "emoji-mart";
+import { BaseEmoji, Picker } from "emoji-mart";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Flex, Input, Label } from "theme-ui";
+import { Button, Field, Flex } from "theme-ui";
 
 import {
   useClearStatusMutation,
@@ -40,26 +40,30 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
     }
   });
 
+  const handleEmojiSelect = (emoji: BaseEmoji) => {
+    console.log(emoji.native);
+    toggleEmojiPicker();
+  };
+
   // TODO: Display graphql errors
   return (
     <Modal title="Set a status" open={open} closeModal={closeModal}>
       <form onSubmit={handleSaveStatus}>
-        <Label>What's happening {data?.me?.username}?</Label>
-
         <Button
           variant="unstyled"
           type="button"
-          sx={{ position: "absolute", p: 1 }}
+          sx={{ position: "absolute", px: 1, pt: 30 }}
           onClick={toggleEmojiPicker}
         >
           {data?.me?.status?.emoji}
         </Button>
-        <Input
+        <Field
+          label={`What's happening ${data?.me?.username}?`}
           type="text"
           defaultValue={data?.me?.status?.message || ""}
-          spellCheck
           name="message"
           ref={register({ required: true })}
+          spellCheck
           pl={4}
         />
 
@@ -69,6 +73,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
             native
             theme="dark"
             title="Pick an emoji"
+            onSelect={handleEmojiSelect}
             style={{ position: "absolute" }}
           />
         )}
