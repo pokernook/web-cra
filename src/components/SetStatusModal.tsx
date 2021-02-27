@@ -2,10 +2,11 @@ import "emoji-mart/css/emoji-mart.css";
 
 import { BaseEmoji, Picker } from "emoji-mart";
 import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Button, Field, Flex } from "theme-ui";
 
 import {
+  SetStatusMutationVariables,
   useClearStatusMutation,
   useMeQuery,
   useSetStatusMutation,
@@ -21,11 +22,17 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   const [meQuery] = useMeQuery();
   const [, clearStatus] = useClearStatusMutation();
   const [, setStatus] = useSetStatusMutation();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+  } = useForm<SetStatusMutationVariables>();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
-  const [emoji, setEmoji] = useState("");
 
   const { data } = meQuery;
+
+  const watchEmoji = watch("emoji");
 
   const toggleEmojiPicker = () => setEmojiPickerOpen(!emojiPickerOpen);
 
@@ -41,11 +48,6 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
     }
   });
 
-  const handleEmojiSelect = (emoji: BaseEmoji) => {
-    setEmoji(emoji.native);
-    toggleEmojiPicker();
-  };
-
   // TODO: Display graphql errors
   return (
     <Modal title="Set a status" open={open} closeModal={closeModal}>
@@ -56,8 +58,9 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           sx={{ position: "absolute", px: 1, pt: 30 }}
           onClick={toggleEmojiPicker}
         >
-          {emoji || data?.me?.status?.emoji}
+          {watchEmoji || data?.me?.status?.emoji}
         </Button>
+
         <Field
           label={`What's happening ${data?.me?.username}?`}
           type="text"
@@ -68,16 +71,28 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           pl={4}
         />
 
-        {emojiPickerOpen && (
-          <Picker
-            emoji="point_up"
-            native
-            theme="dark"
-            title="Pick an emoji"
-            onSelect={handleEmojiSelect}
-            style={{ position: "absolute" }}
-          />
-        )}
+        <Controller
+          name="emoji"
+          control={control}
+          defaultValue={false}
+          render={(props) =>
+            emojiPickerOpen ? (
+              <Picker
+                title="Pick an emoji"
+                emoji="point_up"
+                native
+                theme="dark"
+                onSelect={(emoji: BaseEmoji) => {
+                  props.onChange(emoji.native);
+                  toggleEmojiPicker();
+                }}
+                style={{ position: "absolute" }}
+              />
+            ) : (
+              <></>
+            )
+          }
+        />
 
         <Flex sx={{ float: "right", mt: 3 }}>
           <Button
