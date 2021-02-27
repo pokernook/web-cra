@@ -150,7 +150,7 @@ const UpdateProfilePictureForm = () => {
 
         <Button
           variant="secondary"
-          sx={{ position: "absolute", bottom: 0, left: 0 }}
+          sx={{ position: "absolute", bottom: 0, left: 0, bg: "background" }}
         >
           Change picture
         </Button>
