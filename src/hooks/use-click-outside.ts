@@ -8,6 +8,10 @@ export const useClickOutside = (
 ) => {
   useEffect(() => {
     const listener = (e: Event) => {
+      // Ignore right- and middle-clicks
+      if (e instanceof MouseEvent && e.button !== 0) {
+        return;
+      }
       if (ref.current && !ref.current.contains(e.target as Node)) {
         handler();
       }
