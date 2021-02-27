@@ -49,7 +49,12 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
         />
 
         <Flex sx={{ float: "right" }}>
-          <Button variant="tertiary" mr={2} onClick={handleClearStatus}>
+          <Button
+            variant="tertiary"
+            type="button"
+            mr={2}
+            onClick={handleClearStatus}
+          >
             Clear status
           </Button>
 
