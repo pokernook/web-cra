@@ -177,6 +177,7 @@ export const theme: Theme = {
       borderWidth: 1,
       boxShadow: "0 18px 48px 0 rgba(0, 0, 0, .35)",
       p: 3,
+      position: "relative",
     },
   },
   alerts: {
