@@ -12,6 +12,7 @@ import {
   useSetStatusMutation,
 } from "../graphql";
 import { useClickOutside } from "../hooks";
+import { Menu } from "./Menu";
 import { Modal } from "./Modal";
 
 type Props = {
@@ -67,44 +68,33 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           pl={4}
         />
 
-        <div ref={emojiPickerRef}>
-          <Button
-            variant="unstyled"
-            type="button"
-            sx={{
-              position: "absolute",
-              p: 1,
-              top: 82,
-              display: "inline-block",
-            }}
-            onClick={toggleEmojiPicker}
-          >
-            {watchEmoji}
-          </Button>
-
+        <Menu
+          sx={{ position: "absolute", p: 1, top: 82 }}
+          trigger={
+            <Button variant="unstyled" type="button">
+              {watchEmoji}
+            </Button>
+          }
+        >
           <Controller
             name="emoji"
             control={control}
             defaultValue={defaultEmoji}
-            render={(props) =>
-              emojiPickerOpen ? (
-                <Picker
-                  title="Pick an emoji"
-                  emoji="point_up"
-                  native
-                  theme="dark"
-                  onSelect={(emoji: BaseEmoji) => {
-                    props.onChange(emoji.native);
-                    toggleEmojiPicker();
-                  }}
-                  style={{ position: "absolute" }}
-                />
-              ) : (
-                <></>
-              )
-            }
+            render={(props) => (
+              <Picker
+                title="Pick an emoji"
+                emoji="point_up"
+                native
+                theme="dark"
+                onSelect={(emoji: BaseEmoji) => {
+                  props.onChange(emoji.native);
+                  toggleEmojiPicker();
+                }}
+                style={{ position: "absolute" }}
+              />
+            )}
           />
-        </div>
+        </Menu>
 
         <Flex sx={{ float: "right", mt: 3 }}>
           <Button
