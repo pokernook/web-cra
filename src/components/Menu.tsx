@@ -9,7 +9,6 @@ type MenuProps = {
   sx?: ThemeUIStyleObject;
 };
 
-// TODO: Menu should close when any action is performed within the menu
 export const Menu: FC<MenuProps> = ({ children, toggle, ...props }) => {
   const menuRef = useRef(null);
 
