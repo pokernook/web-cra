@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Flex, Heading, Image, Text } from "theme-ui";
