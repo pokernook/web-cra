@@ -4,7 +4,13 @@ import { NavLink } from "react-router-dom";
 import { Button, Flex, Heading, Image, Text } from "theme-ui";
 
 import logo from "../assets/logo.svg";
-import { Menu, MenuButton, MenuItem, MenuSeparator } from "../components/Menu";
+import {
+  Menu,
+  MenuButton,
+  MenuCard,
+  MenuItem,
+  MenuSeparator,
+} from "../components/Menu";
 import {
   useClearStatusMutation,
   useLogOutMutation,
@@ -45,43 +51,49 @@ export const TopNav = () => {
 
       <Flex sx={{ flex: 1, justifyContent: "flex-end", mx: 4 }}>
         <Menu trigger={<UserAvatar user={data?.me} size={32} />}>
-          <MenuItem>
-            <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
-            <Heading as="h3">{data?.me?.username}</Heading>
-            <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
-              #{data?.me?.discriminator}
-            </Heading>
-          </MenuItem>
+          <MenuCard>
+            <MenuItem>
+              <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
+              <Heading as="h3">{data?.me?.username}</Heading>
+              <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
+                #{data?.me?.discriminator}
+              </Heading>
+            </MenuItem>
 
-          <MenuItem>
-            <Button
-              variant="tertiary"
-              sx={{ width: "100%", textAlign: "left", bg: "background" }}
-              onClick={() => setModalOpen(true)}
-            >
-              {data?.me?.status ? (
-                <Text>
-                  {data.me.status.emoji} {data.me.status.message}
-                </Text>
-              ) : (
-                <Text color="textMuted">Update status</Text>
-              )}
-            </Button>
-          </MenuItem>
+            <MenuItem>
+              <Button
+                variant="tertiary"
+                sx={{ width: "100%", textAlign: "left", bg: "background" }}
+                onClick={() => setModalOpen(true)}
+              >
+                {data?.me?.status ? (
+                  <Text>
+                    {data.me.status.emoji} {data.me.status.message}
+                  </Text>
+                ) : (
+                  <Text color="textMuted">Update status</Text>
+                )}
+              </Button>
+            </MenuItem>
 
-          {data?.me?.status && (
-            <MenuButton onClick={() => clearStatus()}>Clear status</MenuButton>
-          )}
+            {data?.me?.status && (
+              <MenuButton onClick={() => clearStatus()}>
+                Clear status
+              </MenuButton>
+            )}
 
-          <MenuSeparator />
+            <MenuSeparator />
 
-          <MenuButton>Edit profile</MenuButton>
-          <MenuButton>View profile</MenuButton>
-          <MenuButton>Settings</MenuButton>
+            <MenuButton>Edit profile</MenuButton>
+            <MenuButton>View profile</MenuButton>
+            <MenuButton>Settings</MenuButton>
 
-          <MenuSeparator />
+            <MenuSeparator />
 
-          <MenuButton onClick={() => logOut()}>Log out of PokerNook</MenuButton>
+            <MenuButton onClick={() => logOut()}>
+              Log out of PokerNook
+            </MenuButton>
+          </MenuCard>
         </Menu>
       </Flex>
 
