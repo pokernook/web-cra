@@ -1,23 +1,27 @@
-/** @jsxImportSource theme-ui */
 import { FC, useRef } from "react";
 import { Card, Divider, Flex, ThemeUIStyleObject } from "theme-ui";
 
 import { useClickOutside } from "../hooks";
 
 type MenuProps = {
+  open: boolean;
   toggle: () => void;
   sx?: ThemeUIStyleObject;
 };
 
-export const Menu: FC<MenuProps> = ({ children, toggle, ...props }) => {
+export const Menu: FC<MenuProps> = ({ children, open, toggle, ...props }) => {
   const menuRef = useRef(null);
 
   useClickOutside(menuRef, toggle);
 
   return (
-    <div ref={menuRef} sx={{ position: "relative" }} {...props}>
-      {children}
-    </div>
+    <>
+      {open && (
+        <div ref={menuRef} sx={{ position: "relative" }} {...props}>
+          {children}
+        </div>
+      )}
+    </>
   );
 };
 
