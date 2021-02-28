@@ -28,8 +28,14 @@ export const Menu: FC<MenuProps> = ({ children, trigger, ...props }) => {
   );
 };
 
-export const MenuCard: FC = ({ children }) => (
-  <Card variant="menu">{children}</Card>
+type MenuCardProps = {
+  sx?: ThemeUIStyleObject;
+};
+
+export const MenuCard: FC<MenuCardProps> = ({ children, ...props }) => (
+  <Card variant="menu" {...props}>
+    {children}
+  </Card>
 );
 
 export const MenuItem: FC = ({ children }) => (
