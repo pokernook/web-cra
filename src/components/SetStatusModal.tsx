@@ -1,7 +1,7 @@
 import "emoji-mart/css/emoji-mart.css";
 
 import { BaseEmoji, Picker } from "emoji-mart";
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Field, Flex } from "theme-ui";
 
@@ -11,7 +11,6 @@ import {
   useMeQuery,
   useSetStatusMutation,
 } from "../graphql";
-import { useClickOutside } from "../hooks";
 import { Menu } from "./Menu";
 import { Modal } from "./Modal";
 
@@ -31,15 +30,12 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
     watch,
   } = useForm<SetStatusMutationVariables>();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
-  const emojiPickerRef = useRef(null);
 
   const { data } = meQuery;
   const defaultEmoji = data?.me?.status?.emoji || "💬";
   const watchEmoji = watch("emoji", defaultEmoji);
 
   const toggleEmojiPicker = () => setEmojiPickerOpen(!emojiPickerOpen);
-
-  useClickOutside(emojiPickerRef, () => setEmojiPickerOpen(false));
 
   const handleClearStatus = () => {
     closeModal();
