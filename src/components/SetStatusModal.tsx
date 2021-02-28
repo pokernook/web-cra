@@ -34,7 +34,6 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   const emojiPickerRef = useRef(null);
 
   const { data } = meQuery;
-
   const defaultEmoji = data?.me?.status?.emoji || "💬";
   const watchEmoji = watch("emoji", defaultEmoji);
 
@@ -42,9 +41,9 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
 
   useClickOutside(emojiPickerRef, () => setEmojiPickerOpen(false));
 
-  const handleClearStatus = async () => {
-    await clearStatus();
+  const handleClearStatus = () => {
     closeModal();
+    clearStatus();
   };
 
   const handleSaveStatus = handleSubmit(async (data) => {
@@ -68,14 +67,16 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           pl={4}
         />
 
-        <Menu
+        <Button
+          variant="unstyled"
+          type="button"
+          onClick={toggleEmojiPicker}
           sx={{ position: "absolute", p: 1, top: 82 }}
-          trigger={
-            <Button variant="unstyled" type="button">
-              {watchEmoji}
-            </Button>
-          }
         >
+          {watchEmoji}
+        </Button>
+
+        <Menu toggle={toggleEmojiPicker} open={emojiPickerOpen}>
           <Controller
             name="emoji"
             control={control}
