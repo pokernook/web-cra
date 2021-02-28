@@ -1,15 +1,16 @@
 /** @jsxImportSource theme-ui */
 import { FC, ReactNode, useRef, useState } from "react";
-import { Card, Divider, Flex } from "theme-ui";
+import { Card, Divider, Flex, ThemeUIStyleObject } from "theme-ui";
 
 import { useClickOutside } from "../hooks";
 
 type MenuProps = {
   trigger: ReactNode;
+  sx?: ThemeUIStyleObject;
 };
 
 // TODO: Menu should close when any action is performed within the menu
-export const Menu: FC<MenuProps> = ({ children, trigger }) => {
+export const Menu: FC<MenuProps> = ({ children, trigger, ...props }) => {
   const menuRef = useRef(null);
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen(!open);
@@ -17,15 +18,19 @@ export const Menu: FC<MenuProps> = ({ children, trigger }) => {
   useClickOutside(menuRef, () => setOpen(false));
 
   return (
-    <div ref={menuRef} sx={{ position: "relative" }}>
+    <div ref={menuRef} sx={{ position: "relative" }} {...props}>
       <div onClick={toggle} sx={{ ":hover": { cursor: "pointer" } }}>
         {trigger}
       </div>
 
-      {open && <Card variant="menu">{children}</Card>}
+      {open && children}
     </div>
   );
 };
+
+export const MenuCard: FC = ({ children }) => (
+  <Card variant="menu">{children}</Card>
+);
 
 export const MenuItem: FC = ({ children }) => (
   <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>{children}</Flex>
