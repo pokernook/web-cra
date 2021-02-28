@@ -59,7 +59,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           sx={{ position: "absolute", p: 1, top: 82, display: "inline-block" }}
           onClick={toggleEmojiPicker}
         >
-          {watchEmoji || data?.me?.status?.emoji}
+          {watchEmoji}
         </Button>
 
         <Field
