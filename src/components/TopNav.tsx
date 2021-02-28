@@ -23,14 +23,33 @@ const UserMenu = () => {
   const [meQuery] = useMeQuery();
   const [, clearStatus] = useClearStatusMutation();
   const [, logOut] = useLogOutMutation();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   const { data } = meQuery;
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const handleStatusModal = () => {
+    toggleMenu();
+    setModalOpen(true);
+  };
+
+  const handleClearStatus = () => {
+    toggleMenu();
+    clearStatus();
+  };
+
+  const handleLogOut = () => logOut();
+
   return (
     <>
-      <Menu trigger={<UserAvatar user={data?.me} size={32} />}>
-        <MenuCard sx={{ right: 0, minWidth: 300 }}>
+      <Button variant="unstyled" onClick={toggleMenu}>
+        <UserAvatar user={data?.me} size={32} />
+      </Button>
+
+      <Menu toggle={toggleMenu} open={menuOpen}>
+        <MenuCard sx={{ right: 0, top: 36, minWidth: 300 }}>
           <MenuItem>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
             <Heading as="h3">{data?.me?.username}</Heading>
@@ -43,7 +62,7 @@ const UserMenu = () => {
             <Button
               variant="tertiary"
               sx={{ width: "100%", textAlign: "left", bg: "background" }}
-              onClick={() => setModalOpen(true)}
+              onClick={handleStatusModal}
             >
               {data?.me?.status ? (
                 <Text>
@@ -56,7 +75,7 @@ const UserMenu = () => {
           </MenuItem>
 
           {data?.me?.status && (
-            <MenuButton onClick={() => clearStatus()}>Clear status</MenuButton>
+            <MenuButton onClick={handleClearStatus}>Clear status</MenuButton>
           )}
 
           <MenuSeparator />
@@ -67,7 +86,7 @@ const UserMenu = () => {
 
           <MenuSeparator />
 
-          <MenuButton onClick={() => logOut()}>Log out of PokerNook</MenuButton>
+          <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
         </MenuCard>
       </Menu>
 
