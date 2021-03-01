@@ -48,7 +48,7 @@ const UserMenu = () => {
       </Button>
 
       <Menu toggle={toggleMenu} open={menuOpen}>
-        <MenuCard sx={{ right: 0, top: 36, minWidth: 300 }}>
+        <MenuCard sx={{ right: 24, top: 40, minWidth: 300 }}>
           <MenuItem>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
             <Heading as="h3">{data?.me?.username}</Heading>
