@@ -35,6 +35,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
   const defaultEmoji = data?.me?.status?.emoji || "💬";
   const watchEmoji = watch("emoji", defaultEmoji);
 
+  const closeEmojiPicker = () => setEmojiPickerOpen(false);
   const toggleEmojiPicker = () => setEmojiPickerOpen(!emojiPickerOpen);
 
   const handleClearStatus = () => {
@@ -51,7 +52,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
 
   // TODO: Display graphql errors
   return (
-    <Modal title="Set a status" open={open} closeModal={closeModal}>
+    <Modal title="Set a status" open={open} close={closeModal}>
       <form onSubmit={handleSaveStatus}>
         <Field
           label={`What's happening ${data?.me?.username}?`}
@@ -72,7 +73,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           {watchEmoji}
         </Button>
 
-        <Menu toggle={toggleEmojiPicker} open={emojiPickerOpen}>
+        <Menu close={closeEmojiPicker} open={emojiPickerOpen}>
           <Controller
             name="emoji"
             control={control}

@@ -6,27 +6,22 @@ import { useClickOutside, useKeyPress } from "../hooks";
 
 type ModalProps = {
   open: boolean;
-  closeModal: () => void;
+  close: () => void;
   title: string;
 };
 
-export const Modal: FC<ModalProps> = ({
-  open,
-  closeModal,
-  title,
-  children,
-}) => {
+export const Modal: FC<ModalProps> = ({ open, close, title, children }) => {
   const modalRef = useRef(null);
 
-  useClickOutside(modalRef, closeModal);
-  useKeyPress("Escape", closeModal);
+  useClickOutside(modalRef, close);
+  useKeyPress("Escape", close);
 
   return createPortal(
     open && (
       <ModalBackground>
         <Card ref={modalRef} variant="modal">
           <Close
-            onClick={closeModal}
+            onClick={close}
             sx={{ position: "absolute", top: 10, right: 10 }}
           />
           <Heading>{title}</Heading>

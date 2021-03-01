@@ -27,6 +27,7 @@ const UserMenu = () => {
 
   const { data } = meQuery;
 
+  const closeMenu = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleStatusModal = () => {
@@ -47,7 +48,7 @@ const UserMenu = () => {
         <UserAvatar user={data?.me} size={32} />
       </Button>
 
-      <Menu toggle={toggleMenu} open={menuOpen}>
+      <Menu close={closeMenu} open={menuOpen}>
         <MenuCard sx={{ right: 24, top: 40, minWidth: 300 }}>
           <MenuItem>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />

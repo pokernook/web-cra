@@ -5,14 +5,14 @@ import { useClickOutside } from "../hooks";
 
 type MenuProps = {
   open: boolean;
-  toggle: () => void;
+  close: () => void;
   sx?: ThemeUIStyleObject;
 };
 
-export const Menu: FC<MenuProps> = ({ children, open, toggle, ...props }) => {
+export const Menu: FC<MenuProps> = ({ open, close, children, ...props }) => {
   const menuRef = useRef(null);
 
-  useClickOutside(menuRef, toggle);
+  useClickOutside(menuRef, close);
 
   return (
     <>
