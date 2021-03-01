@@ -73,26 +73,26 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
           {watchEmoji}
         </Button>
 
-        <Menu close={closeEmojiPicker} open={emojiPickerOpen}>
-          <Controller
-            name="emoji"
-            control={control}
-            defaultValue={defaultEmoji}
-            render={(props) => (
+        <Controller
+          name="emoji"
+          control={control}
+          defaultValue={defaultEmoji}
+          render={(props) => (
+            <Menu close={closeEmojiPicker} open={emojiPickerOpen}>
               <Picker
                 title="Pick an emoji"
                 emoji="point_up"
                 native
                 theme="dark"
+                style={{ position: "absolute" }}
                 onSelect={(emoji: BaseEmoji) => {
                   props.onChange(emoji.native);
                   closeEmojiPicker();
                 }}
-                style={{ position: "absolute" }}
               />
-            )}
-          />
-        </Menu>
+            </Menu>
+          )}
+        />
 
         <Flex sx={{ float: "right", mt: 3 }}>
           <Button
