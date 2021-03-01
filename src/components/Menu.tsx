@@ -51,7 +51,7 @@ export const MenuButton: FC<MenuButtonProps> = ({ children, onClick }) => (
       alignItems: "center",
       px: 3,
       py: 1,
-      ":hover": { cursor: "pointer", bg: "accent" },
+      ":hover": { cursor: "pointer", bg: "secondary" },
     }}
   >
     {children}

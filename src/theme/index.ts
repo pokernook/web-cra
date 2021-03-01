@@ -5,12 +5,11 @@ export const theme: Theme = {
   useLocalStorage: false,
   colors: {
     background: "#06090e",
-    text: "#c9d1d9",
-    accent: "#306fb3",
+    text: "#f0f6fc",
     primary: "#238636",
+    secondary: "#1f71eb",
     success: "#56d364",
     error: "#f85249",
-    link: "#459cff",
     border: "#2f353d",
     muted: "#0e1116",
     textMuted: "#4b5669",
@@ -31,7 +30,7 @@ export const theme: Theme = {
   },
   styles: {
     a: {
-      color: "link",
+      color: "secondary",
       fontWeight: "bold",
       textDecoration: "none",
       ":hover": {
@@ -78,7 +77,7 @@ export const theme: Theme = {
         bg: "muted",
       },
       "&.active": {
-        bg: "accent",
+        bg: "secondary",
       },
     },
   },
@@ -105,7 +104,7 @@ export const theme: Theme = {
       border: "solid",
       borderColor: "border",
       borderWidth: 1,
-      color: "link",
+      color: "secondary",
       px: 3,
       py: 2,
       ":hover": {
@@ -226,7 +225,7 @@ export const theme: Theme = {
       borderColor: "border",
       outline: "none",
       ":focus": {
-        borderColor: "link",
+        borderColor: "secondary",
       },
     },
   },
