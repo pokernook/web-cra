@@ -180,6 +180,7 @@ export const theme: Theme = {
       bg: "muted",
       boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.12)",
       position: "absolute",
+      minWidth: 300,
     },
     modal: {
       bg: "muted",
