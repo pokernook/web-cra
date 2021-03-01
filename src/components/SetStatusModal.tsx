@@ -86,7 +86,7 @@ export const SetStatusModal: FC<Props> = ({ open, closeModal }) => {
                 theme="dark"
                 onSelect={(emoji: BaseEmoji) => {
                   props.onChange(emoji.native);
-                  toggleEmojiPicker();
+                  closeEmojiPicker();
                 }}
                 style={{ position: "absolute" }}
               />

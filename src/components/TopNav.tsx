@@ -31,12 +31,12 @@ const UserMenu = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleStatusModal = () => {
-    toggleMenu();
+    closeMenu();
     setModalOpen(true);
   };
 
   const handleClearStatus = () => {
-    toggleMenu();
+    closeMenu();
     clearStatus();
   };
 
@@ -80,9 +80,9 @@ const UserMenu = () => {
 
           <MenuSeparator />
 
-          <MenuButton>Edit profile</MenuButton>
-          <MenuButton>View profile</MenuButton>
-          <MenuButton>Settings</MenuButton>
+          <MenuButton onClick={closeMenu}>Edit profile</MenuButton>
+          <MenuButton onClick={closeMenu}>View profile</MenuButton>
+          <MenuButton onClick={closeMenu}>Settings</MenuButton>
 
           <MenuSeparator />
 
