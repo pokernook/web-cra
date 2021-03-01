@@ -1,7 +1,7 @@
 import { FC, useRef } from "react";
 import { Card, Divider, Flex, ThemeUIStyleObject } from "theme-ui";
 
-import { useClickOutside } from "../hooks";
+import { useClickOutside, useKeyPress } from "../hooks";
 
 type MenuProps = {
   open: boolean;
@@ -13,6 +13,7 @@ export const Menu: FC<MenuProps> = ({ open, close, children, ...props }) => {
   const menuRef = useRef(null);
 
   useClickOutside(menuRef, close);
+  useKeyPress("Escape", close);
 
   return (
     <>
