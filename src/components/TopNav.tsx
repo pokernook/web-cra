@@ -4,7 +4,6 @@ import { Button, Flex, Heading, Image, Text } from "theme-ui";
 
 import logo from "../assets/logo.svg";
 import {
-  Menu,
   MenuButton,
   MenuCard,
   MenuItem,
@@ -15,6 +14,7 @@ import {
   useLogOutMutation,
   useMeQuery,
 } from "../graphql";
+import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
 import { UserAvatar } from "./UserAvatar";
 
@@ -48,7 +48,7 @@ const UserMenu = () => {
         <UserAvatar user={data?.me} size={32} />
       </Button>
 
-      <Menu close={closeMenu} open={menuOpen}>
+      <ModalPortal open={menuOpen} close={closeMenu} fadeBackground={false}>
         <MenuCard sx={{ right: 24, top: 40, minWidth: 300 }}>
           <MenuItem>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
@@ -88,7 +88,7 @@ const UserMenu = () => {
 
           <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
         </MenuCard>
-      </Menu>
+      </ModalPortal>
 
       <SetStatusModal open={modalOpen} closeModal={() => setModalOpen(false)} />
     </>
