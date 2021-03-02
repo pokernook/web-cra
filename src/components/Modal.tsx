@@ -48,7 +48,7 @@ const ModalWrapper: FC = ({ children }) => (
 const ModalDimmer = () => (
   <Flex
     sx={{
-      position: "absolute",
+      position: "fixed",
       top: 0,
       left: 0,
       width: "100vw",
