@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Box, Card, Close, Flex, Heading } from "theme-ui";
+import { Flex } from "theme-ui";
 
 import { useClickOutside, useKeyPress } from "../hooks";
 
@@ -52,30 +52,3 @@ const ModalWrapper: FC<ModalWrapperProps> = ({ fadeBackground, children }) => (
     {children}
   </Flex>
 );
-
-type ModalProps = {
-  open: boolean;
-  close: () => void;
-  title: string;
-};
-
-export const Modal: FC<ModalProps> = ({ open, close, title, children }) => {
-  const modalRef = useRef(null);
-
-  useClickOutside(modalRef, close);
-  useKeyPress("Escape", close);
-
-  return createPortal(
-    open && (
-      <Card ref={modalRef} variant="modal">
-        <Close
-          onClick={close}
-          sx={{ position: "absolute", top: 10, right: 10 }}
-        />
-        <Heading>{title}</Heading>
-        <Box sx={{ mt: 3 }}>{children}</Box>
-      </Card>
-    ),
-    document.body
-  );
-};
