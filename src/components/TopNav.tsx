@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Flex, Heading, Image, Text } from "theme-ui";
+import { Button, Card, Divider, Flex, Heading, Image, Text } from "theme-ui";
 
 import logo from "../assets/logo.svg";
-import {
-  MenuButton,
-  MenuCard,
-  MenuItem,
-  MenuSeparator,
-} from "../components/Menu";
 import {
   useClearStatusMutation,
   useLogOutMutation,
@@ -49,16 +43,16 @@ const UserMenu = () => {
       </Button>
 
       <ModalPortal open={menuOpen} close={closeMenu} fadeBackground={false}>
-        <MenuCard sx={{ position: "absolute", right: 24, top: 40 }}>
-          <MenuItem>
+        <Card variant="menu" sx={{ position: "absolute", right: 24, top: 40 }}>
+          <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
             <Heading as="h3">{data?.me?.username}</Heading>
             <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
               #{data?.me?.discriminator}
             </Heading>
-          </MenuItem>
+          </Flex>
 
-          <MenuItem>
+          <Flex px={3} py={1}>
             <Button
               variant="tertiary"
               sx={{ width: "100%", textAlign: "left", bg: "background" }}
@@ -72,22 +66,32 @@ const UserMenu = () => {
                 <Text color="textMuted">Update status</Text>
               )}
             </Button>
-          </MenuItem>
+          </Flex>
 
           {data?.me?.status && (
-            <MenuButton onClick={handleClearStatus}>Clear status</MenuButton>
+            <Button onClick={handleClearStatus} variant="menu">
+              Clear status
+            </Button>
           )}
 
-          <MenuSeparator />
+          <Divider my={2} />
 
-          <MenuButton onClick={closeMenu}>Edit profile</MenuButton>
-          <MenuButton onClick={closeMenu}>View profile</MenuButton>
-          <MenuButton onClick={closeMenu}>Settings</MenuButton>
+          <Button onClick={closeMenu} variant="menu">
+            Edit profile
+          </Button>
+          <Button onClick={closeMenu} variant="menu">
+            View profile
+          </Button>
+          <Button onClick={closeMenu} variant="menu">
+            Settings
+          </Button>
 
-          <MenuSeparator />
+          <Divider my={2} />
 
-          <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
-        </MenuCard>
+          <Button onClick={handleLogOut} variant="menu">
+            Log out of PokerNook
+          </Button>
+        </Card>
       </ModalPortal>
 
       <SetStatusModal open={modalOpen} closeModal={() => setModalOpen(false)} />
