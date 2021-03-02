@@ -42,59 +42,64 @@ const UserMenu = () => {
         <UserAvatar user={data?.me} size={32} />
       </Button>
 
-      <ModalPortal open={menuOpen} close={closeMenu} fadeBackground={false}>
-        <Card variant="menu" sx={{ position: "absolute", right: 24, top: 40 }}>
-          <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
-            <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
-            <Heading as="h3">{data?.me?.username}</Heading>
-            <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
-              #{data?.me?.discriminator}
-            </Heading>
-          </Flex>
+      {menuOpen && (
+        <ModalPortal close={closeMenu} fadeBackground={false}>
+          <Card
+            variant="menu"
+            sx={{ position: "absolute", right: 24, top: 40 }}
+          >
+            <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
+              <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
+              <Heading as="h3">{data?.me?.username}</Heading>
+              <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
+                #{data?.me?.discriminator}
+              </Heading>
+            </Flex>
 
-          <Flex px={3} py={1}>
-            <Button
-              variant="tertiary"
-              sx={{ width: "100%", textAlign: "left", bg: "background" }}
-              onClick={handleStatusModal}
-            >
-              {data?.me?.status ? (
-                <Text>
-                  {data.me.status.emoji} {data.me.status.message}
-                </Text>
-              ) : (
-                <Text color="textMuted">Update status</Text>
-              )}
+            <Flex px={3} py={1}>
+              <Button
+                variant="tertiary"
+                sx={{ width: "100%", textAlign: "left", bg: "background" }}
+                onClick={handleStatusModal}
+              >
+                {data?.me?.status ? (
+                  <Text>
+                    {data.me.status.emoji} {data.me.status.message}
+                  </Text>
+                ) : (
+                  <Text color="textMuted">Update status</Text>
+                )}
+              </Button>
+            </Flex>
+
+            {data?.me?.status && (
+              <Button onClick={handleClearStatus} variant="menu">
+                Clear status
+              </Button>
+            )}
+
+            <Divider my={2} />
+
+            <Button onClick={closeMenu} variant="menu">
+              Edit profile
             </Button>
-          </Flex>
-
-          {data?.me?.status && (
-            <Button onClick={handleClearStatus} variant="menu">
-              Clear status
+            <Button onClick={closeMenu} variant="menu">
+              View profile
             </Button>
-          )}
+            <Button onClick={closeMenu} variant="menu">
+              Settings
+            </Button>
 
-          <Divider my={2} />
+            <Divider my={2} />
 
-          <Button onClick={closeMenu} variant="menu">
-            Edit profile
-          </Button>
-          <Button onClick={closeMenu} variant="menu">
-            View profile
-          </Button>
-          <Button onClick={closeMenu} variant="menu">
-            Settings
-          </Button>
+            <Button onClick={handleLogOut} variant="menu">
+              Log out of PokerNook
+            </Button>
+          </Card>
+        </ModalPortal>
+      )}
 
-          <Divider my={2} />
-
-          <Button onClick={handleLogOut} variant="menu">
-            Log out of PokerNook
-          </Button>
-        </Card>
-      </ModalPortal>
-
-      <SetStatusModal open={modalOpen} closeModal={() => setModalOpen(false)} />
+      {modalOpen && <SetStatusModal closeModal={() => setModalOpen(false)} />}
     </>
   );
 };
