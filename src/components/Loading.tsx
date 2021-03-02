@@ -31,24 +31,28 @@ export const Loading: FC<Props> = ({
     minLoadTimeMet,
   ]);
 
-  return showLoading ? (
-    <Container
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        height: "100vh",
-        width: "100vw",
-        justifyContent: "center",
-      }}
-    >
-      <motion.img
-        src={logo}
-        initial={{ scale: 0.5 }}
-        animate={{ scale: [0.5, 0.52, 0.5] }}
-        transition={{ duration: 1.1, repeat: Infinity }}
-      />
-    </Container>
-  ) : (
-    <>{children}</>
+  return (
+    <>
+      {showLoading ? (
+        <Container
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            height: "100vh",
+            width: "100vw",
+            justifyContent: "center",
+          }}
+        >
+          <motion.img
+            src={logo}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: [0.5, 0.52, 0.5] }}
+            transition={{ duration: 1.1, repeat: Infinity }}
+          />
+        </Container>
+      ) : (
+        children
+      )}
+    </>
   );
 };
