@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC } from "react";
 import { createPortal } from "react-dom";
 import { Flex } from "theme-ui";
 
@@ -14,14 +14,12 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   fadeBackground,
   children,
 }) => {
-  const ref = useRef(null);
-
   useKeyPress("Escape", close);
 
   return createPortal(
     <ModalWrapper fadeBackground={fadeBackground}>
       <ModalOverlay onClick={close} />
-      <div ref={ref}>{children}</div>
+      <div>{children}</div>
     </ModalWrapper>,
     document.body
   );
