@@ -4,12 +4,11 @@ import { ThemeUIStyleObject } from "theme-ui";
 import { useClickOutside, useKeyPress } from "../hooks";
 
 type MenuProps = {
-  open: boolean;
   close: () => void;
   sx?: ThemeUIStyleObject;
 };
 
-export const Menu: FC<MenuProps> = ({ open, close, children, ...props }) => {
+export const Menu: FC<MenuProps> = ({ close, children, ...props }) => {
   const menuRef = useRef(null);
 
   useClickOutside(menuRef, close);
@@ -17,11 +16,9 @@ export const Menu: FC<MenuProps> = ({ open, close, children, ...props }) => {
 
   return (
     <>
-      {open && (
-        <div ref={menuRef} sx={{ position: "relative" }} {...props}>
-          {children}
-        </div>
-      )}
+      <div ref={menuRef} sx={{ position: "relative" }} {...props}>
+        {children}
+      </div>
     </>
   );
 };
