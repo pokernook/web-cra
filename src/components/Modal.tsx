@@ -48,7 +48,14 @@ const ModalWrapper: FC = ({ children }) => (
 );
 
 const ModalFade = () => (
-  <Box sx={{ bg: "rgba(0, 0, 0, 0.6)", width: "100%", height: "100%" }} />
+  <Box
+    sx={{
+      bg: "rgba(0, 0, 0, 0.6)",
+      width: "100%",
+      height: "100%",
+      position: "fixed",
+    }}
+  />
 );
 
 type ModalProps = {
