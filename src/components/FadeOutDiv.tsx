@@ -7,7 +7,7 @@ type Props = {
   sx?: ThemeUIStyleObject;
 };
 
-export const BriefDiv: FC<Props> = ({
+export const FadeOutDiv: FC<Props> = ({
   children,
   showTime = 1500,
   ...props
@@ -15,9 +15,11 @@ export const BriefDiv: FC<Props> = ({
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setVisible(false);
     }, showTime);
+
+    return () => clearTimeout(timeout);
   });
 
   return (

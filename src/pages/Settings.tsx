@@ -9,7 +9,6 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import {
-  Avatar,
   Box,
   Card,
   Container,
@@ -20,8 +19,8 @@ import {
   Text,
 } from "theme-ui";
 
+import { UserAvatar } from "../components/UserAvatar";
 import { useMeQuery } from "../graphql";
-import { generateAvatarSvg } from "../util/generate-avatar";
 import { AccountSettings } from "./AccountSettings";
 import { ProfileSettings } from "./ProfileSettings";
 
@@ -68,22 +67,18 @@ const SettingsLayout: FC = ({ children }) => {
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
       <Flex mb={4}>
-        <Avatar
-          src={generateAvatarSvg(`${data?.me?.id}`)}
-          sx={{ width: 64, height: 64, mr: 3 }}
-        />
+        <UserAvatar size={64} user={data?.me} sx={{ mr: 3 }} />
         <Box>
           <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>
-            <Heading sx={{ color: "mutedText", fontWeight: "body" }}>
+            <Heading sx={{ color: "textMuted", fontWeight: "body" }}>
               #{data?.me?.discriminator}
             </Heading>
           </Flex>
 
-          <Flex sx={{ alignItems: "center" }}>
-            <Text mr={1}>{data?.me?.status?.emoji}</Text>
-            <Text>{data?.me?.status?.message}</Text>
-          </Flex>
+          <Text>
+            {data?.me?.status?.emoji} {data?.me?.status?.message}
+          </Text>
         </Box>
       </Flex>
 

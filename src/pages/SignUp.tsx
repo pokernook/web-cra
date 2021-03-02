@@ -10,9 +10,7 @@ export const SignUp = () => {
   const [signUpResult, signUp] = useSignUpMutation();
   const { register, handleSubmit } = useForm<MutationUserSignUpArgs>();
 
-  const onSubmit = handleSubmit(async (data) => {
-    await signUp(data);
-  });
+  const onSubmit = handleSubmit((data) => signUp(data));
 
   return (
     <>

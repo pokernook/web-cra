@@ -10,9 +10,7 @@ export const LogIn = () => {
   const [logInResult, logIn] = useLogInMutation();
   const { register, handleSubmit } = useForm<MutationUserLogInArgs>();
 
-  const onSubmit = handleSubmit(async (data) => {
-    await logIn(data);
-  });
+  const onSubmit = handleSubmit((data) => logIn(data));
 
   return (
     <>
