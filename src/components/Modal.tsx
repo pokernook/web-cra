@@ -14,6 +14,7 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   fadeBackground,
   children,
 }) => {
+  // TODO: This should only close the current modal
   useKeyPress("Escape", close);
 
   return createPortal(
