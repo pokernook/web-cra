@@ -5,13 +5,11 @@ import { Flex } from "theme-ui";
 import { useClickOutside, useKeyPress } from "../hooks";
 
 type ModalPortalProps = {
-  open: boolean;
   close: () => void;
   fadeBackground?: boolean;
 };
 
 export const ModalPortal: FC<ModalPortalProps> = ({
-  open,
   close,
   fadeBackground = false,
   children,
@@ -22,12 +20,10 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   useKeyPress("Escape", close);
 
   return createPortal(
-    open && (
-      <ModalWrapper>
-        {fadeBackground && <ModalDimmer />}
-        <div ref={ref}>{children}</div>
-      </ModalWrapper>
-    ),
+    <ModalWrapper>
+      {fadeBackground && <ModalDimmer />}
+      <div ref={ref}>{children}</div>
+    </ModalWrapper>,
     document.body
   );
 };
