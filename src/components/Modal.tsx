@@ -2,7 +2,7 @@ import { FC, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Flex } from "theme-ui";
 
-import { useClickOutside, useKeyPress } from "../hooks";
+import { useKeyPress } from "../hooks";
 
 type ModalPortalProps = {
   close: () => void;
@@ -11,26 +11,33 @@ type ModalPortalProps = {
 
 export const ModalPortal: FC<ModalPortalProps> = ({
   close,
-  fadeBackground = false,
+  fadeBackground,
   children,
 }) => {
   const ref = useRef(null);
 
-  useClickOutside(ref, close);
   useKeyPress("Escape", close);
 
   return createPortal(
-    <ModalWrapper>
-      {fadeBackground && <ModalDimmer />}
+    <ModalWrapper fadeBackground={fadeBackground}>
+      <ModalOverlay onClick={close} />
       <div ref={ref}>{children}</div>
     </ModalWrapper>,
     document.body
   );
 };
 
-const ModalWrapper: FC = ({ children }) => (
+type ModalWrapperProps = {
+  fadeBackground?: boolean;
+};
+
+const ModalWrapper: FC<ModalWrapperProps> = ({
+  fadeBackground = false,
+  children,
+}) => (
   <Flex
     sx={{
+      bg: fadeBackground && "rgba(0, 0, 0, 0.6)",
       alignItems: "center",
       justifyContent: "center",
       position: "fixed",
@@ -45,15 +52,21 @@ const ModalWrapper: FC = ({ children }) => (
   </Flex>
 );
 
-const ModalDimmer = () => (
+type ModalOverlayProps = {
+  onClick: () => void;
+};
+
+const ModalOverlay: FC<ModalOverlayProps> = ({ onClick }) => (
   <Flex
+    onClick={onClick}
     sx={{
+      display: "none",
       position: "fixed",
       top: 0,
       left: 0,
-      width: "100vw",
-      height: "100vh",
-      bg: "rgba(0, 0, 0, 0.6)",
+      width: "100%",
+      height: "100%",
+      zIndex: -1,
     }}
   />
 );
