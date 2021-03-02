@@ -13,7 +13,7 @@ type ModalPortalProps = {
 export const ModalPortal: FC<ModalPortalProps> = ({
   open,
   close,
-  fadeBackground,
+  fadeBackground = false,
   children,
 }) => {
   const ref = useRef(null);
@@ -23,7 +23,8 @@ export const ModalPortal: FC<ModalPortalProps> = ({
 
   return createPortal(
     open && (
-      <ModalWrapper fadeBackground={fadeBackground}>
+      <ModalWrapper>
+        {fadeBackground && <ModalDimmer />}
         <div ref={ref}>{children}</div>
       </ModalWrapper>
     ),
@@ -31,14 +32,7 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   );
 };
 
-type ModalWrapperProps = {
-  fadeBackground?: boolean;
-};
-
-const ModalWrapper: FC<ModalWrapperProps> = ({
-  fadeBackground = true,
-  children,
-}) => (
+const ModalWrapper: FC = ({ children }) => (
   <Flex
     sx={{
       alignItems: "center",
@@ -49,9 +43,21 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
       width: "100vw",
       height: "100vh",
       zIndex: 10,
-      bg: fadeBackground && "rgba(0, 0, 0, 0.6)",
     }}
   >
     {children}
   </Flex>
+);
+
+const ModalDimmer = () => (
+  <Flex
+    sx={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      bg: "rgba(0, 0, 0, 0.6)",
+    }}
+  />
 );
