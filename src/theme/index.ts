@@ -182,6 +182,8 @@ export const theme: Theme = {
       minWidth: 300,
     },
     modal: {
+      display: "flex",
+      flexDirection: "column",
       bg: "muted",
       border: "solid",
       borderColor: "border",
