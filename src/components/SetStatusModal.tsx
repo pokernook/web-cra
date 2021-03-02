@@ -12,7 +12,6 @@ import {
   useMeQuery,
   useSetStatusMutation,
 } from "../graphql";
-import { Menu } from "./Menu";
 import { ModalPortal } from "./Modal";
 
 type Props = {
@@ -86,19 +85,19 @@ export const SetStatusModal: FC<Props> = ({ closeModal }) => {
             defaultValue={defaultEmoji}
             render={(props) =>
               emojiPickerOpen ? (
-                <Menu close={closeEmojiPicker}>
+                <ModalPortal close={closeEmojiPicker}>
                   <Picker
                     title="Pick an emoji"
                     emoji="point_up"
                     native
                     theme="dark"
-                    style={{ position: "absolute" }}
+                    style={{ position: "relative", top: 240, left: -100 }}
                     onSelect={(emoji: BaseEmoji) => {
                       props.onChange(emoji.native);
                       closeEmojiPicker();
                     }}
                   />
-                </Menu>
+                </ModalPortal>
               ) : (
                 <></>
               )
