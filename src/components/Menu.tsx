@@ -1,7 +1,7 @@
 import { FC, useRef } from "react";
 import { ThemeUIStyleObject } from "theme-ui";
 
-import { useClickOutside, useKeyPress } from "../hooks";
+import { useKeyPress } from "../hooks";
 
 type MenuProps = {
   close: () => void;
@@ -11,7 +11,6 @@ type MenuProps = {
 export const Menu: FC<MenuProps> = ({ close, children, ...props }) => {
   const menuRef = useRef(null);
 
-  useClickOutside(menuRef, close);
   useKeyPress("Escape", close);
 
   return (
