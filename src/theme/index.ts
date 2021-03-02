@@ -147,6 +147,19 @@ export const theme: Theme = {
         borderColor: "border",
       },
     },
+    menu: {
+      alignItems: "center",
+      borderRadius: 0,
+      bg: "inherit",
+      display: "flex",
+      px: 3,
+      py: 1,
+      width: "100%",
+      ":hover": {
+        cursor: "pointer",
+        bg: "secondary",
+      },
+    },
     unstyled: {
       bg: "transparent",
       border: "none",
