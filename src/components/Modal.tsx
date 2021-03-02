@@ -13,7 +13,7 @@ type ModalPortalProps = {
 export const ModalPortal: FC<ModalPortalProps> = ({
   open,
   close,
-  fadeBackground = true,
+  fadeBackground,
   children,
 }) => {
   const ref = useRef(null);
@@ -32,10 +32,13 @@ export const ModalPortal: FC<ModalPortalProps> = ({
 };
 
 type ModalWrapperProps = {
-  fadeBackground: boolean;
+  fadeBackground?: boolean;
 };
 
-const ModalWrapper: FC<ModalWrapperProps> = ({ fadeBackground, children }) => (
+const ModalWrapper: FC<ModalWrapperProps> = ({
+  fadeBackground = true,
+  children,
+}) => (
   <Flex
     sx={{
       alignItems: "center",
