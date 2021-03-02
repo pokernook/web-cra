@@ -49,7 +49,7 @@ const UserMenu = () => {
       </Button>
 
       <ModalPortal open={menuOpen} close={closeMenu} fadeBackground={false}>
-        <MenuCard sx={{ right: 24, top: 40 }}>
+        <MenuCard sx={{ position: "absolute", right: 24, top: 40 }}>
           <MenuItem>
             <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
             <Heading as="h3">{data?.me?.username}</Heading>

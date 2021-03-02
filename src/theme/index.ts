@@ -179,7 +179,6 @@ export const theme: Theme = {
       borderWidth: 1,
       bg: "muted",
       boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.12)",
-      position: "absolute",
       minWidth: 300,
     },
     modal: {
