@@ -35,6 +35,8 @@ export const ModalPortal: FC<ModalPortalProps> = ({
 const ModalWrapper: FC = ({ children }) => (
   <Flex
     sx={{
+      alignItems: "center",
+      justifyContent: "center",
       position: "fixed",
       top: 0,
       left: 0,
