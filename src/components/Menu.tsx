@@ -1,5 +1,5 @@
 import { FC, useRef } from "react";
-import { Divider, ThemeUIStyleObject } from "theme-ui";
+import { ThemeUIStyleObject } from "theme-ui";
 
 import { useClickOutside, useKeyPress } from "../hooks";
 
@@ -25,5 +25,3 @@ export const Menu: FC<MenuProps> = ({ open, close, children, ...props }) => {
     </>
   );
 };
-
-export const MenuSeparator = () => <Divider my={2} />;
