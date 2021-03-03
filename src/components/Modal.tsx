@@ -11,7 +11,7 @@ type ModalPortalProps = {
 
 export const ModalPortal: FC<ModalPortalProps> = ({
   close,
-  fadeBackground,
+  fadeBackground = false,
   children,
 }) => {
   // TODO: This should only close the current modal
@@ -30,10 +30,7 @@ type ModalWrapperProps = {
   fadeBackground?: boolean;
 };
 
-const ModalWrapper: FC<ModalWrapperProps> = ({
-  fadeBackground = false,
-  children,
-}) => (
+const ModalWrapper: FC<ModalWrapperProps> = ({ fadeBackground, children }) => (
   <Flex
     sx={{
       bg: fadeBackground && "rgba(0, 0, 0, 0.6)",
