@@ -1,4 +1,4 @@
-mutation updateEmail($newEmail: String!) {
+mutation updateEmail($newEmail: EmailAddress!) {
   userUpdateEmail(newEmail: $newEmail) {
     ...userFields
   }
