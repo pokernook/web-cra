@@ -23,7 +23,7 @@ export const SideNav = () => {
         borderRightWidth: 1,
       }}
     >
-      <Box sx={{ position: "sticky", top: 5 }}>
+      <Box sx={{ position: "sticky", my: 3 }}>
         <Flex sx={{ alignItems: "center", mx: 3 }}>
           <UserAvatar user={data?.me} size={48} sx={{ mr: 2 }} />
           <Heading as="h3">{data?.me?.username}</Heading>
