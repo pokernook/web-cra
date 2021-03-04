@@ -22,7 +22,7 @@ const UserMenu = () => {
   const { data } = meQuery;
 
   const closeMenu = () => setMenuOpen(false);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const openMenu = () => setMenuOpen(true);
 
   const handleStatusModal = () => {
     closeMenu();
@@ -38,7 +38,7 @@ const UserMenu = () => {
 
   return (
     <>
-      <Button variant="unstyled" onClick={toggleMenu}>
+      <Button variant="unstyled" onClick={openMenu}>
         <UserAvatar user={data?.me} size={32} />
       </Button>
 
