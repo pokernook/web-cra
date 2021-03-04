@@ -58,7 +58,7 @@ export const SignUp = () => {
         </Box>
       </Card>
 
-      <Card sx={{ mt: 3 }}>
+      <Card mt={3}>
         <Text>
           Been here before?{" "}
           <Link to="/logIn" sx={{ variant: "styles.a" }}>
