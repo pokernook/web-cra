@@ -15,10 +15,10 @@ import {
 import { ModalPortal } from "./Modal";
 
 type Props = {
-  closeModal: () => void;
+  close: () => void;
 };
 
-export const SetStatusModal: FC<Props> = ({ closeModal }) => {
+export const SetStatusModal: FC<Props> = ({ close }) => {
   const [meQuery] = useMeQuery();
   const [, clearStatus] = useClearStatusMutation();
   const [setStatusResult, setStatus] = useSetStatusMutation();
@@ -35,26 +35,23 @@ export const SetStatusModal: FC<Props> = ({ closeModal }) => {
   const defaultEmoji = data?.me?.status?.emoji || "💬";
   const watchEmoji = watch("emoji", defaultEmoji);
 
-  const closeEmojiPicker = () => setEmojiPickerOpen(false);
-  const toggleEmojiPicker = () => setEmojiPickerOpen(!emojiPickerOpen);
-
   const handleClearStatus = () => {
-    closeModal();
+    close();
     clearStatus();
   };
 
   const handleSaveStatus = handleSubmit(async (data) => {
     const result = await setStatus(data);
     if (!result.error) {
-      closeModal();
+      close();
     }
   });
 
   return (
-    <ModalPortal close={closeModal} fadeBackground>
+    <ModalPortal close={close} fadeBackground>
       <Card variant="modal">
         <Close
-          onClick={closeModal}
+          onClick={close}
           sx={{ position: "absolute", top: 10, right: 10 }}
         />
         <Heading>Set a status</Heading>
@@ -73,7 +70,7 @@ export const SetStatusModal: FC<Props> = ({ closeModal }) => {
           <Button
             variant="unstyled"
             type="button"
-            onClick={toggleEmojiPicker}
+            onClick={() => setEmojiPickerOpen(true)}
             sx={{ position: "absolute", p: 1, top: 82 }}
           >
             {watchEmoji}
@@ -85,7 +82,7 @@ export const SetStatusModal: FC<Props> = ({ closeModal }) => {
             defaultValue={defaultEmoji}
             render={(props) =>
               emojiPickerOpen ? (
-                <ModalPortal close={closeEmojiPicker}>
+                <ModalPortal close={() => setEmojiPickerOpen(false)}>
                   <Picker
                     title="Pick an emoji"
                     emoji="point_up"
@@ -94,7 +91,7 @@ export const SetStatusModal: FC<Props> = ({ closeModal }) => {
                     style={{ position: "relative", top: 240, left: -100 }}
                     onSelect={(emoji: BaseEmoji) => {
                       props.onChange(emoji.native);
-                      closeEmojiPicker();
+                      setEmojiPickerOpen(false);
                     }}
                   />
                 </ModalPortal>
