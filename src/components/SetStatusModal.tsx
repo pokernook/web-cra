@@ -82,6 +82,7 @@ export const SetStatusModal: FC<Props> = ({ close }) => {
             defaultValue={defaultEmoji}
             render={(props) =>
               emojiPickerOpen ? (
+                // TODO: The positioning creates a weird invisible div
                 <ModalPortal close={() => setEmojiPickerOpen(false)}>
                   <Picker
                     title="Pick an emoji"
