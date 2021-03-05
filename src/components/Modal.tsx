@@ -5,35 +5,38 @@ import { Flex } from "theme-ui";
 import { useKeyPress } from "../hooks";
 
 type ModalPortalProps = {
-  close: () => void;
-  fadeBackground?: boolean;
+  onClose: () => void;
+  hasDimmedBackground?: boolean;
 };
 
 export const ModalPortal: FC<ModalPortalProps> = ({
-  close,
-  fadeBackground = false,
+  onClose,
+  hasDimmedBackground = false,
   children,
 }) => {
   // TODO: This should only close the current modal
-  useKeyPress("Escape", close);
+  useKeyPress("Escape", onClose);
 
   return createPortal(
-    <ModalWrapper fadeBackground={fadeBackground}>
-      <ModalOverlay onClick={close} />
-      <div>{children}</div>
+    <ModalWrapper hasDimmedBackground={hasDimmedBackground}>
+      <ModalOverlay onClick={onClose} />
+      {children}
     </ModalWrapper>,
     document.body
   );
 };
 
 type ModalWrapperProps = {
-  fadeBackground?: boolean;
+  hasDimmedBackground: boolean;
 };
 
-const ModalWrapper: FC<ModalWrapperProps> = ({ fadeBackground, children }) => (
+const ModalWrapper: FC<ModalWrapperProps> = ({
+  hasDimmedBackground,
+  children,
+}) => (
   <Flex
     sx={{
-      bg: fadeBackground && "rgba(0, 0, 0, 0.6)",
+      bg: hasDimmedBackground && "rgba(0, 0, 0, 0.6)",
       alignItems: "center",
       justifyContent: "center",
       position: "fixed",

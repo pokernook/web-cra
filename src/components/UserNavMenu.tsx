@@ -38,7 +38,7 @@ export const UserNavMenu: FC = () => {
       </Button>
 
       {menuOpen && (
-        <ModalPortal close={() => setMenuOpen(false)} fadeBackground={false}>
+        <ModalPortal onClose={() => setMenuOpen(false)}>
           <Card
             variant="menu"
             sx={{ position: "absolute", right: 24, top: 40 }}
@@ -95,7 +95,7 @@ export const UserNavMenu: FC = () => {
       )}
 
       {statusModalOpen && (
-        <SetStatusModal close={() => setStatusModalOpen(false)} />
+        <SetStatusModal onClose={() => setStatusModalOpen(false)} />
       )}
     </>
   );

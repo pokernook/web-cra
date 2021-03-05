@@ -15,10 +15,10 @@ import {
 import { ModalPortal } from "./Modal";
 
 type Props = {
-  close: () => void;
+  onClose: () => void;
 };
 
-export const SetStatusModal: FC<Props> = ({ close }) => {
+export const SetStatusModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const [, clearStatus] = useClearStatusMutation();
   const [setStatusResult, setStatus] = useSetStatusMutation();
@@ -36,22 +36,22 @@ export const SetStatusModal: FC<Props> = ({ close }) => {
   const watchEmoji = watch("emoji", defaultEmoji);
 
   const handleClearStatus = () => {
-    close();
+    onClose();
     clearStatus();
   };
 
   const handleSaveStatus = handleSubmit(async (data) => {
     const result = await setStatus(data);
     if (!result.error) {
-      close();
+      onClose();
     }
   });
 
   return (
-    <ModalPortal close={close} fadeBackground>
+    <ModalPortal onClose={onClose} hasDimmedBackground>
       <Card variant="modal">
         <Close
-          onClick={close}
+          onClick={onClose}
           sx={{ position: "absolute", top: 10, right: 10 }}
         />
         <Heading>Set a status</Heading>
@@ -82,7 +82,7 @@ export const SetStatusModal: FC<Props> = ({ close }) => {
             defaultValue={defaultEmoji}
             render={(props) =>
               emojiPickerOpen ? (
-                <ModalPortal close={() => setEmojiPickerOpen(false)}>
+                <ModalPortal onClose={() => setEmojiPickerOpen(false)}>
                   <Picker
                     title="Pick an emoji"
                     emoji="point_up"

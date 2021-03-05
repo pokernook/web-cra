@@ -8,8 +8,8 @@ type Props = {
 };
 
 export const FadeOutDiv: FC<Props> = ({
-  children,
   showTime = 1500,
+  children,
   ...props
 }) => {
   const [visible, setVisible] = useState(true);

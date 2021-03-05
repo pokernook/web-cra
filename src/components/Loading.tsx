@@ -10,9 +10,9 @@ type Props = {
 };
 
 export const Loading: FC<Props> = ({
-  children,
   loading,
   minLoadTime = 1000,
+  children,
 }) => {
   const [showLoading, setShowLoading] = useState(true);
   const [minLoadTimeMet, setMinLoadTimeMet] = useState(false);

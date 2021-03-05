@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
