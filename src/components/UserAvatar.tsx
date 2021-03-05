@@ -13,5 +13,5 @@ type Props = {
 export const UserAvatar: FC<Props> = ({ size, user, ...props }) => {
   const src = useMemo(() => generateAvatarSvg(user?.id || ""), [user?.id]);
 
-  return <Avatar src={src} width={size} height={size} {...props} />;
+  return <Avatar src={src} sx={{ width: size, height: size }} {...props} />;
 };
