@@ -172,6 +172,7 @@ export const theme: Theme = {
     close: {
       color: "text",
       ":hover": {
+        bg: lighten("muted", 0.05),
         cursor: "pointer",
       },
     },
