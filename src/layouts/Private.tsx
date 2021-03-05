@@ -5,6 +5,7 @@ import { FC } from "react";
 import { SideNav } from "../components/SideNav";
 import { TopNav } from "../components/TopNav";
 
+// TODO: Fix weird gap at the bottom of the screen on Safari
 export const PrivateLayout: FC = ({ children }) => (
   <Grid
     columns={["auto"]}
