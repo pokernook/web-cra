@@ -6,6 +6,7 @@ import {
   useLogOutMutation,
   useMeQuery,
 } from "../graphql";
+import { EditProfileModal } from "./EditProfileModal";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
 import { UserAvatar } from "./UserAvatar";
@@ -16,6 +17,7 @@ export const UserNavMenu: FC = () => {
   const [, logOut] = useLogOutMutation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const { data } = meQuery;
 
@@ -24,6 +26,11 @@ export const UserNavMenu: FC = () => {
   const openStatusModal = () => {
     setMenuOpen(false);
     setStatusModalOpen(true);
+  };
+
+  const openProfileModal = () => {
+    setMenuOpen(false);
+    setProfileModalOpen(true);
   };
 
   const handleClearStatus = () => {
@@ -75,7 +82,7 @@ export const UserNavMenu: FC = () => {
 
             <Divider my={2} />
 
-            <Button onClick={() => setMenuOpen(false)} variant="menu">
+            <Button onClick={openProfileModal} variant="menu">
               Edit profile
             </Button>
             <Button onClick={() => setMenuOpen(false)} variant="menu">
@@ -96,6 +103,10 @@ export const UserNavMenu: FC = () => {
 
       {statusModalOpen && (
         <SetStatusModal onClose={() => setStatusModalOpen(false)} />
+      )}
+
+      {profileModalOpen && (
+        <EditProfileModal onClose={() => setProfileModalOpen(false)} />
       )}
     </>
   );
