@@ -175,6 +175,9 @@ export const theme: Theme = {
         bg: lighten("muted", 0.05),
         cursor: "pointer",
       },
+      ":active": {
+        bg: lighten("muted", 0.1),
+      },
     },
   },
   cards: {
