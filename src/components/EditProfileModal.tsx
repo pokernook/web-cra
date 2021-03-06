@@ -17,10 +17,15 @@ type Props = {
   onClose: () => void;
 };
 
+type PhotoUploadState = {
+  file?: File;
+  url?: string;
+};
+
 export const EditProfileModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const inputPhoto = useRef<HTMLInputElement>(null);
-  const [photoUpload, setPhotoUpload] = useState<File | undefined>(undefined);
+  const [photoUpload, setPhotoUpload] = useState<PhotoUploadState>();
 
   const { data } = meQuery;
 
@@ -30,7 +35,7 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
 
   const handlePhotoUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    setPhotoUpload(file);
+    setPhotoUpload({ file, url: URL.createObjectURL(file) });
   };
 
   return (
