@@ -22,10 +22,8 @@ import {
 import { UserAvatar } from "../components/UserAvatar";
 import { useMeQuery } from "../graphql";
 import { AccountSettings } from "./AccountSettings";
-import { ProfileSettings } from "./ProfileSettings";
 
 const settingsRoutes: NavLinkProps[] = [
-  { to: "/profile", children: "Profile" },
   { to: "/account", children: "Account" },
 ];
 
@@ -96,10 +94,6 @@ export const Settings = () => {
   return (
     <SettingsLayout>
       <Switch>
-        <Route exact path={`${path}/profile`}>
-          <ProfileSettings />
-        </Route>
-
         <Route exact path={`${path}/account`}>
           <AccountSettings />
         </Route>
