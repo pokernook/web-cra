@@ -27,6 +27,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const imageInput = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<ImageState>();
+  const [cropperOpen, setCropperOpen] = useState(false);
 
   const { data } = meQuery;
 
