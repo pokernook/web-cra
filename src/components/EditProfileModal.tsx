@@ -1,5 +1,6 @@
 import { Box, Button, Field, Grid, Input, Label } from "@theme-ui/components";
 import { ChangeEvent, FC, useRef, useState } from "react";
+import Cropper from "react-easy-crop";
 
 import { useMeQuery } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
@@ -13,7 +14,7 @@ import {
 } from "./Modal";
 import { UserAvatar } from "./UserAvatar";
 
-type Props = {
+type EditProfileModalProps = {
   onClose: () => void;
 };
 
@@ -22,7 +23,7 @@ type PhotoUploadState = {
   url?: string;
 };
 
-export const EditProfileModal: FC<Props> = ({ onClose }) => {
+export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const inputPhoto = useRef<HTMLInputElement>(null);
   const [photoUpload, setPhotoUpload] = useState<PhotoUploadState>();
@@ -90,6 +91,28 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
           <Button variant="secondary">Save changes</Button>
         </ModalFooter>
       </ModalCard>
+    </ModalPortal>
+  );
+};
+
+type CropPhotoModalProps = {
+  photoUrl: string;
+};
+
+const CropPhotoModal: FC<CropPhotoModalProps> = ({ photoUrl }) => {
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+
+  return (
+    <ModalPortal onClose={() => {}}>
+      <Cropper
+        aspect={1}
+        image={photoUrl}
+        crop={crop}
+        onCropChange={setCrop}
+        zoom={zoom}
+        onZoomChange={setZoom}
+      />
     </ModalPortal>
   );
 };
