@@ -63,6 +63,7 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
                   <UserAvatar src={generatedAvatar} size={160} />
                   <Input
                     type="file"
+                    accept="image/*"
                     ref={inputPhoto}
                     sx={{ display: "none" }}
                     onChange={handlePhotoUpload}
