@@ -42,7 +42,16 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
 
               <Box>
                 <Label>Profile photo</Label>
-                <UserAvatar user={data?.me} size={160} />
+                <div>
+                  <UserAvatar user={data?.me} size={160} />
+                </div>
+                <Button
+                  type="button"
+                  sx={{ width: "100%", mt: 1 }}
+                  variant="tertiary"
+                >
+                  Upload an image
+                </Button>
               </Box>
             </Grid>
           </form>
