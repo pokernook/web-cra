@@ -18,26 +18,26 @@ type EditProfileModalProps = {
   onClose: () => void;
 };
 
-type PhotoUploadState = {
+type ImageState = {
   file: File;
   url: string;
 };
 
 export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
-  const inputPhoto = useRef<HTMLInputElement>(null);
-  const [photoUpload, setPhotoUpload] = useState<PhotoUploadState>();
+  const imageInput = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<ImageState>();
 
   const { data } = meQuery;
 
   const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
 
-  const openPhotoUpload = () => inputPhoto.current?.click();
+  const openImageUpload = () => imageInput.current?.click();
 
-  const handlePhotoUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setPhotoUpload({ file, url: URL.createObjectURL(file) });
+      setImage({ file, url: URL.createObjectURL(file) });
     }
   };
 
@@ -67,16 +67,16 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
                   <Input
                     type="file"
                     accept="image/*"
-                    ref={inputPhoto}
+                    ref={imageInput}
                     sx={{ display: "none" }}
-                    onChange={handlePhotoUpload}
+                    onChange={handleImageUpload}
                   />
                 </div>
                 <Button
                   type="button"
                   sx={{ width: "100%", mt: 1 }}
                   variant="tertiary"
-                  onClick={openPhotoUpload}
+                  onClick={openImageUpload}
                 >
                   Upload an image
                 </Button>
@@ -97,11 +97,11 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   );
 };
 
-type CropPhotoModalProps = {
-  photoUrl: string;
+type CropImageModalProps = {
+  imageUrl: string;
 };
 
-const CropPhotoModal: FC<CropPhotoModalProps> = ({ photoUrl }) => {
+const CropImageModal: FC<CropImageModalProps> = ({ imageUrl }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
@@ -109,7 +109,7 @@ const CropPhotoModal: FC<CropPhotoModalProps> = ({ photoUrl }) => {
     <ModalPortal onClose={() => {}}>
       <Cropper
         aspect={1}
-        image={photoUrl}
+        image={imageUrl}
         crop={crop}
         onCropChange={setCrop}
         zoom={zoom}
