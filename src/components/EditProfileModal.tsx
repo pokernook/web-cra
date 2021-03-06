@@ -29,7 +29,8 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
   const openPhotoUpload = () => inputPhoto.current?.click();
 
   const handlePhotoUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    setPhotoUpload(e.target.files?.[0]);
+    const file = e.target.files?.[0];
+    setPhotoUpload(file);
   };
 
   return (
