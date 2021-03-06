@@ -229,6 +229,7 @@ export const theme: Theme = {
       border: "solid",
       borderColor: "border",
       borderWidth: 1,
+      borderRadius: 4,
     },
   },
   forms: {
