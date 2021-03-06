@@ -19,8 +19,8 @@ type EditProfileModalProps = {
 };
 
 type PhotoUploadState = {
-  file?: File;
-  url?: string;
+  file: File;
+  url: string;
 };
 
 export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
@@ -36,7 +36,9 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
 
   const handlePhotoUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    setPhotoUpload({ file, url: URL.createObjectURL(file) });
+    if (file) {
+      setPhotoUpload({ file, url: URL.createObjectURL(file) });
+    }
   };
 
   return (
