@@ -99,9 +99,11 @@ export const Settings = () => {
         <Route exact path={`${path}/profile`}>
           <ProfileSettings />
         </Route>
+
         <Route exact path={`${path}/account`}>
           <AccountSettings />
         </Route>
+
         <Route path={`${path}`}>
           <Redirect to={`${path}/profile`} />
         </Route>

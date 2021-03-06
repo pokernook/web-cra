@@ -1,7 +1,6 @@
 import "emoji-mart/css/emoji-mart.css";
 
 import { BaseEmoji, Picker } from "emoji-mart";
-import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Box, Button, Field, Text } from "theme-ui";
@@ -12,6 +11,7 @@ import {
   useMeQuery,
   useSetStatusMutation,
 } from "../graphql";
+import { FadeIn } from "./Animated";
 import {
   ModalCard,
   ModalClose,
@@ -107,12 +107,12 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
 
             <Box>
               {setStatusResult.error && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <FadeIn>
                   <Text variant="danger">
                     {setStatusResult.error.graphQLErrors[0]?.message ||
                       setStatusResult.error.networkError?.message}
                   </Text>
-                </motion.div>
+                </FadeIn>
               )}
             </Box>
           </form>

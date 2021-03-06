@@ -1,13 +1,19 @@
+import { ThemeUIStyleObject } from "@theme-ui/css";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
-import { ThemeUIStyleObject } from "theme-ui";
 
-type Props = {
+export const FadeIn: FC = ({ children }) => (
+  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    {children}
+  </motion.div>
+);
+
+type FadeOutProps = {
   showTime?: number;
   sx?: ThemeUIStyleObject;
 };
 
-export const FadeOutDiv: FC<Props> = ({
+export const FadeOut: FC<FadeOutProps> = ({
   showTime = 1500,
   children,
   ...props
@@ -15,9 +21,7 @@ export const FadeOutDiv: FC<Props> = ({
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setVisible(false);
-    }, showTime);
+    const timeout = setTimeout(() => setVisible(false), showTime);
 
     return () => clearTimeout(timeout);
   });

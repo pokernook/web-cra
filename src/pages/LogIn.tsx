@@ -1,9 +1,9 @@
 /** @jsxImportSource theme-ui */
-import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
+import { FadeIn } from "../components/Animated";
 import { MutationUserLogInArgs, useLogInMutation } from "../graphql";
 
 export const LogIn = () => {
@@ -17,12 +17,12 @@ export const LogIn = () => {
       <Heading mb={3}>Enter the &apos;Nook</Heading>
 
       {logInResult.error && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <FadeIn>
           <Alert variant="error" mb={3}>
             {logInResult.error.networkError?.message ||
               logInResult.error.graphQLErrors[0]?.message}
           </Alert>
-        </motion.div>
+        </FadeIn>
       )}
 
       <Card>

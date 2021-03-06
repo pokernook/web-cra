@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
 
-import { FadeOutDiv } from "../components/FadeOutDiv";
+import { FadeIn, FadeOut } from "../components/Animated";
 import { UserAvatar } from "../components/UserAvatar";
 import {
   MutationUserUpdateUsernameArgs,
@@ -34,12 +33,12 @@ const UpdateUsernameForm = () => {
 
         <Box mt={1} mb={3}>
           {result.error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <FadeIn>
               <Text variant="danger">
                 {result.error.graphQLErrors[0]?.message ||
                   result.error.networkError?.message}
               </Text>
-            </motion.div>
+            </FadeIn>
           )}
         </Box>
 
@@ -48,9 +47,9 @@ const UpdateUsernameForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <FadeOutDiv sx={{ display: "inline-block" }}>
+          <FadeOut sx={{ display: "inline-block" }}>
             <Text variant="success">Saved</Text>
-          </FadeOutDiv>
+          </FadeOut>
         )}
       </Box>
     </>
