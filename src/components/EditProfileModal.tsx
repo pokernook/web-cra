@@ -1,4 +1,4 @@
-import { Button, Field } from "@theme-ui/components";
+import { Box, Button, Field, Grid, Label } from "@theme-ui/components";
 import { FC } from "react";
 
 import { useMeQuery } from "../graphql";
@@ -10,6 +10,7 @@ import {
   ModalHeader,
   ModalPortal,
 } from "./Modal";
+import { UserAvatar } from "./UserAvatar";
 
 type Props = {
   onClose: () => void;
@@ -28,13 +29,22 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
 
         <ModalContent>
           <form id="profile-form" onSubmit={() => {}}>
-            <Field
-              label="Username"
-              type="text"
-              spellCheck={false}
-              name="username"
-              defaultValue={data?.me?.username}
-            />
+            <Grid gap={3} columns={[2, "2fr 1fr"]}>
+              <Box>
+                <Field
+                  label="Username"
+                  type="text"
+                  spellCheck={false}
+                  name="username"
+                  defaultValue={data?.me?.username}
+                />
+              </Box>
+
+              <Box>
+                <Label>Profile photo</Label>
+                <UserAvatar user={data?.me} size={160} />
+              </Box>
+            </Grid>
           </form>
         </ModalContent>
 
