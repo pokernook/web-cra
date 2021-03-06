@@ -6,6 +6,7 @@ import {
   useLogOutMutation,
   useMeQuery,
 } from "../graphql";
+import { useGeneratedAvatar } from "../hooks";
 import { EditProfileModal } from "./EditProfileModal";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
@@ -20,6 +21,8 @@ export const UserNavMenu: FC = () => {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const { data } = meQuery;
+
+  const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
 
   const handleLogOut = () => logOut();
 
@@ -41,7 +44,7 @@ export const UserNavMenu: FC = () => {
   return (
     <>
       <Button variant="unstyled" onClick={() => setMenuOpen(true)}>
-        <UserAvatar user={data?.me} size={32} />
+        <UserAvatar src={generatedAvatar} size={32} />
       </Button>
 
       {menuOpen && (
@@ -51,7 +54,7 @@ export const UserNavMenu: FC = () => {
             sx={{ position: "absolute", right: 24, top: 40 }}
           >
             <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
-              <UserAvatar user={data?.me} size={40} sx={{ mr: 2 }} />
+              <UserAvatar src={generatedAvatar} size={40} sx={{ mr: 2 }} />
               <Heading as="h3">{data?.me?.username}</Heading>
               <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
                 #{data?.me?.discriminator}

@@ -2,6 +2,7 @@ import { Box, Button, Field, Grid, Input, Label } from "@theme-ui/components";
 import { ChangeEvent, FC, useRef, useState } from "react";
 
 import { useMeQuery } from "../graphql";
+import { useGeneratedAvatar } from "../hooks";
 import {
   ModalCard,
   ModalClose,
@@ -22,6 +23,8 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
   const [photoUpload, setPhotoUpload] = useState<File | undefined>(undefined);
 
   const { data } = meQuery;
+
+  const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
 
   const openPhotoUpload = () => inputPhoto.current?.click();
 
@@ -51,7 +54,7 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
               <Box>
                 <Label>Profile photo</Label>
                 <div>
-                  <UserAvatar user={data?.me} size={160} />
+                  <UserAvatar src={generatedAvatar} size={160} />
                   <Input
                     type="file"
                     ref={inputPhoto}

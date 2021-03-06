@@ -21,6 +21,7 @@ import {
 
 import { UserAvatar } from "../components/UserAvatar";
 import { useMeQuery } from "../graphql";
+import { useGeneratedAvatar } from "../hooks";
 import { AccountSettings } from "./AccountSettings";
 
 const settingsRoutes: NavLinkProps[] = [
@@ -62,10 +63,12 @@ const SettingsLayout: FC = ({ children }) => {
 
   const { data } = meQuery;
 
+  const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
+
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
       <Flex mb={4}>
-        <UserAvatar size={64} user={data?.me} sx={{ mr: 3 }} />
+        <UserAvatar size={64} src={generatedAvatar} sx={{ mr: 3 }} />
         <Box>
           <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>

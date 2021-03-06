@@ -3,6 +3,7 @@ import { NavLink, NavLinkProps } from "react-router-dom";
 import { Box, Divider, Flex, Heading } from "theme-ui";
 
 import { useMeQuery } from "../graphql";
+import { useGeneratedAvatar } from "../hooks";
 import { UserAvatar } from "./UserAvatar";
 
 const sideNavRoutes: NavLinkProps[] = [
@@ -15,6 +16,8 @@ export const SideNav = () => {
 
   const { data } = meQuery;
 
+  const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
+
   return (
     <aside
       sx={{
@@ -25,7 +28,7 @@ export const SideNav = () => {
     >
       <Box sx={{ position: "sticky", my: 3 }}>
         <Flex sx={{ alignItems: "center", mx: 3 }}>
-          <UserAvatar user={data?.me} size={48} sx={{ mr: 2 }} />
+          <UserAvatar src={generatedAvatar} size={48} sx={{ mr: 2 }} />
           <Heading as="h3">{data?.me?.username}</Heading>
           <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
             #{data?.me?.discriminator}
