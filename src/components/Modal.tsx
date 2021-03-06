@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
-import { Flex } from "theme-ui";
+import { Box, Card, Close, Flex, Heading } from "theme-ui";
 
 import { useKeyPress } from "../hooks";
 
@@ -25,6 +25,42 @@ export const ModalPortal: FC<ModalPortalProps> = ({
     document.body
   );
 };
+
+export const ModalCard: FC = ({ children }) => (
+  <Card variant="modal">{children}</Card>
+);
+
+type ModalCloseProps = {
+  onClose: () => void;
+};
+
+export const ModalClose: FC<ModalCloseProps> = ({ onClose }) => (
+  <Close onClick={onClose} sx={{ position: "absolute", top: 15, right: 15 }} />
+);
+
+export const ModalHeader: FC = ({ children }) => (
+  <Flex sx={{ alignItems: "center", width: "100%", minHeight: 60 }}>
+    <Heading p={3}>{children}</Heading>
+  </Flex>
+);
+
+export const ModalContent: FC = ({ children }) => (
+  <Box sx={{ px: 3, width: "100%" }}>{children}</Box>
+);
+
+export const ModalFooter: FC = ({ children }) => (
+  <Flex
+    sx={{
+      alignItems: "center",
+      justifyContent: "flex-end",
+      width: "100%",
+      minHeight: 60,
+      px: 3,
+    }}
+  >
+    {children}
+  </Flex>
+);
 
 type ModalWrapperProps = {
   hasDimmedBackground: boolean;
