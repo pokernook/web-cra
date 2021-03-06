@@ -105,7 +105,7 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
               }
             />
 
-            <Box mt={1} mb={3}>
+            <Box>
               {setStatusResult.error && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   <Text variant="danger">
