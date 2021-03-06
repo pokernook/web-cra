@@ -1,16 +1,15 @@
-import {
-  Box,
-  Button,
-  Card,
-  Close,
-  Field,
-  Flex,
-  Heading,
-} from "@theme-ui/components";
+import { Button, Field } from "@theme-ui/components";
 import { FC } from "react";
 
 import { useMeQuery } from "../graphql";
-import { ModalPortal } from "./Modal";
+import {
+  ModalCard,
+  ModalClose,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalPortal,
+} from "./Modal";
 
 type Props = {
   onClose: () => void;
@@ -23,32 +22,30 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
 
   return (
     <ModalPortal onClose={onClose} hasDimmedBackground>
-      <Card variant="modal">
-        <Close
-          onClick={onClose}
-          sx={{ position: "absolute", top: 10, right: 10 }}
-        />
-        <Heading>Edit your profile</Heading>
+      <ModalCard>
+        <ModalClose onClose={onClose} />
+        <ModalHeader>Edit your profile</ModalHeader>
 
-        <Box mt={3}>
-          <Field
-            label="Username"
-            type="text"
-            spellCheck={false}
-            name="username"
-            defaultValue={data?.me?.username}
-            mb={3}
-          />
+        <ModalContent>
+          <form id="profile-form" onSubmit={() => {}}>
+            <Field
+              label="Username"
+              type="text"
+              spellCheck={false}
+              name="username"
+              defaultValue={data?.me?.username}
+            />
+          </form>
+        </ModalContent>
 
-          <Flex sx={{ float: "right" }}>
-            <Button variant="tertiary" type="button" mr={2} onClick={onClose}>
-              Cancel
-            </Button>
+        <ModalFooter>
+          <Button variant="tertiary" mr={2} onClick={onClose}>
+            Cancel
+          </Button>
 
-            <Button variant="secondary">Save changes</Button>
-          </Flex>
-        </Box>
-      </Card>
+          <Button variant="secondary">Save changes</Button>
+        </ModalFooter>
+      </ModalCard>
     </ModalPortal>
   );
 };
