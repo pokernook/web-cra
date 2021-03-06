@@ -1,5 +1,5 @@
-import { Box, Button, Field, Grid, Label } from "@theme-ui/components";
-import { FC } from "react";
+import { Box, Button, Field, Grid, Input, Label } from "@theme-ui/components";
+import { ChangeEvent, FC, useRef, useState } from "react";
 
 import { useMeQuery } from "../graphql";
 import {
@@ -18,8 +18,16 @@ type Props = {
 
 export const EditProfileModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
+  const inputPhoto = useRef<HTMLInputElement>(null);
+  const [photoUpload, setPhotoUpload] = useState<File | undefined>(undefined);
 
   const { data } = meQuery;
+
+  const openPhotoUpload = () => inputPhoto.current?.click();
+
+  const handlePhotoUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    setPhotoUpload(e.target.files?.[0]);
+  };
 
   return (
     <ModalPortal onClose={onClose} hasDimmedBackground>
@@ -44,11 +52,18 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
                 <Label>Profile photo</Label>
                 <div>
                   <UserAvatar user={data?.me} size={160} />
+                  <Input
+                    type="file"
+                    ref={inputPhoto}
+                    sx={{ display: "none" }}
+                    onChange={handlePhotoUpload}
+                  />
                 </div>
                 <Button
                   type="button"
                   sx={{ width: "100%", mt: 1 }}
                   variant="tertiary"
+                  onClick={openPhotoUpload}
                 >
                   Upload an image
                 </Button>
