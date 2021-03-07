@@ -1,6 +1,7 @@
 import { Box, Button, Field, Grid, Input, Label } from "@theme-ui/components";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
+import { useForm } from "react-hook-form";
 
 import { useMeQuery } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
@@ -28,6 +29,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const imageInput = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<ImageState>();
   const [cropperOpen, setCropperOpen] = useState(false);
+  const { register, handleSubmit } = useForm();
 
   const { data } = meQuery;
 
@@ -44,6 +46,8 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
     e.target.value = "";
   };
 
+  const handleProfileUpdate = handleSubmit((data) => console.log(data));
+
   return (
     <ModalPortal onClose={onClose} hasDimmedBackground>
       <ModalCard>
@@ -51,7 +55,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
         <ModalHeader>Edit your profile</ModalHeader>
 
         <ModalContent>
-          <form id="profile-form" onSubmit={() => {}}>
+          <form id="profile-form" onSubmit={handleProfileUpdate}>
             <Grid gap={3} columns={[2, "2fr 1fr"]}>
               <Box>
                 <Field
@@ -60,6 +64,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
                   spellCheck={false}
                   name="username"
                   defaultValue={data?.me?.username}
+                  ref={register()}
                 />
               </Box>
 
@@ -93,7 +98,9 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
             Cancel
           </Button>
 
-          <Button variant="secondary">Save changes</Button>
+          <Button variant="secondary" type="submit" form="profile-form">
+            Save changes
+          </Button>
         </ModalFooter>
       </ModalCard>
 
