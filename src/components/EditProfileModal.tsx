@@ -6,6 +6,7 @@ import { Avatar, Box, Button, Field, Grid, Input, Label } from "theme-ui";
 
 import { useMeQuery, useUpdateUsernameMutation } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
+import { getCroppedImageUrl } from "../util/image";
 import {
   ModalCard,
   ModalClose,
@@ -135,6 +136,15 @@ const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
   const handleCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) =>
     setCroppedAreaPixels(croppedAreaPixels);
 
+  const handleSaveCrop = async () => {
+    if (!croppedAreaPixels) {
+      return;
+    }
+    const croppedUrl = await getCroppedImageUrl(imageUrl, croppedAreaPixels);
+    console.log(croppedUrl);
+    onClose();
+  };
+
   return (
     <ModalPortal onClose={onClose}>
       <ModalCard>
@@ -160,7 +170,7 @@ const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
             Cancel
           </Button>
 
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="secondary" onClick={handleSaveCrop}>
             Save
           </Button>
         </ModalFooter>
