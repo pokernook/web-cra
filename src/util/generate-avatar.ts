@@ -82,7 +82,8 @@ const getAvatarSvgFromData = (avatarData: string, size: number) => {
   });
   svg += "</svg>";
 
-  return `data:image/svg+xml;base64,${btoa(svg)}`;
+  const blob = new Blob([svg], { type: "image/svg+xml" });
+  return URL.createObjectURL(blob);
 };
 
 export const generateAvatarSvg = (seed: string, complexity = 6, size = 256) => {
