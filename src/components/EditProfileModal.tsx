@@ -131,7 +131,6 @@ const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
               onCropChange={setCrop}
               zoom={zoom}
               onZoomChange={setZoom}
-              showGrid={true}
             />
           </Box>
         </ModalContent>
