@@ -19,11 +19,6 @@ type EditProfileModalProps = {
   onClose: () => void;
 };
 
-type ImageState = {
-  file: File;
-  url: string;
-};
-
 type FormData = {
   username: string;
 };
@@ -32,7 +27,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const [, updateUsername] = useUpdateUsernameMutation();
   const imageInput = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState<ImageState>();
+  const [imageUrl, setImageUrl] = useState<string>();
   const [cropperOpen, setCropperOpen] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
 
@@ -45,7 +40,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setImage({ file, url: URL.createObjectURL(file) });
+      setImageUrl(URL.createObjectURL(file));
       setCropperOpen(true);
     }
     e.target.value = "";
@@ -117,9 +112,9 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
         </ModalFooter>
       </ModalCard>
 
-      {cropperOpen && image && (
+      {cropperOpen && imageUrl && (
         <CropImageModal
-          imageUrl={image.url}
+          imageUrl={imageUrl}
           onClose={() => setCropperOpen(false)}
         />
       )}
