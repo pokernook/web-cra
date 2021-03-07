@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
+import { Area } from "react-easy-crop/types";
 import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Field, Grid, Input, Label } from "theme-ui";
 
@@ -134,6 +135,10 @@ type CropImageModalProps = {
 const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
+
+  const handleCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) =>
+    setCroppedAreaPixels(croppedAreaPixels);
 
   return (
     <ModalPortal onClose={onClose}>
@@ -148,6 +153,7 @@ const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
               image={imageUrl}
               crop={crop}
               onCropChange={setCrop}
+              onCropComplete={handleCropComplete}
               zoom={zoom}
               onZoomChange={setZoom}
             />
