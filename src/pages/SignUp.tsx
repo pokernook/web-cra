@@ -6,9 +6,11 @@ import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 import { FadeIn } from "../components/Animated";
 import { MutationUserSignUpArgs, useSignUpMutation } from "../graphql";
 
+type FormData = MutationUserSignUpArgs;
+
 export const SignUp = () => {
   const [signUpResult, signUp] = useSignUpMutation();
-  const { register, handleSubmit } = useForm<MutationUserSignUpArgs>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = handleSubmit((data) => signUp(data));
 
