@@ -102,7 +102,7 @@ export const Settings = () => {
         </Route>
 
         <Route path={`${path}`}>
-          <Redirect to={`${path}/profile`} />
+          <Redirect to={`${path}/account`} />
         </Route>
       </Switch>
     </SettingsLayout>
