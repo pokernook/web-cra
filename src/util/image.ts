@@ -12,13 +12,13 @@ export const getCroppedImageUrl = async (
   url: string,
   crop: Area,
   type = "image/png"
-): Promise<string | undefined> => {
+): Promise<string> => {
   const image = await createImageFromUrl(url);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
   if (!ctx) {
-    return;
+    throw new Error("Failed to create canvas context");
   }
 
   canvas.width = image.width;
