@@ -17,8 +17,14 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
+  EmailAddress: any;
+  /** One emoji character */
+  EmojiSingular: any;
   DateTime: any;
 };
+
+
 
 export type User = {
   __typename?: 'User';
@@ -73,14 +79,14 @@ export type Mutation = {
 
 
 export type MutationUserSignUpArgs = {
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   username: Scalars['String'];
   password: Scalars['String'];
 };
 
 
 export type MutationUserLogInArgs = {
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   password: Scalars['String'];
 };
 
@@ -97,12 +103,12 @@ export type MutationUserUpdatePasswordArgs = {
 
 
 export type MutationUserUpdateEmailArgs = {
-  newEmail: Scalars['String'];
+  newEmail: Scalars['EmailAddress'];
 };
 
 
 export type MutationUserSetStatusArgs = {
-  emoji?: Maybe<Scalars['String']>;
+  emoji?: Maybe<Scalars['EmojiSingular']>;
   message?: Maybe<Scalars['String']>;
 };
 
@@ -138,7 +144,7 @@ export type DeleteAccountMutation = (
 );
 
 export type LogInMutationVariables = Exact<{
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   password: Scalars['String'];
 }>;
 
@@ -166,7 +172,7 @@ export type LogOutMutation = (
 );
 
 export type SetStatusMutationVariables = Exact<{
-  emoji?: Maybe<Scalars['String']>;
+  emoji?: Maybe<Scalars['EmojiSingular']>;
   message?: Maybe<Scalars['String']>;
 }>;
 
@@ -185,7 +191,7 @@ export type SetStatusMutation = (
 
 export type SignUpMutationVariables = Exact<{
   username: Scalars['String'];
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   password: Scalars['String'];
 }>;
 
@@ -202,7 +208,7 @@ export type SignUpMutation = (
 );
 
 export type UpdateEmailMutationVariables = Exact<{
-  newEmail: Scalars['String'];
+  newEmail: Scalars['EmailAddress'];
 }>;
 
 
@@ -290,7 +296,7 @@ export function useDeleteAccountMutation() {
   return Urql.useMutation<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument);
 };
 export const LogInDocument = gql`
-    mutation logIn($email: String!, $password: String!) {
+    mutation logIn($email: EmailAddress!, $password: String!) {
   userLogIn(email: $email, password: $password) {
     user {
       ...userFields
@@ -314,7 +320,7 @@ export function useLogOutMutation() {
   return Urql.useMutation<LogOutMutation, LogOutMutationVariables>(LogOutDocument);
 };
 export const SetStatusDocument = gql`
-    mutation setStatus($emoji: String, $message: String) {
+    mutation setStatus($emoji: EmojiSingular, $message: String) {
   userSetStatus(emoji: $emoji, message: $message) {
     createdAt
     emoji
@@ -332,7 +338,7 @@ export function useSetStatusMutation() {
   return Urql.useMutation<SetStatusMutation, SetStatusMutationVariables>(SetStatusDocument);
 };
 export const SignUpDocument = gql`
-    mutation signUp($username: String!, $email: String!, $password: String!) {
+    mutation signUp($username: String!, $email: EmailAddress!, $password: String!) {
   userSignUp(username: $username, email: $email, password: $password) {
     user {
       ...userFields
@@ -345,7 +351,7 @@ export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
 };
 export const UpdateEmailDocument = gql`
-    mutation updateEmail($newEmail: String!) {
+    mutation updateEmail($newEmail: EmailAddress!) {
   userUpdateEmail(newEmail: $newEmail) {
     ...userFields
   }

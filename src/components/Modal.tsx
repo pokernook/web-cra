@@ -1,42 +1,78 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
-import { Flex } from "theme-ui";
+import { Box, Card, Close, Flex, Heading } from "theme-ui";
 
 import { useKeyPress } from "../hooks";
 
 type ModalPortalProps = {
-  close: () => void;
-  fadeBackground?: boolean;
+  onClose: () => void;
+  hasDimmedBackground?: boolean;
 };
 
 export const ModalPortal: FC<ModalPortalProps> = ({
-  close,
-  fadeBackground,
+  onClose,
+  hasDimmedBackground = false,
   children,
 }) => {
   // TODO: This should only close the current modal
-  useKeyPress("Escape", close);
+  useKeyPress("Escape", onClose);
 
   return createPortal(
-    <ModalWrapper fadeBackground={fadeBackground}>
-      <ModalOverlay onClick={close} />
-      <div>{children}</div>
+    <ModalWrapper hasDimmedBackground={hasDimmedBackground}>
+      <ModalOverlay onClick={onClose} />
+      {children}
     </ModalWrapper>,
     document.body
   );
 };
 
+export const ModalCard: FC = ({ children }) => (
+  <Card variant="modal">{children}</Card>
+);
+
+type ModalCloseProps = {
+  onClose: () => void;
+};
+
+export const ModalClose: FC<ModalCloseProps> = ({ onClose }) => (
+  <Close onClick={onClose} sx={{ position: "absolute", top: 15, right: 15 }} />
+);
+
+export const ModalHeader: FC = ({ children }) => (
+  <Flex sx={{ alignItems: "center", width: "100%", minHeight: 60 }}>
+    <Heading p={3}>{children}</Heading>
+  </Flex>
+);
+
+export const ModalContent: FC = ({ children }) => (
+  <Box sx={{ px: 3, width: "100%" }}>{children}</Box>
+);
+
+export const ModalFooter: FC = ({ children }) => (
+  <Flex
+    sx={{
+      alignItems: "center",
+      justifyContent: "flex-end",
+      width: "100%",
+      minHeight: 60,
+      px: 3,
+    }}
+  >
+    {children}
+  </Flex>
+);
+
 type ModalWrapperProps = {
-  fadeBackground?: boolean;
+  hasDimmedBackground: boolean;
 };
 
 const ModalWrapper: FC<ModalWrapperProps> = ({
-  fadeBackground = false,
+  hasDimmedBackground,
   children,
 }) => (
   <Flex
     sx={{
-      bg: fadeBackground && "rgba(0, 0, 0, 0.6)",
+      bg: hasDimmedBackground && "rgba(0, 0, 0, 0.6)",
       alignItems: "center",
       justifyContent: "center",
       position: "fixed",
@@ -63,8 +99,8 @@ const ModalOverlay: FC<ModalOverlayProps> = ({ onClick }) => (
       position: "fixed",
       top: 0,
       left: 0,
-      width: "100%",
-      height: "100%",
+      width: "100vw",
+      height: "100vh",
       zIndex: -1,
     }}
   />

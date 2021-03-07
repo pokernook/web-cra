@@ -1,14 +1,16 @@
 /** @jsxImportSource theme-ui */
-import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Alert, Box, Button, Card, Field, Heading, Text } from "theme-ui";
 
+import { FadeIn } from "../components/Animated";
 import { MutationUserLogInArgs, useLogInMutation } from "../graphql";
+
+type FormData = MutationUserLogInArgs;
 
 export const LogIn = () => {
   const [logInResult, logIn] = useLogInMutation();
-  const { register, handleSubmit } = useForm<MutationUserLogInArgs>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = handleSubmit((data) => logIn(data));
 
@@ -17,12 +19,12 @@ export const LogIn = () => {
       <Heading mb={3}>Enter the &apos;Nook</Heading>
 
       {logInResult.error && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <FadeIn>
           <Alert variant="error" mb={3}>
             {logInResult.error.networkError?.message ||
               logInResult.error.graphQLErrors[0]?.message}
           </Alert>
-        </motion.div>
+        </FadeIn>
       )}
 
       <Card>
@@ -49,7 +51,7 @@ export const LogIn = () => {
         </Box>
       </Card>
 
-      <Card sx={{ mt: 3 }}>
+      <Card mt={3}>
         <Text>
           New &apos;round these parts?{" "}
           <Link to="/signUp" sx={{ variant: "styles.a" }}>

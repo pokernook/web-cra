@@ -9,6 +9,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import {
+  Avatar,
   Box,
   Card,
   Container,
@@ -19,13 +20,11 @@ import {
   Text,
 } from "theme-ui";
 
-import { UserAvatar } from "../components/UserAvatar";
 import { useMeQuery } from "../graphql";
+import { useGeneratedAvatar } from "../hooks";
 import { AccountSettings } from "./AccountSettings";
-import { ProfileSettings } from "./ProfileSettings";
 
 const settingsRoutes: NavLinkProps[] = [
-  { to: "/profile", children: "Profile" },
   { to: "/account", children: "Account" },
 ];
 
@@ -64,10 +63,12 @@ const SettingsLayout: FC = ({ children }) => {
 
   const { data } = meQuery;
 
+  const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
+
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
       <Flex mb={4}>
-        <UserAvatar size={64} user={data?.me} sx={{ mr: 3 }} />
+        <Avatar src={generatedAvatar} sx={{ height: 64, width: 64, mr: 3 }} />
         <Box>
           <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>
@@ -96,14 +97,12 @@ export const Settings = () => {
   return (
     <SettingsLayout>
       <Switch>
-        <Route exact path={`${path}/profile`}>
-          <ProfileSettings />
-        </Route>
         <Route exact path={`${path}/account`}>
           <AccountSettings />
         </Route>
+
         <Route path={`${path}`}>
-          <Redirect to={`${path}/profile`} />
+          <Redirect to={`${path}/account`} />
         </Route>
       </Switch>
     </SettingsLayout>

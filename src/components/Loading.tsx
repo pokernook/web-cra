@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
-import { Container } from "theme-ui";
+import { Flex } from "theme-ui";
 
 import logo from "../assets/logo.svg";
 
@@ -10,9 +10,9 @@ type Props = {
 };
 
 export const Loading: FC<Props> = ({
-  children,
   loading,
   minLoadTime = 1000,
+  children,
 }) => {
   const [showLoading, setShowLoading] = useState(true);
   const [minLoadTimeMet, setMinLoadTimeMet] = useState(false);
@@ -34,13 +34,12 @@ export const Loading: FC<Props> = ({
   return (
     <>
       {showLoading ? (
-        <Container
+        <Flex
           sx={{
             alignItems: "center",
-            display: "flex",
+            justifyContent: "center",
             height: "100vh",
             width: "100vw",
-            justifyContent: "center",
           }}
         >
           <motion.img
@@ -49,7 +48,7 @@ export const Loading: FC<Props> = ({
             animate={{ scale: [0.5, 0.52, 0.5] }}
             transition={{ duration: 1.1, repeat: Infinity }}
           />
-        </Container>
+        </Flex>
       ) : (
         children
       )}

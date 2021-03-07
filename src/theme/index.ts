@@ -172,7 +172,11 @@ export const theme: Theme = {
     close: {
       color: "text",
       ":hover": {
+        bg: lighten("muted", 0.05),
         cursor: "pointer",
+      },
+      ":active": {
+        bg: lighten("muted", 0.1),
       },
     },
   },
@@ -203,8 +207,7 @@ export const theme: Theme = {
       borderRadius: 4,
       borderWidth: 1,
       boxShadow: "0 18px 48px 0 rgba(0, 0, 0, .35)",
-      minWidth: 520,
-      p: 3,
+      minWidth: 530,
       position: "relative",
     },
   },
@@ -226,6 +229,7 @@ export const theme: Theme = {
       border: "solid",
       borderColor: "border",
       borderWidth: 1,
+      borderRadius: 4,
     },
   },
   forms: {

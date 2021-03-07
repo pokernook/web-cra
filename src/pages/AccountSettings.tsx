@@ -1,9 +1,7 @@
-/** @jsxImportSource theme-ui */
-import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
-import { FadeOutDiv } from "../components/FadeOutDiv";
+import { FadeIn, FadeOut } from "../components/Animated";
 import {
   MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
@@ -55,12 +53,12 @@ const EmailForm = () => {
 
         <Box mt={1} mb={3}>
           {result.error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <FadeIn>
               <Text variant="danger">
                 {result.error.graphQLErrors[0]?.message ||
                   result.error.networkError?.message}
               </Text>
-            </motion.div>
+            </FadeIn>
           )}
         </Box>
 
@@ -69,9 +67,9 @@ const EmailForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <FadeOutDiv sx={{ display: "inline-block" }}>
+          <FadeOut sx={{ display: "inline-block" }}>
             <Text variant="success">Updated</Text>
-          </FadeOutDiv>
+          </FadeOut>
         )}
       </Box>
     </>
@@ -115,12 +113,12 @@ const UpdatePasswordForm = () => {
 
         <Box mt={1} mb={3}>
           {result.error && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <FadeIn>
               <Text variant="danger">
                 {result.error.graphQLErrors[0]?.message ||
                   result.error.networkError?.message}
               </Text>
-            </motion.div>
+            </FadeIn>
           )}
         </Box>
 
@@ -129,9 +127,9 @@ const UpdatePasswordForm = () => {
         </Button>
 
         {result.data && !result.error && (
-          <FadeOutDiv sx={{ display: "inline-block" }}>
+          <FadeOut sx={{ display: "inline-block" }}>
             <Text variant="success">Updated</Text>
-          </FadeOutDiv>
+          </FadeOut>
         )}
       </Box>
     </>
