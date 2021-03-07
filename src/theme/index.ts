@@ -207,7 +207,7 @@ export const theme: Theme = {
       borderRadius: 4,
       borderWidth: 1,
       boxShadow: "0 18px 48px 0 rgba(0, 0, 0, .35)",
-      minWidth: 520,
+      minWidth: 530,
       position: "relative",
     },
   },
