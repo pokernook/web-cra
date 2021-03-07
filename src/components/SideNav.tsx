@@ -1,10 +1,9 @@
 /** @jsxImportSource theme-ui */
 import { NavLink, NavLinkProps } from "react-router-dom";
-import { Box, Divider, Flex, Heading } from "theme-ui";
+import { Avatar, Box, Divider, Flex, Heading } from "theme-ui";
 
 import { useMeQuery } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
-import { UserAvatar } from "./UserAvatar";
 
 const sideNavRoutes: NavLinkProps[] = [
   { to: "/", exact: true, children: "Home" },
@@ -28,7 +27,7 @@ export const SideNav = () => {
     >
       <Box sx={{ position: "sticky", my: 3 }}>
         <Flex sx={{ alignItems: "center", mx: 3 }}>
-          <UserAvatar src={generatedAvatar} size={48} sx={{ mr: 2 }} />
+          <Avatar src={generatedAvatar} sx={{ height: 48, width: 48, mr: 2 }} />
           <Heading as="h3">{data?.me?.username}</Heading>
           <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
             #{data?.me?.discriminator}

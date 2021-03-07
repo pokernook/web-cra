@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Button, Card, Divider, Flex, Heading, Text } from "theme-ui";
+import { Avatar, Button, Card, Divider, Flex, Heading, Text } from "theme-ui";
 
 import {
   useClearStatusMutation,
@@ -10,7 +10,6 @@ import { useGeneratedAvatar } from "../hooks";
 import { EditProfileModal } from "./EditProfileModal";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
-import { UserAvatar } from "./UserAvatar";
 
 export const UserNavMenu: FC = () => {
   const [meQuery] = useMeQuery();
@@ -44,7 +43,7 @@ export const UserNavMenu: FC = () => {
   return (
     <>
       <Button variant="unstyled" onClick={() => setMenuOpen(true)}>
-        <UserAvatar src={generatedAvatar} size={32} />
+        <Avatar src={generatedAvatar} sx={{ height: 32, width: 32 }} />
       </Button>
 
       {menuOpen && (
@@ -54,7 +53,10 @@ export const UserNavMenu: FC = () => {
             sx={{ position: "absolute", right: 24, top: 40 }}
           >
             <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
-              <UserAvatar src={generatedAvatar} size={40} sx={{ mr: 2 }} />
+              <Avatar
+                src={generatedAvatar}
+                sx={{ height: 40, width: 40, mr: 2 }}
+              />
               <Heading as="h3">{data?.me?.username}</Heading>
               <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
                 #{data?.me?.discriminator}

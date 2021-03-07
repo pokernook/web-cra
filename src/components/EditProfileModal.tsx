@@ -1,7 +1,7 @@
-import { Box, Button, Field, Grid, Input, Label } from "@theme-ui/components";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useForm } from "react-hook-form";
+import { Avatar, Box, Button, Field, Grid, Input, Label } from "theme-ui";
 
 import { useMeQuery, useUpdateUsernameMutation } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
@@ -13,7 +13,6 @@ import {
   ModalHeader,
   ModalPortal,
 } from "./Modal";
-import { UserAvatar } from "./UserAvatar";
 
 type EditProfileModalProps = {
   onClose: () => void;
@@ -81,7 +80,10 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
               <Box>
                 <Label>Profile photo</Label>
                 <div>
-                  <UserAvatar src={generatedAvatar} size={160} />
+                  <Avatar
+                    src={generatedAvatar}
+                    sx={{ height: 160, width: 160 }}
+                  />
                   <Input
                     type="file"
                     accept="image/*"

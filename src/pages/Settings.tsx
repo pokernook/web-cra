@@ -9,6 +9,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import {
+  Avatar,
   Box,
   Card,
   Container,
@@ -19,7 +20,6 @@ import {
   Text,
 } from "theme-ui";
 
-import { UserAvatar } from "../components/UserAvatar";
 import { useMeQuery } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
 import { AccountSettings } from "./AccountSettings";
@@ -68,7 +68,7 @@ const SettingsLayout: FC = ({ children }) => {
   return (
     <Container sx={{ maxWidth: 980, pt: 20 }}>
       <Flex mb={4}>
-        <UserAvatar size={64} src={generatedAvatar} sx={{ mr: 3 }} />
+        <Avatar src={generatedAvatar} sx={{ height: 64, width: 64, mr: 3 }} />
         <Box>
           <Flex mb={2}>
             <Heading>{data?.me?.username}</Heading>
