@@ -25,16 +25,13 @@ type Props = {
   onClose: () => void;
 };
 
+type FormData = SetStatusMutationVariables;
+
 export const SetStatusModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const [, clearStatus] = useClearStatusMutation();
   const [setStatusResult, setStatus] = useSetStatusMutation();
-  const {
-    control,
-    handleSubmit,
-    register,
-    watch,
-  } = useForm<SetStatusMutationVariables>();
+  const { control, handleSubmit, register, watch } = useForm<FormData>();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
 
   const { data } = meQuery;
