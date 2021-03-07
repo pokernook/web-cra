@@ -39,7 +39,9 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
     const file = e.target.files?.[0];
     if (file) {
       setImage({ file, url: URL.createObjectURL(file) });
+      setCropperOpen(true);
     }
+    e.target.value = "";
   };
 
   return (
@@ -94,28 +96,56 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
           <Button variant="secondary">Save changes</Button>
         </ModalFooter>
       </ModalCard>
+
+      {cropperOpen && image && (
+        <CropImageModal
+          imageUrl={image.url}
+          onClose={() => setCropperOpen(false)}
+        />
+      )}
     </ModalPortal>
   );
 };
 
 type CropImageModalProps = {
   imageUrl: string;
+  onClose: () => void;
 };
 
-const CropImageModal: FC<CropImageModalProps> = ({ imageUrl }) => {
+const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
   return (
-    <ModalPortal onClose={() => {}}>
-      <Cropper
-        aspect={1}
-        image={imageUrl}
-        crop={crop}
-        onCropChange={setCrop}
-        zoom={zoom}
-        onZoomChange={setZoom}
-      />
+    <ModalPortal onClose={onClose}>
+      <ModalCard>
+        <ModalClose onClose={onClose} />
+        <ModalHeader>Crop your photo</ModalHeader>
+
+        <ModalContent>
+          <Box sx={{ position: "relative", minHeight: 350 }}>
+            <Cropper
+              aspect={1}
+              image={imageUrl}
+              crop={crop}
+              onCropChange={setCrop}
+              zoom={zoom}
+              onZoomChange={setZoom}
+              showGrid={true}
+            />
+          </Box>
+        </ModalContent>
+
+        <ModalFooter>
+          <Button variant="tertiary" onClick={onClose} mr={2}>
+            Cancel
+          </Button>
+
+          <Button variant="secondary" onClick={onClose}>
+            Save
+          </Button>
+        </ModalFooter>
+      </ModalCard>
     </ModalPortal>
   );
 };
