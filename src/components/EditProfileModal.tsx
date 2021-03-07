@@ -27,10 +27,11 @@ type FormData = {
 export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const [, updateUsername] = useUpdateUsernameMutation();
-  const imageInput = useRef<HTMLInputElement>(null);
-  const [imageUrl, setImageUrl] = useState<string>();
-  const [cropperOpen, setCropperOpen] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
+  const imageInput = useRef<HTMLInputElement>(null);
+  const [rawImageUrl, setRawImageUrl] = useState<string>();
+  const [croppedImageUrl, setCroppedImageUrl] = useState<string>();
+  const [cropperOpen, setCropperOpen] = useState(false);
 
   const { data } = meQuery;
 
@@ -41,7 +42,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setImageUrl(URL.createObjectURL(file));
+      setRawImageUrl(URL.createObjectURL(file));
       setCropperOpen(true);
     }
     e.target.value = "";
@@ -78,7 +79,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
                 <Label>Profile photo</Label>
                 <div>
                   <Avatar
-                    src={generatedAvatar}
+                    src={croppedImageUrl || generatedAvatar}
                     sx={{ height: 160, width: 160 }}
                   />
                   <Input
@@ -113,10 +114,11 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
         </ModalFooter>
       </ModalCard>
 
-      {cropperOpen && imageUrl && (
+      {cropperOpen && rawImageUrl && (
         <CropImageModal
-          imageUrl={imageUrl}
+          imageUrl={rawImageUrl}
           onClose={() => setCropperOpen(false)}
+          onSaveCrop={setCroppedImageUrl}
         />
       )}
     </ModalPortal>
@@ -126,9 +128,14 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
 type CropImageModalProps = {
   imageUrl: string;
   onClose: () => void;
+  onSaveCrop: (url: string) => void;
 };
 
-const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
+const CropImageModal: FC<CropImageModalProps> = ({
+  imageUrl,
+  onClose,
+  onSaveCrop,
+}) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
@@ -140,8 +147,8 @@ const CropImageModal: FC<CropImageModalProps> = ({ imageUrl, onClose }) => {
     if (!croppedAreaPixels) {
       return;
     }
-    const croppedUrl = await getCroppedImageUrl(imageUrl, croppedAreaPixels);
-    console.log(croppedUrl);
+    const url = await getCroppedImageUrl(imageUrl, croppedAreaPixels);
+    onSaveCrop(url);
     onClose();
   };
 
