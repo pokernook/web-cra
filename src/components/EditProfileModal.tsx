@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useRef, useState } from "react";
 import Cropper from "react-easy-crop";
 import { useForm } from "react-hook-form";
 
-import { useMeQuery } from "../graphql";
+import { useMeQuery, useUpdateUsernameMutation } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
 import {
   ModalCard,
@@ -24,12 +24,17 @@ type ImageState = {
   url: string;
 };
 
+type FormData = {
+  username: string;
+};
+
 export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
+  const [, updateUsername] = useUpdateUsernameMutation();
   const imageInput = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<ImageState>();
   const [cropperOpen, setCropperOpen] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const { data } = meQuery;
 
@@ -46,7 +51,12 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
     e.target.value = "";
   };
 
-  const handleProfileUpdate = handleSubmit((data) => console.log(data));
+  const handleProfileUpdate = handleSubmit(async (data) => {
+    const result = await updateUsername({ newUsername: data.username });
+    if (!result.error) {
+      onClose();
+    }
+  });
 
   return (
     <ModalPortal onClose={onClose} hasDimmedBackground>
