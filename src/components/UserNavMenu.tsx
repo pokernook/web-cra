@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Avatar, Button, Flex, Heading, Text } from "theme-ui";
+import { Avatar, Button, Heading, Text } from "theme-ui";
 
 import {
   useClearStatusMutation,
@@ -8,7 +8,7 @@ import {
 } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
 import { EditProfileModal } from "./EditProfileModal";
-import { MenuButton, MenuCard, MenuDivider } from "./Menu";
+import { MenuButton, MenuCard, MenuDivider, MenuItem } from "./Menu";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
 
@@ -56,7 +56,7 @@ export const UserNavMenu: FC = () => {
       {menuOpen && (
         <ModalPortal onClose={() => setMenuOpen(false)}>
           <MenuCard sx={{ position: "absolute", right: 24, top: 40 }}>
-            <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
+            <MenuItem>
               <Avatar
                 src={generatedAvatar}
                 sx={{ height: 40, width: 40, mr: 2 }}
@@ -65,9 +65,9 @@ export const UserNavMenu: FC = () => {
               <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
                 #{data?.me?.discriminator}
               </Heading>
-            </Flex>
+            </MenuItem>
 
-            <Flex px={3} py={1}>
+            <MenuItem>
               <Button
                 variant="tertiary"
                 sx={{ width: "100%", textAlign: "left", bg: "background" }}
@@ -81,7 +81,7 @@ export const UserNavMenu: FC = () => {
                   <Text color="textMuted">Update status</Text>
                 )}
               </Button>
-            </Flex>
+            </MenuItem>
 
             {data?.me?.status && (
               <MenuButton onClick={handleClearStatus}>Clear status</MenuButton>
