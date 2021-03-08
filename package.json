@@ -18,7 +18,7 @@
     "@graphql-codegen/typescript": "^1.20.0",
     "@graphql-codegen/typescript-operations": "^1.17.13",
     "@graphql-codegen/typescript-urql": "^2.0.3",
-    "@theme-ui/color": "^0.6.0-alpha.4",
+    "@theme-ui/color": "^0.6.0-canary.1544.5359f8a1e408a4dfeb74a9ae39688270286e534a.0",
     "@types/emoji-mart": "^3.0.4",
     "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
