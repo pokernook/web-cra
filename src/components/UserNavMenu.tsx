@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Avatar, Button, Card, Divider, Flex, Heading, Text } from "theme-ui";
+import { Avatar, Button, Flex, Heading, Text } from "theme-ui";
 
 import {
   useClearStatusMutation,
@@ -8,6 +8,7 @@ import {
 } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
 import { EditProfileModal } from "./EditProfileModal";
+import { MenuButton, MenuCard, MenuDivider } from "./Menu";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
 
@@ -54,10 +55,7 @@ export const UserNavMenu: FC = () => {
 
       {menuOpen && (
         <ModalPortal onClose={() => setMenuOpen(false)}>
-          <Card
-            variant="menu"
-            sx={{ position: "absolute", right: 24, top: 40 }}
-          >
+          <MenuCard sx={{ position: "absolute", right: 24, top: 40 }}>
             <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
               <Avatar
                 src={generatedAvatar}
@@ -86,29 +84,21 @@ export const UserNavMenu: FC = () => {
             </Flex>
 
             {data?.me?.status && (
-              <Button onClick={handleClearStatus} variant="menu">
-                Clear status
-              </Button>
+              <MenuButton onClick={handleClearStatus}>Clear status</MenuButton>
             )}
 
-            <Divider my={2} />
+            <MenuDivider />
 
-            <Button onClick={openProfileModal} variant="menu">
-              Edit profile
-            </Button>
-            <Button onClick={() => setMenuOpen(false)} variant="menu">
+            <MenuButton onClick={openProfileModal}>Edit profile</MenuButton>
+            <MenuButton onClick={() => setMenuOpen(false)}>
               View profile
-            </Button>
-            <Button onClick={openSettingsModal} variant="menu">
-              Settings
-            </Button>
+            </MenuButton>
+            <MenuButton onClick={openSettingsModal}>Settings</MenuButton>
 
-            <Divider my={2} />
+            <MenuDivider />
 
-            <Button onClick={handleLogOut} variant="menu">
-              Log out of PokerNook
-            </Button>
-          </Card>
+            <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
+          </MenuCard>
         </ModalPortal>
       )}
 
