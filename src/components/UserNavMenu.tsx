@@ -18,6 +18,7 @@ export const UserNavMenu: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
   const { data } = meQuery;
 
@@ -33,6 +34,11 @@ export const UserNavMenu: FC = () => {
   const openProfileModal = () => {
     setMenuOpen(false);
     setProfileModalOpen(true);
+  };
+
+  const openSettingsModal = () => {
+    setMenuOpen(false);
+    setSettingsModalOpen(true);
   };
 
   const handleClearStatus = () => {
@@ -93,7 +99,7 @@ export const UserNavMenu: FC = () => {
             <Button onClick={() => setMenuOpen(false)} variant="menu">
               View profile
             </Button>
-            <Button onClick={() => setMenuOpen(false)} variant="menu">
+            <Button onClick={openSettingsModal} variant="menu">
               Settings
             </Button>
 
