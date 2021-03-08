@@ -189,6 +189,8 @@ export const theme: Theme = {
       borderWidth: 1,
     },
     menu: {
+      display: "flex",
+      flexDirection: "column",
       py: 2,
       border: "solid",
       borderColor: "border",
