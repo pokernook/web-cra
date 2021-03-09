@@ -60,7 +60,7 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Edit your profile</ModalHeader>
 
         <ModalContent>
-          <form id="profile-form" onSubmit={handleProfileUpdate}>
+          <Box as="form" id="profile-form" onSubmit={handleProfileUpdate}>
             <Grid gap={3} columns={[2, "2fr 1fr"]}>
               <Box>
                 <Field
@@ -98,7 +98,7 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
                 </Button>
               </Box>
             </Grid>
-          </form>
+          </Box>
         </ModalContent>
 
         <ModalFooter>
