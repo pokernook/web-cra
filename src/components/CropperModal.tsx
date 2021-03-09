@@ -1,7 +1,7 @@
-import { Box, Button } from "@theme-ui/components";
 import { FC, useState } from "react";
 import Cropper from "react-easy-crop";
 import { Area } from "react-easy-crop/types";
+import { Box, Button } from "theme-ui";
 
 import { getCroppedImageUrl } from "../util/image";
 import {
