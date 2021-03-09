@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Box } from "theme-ui";
 
 import {
   ModalCard,
@@ -19,7 +20,9 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <ModalClose onClose={onClose} />
         <ModalHeader>Settings</ModalHeader>
 
-        <ModalContent></ModalContent>
+        <ModalContent>
+          <Box sx={{ height: 450 }}></Box>
+        </ModalContent>
       </ModalCard>
     </ModalPortal>
   );
