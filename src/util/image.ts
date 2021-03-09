@@ -1,3 +1,10 @@
+type Area = {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+};
+
 export const createImageFromUrl = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
@@ -5,13 +12,6 @@ export const createImageFromUrl = (url: string): Promise<HTMLImageElement> =>
     image.addEventListener("load", () => resolve(image));
     image.addEventListener("error", (e) => reject(e));
   });
-
-type Area = {
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-};
 
 export const getCroppedImageUrl = async (
   url: string,
