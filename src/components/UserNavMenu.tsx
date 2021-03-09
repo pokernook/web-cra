@@ -11,6 +11,7 @@ import { EditProfileModal } from "./EditProfileModal";
 import { MenuButton, MenuCard, MenuDivider, MenuItem } from "./Menu";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
+import { SettingsModal } from "./SettingsModal";
 
 export const UserNavMenu: FC = () => {
   const [meQuery] = useMeQuery();
@@ -108,6 +109,10 @@ export const UserNavMenu: FC = () => {
 
       {profileModalOpen && (
         <EditProfileModal onClose={() => setProfileModalOpen(false)} />
+      )}
+
+      {settingsModalOpen && (
+        <SettingsModal onClose={() => setSettingsModalOpen(false)} />
       )}
     </>
   );
