@@ -21,7 +21,7 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Settings</ModalHeader>
 
         <ModalContent>
-          <Box sx={{ height: 450 }}></Box>
+          <Box sx={{ height: 450, width: 600 }}></Box>
         </ModalContent>
       </ModalCard>
     </ModalPortal>
