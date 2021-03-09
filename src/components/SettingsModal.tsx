@@ -21,9 +21,10 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Settings</ModalHeader>
 
         <ModalContent>
-          <Box sx={{ height: 450, width: 600 }}>
+          <Box sx={{ height: 450, width: 650 }}>
             <Grid gap={3} columns={[2, "1fr 2fr"]}>
               <Box />
+
               <Box />
             </Grid>
           </Box>
