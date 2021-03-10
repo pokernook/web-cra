@@ -41,7 +41,7 @@ export const SideNav = () => {
             <NavLink
               key={index}
               {...route}
-              sx={{ variant: "links.nav", my: 1, display: "inherit" }}
+              sx={{ variant: "links.nav", my: 1 }}
             />
           ))}
         </Box>
