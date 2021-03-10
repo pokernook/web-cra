@@ -69,6 +69,7 @@ export const theme: Theme = {
       },
     },
     nav: {
+      display: "block",
       borderRadius: 4,
       color: "text",
       textDecoration: "none",
