@@ -7,7 +7,7 @@ import {
   Redirect,
   Route,
 } from "react-router-dom";
-import { Box, Grid, Text } from "theme-ui";
+import { Box, Grid } from "theme-ui";
 
 import {
   ModalCard,
