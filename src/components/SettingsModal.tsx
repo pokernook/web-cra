@@ -7,7 +7,7 @@ import {
   Redirect,
   Route,
 } from "react-router-dom";
-import { Box, Grid } from "theme-ui";
+import { Box, Grid, Text } from "theme-ui";
 
 import {
   ModalCard,
@@ -28,16 +28,18 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <ModalClose onClose={onClose} />
         <ModalHeader>Settings</ModalHeader>
 
-        <ModalContent>
-          <Box sx={{ height: 450, width: 650 }}>
-            <Grid gap={3} columns={[2, "2fr 5fr"]}>
-              <MemoryRouter>
-                <SettingsNav />
-                <SettingsRoutes />
-              </MemoryRouter>
+        <MemoryRouter>
+          <ModalContent>
+            <Grid
+              gap={3}
+              columns={[2, "2fr 5fr"]}
+              sx={{ height: 450, width: 650 }}
+            >
+              <SettingsNav />
+              <SettingsRoutes />
             </Grid>
-          </Box>
-        </ModalContent>
+          </ModalContent>
+        </MemoryRouter>
       </ModalCard>
     </ModalPortal>
   );
@@ -56,7 +58,7 @@ const SettingsNav = () => (
 );
 
 const SettingsRoutes = () => (
-  <Box>
+  <Box sx={{ overflow: "auto" }}>
     <Route exact path="/settings/account">
       Account settings
     </Route>
