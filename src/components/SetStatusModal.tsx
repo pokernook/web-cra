@@ -58,7 +58,7 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Set a status</ModalHeader>
 
         <ModalContent>
-          <form id="status-form" onSubmit={handleSaveStatus}>
+          <Box as="form" id="status-form" onSubmit={handleSaveStatus}>
             <Field
               label={`What's happening ${data?.me?.username}?`}
               type="text"
@@ -112,7 +112,7 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
                 </FadeIn>
               )}
             </Box>
-          </form>
+          </Box>
         </ModalContent>
 
         <ModalFooter>
