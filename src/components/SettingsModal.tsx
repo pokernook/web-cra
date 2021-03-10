@@ -28,6 +28,8 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <ModalClose onClose={onClose} />
         <ModalHeader>Settings</ModalHeader>
 
+        {/* TODO: Show divider between header and content on scroll */}
+
         <MemoryRouter>
           <ModalContent>
             <Grid
@@ -57,6 +59,7 @@ const SettingsNav = () => (
   </Box>
 );
 
+// TODO: Scroll bar should be flush with right side of modal
 const SettingsRoutes = () => (
   <Box sx={{ overflow: "auto" }}>
     <Route exact path="/settings/account">
