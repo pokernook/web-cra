@@ -1,19 +1,81 @@
 import { useForm } from "react-hook-form";
-import { Box, Button, Divider, Field, Heading, Text } from "theme-ui";
+import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
 import {
+  MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
   useDeleteAccountMutation,
+  useMeQuery,
+  useUpdateEmailMutation,
   useUpdatePasswordMutation,
 } from "../graphql";
 
 export const AccountSettings = () => (
   <>
+    <UpdateEmail />
+    <Divider my={3} />
     <UpdatePassword />
     <Divider my={3} />
     <DeleteAccount />
   </>
 );
+
+const UpdateEmail = () => {
+  const [meQuery] = useMeQuery();
+  const { data } = meQuery;
+  const {
+    handleSubmit,
+    register,
+    formState,
+  } = useForm<MutationUserUpdateEmailArgs>({
+    defaultValues: { newEmail: data?.me?.email },
+  });
+  const [, updateEmail] = useUpdateEmailMutation();
+
+  const { isDirty } = formState;
+
+  const onSubmit = handleSubmit((data) => updateEmail(data));
+
+  return (
+    <form onSubmit={onSubmit}>
+      <Heading as="h3" mb={3}>
+        Email
+      </Heading>
+
+      <Field
+        label="Email address"
+        name="newEmail"
+        type="email"
+        ref={register({ required: true })}
+      />
+
+      <Box mt={1} mb={3} ml={1}>
+        {!data?.me?.emailVerified && (
+          <Text variant="help">
+            Not verified; check your inbox, or{" "}
+            <Link>resend the verification email</Link>.
+          </Text>
+        )}
+      </Box>
+
+      {isDirty && (
+        <>
+          <Field
+            label="Password"
+            name="password"
+            type="password"
+            ref={register({ required: true })}
+            mb={3}
+          />
+
+          <Button variant="tertiary" type="submit">
+            Save email
+          </Button>
+        </>
+      )}
+    </form>
+  );
+};
 
 const UpdatePassword = () => {
   const {
