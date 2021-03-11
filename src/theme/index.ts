@@ -49,6 +49,7 @@ export const theme: Theme = {
   },
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
+    help: { color: "text", fontSize: 0, fontWeight: "body" },
     success: { color: "success", fontSize: 1, fontWeight: "bold" },
     danger: { color: "error", fontSize: 1, fontWeight: "bold" },
   },
