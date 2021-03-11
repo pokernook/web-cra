@@ -18,7 +18,7 @@ export const updates: Partial<UpdatesConfig> = {
       cache.updateQuery({ query: graphql.MeDocument }, (data) => {
         const castData = data as graphql.MeQuery;
         const castResult = result as graphql.LogInMutation;
-        castData.me = castResult.userLogIn?.user;
+        castData.me = castResult.userLogIn?.user || null;
         return castData as Data;
       });
     },
@@ -27,7 +27,7 @@ export const updates: Partial<UpdatesConfig> = {
       cache.updateQuery({ query: graphql.MeDocument }, (data) => {
         const castData = data as graphql.MeQuery;
         const castResult = result as graphql.SignUpMutation;
-        castData.me = castResult.userSignUp?.user;
+        castData.me = castResult.userSignUp?.user || null;
         return castData as Data;
       });
     },
