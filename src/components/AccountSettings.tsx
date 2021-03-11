@@ -9,6 +9,7 @@ import {
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
 } from "../graphql";
+import { FadeIn } from "./Animated";
 
 export const AccountSettings = () => (
   <>
@@ -59,7 +60,7 @@ const UpdateEmail = () => {
       </Box>
 
       {isDirty && (
-        <>
+        <FadeIn>
           <Field
             label="Password"
             name="password"
@@ -71,7 +72,7 @@ const UpdateEmail = () => {
           <Button variant="tertiary" type="submit">
             Save email
           </Button>
-        </>
+        </FadeIn>
       )}
     </form>
   );
