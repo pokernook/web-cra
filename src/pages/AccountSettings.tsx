@@ -4,10 +4,8 @@ import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 import { FadeIn, FadeOut } from "../components/Animated";
 import {
   MutationUserUpdateEmailArgs,
-  MutationUserUpdatePasswordArgs,
   useMeQuery,
   useUpdateEmailMutation,
-  useUpdatePasswordMutation,
 } from "../graphql";
 
 const EmailForm = () => {
@@ -75,69 +73,8 @@ const EmailForm = () => {
   );
 };
 
-const UpdatePasswordForm = () => {
-  const {
-    handleSubmit,
-    register,
-    reset,
-  } = useForm<MutationUserUpdatePasswordArgs>();
-  const [result, updatePassword] = useUpdatePasswordMutation();
-
-  const onSubmit = handleSubmit(async (data) => {
-    const result = await updatePassword(data);
-    if (!result.error) {
-      reset();
-    }
-  });
-
-  return (
-    <>
-      <Heading as="h2">Password</Heading>
-      <Divider mt={2} mb={3} />
-      <Box as="form" onSubmit={onSubmit}>
-        <Field
-          label="Current password"
-          name="currentPassword"
-          type="password"
-          ref={register({ required: true })}
-          mb={3}
-        />
-
-        <Field
-          label="New password"
-          name="newPassword"
-          type="password"
-          ref={register({ required: true })}
-        />
-
-        <Box mt={1} mb={3}>
-          {result.error && (
-            <FadeIn>
-              <Text variant="danger">
-                {result.error.graphQLErrors[0]?.message ||
-                  result.error.networkError?.message}
-              </Text>
-            </FadeIn>
-          )}
-        </Box>
-
-        <Button variant="secondary" type="submit" mb={4} mr={2}>
-          Update password
-        </Button>
-
-        {result.data && !result.error && (
-          <FadeOut sx={{ display: "inline-block" }}>
-            <Text variant="success">Updated</Text>
-          </FadeOut>
-        )}
-      </Box>
-    </>
-  );
-};
-
 export const AccountSettings = () => (
   <>
     <EmailForm />
-    <UpdatePasswordForm />
   </>
 );
