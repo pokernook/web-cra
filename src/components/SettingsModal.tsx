@@ -41,7 +41,7 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
                 <SettingsNav />
               </Box>
 
-              <Box sx={{ overflow: "auto", py: 3 }}>
+              <Box sx={{ overflow: "auto", py: 3, pr: 4 }}>
                 <SettingsRoutes />
               </Box>
             </Grid>
