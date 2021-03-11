@@ -24,14 +24,15 @@ type FormData = {
 
 export const EditProfileModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
+  const { data } = meQuery;
   const [, updateUsername] = useUpdateUsernameMutation();
-  const { register, handleSubmit } = useForm<FormData>();
   const imageInput = useRef<HTMLInputElement>(null);
   const [rawImageUrl, setRawImageUrl] = useState<string>();
   const [croppedImageUrl, setCroppedImageUrl] = useState<string>();
   const [cropperOpen, setCropperOpen] = useState(false);
-
-  const { data } = meQuery;
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: { username: data?.me?.username },
+  });
 
   const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
 
@@ -73,7 +74,6 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
                   type="text"
                   spellCheck={false}
                   name="username"
-                  defaultValue={data?.me?.username}
                   ref={register()}
                 />
               </Box>
