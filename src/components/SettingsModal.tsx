@@ -33,7 +33,7 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <MemoryRouter>
           <ModalContent>
             <Grid
-              gap={4}
+              gap={3}
               columns={[2, "2fr 5fr"]}
               sx={{ height: 450, width: 650, ml: 3 }}
             >
