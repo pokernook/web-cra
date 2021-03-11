@@ -45,7 +45,7 @@ export const ModalHeader: FC = ({ children }) => (
 );
 
 export const ModalContent: FC = ({ children }) => (
-  <Box sx={{ px: 3, width: "100%" }}>{children}</Box>
+  <Box sx={{ width: "100%" }}>{children}</Box>
 );
 
 export const ModalFooter: FC = ({ children }) => (
@@ -55,7 +55,7 @@ export const ModalFooter: FC = ({ children }) => (
       justifyContent: "flex-end",
       width: "100%",
       minHeight: 60,
-      px: 3,
+      p: 3,
     }}
   >
     {children}
