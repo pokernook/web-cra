@@ -33,12 +33,17 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <MemoryRouter>
           <ModalContent>
             <Grid
-              gap={3}
+              gap={4}
               columns={[2, "2fr 5fr"]}
-              sx={{ height: 450, width: 650 }}
+              sx={{ height: 450, width: 650, ml: 3 }}
             >
-              <SettingsNav />
-              <SettingsRoutes />
+              <Box sx={{ my: 2 }}>
+                <SettingsNav />
+              </Box>
+
+              <Box sx={{ overflow: "auto", py: 3 }}>
+                <SettingsRoutes />
+              </Box>
             </Grid>
           </ModalContent>
         </MemoryRouter>
@@ -52,16 +57,15 @@ const settingsNavLinks: NavLinkProps[] = [
 ];
 
 const SettingsNav = () => (
-  <Box>
+  <>
     {settingsNavLinks.map((route, index) => (
       <NavLink key={index} {...route} sx={{ variant: "links.nav", my: 1 }} />
     ))}
-  </Box>
+  </>
 );
 
-// TODO: Scroll bar should be flush with right side of modal
 const SettingsRoutes = () => (
-  <Box sx={{ overflow: "auto" }}>
+  <>
     <Route exact path="/settings/account">
       Account settings
     </Route>
@@ -69,5 +73,5 @@ const SettingsRoutes = () => (
     <Route>
       <Redirect to="/settings/account" />
     </Route>
-  </Box>
+  </>
 );
