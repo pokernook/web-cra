@@ -28,6 +28,7 @@ const UpdateEmail = () => {
     handleSubmit,
     register,
     formState,
+    reset,
   } = useForm<MutationUserUpdateEmailArgs>({
     defaultValues: { newEmail: data?.me?.email },
   });
@@ -35,7 +36,12 @@ const UpdateEmail = () => {
 
   const { isDirty } = formState;
 
-  const onSubmit = handleSubmit((data) => updateEmail(data));
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await updateEmail(data);
+    if (!result.error) {
+      reset({ newEmail: result.data?.userUpdateEmail?.email });
+    }
+  });
 
   return (
     <form onSubmit={onSubmit}>
