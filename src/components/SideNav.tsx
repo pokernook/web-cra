@@ -7,7 +7,6 @@ import { useGeneratedAvatar } from "../hooks";
 
 const sideNavRoutes: NavLinkProps[] = [
   { to: "/", exact: true, children: "Home" },
-  { to: "/settings", exact: false, children: "Settings" },
 ];
 
 export const SideNav = () => {
