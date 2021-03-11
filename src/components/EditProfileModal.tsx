@@ -60,7 +60,12 @@ export const EditProfileModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Edit your profile</ModalHeader>
 
         <ModalContent>
-          <Box as="form" id="profile-form" onSubmit={handleProfileUpdate}>
+          <Box
+            as="form"
+            id="profile-form"
+            onSubmit={handleProfileUpdate}
+            sx={{ px: 3 }}
+          >
             <Grid gap={3} columns={[2, "2fr 1fr"]}>
               <Box>
                 <Field
