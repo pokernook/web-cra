@@ -58,7 +58,12 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Set a status</ModalHeader>
 
         <ModalContent>
-          <Box as="form" id="status-form" onSubmit={handleSaveStatus}>
+          <Box
+            as="form"
+            id="status-form"
+            onSubmit={handleSaveStatus}
+            sx={{ px: 3 }}
+          >
             <Field
               label={`What's happening ${data?.me?.username}?`}
               type="text"
