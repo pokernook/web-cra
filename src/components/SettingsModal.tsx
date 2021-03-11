@@ -7,7 +7,7 @@ import {
   Redirect,
   Route,
 } from "react-router-dom";
-import { Box, Grid } from "theme-ui";
+import { Box, Divider, Grid } from "theme-ui";
 
 import {
   ModalCard,
@@ -28,7 +28,7 @@ export const SettingsModal: FC<Props> = ({ onClose }) => {
         <ModalClose onClose={onClose} />
         <ModalHeader>Settings</ModalHeader>
 
-        {/* TODO: Show divider between header and content on scroll */}
+        <Divider />
 
         <MemoryRouter>
           <ModalContent>
