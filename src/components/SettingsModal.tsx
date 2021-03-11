@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { Box, Divider, Grid } from "theme-ui";
 
+import { AccountSettings } from "./AccountSettings";
 import {
   ModalCard,
   ModalClose,
@@ -67,7 +68,7 @@ const SettingsNav = () => (
 const SettingsRoutes = () => (
   <>
     <Route exact path="/settings/account">
-      Account settings
+      <AccountSettings />
     </Route>
 
     <Route>

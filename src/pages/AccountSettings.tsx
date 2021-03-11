@@ -5,7 +5,6 @@ import { FadeIn, FadeOut } from "../components/Animated";
 import {
   MutationUserUpdateEmailArgs,
   MutationUserUpdatePasswordArgs,
-  useDeleteAccountMutation,
   useMeQuery,
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
@@ -136,32 +135,9 @@ const UpdatePasswordForm = () => {
   );
 };
 
-const DeleteAccountForm = () => {
-  const [, deleteAccount] = useDeleteAccountMutation();
-
-  const handleDeleteAccount = async () => await deleteAccount();
-
-  return (
-    <>
-      <Heading as="h2" color="error">
-        Delete account
-      </Heading>
-      <Divider mt={2} mb={3} />
-      <Box mb={3}>
-        <Text>Be careful, there's no coming back.</Text>
-      </Box>
-
-      <Button variant="danger" onClick={handleDeleteAccount}>
-        Delete account
-      </Button>
-    </>
-  );
-};
-
 export const AccountSettings = () => (
   <>
     <EmailForm />
     <UpdatePasswordForm />
-    <DeleteAccountForm />
   </>
 );
