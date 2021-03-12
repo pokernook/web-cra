@@ -27,7 +27,7 @@ type Props = {
 
 type FormData = SetStatusMutationVariables;
 
-export const SetStatusModal: FC<Props> = ({ onClose }) => {
+export const StatusModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const { data } = meQuery;
   const defaultEmoji = data?.me?.status?.emoji || "💬";
