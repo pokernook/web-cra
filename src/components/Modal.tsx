@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { Box, Card, Close, Flex, Heading } from "theme-ui";
 
@@ -14,12 +14,11 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   hasDimmedBackground = false,
   children,
 }) => {
-  // TODO: This should only close the current modal
-  useKeyPress("Escape", onClose);
+  const closeOnEscape = useKeyPress("Escape", onClose);
 
   return createPortal(
     <ModalWrapper hasDimmedBackground={hasDimmedBackground}>
-      <ModalOverlay onClick={onClose} />
+      <ModalOverlay onKeyUp={closeOnEscape} onClick={onClose} />
       {children}
     </ModalWrapper>,
     document.body
@@ -89,10 +88,14 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
 
 type ModalOverlayProps = {
   onClick: () => void;
+  onKeyUp: (e: KeyboardEvent) => void;
 };
 
-const ModalOverlay: FC<ModalOverlayProps> = ({ onClick }) => (
+const ModalOverlay: FC<ModalOverlayProps> = ({ onClick, onKeyUp }) => (
   <Flex
+    ref={(ref) => ref?.focus()}
+    tabIndex={0}
+    onKeyUp={onKeyUp}
     onClick={onClick}
     sx={{
       display: "none",
