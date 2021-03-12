@@ -13,8 +13,6 @@ export const theme: Theme = {
     border: "#2f353d",
     muted: "#0e1116",
     textMuted: "#4b5669",
-    menuItemActiveBackground: "#171b21",
-    menuItemActiveBorder: "#e8886d",
   },
   fonts: {
     code: "source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace",
@@ -54,21 +52,6 @@ export const theme: Theme = {
     danger: { color: "error", fontSize: 1, fontWeight: "bold" },
   },
   links: {
-    menu: {
-      borderLeft: "solid",
-      borderLeftColor: "transparent",
-      borderLeftWidth: 2,
-      color: "text",
-      fontWeight: "body",
-      textDecoration: "none",
-      ":hover": {
-        bg: "menuItemActiveBackground",
-      },
-      "&.active": {
-        bg: "menuItemActiveBackground",
-        borderLeftColor: "menuItemActiveBorder",
-      },
-    },
     nav: {
       display: "block",
       borderRadius: 4,
