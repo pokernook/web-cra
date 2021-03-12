@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Avatar, Button, Card, Divider, Flex, Heading, Text } from "theme-ui";
+import { Avatar, Button, Heading, Text } from "theme-ui";
 
 import {
   useClearStatusMutation,
@@ -8,8 +8,10 @@ import {
 } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
 import { EditProfileModal } from "./EditProfileModal";
+import { MenuButton, MenuCard, MenuDivider, MenuItem } from "./Menu";
 import { ModalPortal } from "./Modal";
 import { SetStatusModal } from "./SetStatusModal";
+import { SettingsModal } from "./SettingsModal";
 
 export const UserNavMenu: FC = () => {
   const [meQuery] = useMeQuery();
@@ -18,6 +20,7 @@ export const UserNavMenu: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
   const { data } = meQuery;
 
@@ -35,6 +38,11 @@ export const UserNavMenu: FC = () => {
     setProfileModalOpen(true);
   };
 
+  const openSettingsModal = () => {
+    setMenuOpen(false);
+    setSettingsModalOpen(true);
+  };
+
   const handleClearStatus = () => {
     setMenuOpen(false);
     clearStatus();
@@ -42,17 +50,24 @@ export const UserNavMenu: FC = () => {
 
   return (
     <>
+      {data?.me?.status && (
+        <Button
+          variant="unstyled"
+          onClick={openStatusModal}
+          sx={{ fontSize: 2, p: 1, mr: 1 }}
+        >
+          {data?.me?.status?.emoji}
+        </Button>
+      )}
+
       <Button variant="unstyled" onClick={() => setMenuOpen(true)}>
         <Avatar src={generatedAvatar} sx={{ height: 32, width: 32 }} />
       </Button>
 
       {menuOpen && (
         <ModalPortal onClose={() => setMenuOpen(false)}>
-          <Card
-            variant="menu"
-            sx={{ position: "absolute", right: 24, top: 40 }}
-          >
-            <Flex sx={{ alignItems: "center", px: 3, py: 1 }}>
+          <MenuCard sx={{ position: "absolute", right: 24, top: 40 }}>
+            <MenuItem>
               <Avatar
                 src={generatedAvatar}
                 sx={{ height: 40, width: 40, mr: 2 }}
@@ -61,9 +76,9 @@ export const UserNavMenu: FC = () => {
               <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
                 #{data?.me?.discriminator}
               </Heading>
-            </Flex>
+            </MenuItem>
 
-            <Flex px={3} py={1}>
+            <MenuItem>
               <Button
                 variant="tertiary"
                 sx={{ width: "100%", textAlign: "left", bg: "background" }}
@@ -77,32 +92,24 @@ export const UserNavMenu: FC = () => {
                   <Text color="textMuted">Update status</Text>
                 )}
               </Button>
-            </Flex>
+            </MenuItem>
 
             {data?.me?.status && (
-              <Button onClick={handleClearStatus} variant="menu">
-                Clear status
-              </Button>
+              <MenuButton onClick={handleClearStatus}>Clear status</MenuButton>
             )}
 
-            <Divider my={2} />
+            <MenuDivider />
 
-            <Button onClick={openProfileModal} variant="menu">
-              Edit profile
-            </Button>
-            <Button onClick={() => setMenuOpen(false)} variant="menu">
+            <MenuButton onClick={openProfileModal}>Edit profile</MenuButton>
+            <MenuButton onClick={() => setMenuOpen(false)}>
               View profile
-            </Button>
-            <Button onClick={() => setMenuOpen(false)} variant="menu">
-              Settings
-            </Button>
+            </MenuButton>
+            <MenuButton onClick={openSettingsModal}>Settings</MenuButton>
 
-            <Divider my={2} />
+            <MenuDivider />
 
-            <Button onClick={handleLogOut} variant="menu">
-              Log out of PokerNook
-            </Button>
-          </Card>
+            <MenuButton onClick={handleLogOut}>Log out of PokerNook</MenuButton>
+          </MenuCard>
         </ModalPortal>
       )}
 
@@ -112,6 +119,10 @@ export const UserNavMenu: FC = () => {
 
       {profileModalOpen && (
         <EditProfileModal onClose={() => setProfileModalOpen(false)} />
+      )}
+
+      {settingsModalOpen && (
+        <SettingsModal onClose={() => setSettingsModalOpen(false)} />
       )}
     </>
   );

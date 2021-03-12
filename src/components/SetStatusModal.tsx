@@ -29,15 +29,17 @@ type FormData = SetStatusMutationVariables;
 
 export const SetStatusModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
+  const { data } = meQuery;
+  const defaultEmoji = data?.me?.status?.emoji || "💬";
   const [, clearStatus] = useClearStatusMutation();
   const [setStatusResult, setStatus] = useSetStatusMutation();
-  const { control, handleSubmit, register, watch } = useForm<FormData>();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
-
-  const { data } = meQuery;
-
-  const defaultEmoji = data?.me?.status?.emoji || "💬";
-  const watchEmoji = watch("emoji", defaultEmoji);
+  const { control, handleSubmit, register, getValues } = useForm<FormData>({
+    defaultValues: {
+      emoji: defaultEmoji,
+      message: data?.me?.status?.message,
+    },
+  });
 
   const handleClearStatus = () => {
     onClose();
@@ -58,11 +60,15 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
         <ModalHeader>Set a status</ModalHeader>
 
         <ModalContent>
-          <form id="status-form" onSubmit={handleSaveStatus}>
+          <Box
+            as="form"
+            id="status-form"
+            onSubmit={handleSaveStatus}
+            sx={{ px: 3 }}
+          >
             <Field
               label={`What's happening ${data?.me?.username}?`}
               type="text"
-              defaultValue={data?.me?.status?.message || ""}
               name="message"
               ref={register({ required: true })}
               spellCheck
@@ -75,13 +81,12 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
               onClick={() => setEmojiPickerOpen(true)}
               sx={{ position: "absolute", p: 2, top: 82 }}
             >
-              {watchEmoji}
+              {getValues("emoji")}
             </Button>
 
             <Controller
               name="emoji"
               control={control}
-              defaultValue={defaultEmoji}
               render={(props) =>
                 emojiPickerOpen ? (
                   <ModalPortal onClose={() => setEmojiPickerOpen(false)}>
@@ -112,7 +117,7 @@ export const SetStatusModal: FC<Props> = ({ onClose }) => {
                 </FadeIn>
               )}
             </Box>
-          </form>
+          </Box>
         </ModalContent>
 
         <ModalFooter>

@@ -1,6 +1,6 @@
-import { ThemeUIStyleObject } from "@theme-ui/css";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
+import { ThemeUIStyleObject } from "theme-ui";
 
 export const FadeIn: FC = ({ children }) => (
   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

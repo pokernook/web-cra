@@ -103,6 +103,7 @@ export type MutationUserUpdatePasswordArgs = {
 
 
 export type MutationUserUpdateEmailArgs = {
+  password: Scalars['String'];
   newEmail: Scalars['EmailAddress'];
 };
 
@@ -209,6 +210,7 @@ export type SignUpMutation = (
 
 export type UpdateEmailMutationVariables = Exact<{
   newEmail: Scalars['EmailAddress'];
+  password: Scalars['String'];
 }>;
 
 
@@ -351,8 +353,8 @@ export function useSignUpMutation() {
   return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
 };
 export const UpdateEmailDocument = gql`
-    mutation updateEmail($newEmail: EmailAddress!) {
-  userUpdateEmail(newEmail: $newEmail) {
+    mutation updateEmail($newEmail: EmailAddress!, $password: String!) {
+  userUpdateEmail(newEmail: $newEmail, password: $password) {
     ...userFields
   }
 }

@@ -1,12 +1,10 @@
 import { ChangeEvent, FC, useRef, useState } from "react";
-import Cropper from "react-easy-crop";
-import { Area } from "react-easy-crop/types";
 import { useForm } from "react-hook-form";
 import { Avatar, Box, Button, Field, Grid, Input, Label } from "theme-ui";
 
 import { useMeQuery, useUpdateUsernameMutation } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
-import { getCroppedImageUrl } from "../util/image";
+import { CropperModal } from "./CropperModal";
 import {
   ModalCard,
   ModalClose,
@@ -16,7 +14,7 @@ import {
   ModalPortal,
 } from "./Modal";
 
-type EditProfileModalProps = {
+type Props = {
   onClose: () => void;
 };
 
@@ -24,16 +22,17 @@ type FormData = {
   username: string;
 };
 
-export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
+export const EditProfileModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
+  const { data } = meQuery;
   const [, updateUsername] = useUpdateUsernameMutation();
-  const { register, handleSubmit } = useForm<FormData>();
   const imageInput = useRef<HTMLInputElement>(null);
   const [rawImageUrl, setRawImageUrl] = useState<string>();
   const [croppedImageUrl, setCroppedImageUrl] = useState<string>();
   const [cropperOpen, setCropperOpen] = useState(false);
-
-  const { data } = meQuery;
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: { username: data?.me?.username },
+  });
 
   const generatedAvatar = useGeneratedAvatar(data?.me?.id || "");
 
@@ -62,7 +61,12 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
         <ModalHeader>Edit your profile</ModalHeader>
 
         <ModalContent>
-          <form id="profile-form" onSubmit={handleProfileUpdate}>
+          <Box
+            as="form"
+            id="profile-form"
+            onSubmit={handleProfileUpdate}
+            sx={{ px: 3 }}
+          >
             <Grid gap={3} columns={[2, "2fr 1fr"]}>
               <Box>
                 <Field
@@ -70,7 +74,6 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
                   type="text"
                   spellCheck={false}
                   name="username"
-                  defaultValue={data?.me?.username}
                   ref={register()}
                 />
               </Box>
@@ -100,7 +103,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
                 </Button>
               </Box>
             </Grid>
-          </form>
+          </Box>
         </ModalContent>
 
         <ModalFooter>
@@ -115,73 +118,12 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({ onClose }) => {
       </ModalCard>
 
       {cropperOpen && rawImageUrl && (
-        <CropImageModal
+        <CropperModal
           imageUrl={rawImageUrl}
           onClose={() => setCropperOpen(false)}
-          onSaveCrop={setCroppedImageUrl}
+          onSave={setCroppedImageUrl}
         />
       )}
-    </ModalPortal>
-  );
-};
-
-type CropImageModalProps = {
-  imageUrl: string;
-  onClose: () => void;
-  onSaveCrop: (url: string) => void;
-};
-
-const CropImageModal: FC<CropImageModalProps> = ({
-  imageUrl,
-  onClose,
-  onSaveCrop,
-}) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
-
-  const handleCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) =>
-    setCroppedAreaPixels(croppedAreaPixels);
-
-  const handleSaveCrop = async () => {
-    if (!croppedAreaPixels) {
-      return;
-    }
-    const url = await getCroppedImageUrl(imageUrl, croppedAreaPixels);
-    onSaveCrop(url);
-    onClose();
-  };
-
-  return (
-    <ModalPortal onClose={onClose}>
-      <ModalCard>
-        <ModalClose onClose={onClose} />
-        <ModalHeader>Crop your photo</ModalHeader>
-
-        <ModalContent>
-          <Box sx={{ position: "relative", minHeight: 350 }}>
-            <Cropper
-              aspect={1}
-              image={imageUrl}
-              crop={crop}
-              onCropChange={setCrop}
-              onCropComplete={handleCropComplete}
-              zoom={zoom}
-              onZoomChange={setZoom}
-            />
-          </Box>
-        </ModalContent>
-
-        <ModalFooter>
-          <Button variant="tertiary" onClick={onClose} mr={2}>
-            Cancel
-          </Button>
-
-          <Button variant="secondary" onClick={handleSaveCrop}>
-            Save
-          </Button>
-        </ModalFooter>
-      </ModalCard>
     </ModalPortal>
   );
 };

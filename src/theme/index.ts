@@ -49,6 +49,7 @@ export const theme: Theme = {
   },
   text: {
     default: { color: "text", fontSize: 1, fontWeight: "body" },
+    help: { color: "text", fontSize: 0, fontWeight: "body" },
     success: { color: "success", fontSize: 1, fontWeight: "bold" },
     danger: { color: "error", fontSize: 1, fontWeight: "bold" },
   },
@@ -69,12 +70,15 @@ export const theme: Theme = {
       },
     },
     nav: {
+      display: "block",
       borderRadius: 4,
       color: "text",
       textDecoration: "none",
       p: 2,
       ":hover": {
-        bg: "muted",
+        color: "text",
+        bg: alpha("secondary", 0.1),
+        cursor: "pointer",
       },
       "&.active": {
         bg: "secondary",
@@ -189,6 +193,8 @@ export const theme: Theme = {
       borderWidth: 1,
     },
     menu: {
+      display: "flex",
+      flexDirection: "column",
       py: 2,
       border: "solid",
       borderColor: "border",

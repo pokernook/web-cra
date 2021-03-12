@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
-import { Grid } from "@theme-ui/components";
 import { FC } from "react";
+import { Grid } from "theme-ui";
 
 import { SideNav } from "../components/SideNav";
 import { TopNav } from "../components/TopNav";
