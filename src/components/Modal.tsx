@@ -1,8 +1,6 @@
-import { FC, KeyboardEvent } from "react";
+import { FC } from "react";
 import { createPortal } from "react-dom";
 import { Box, Card, Close, Flex, Heading } from "theme-ui";
-
-import { useKeyPress } from "../hooks";
 
 type ModalPortalProps = {
   onClose: () => void;
@@ -13,17 +11,14 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   onClose,
   hasDimmedBackground = false,
   children,
-}) => {
-  const closeOnEscape = useKeyPress("Escape", onClose);
-
-  return createPortal(
+}) =>
+  createPortal(
     <ModalWrapper hasDimmedBackground={hasDimmedBackground}>
-      <ModalOverlay onKeyUp={closeOnEscape} onClick={onClose} />
+      <ModalOverlay onClick={onClose} />
       {children}
     </ModalWrapper>,
     document.body
   );
-};
 
 export const ModalCard: FC = ({ children }) => (
   <Card variant="modal">{children}</Card>
@@ -88,14 +83,10 @@ const ModalWrapper: FC<ModalWrapperProps> = ({
 
 type ModalOverlayProps = {
   onClick: () => void;
-  onKeyUp: (e: KeyboardEvent) => void;
 };
 
-const ModalOverlay: FC<ModalOverlayProps> = ({ onClick, onKeyUp }) => (
+const ModalOverlay: FC<ModalOverlayProps> = ({ onClick }) => (
   <Flex
-    ref={(ref) => ref?.focus()}
-    tabIndex={0}
-    onKeyUp={onKeyUp}
     onClick={onClick}
     sx={{
       display: "none",
