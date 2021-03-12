@@ -7,11 +7,11 @@ import {
   useMeQuery,
 } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
-import { EditProfileModal } from "./EditProfileModal";
 import { MenuButton, MenuCard, MenuDivider, MenuItem } from "./Menu";
 import { ModalPortal } from "./Modal";
-import { SetStatusModal } from "./SetStatusModal";
+import { ProfileModal } from "./ProfileModal";
 import { SettingsModal } from "./SettingsModal";
+import { StatusModal } from "./StatusModal";
 
 export const UserNavMenu: FC = () => {
   const [meQuery] = useMeQuery();
@@ -114,11 +114,11 @@ export const UserNavMenu: FC = () => {
       )}
 
       {statusModalOpen && (
-        <SetStatusModal onClose={() => setStatusModalOpen(false)} />
+        <StatusModal onClose={() => setStatusModalOpen(false)} />
       )}
 
       {profileModalOpen && (
-        <EditProfileModal onClose={() => setProfileModalOpen(false)} />
+        <ProfileModal onClose={() => setProfileModalOpen(false)} />
       )}
 
       {settingsModalOpen && (

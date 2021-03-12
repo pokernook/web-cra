@@ -1,15 +1,12 @@
-import { useEffect } from "react";
+import { KeyboardEvent, useCallback } from "react";
 
-export const useKeyPress = (key: string, action: () => void) => {
-  useEffect(() => {
-    const listener = (e: KeyboardEvent) => {
+export const useKeyPress = (key: string, action: () => void) =>
+  useCallback(
+    (e: KeyboardEvent) => {
       if (e.key === key) {
+        e.stopPropagation();
         action();
       }
-    };
-
-    document.addEventListener("keyup", listener);
-
-    return () => document.removeEventListener("keyup", listener);
-  }, [action, key]);
-};
+    },
+    [key, action]
+  );

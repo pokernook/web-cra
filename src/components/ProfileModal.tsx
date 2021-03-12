@@ -22,7 +22,7 @@ type FormData = {
   username: string;
 };
 
-export const EditProfileModal: FC<Props> = ({ onClose }) => {
+export const ProfileModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const { data } = meQuery;
   const [, updateUsername] = useUpdateUsernameMutation();
