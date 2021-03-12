@@ -54,15 +54,17 @@ export const UserNavMenu: FC = () => {
         <Button
           variant="unstyled"
           onClick={openStatusModal}
-          sx={{ fontSize: 2, p: 1, mr: 1 }}
+          sx={{ fontSize: 2, p: 2 }}
         >
           {data?.me?.status?.emoji}
         </Button>
       )}
 
-      <Button variant="unstyled" onClick={() => setMenuOpen(true)}>
-        <Avatar src={generatedAvatar} sx={{ height: 32, width: 32 }} />
-      </Button>
+      <Avatar
+        onClick={() => setMenuOpen(true)}
+        src={generatedAvatar}
+        sx={{ height: 32, width: 32, ":hover": { cursor: "pointer" } }}
+      />
 
       {menuOpen && (
         <ModalPortal onClose={() => setMenuOpen(false)}>
