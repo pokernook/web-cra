@@ -11,15 +11,14 @@ export const ModalPortal: FC<ModalPortalProps> = ({
   onClose,
   hasDimmedBackground = false,
   children,
-}) => {
-  return createPortal(
+}) =>
+  createPortal(
     <ModalWrapper hasDimmedBackground={hasDimmedBackground}>
       <ModalOverlay onClick={onClose} />
       {children}
     </ModalWrapper>,
     document.body
   );
-};
 
 export const ModalCard: FC = ({ children }) => (
   <Card variant="modal">{children}</Card>
