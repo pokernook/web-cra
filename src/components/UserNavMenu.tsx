@@ -50,6 +50,16 @@ export const UserNavMenu: FC = () => {
 
   return (
     <>
+      {data?.me?.status && (
+        <Button
+          variant="unstyled"
+          onClick={openStatusModal}
+          sx={{ fontSize: 2, p: 1, mr: 1 }}
+        >
+          {data?.me?.status?.emoji}
+        </Button>
+      )}
+
       <Button variant="unstyled" onClick={() => setMenuOpen(true)}>
         <Avatar src={generatedAvatar} sx={{ height: 32, width: 32 }} />
       </Button>
