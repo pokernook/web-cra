@@ -6,10 +6,10 @@ import { Controller, useForm } from "react-hook-form";
 import { Box, Button, Field, Text } from "theme-ui";
 
 import {
-  SetStatusMutationVariables,
-  useClearStatusMutation,
+  StatusSetMutationVariables,
   useMeQuery,
-  useSetStatusMutation,
+  useStatusClearMutation,
+  useStatusSetMutation,
 } from "../graphql";
 import { FadeIn } from "./Animated";
 import {
@@ -25,14 +25,14 @@ type Props = {
   onClose: () => void;
 };
 
-type FormData = SetStatusMutationVariables;
+type FormData = StatusSetMutationVariables;
 
 export const StatusModal: FC<Props> = ({ onClose }) => {
   const [meQuery] = useMeQuery();
   const { data } = meQuery;
   const defaultEmoji = data?.me?.status?.emoji || "💬";
-  const [, clearStatus] = useClearStatusMutation();
-  const [setStatusResult, setStatus] = useSetStatusMutation();
+  const [, clearStatus] = useStatusClearMutation();
+  const [setStatusResult, setStatus] = useStatusSetMutation();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
   const { control, handleSubmit, register, getValues } = useForm<FormData>({
     defaultValues: {

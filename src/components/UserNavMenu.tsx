@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import { Avatar, Button, Heading, Text } from "theme-ui";
 
 import {
-  useClearStatusMutation,
   useLogOutMutation,
   useMeQuery,
+  useStatusClearMutation,
 } from "../graphql";
 import { useGeneratedAvatar } from "../hooks";
 import { MenuButton, MenuCard, MenuDivider, MenuItem } from "./Menu";
@@ -15,7 +15,7 @@ import { StatusModal } from "./StatusModal";
 
 export const UserNavMenu: FC = () => {
   const [meQuery] = useMeQuery();
-  const [, clearStatus] = useClearStatusMutation();
+  const [, clearStatus] = useStatusClearMutation();
   const [, logOut] = useLogOutMutation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [statusModalOpen, setStatusModalOpen] = useState(false);

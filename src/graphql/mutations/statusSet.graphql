@@ -1,4 +1,4 @@
-mutation setStatus($emoji: EmojiSingular, $message: String) {
+mutation statusSet($emoji: EmojiSingular, $message: String) {
   userStatusSet(emoji: $emoji, message: $message) {
     createdAt
     emoji

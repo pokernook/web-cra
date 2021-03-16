@@ -220,17 +220,6 @@ export type UserFieldsFragment = (
   )> }
 );
 
-export type ClearStatusMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ClearStatusMutation = (
-  { __typename?: 'Mutation' }
-  & { userStatusClear?: Maybe<(
-    { __typename?: 'UserStatus' }
-    & Pick<UserStatus, 'id'>
-  )> }
-);
-
 export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -239,6 +228,27 @@ export type DeleteAccountMutation = (
   & { userDeleteAccount?: Maybe<(
     { __typename?: 'User' }
     & UserFieldsFragment
+  )> }
+);
+
+export type FriendRequestSendMutationVariables = Exact<{
+  username: Scalars['String'];
+  discriminator: Scalars['Int'];
+}>;
+
+
+export type FriendRequestSendMutation = (
+  { __typename?: 'Mutation' }
+  & { friendRequestSend?: Maybe<(
+    { __typename?: 'FriendRequest' }
+    & Pick<FriendRequest, 'createdAt' | 'id' | 'status' | 'updatedAt'>
+    & { from: (
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    ), to: (
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    ) }
   )> }
 );
 
@@ -270,24 +280,6 @@ export type LogOutMutation = (
   )> }
 );
 
-export type SetStatusMutationVariables = Exact<{
-  emoji?: Maybe<Scalars['EmojiSingular']>;
-  message?: Maybe<Scalars['String']>;
-}>;
-
-
-export type SetStatusMutation = (
-  { __typename?: 'Mutation' }
-  & { userStatusSet?: Maybe<(
-    { __typename?: 'UserStatus' }
-    & Pick<UserStatus, 'createdAt' | 'emoji' | 'id' | 'message' | 'updatedAt'>
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & UserFieldsFragment
-    )> }
-  )> }
-);
-
 export type SignUpMutationVariables = Exact<{
   username: Scalars['String'];
   email: Scalars['EmailAddress'];
@@ -299,6 +291,35 @@ export type SignUpMutation = (
   { __typename?: 'Mutation' }
   & { userSignUp?: Maybe<(
     { __typename?: 'UserAuthPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    )> }
+  )> }
+);
+
+export type StatusClearMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type StatusClearMutation = (
+  { __typename?: 'Mutation' }
+  & { userStatusClear?: Maybe<(
+    { __typename?: 'UserStatus' }
+    & Pick<UserStatus, 'id'>
+  )> }
+);
+
+export type StatusSetMutationVariables = Exact<{
+  emoji?: Maybe<Scalars['EmojiSingular']>;
+  message?: Maybe<Scalars['String']>;
+}>;
+
+
+export type StatusSetMutation = (
+  { __typename?: 'Mutation' }
+  & { userStatusSet?: Maybe<(
+    { __typename?: 'UserStatus' }
+    & Pick<UserStatus, 'createdAt' | 'emoji' | 'id' | 'message' | 'updatedAt'>
     & { user?: Maybe<(
       { __typename?: 'User' }
       & UserFieldsFragment
@@ -373,17 +394,6 @@ export const UserFieldsFragmentDoc = gql`
   }
 }
     `;
-export const ClearStatusDocument = gql`
-    mutation clearStatus {
-  userStatusClear {
-    id
-  }
-}
-    `;
-
-export function useClearStatusMutation() {
-  return Urql.useMutation<ClearStatusMutation, ClearStatusMutationVariables>(ClearStatusDocument);
-};
 export const DeleteAccountDocument = gql`
     mutation deleteAccount {
   userDeleteAccount {
@@ -394,6 +404,26 @@ export const DeleteAccountDocument = gql`
 
 export function useDeleteAccountMutation() {
   return Urql.useMutation<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument);
+};
+export const FriendRequestSendDocument = gql`
+    mutation friendRequestSend($username: String!, $discriminator: Int!) {
+  friendRequestSend(username: $username, discriminator: $discriminator) {
+    createdAt
+    from {
+      ...userFields
+    }
+    id
+    status
+    to {
+      ...userFields
+    }
+    updatedAt
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+export function useFriendRequestSendMutation() {
+  return Urql.useMutation<FriendRequestSendMutation, FriendRequestSendMutationVariables>(FriendRequestSendDocument);
 };
 export const LogInDocument = gql`
     mutation logIn($email: EmailAddress!, $password: String!) {
@@ -419,8 +449,32 @@ export const LogOutDocument = gql`
 export function useLogOutMutation() {
   return Urql.useMutation<LogOutMutation, LogOutMutationVariables>(LogOutDocument);
 };
-export const SetStatusDocument = gql`
-    mutation setStatus($emoji: EmojiSingular, $message: String) {
+export const SignUpDocument = gql`
+    mutation signUp($username: String!, $email: EmailAddress!, $password: String!) {
+  userSignUp(username: $username, email: $email, password: $password) {
+    user {
+      ...userFields
+    }
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+export function useSignUpMutation() {
+  return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
+};
+export const StatusClearDocument = gql`
+    mutation statusClear {
+  userStatusClear {
+    id
+  }
+}
+    `;
+
+export function useStatusClearMutation() {
+  return Urql.useMutation<StatusClearMutation, StatusClearMutationVariables>(StatusClearDocument);
+};
+export const StatusSetDocument = gql`
+    mutation statusSet($emoji: EmojiSingular, $message: String) {
   userStatusSet(emoji: $emoji, message: $message) {
     createdAt
     emoji
@@ -434,21 +488,8 @@ export const SetStatusDocument = gql`
 }
     ${UserFieldsFragmentDoc}`;
 
-export function useSetStatusMutation() {
-  return Urql.useMutation<SetStatusMutation, SetStatusMutationVariables>(SetStatusDocument);
-};
-export const SignUpDocument = gql`
-    mutation signUp($username: String!, $email: EmailAddress!, $password: String!) {
-  userSignUp(username: $username, email: $email, password: $password) {
-    user {
-      ...userFields
-    }
-  }
-}
-    ${UserFieldsFragmentDoc}`;
-
-export function useSignUpMutation() {
-  return Urql.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument);
+export function useStatusSetMutation() {
+  return Urql.useMutation<StatusSetMutation, StatusSetMutationVariables>(StatusSetDocument);
 };
 export const UpdateEmailDocument = gql`
     mutation updateEmail($newEmail: EmailAddress!, $password: String!) {

@@ -1,4 +1,4 @@
-mutation clearStatus {
+mutation statusClear {
   userStatusClear {
     id
   }
