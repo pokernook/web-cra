@@ -40,7 +40,7 @@ export const updates: Partial<UpdatesConfig> = {
       cache.invalidate("Query", "me");
     },
 
-    userClearStatus: (_result, _args, cache) => {
+    userStatusClear: (_result, _args, cache) => {
       cache.updateQuery({ query: graphql.MeDocument }, (data) => {
         const castData = data as graphql.MeQuery;
         if (castData.me) {
