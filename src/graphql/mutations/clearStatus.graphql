@@ -1,5 +1,5 @@
 mutation clearStatus {
-  userClearStatus {
+  userStatusClear {
     id
   }
 }

@@ -1,5 +1,5 @@
 mutation setStatus($emoji: EmojiSingular, $message: String) {
-  userSetStatus(emoji: $emoji, message: $message) {
+  userStatusSet(emoji: $emoji, message: $message) {
     createdAt
     emoji
     id

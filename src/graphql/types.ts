@@ -25,6 +25,30 @@ export type Scalars = {
 };
 
 
+export type FriendRequest = {
+  __typename?: 'FriendRequest';
+  createdAt: Scalars['DateTime'];
+  from: User;
+  id: Scalars['String'];
+  status: FriendRequestStatus;
+  to: User;
+  updatedAt: Scalars['DateTime'];
+};
+
+export type Friendship = {
+  __typename?: 'Friendship';
+  createdAt: Scalars['DateTime'];
+  id: Scalars['String'];
+  users: Array<User>;
+};
+
+
+export type FriendshipUsersArgs = {
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+};
+
 
 export type User = {
   __typename?: 'User';
@@ -32,9 +56,33 @@ export type User = {
   discriminator: Scalars['Int'];
   email: Scalars['String'];
   emailVerified: Scalars['Boolean'];
+  friendships: Array<Friendship>;
+  friendRequestsReceived: Array<FriendRequest>;
+  friendRequestsSent: Array<FriendRequest>;
   id: Scalars['String'];
   status?: Maybe<UserStatus>;
   username: Scalars['String'];
+};
+
+
+export type UserFriendshipsArgs = {
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  cursor?: Maybe<FriendshipWhereUniqueInput>;
+};
+
+
+export type UserFriendRequestsReceivedArgs = {
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  cursor?: Maybe<FriendRequestWhereUniqueInput>;
+};
+
+
+export type UserFriendRequestsSentArgs = {
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  cursor?: Maybe<FriendRequestWhereUniqueInput>;
 };
 
 export type UserAuthPayload = {
@@ -59,6 +107,37 @@ export type UserStatus = {
 };
 
 
+export enum FriendRequestStatus {
+  Pending = 'PENDING',
+  Accepted = 'ACCEPTED',
+  Rejected = 'REJECTED'
+}
+
+export type UserWhereUniqueInput = {
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  Tag?: Maybe<UserTagCompoundUniqueInput>;
+};
+
+export type FriendshipWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type FriendRequestWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+  fromId_toId?: Maybe<FriendRequestFromIdToIdCompoundUniqueInput>;
+};
+
+export type UserTagCompoundUniqueInput = {
+  username: Scalars['String'];
+  discriminator: Scalars['Int'];
+};
+
+export type FriendRequestFromIdToIdCompoundUniqueInput = {
+  fromId: Scalars['String'];
+  toId: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
@@ -66,6 +145,9 @@ export type Query = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  friendRequestSend?: Maybe<FriendRequest>;
+  friendRequestAccept?: Maybe<FriendRequest>;
+  friendRequestReject?: Maybe<FriendRequest>;
   userSignUp?: Maybe<UserAuthPayload>;
   userLogIn?: Maybe<UserAuthPayload>;
   userLogOut?: Maybe<UserLogOutPayload>;
@@ -73,8 +155,24 @@ export type Mutation = {
   userUpdatePassword?: Maybe<User>;
   userUpdateEmail?: Maybe<User>;
   userDeleteAccount?: Maybe<User>;
-  userSetStatus?: Maybe<UserStatus>;
-  userClearStatus?: Maybe<UserStatus>;
+  userStatusSet?: Maybe<UserStatus>;
+  userStatusClear?: Maybe<UserStatus>;
+};
+
+
+export type MutationFriendRequestSendArgs = {
+  username: Scalars['String'];
+  discriminator: Scalars['Int'];
+};
+
+
+export type MutationFriendRequestAcceptArgs = {
+  friendRequestId: Scalars['String'];
+};
+
+
+export type MutationFriendRequestRejectArgs = {
+  friendRequestId: Scalars['String'];
 };
 
 
@@ -108,7 +206,7 @@ export type MutationUserUpdateEmailArgs = {
 };
 
 
-export type MutationUserSetStatusArgs = {
+export type MutationUserStatusSetArgs = {
   emoji?: Maybe<Scalars['EmojiSingular']>;
   message?: Maybe<Scalars['String']>;
 };
@@ -127,7 +225,7 @@ export type ClearStatusMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type ClearStatusMutation = (
   { __typename?: 'Mutation' }
-  & { userClearStatus?: Maybe<(
+  & { userStatusClear?: Maybe<(
     { __typename?: 'UserStatus' }
     & Pick<UserStatus, 'id'>
   )> }
@@ -180,7 +278,7 @@ export type SetStatusMutationVariables = Exact<{
 
 export type SetStatusMutation = (
   { __typename?: 'Mutation' }
-  & { userSetStatus?: Maybe<(
+  & { userStatusSet?: Maybe<(
     { __typename?: 'UserStatus' }
     & Pick<UserStatus, 'createdAt' | 'emoji' | 'id' | 'message' | 'updatedAt'>
     & { user?: Maybe<(
@@ -277,7 +375,7 @@ export const UserFieldsFragmentDoc = gql`
     `;
 export const ClearStatusDocument = gql`
     mutation clearStatus {
-  userClearStatus {
+  userStatusClear {
     id
   }
 }
@@ -323,7 +421,7 @@ export function useLogOutMutation() {
 };
 export const SetStatusDocument = gql`
     mutation setStatus($emoji: EmojiSingular, $message: String) {
-  userSetStatus(emoji: $emoji, message: $message) {
+  userStatusSet(emoji: $emoji, message: $message) {
     createdAt
     emoji
     id
