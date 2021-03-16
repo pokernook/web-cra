@@ -228,9 +228,9 @@ export const theme: Theme = {
       mb: 2,
     },
     input: {
-      px: 2,
-      py: 1,
+      p: 2,
       borderColor: "border",
+      borderWidth: 2,
       outline: "none",
       ":focus": {
         borderColor: "secondary",

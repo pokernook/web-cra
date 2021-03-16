@@ -79,7 +79,7 @@ export const StatusModal: FC<Props> = ({ onClose }) => {
               variant="unstyled"
               type="button"
               onClick={() => setEmojiPickerOpen(true)}
-              sx={{ position: "absolute", p: 2, top: 82 }}
+              sx={{ position: "absolute", p: 2, top: 86 }}
             >
               {getValues("emoji")}
             </Button>
