@@ -19,7 +19,6 @@ export const PrivateLayout: FC = ({ children }) => (
         sx={{
           display: "inherit",
           minHeight: "inherit",
-          minWidth: 320,
           width: "100%",
         }}
       >
