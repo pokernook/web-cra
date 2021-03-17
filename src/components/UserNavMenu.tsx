@@ -83,7 +83,14 @@ export const UserNavMenu: FC = () => {
             <MenuItem>
               <Button
                 variant="tertiary"
-                sx={{ width: "100%", textAlign: "left", bg: "background" }}
+                sx={{
+                  width: "100%",
+                  textAlign: "left",
+                  bg: "background",
+                  border: "solid",
+                  borderColor: "border",
+                  borderWidth: 1,
+                }}
                 onClick={openStatusModal}
               >
                 {data?.me?.status ? (

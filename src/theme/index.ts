@@ -71,15 +71,11 @@ export const theme: Theme = {
   buttons: {
     primary: {
       bg: "primary",
-      border: "solid",
-      borderColor: lighten("primary", 0.1),
-      borderWidth: 1,
-      color: lighten("text", 0.2),
+      color: "text",
       fontWeight: "bold",
       px: 3,
       py: 2,
       "&:hover": {
-        bg: lighten("primary", 0.05),
         cursor: "pointer",
       },
       ":active": {
@@ -87,15 +83,12 @@ export const theme: Theme = {
       },
     },
     secondary: {
-      bg: "transparent",
-      border: "solid",
-      borderColor: "border",
-      borderWidth: 1,
-      color: "secondary",
+      bg: "secondary",
+      color: "text",
+      fontWeight: "bold",
       px: 3,
       py: 2,
       ":hover": {
-        borderColor: lighten("border", 0.2),
         cursor: "pointer",
       },
       ":active": {
@@ -103,15 +96,12 @@ export const theme: Theme = {
       },
     },
     tertiary: {
-      bg: "transparent",
-      border: "solid",
-      borderColor: "border",
-      borderWidth: 1,
+      bg: "border",
       color: "text",
+      fontWeight: "bold",
       px: 3,
       py: 2,
       ":hover": {
-        borderColor: lighten("border", 0.2),
         cursor: "pointer",
       },
       ":active": {
@@ -119,15 +109,12 @@ export const theme: Theme = {
       },
     },
     danger: {
-      bg: "transparent",
-      border: "solid",
-      borderColor: "border",
-      borderWidth: 1,
-      color: "error",
+      bg: "error",
+      color: "text",
+      fontWeight: "bold",
       px: 3,
       py: 2,
       ":hover": {
-        borderColor: lighten("border", 0.2),
         cursor: "pointer",
       },
       ":active": {
