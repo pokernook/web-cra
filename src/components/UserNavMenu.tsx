@@ -76,7 +76,7 @@ export const UserNavMenu: FC = () => {
               />
               <Heading as="h3">{data?.me?.username}</Heading>
               <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
-                #{data?.me?.discriminator}
+                {data?.me?.discriminator}
               </Heading>
             </MenuItem>
 

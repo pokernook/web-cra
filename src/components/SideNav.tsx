@@ -30,7 +30,7 @@ export const SideNav = () => {
           <Avatar src={generatedAvatar} sx={{ height: 48, width: 48, mr: 2 }} />
           <Heading as="h3">{data?.me?.username}</Heading>
           <Heading as="h3" sx={{ color: "textMuted", fontWeight: "body" }}>
-            #{data?.me?.discriminator}
+            {data?.me?.discriminator}
           </Heading>
         </Flex>
 
