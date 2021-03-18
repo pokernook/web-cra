@@ -148,6 +148,7 @@ export type Mutation = {
   friendRequestSend?: Maybe<FriendRequest>;
   friendRequestAccept?: Maybe<FriendRequest>;
   friendRequestReject?: Maybe<FriendRequest>;
+  friendshipDelete?: Maybe<Friendship>;
   userSignUp?: Maybe<UserAuthPayload>;
   userLogIn?: Maybe<UserAuthPayload>;
   userLogOut?: Maybe<UserLogOutPayload>;
@@ -173,6 +174,11 @@ export type MutationFriendRequestAcceptArgs = {
 
 export type MutationFriendRequestRejectArgs = {
   friendRequestId: Scalars['String'];
+};
+
+
+export type MutationFriendshipDeleteArgs = {
+  friendshipId: Scalars['String'];
 };
 
 
@@ -368,6 +374,25 @@ export type UpdateUsernameMutation = (
   )> }
 );
 
+export type FriendshipsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FriendshipsQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+    & { friendships: Array<(
+      { __typename?: 'Friendship' }
+      & Pick<Friendship, 'createdAt'>
+      & { users: Array<(
+        { __typename?: 'User' }
+        & UserFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -523,6 +548,23 @@ export const UpdateUsernameDocument = gql`
 
 export function useUpdateUsernameMutation() {
   return Urql.useMutation<UpdateUsernameMutation, UpdateUsernameMutationVariables>(UpdateUsernameDocument);
+};
+export const FriendshipsDocument = gql`
+    query friendships {
+  me {
+    id
+    friendships {
+      createdAt
+      users {
+        ...userFields
+      }
+    }
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+export function useFriendshipsQuery(options: Omit<Urql.UseQueryArgs<FriendshipsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<FriendshipsQuery>({ query: FriendshipsDocument, ...options });
 };
 export const MeDocument = gql`
     query me {
