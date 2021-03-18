@@ -5,7 +5,7 @@ import * as graphql from "./types";
 export const resolvers: ResolverConfig = {
   User: {
     discriminator: (parent) =>
-      parent.discriminator?.toString().padStart(4, "0"),
+      `#${parent.discriminator?.toString().padStart(4, "0")}`,
   },
   UserStatus: {
     emoji: (parent) => parent.emoji ?? "💬",
