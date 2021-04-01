@@ -1,7 +1,7 @@
 {
   "name": "web",
   "description": "Web App built with React",
-  "repository": "github:pokernook/web",
+  "repository": "github:pokernook/web-cra",
   "scripts": {
     "generate": "graphql-codegen -r dotenv/config",
     "lint": "eslint . --ext .js,.ts,.tsx",
